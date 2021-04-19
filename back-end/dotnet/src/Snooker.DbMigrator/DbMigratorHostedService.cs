@@ -5,6 +5,8 @@ using Microsoft.Extensions.Hosting;
 using Snooker.Data;
 using Serilog;
 using Volo.Abp;
+using Microsoft.Extensions.Configuration;
+using System;
 
 namespace Snooker.DbMigrator
 {
@@ -23,6 +25,7 @@ namespace Snooker.DbMigrator
             {
                 options.UseAutofac();
                 options.Services.AddLogging(c => c.AddSerilog());
+                options.Services.ReplaceConfiguration(BuildConfiguration());
             }))
             {
                 application.Initialize();
@@ -39,5 +42,14 @@ namespace Snooker.DbMigrator
         }
 
         public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
+        private static IConfiguration BuildConfiguration()
+        {
+            string environmentName = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT");
+            return new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .AddJsonFile($"appsettings.{environmentName}.json", true)
+                .Build();
+        }
     }
 }

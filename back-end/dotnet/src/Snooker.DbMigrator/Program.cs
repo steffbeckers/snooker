@@ -1,4 +1,3 @@
-using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -31,7 +30,7 @@ namespace Snooker.DbMigrator
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureLogging((context, logging) => logging.ClearProviders())
+                .ConfigureLogging((hostContext, logging) => logging.ClearProviders())
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.AddHostedService<DbMigratorHostedService>();
