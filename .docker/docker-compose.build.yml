@@ -7,8 +7,8 @@ services:
       context: ../front-end/angular/
       dockerfile: Dockerfile
 
-  # back-end:
-  #   image: registry.steffbeckers.eu/snooker/back-end/dotnet
-  #   build:
-  #     context: ../back-end/dotnet/
-  #     dockerfile: src/Snooker.HttpApi.Host/Dockerfile
+  back-end:
+    image: registry.steffbeckers.eu/snooker/back-end/dotnet
+    build:
+      context: ../back-end/dotnet/
+      dockerfile: src/Snooker.HttpApi.Host/Dockerfile
