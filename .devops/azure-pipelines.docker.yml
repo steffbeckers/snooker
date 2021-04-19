@@ -1,0 +1,36 @@
+# Docker build and push pipeline
+
+trigger:
+  - main
+
+pool:
+  name: Default
+
+steps:
+  - task: Docker@2
+    displayName: "Registry login"
+    inputs:
+      command: login
+      containerRegistry: SteffsContainerRegistry
+
+  - task: DockerCompose@0
+    displayName: "Build services"
+    inputs:
+      action: Build services
+      containerregistrytype: Container Registry
+      dockerRegistryEndpoint: SteffsContainerRegistry
+      dockerComposeFile: ../.docker/docker-compose.build.yml
+      projectName: $(Build.Repository.Name)
+      qualifyImageNames: true
+      additionalImageTags: $(Build.SourceBranchName)
+
+  - task: DockerCompose@0
+    displayName: "Push services"
+    inputs:
+      action: Push services
+      containerregistrytype: Container Registry
+      dockerRegistryEndpoint: SteffsContainerRegistry
+      dockerComposeFile: ../.docker/docker-compose.build.yml
+      projectName: $(Build.Repository.Name)
+      qualifyImageNames: true
+      additionalImageTags: $(Build.SourceBranchName)
