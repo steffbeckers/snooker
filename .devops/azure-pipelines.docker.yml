@@ -15,27 +15,25 @@ steps:
   #     containerRegistry: SteffsContainerRegistry
 
   - task: DockerCompose@0
-    displayName: "Build services"
+    displayName: 'Build services'
     inputs:
-      action: Build services
-      containerregistrytype: Container Registry
       # dockerRegistryEndpoint: SteffsContainerRegistry
-      dockerComposeFile: ../.docker/docker-compose.build.yml
-      projectName: $(Build.Repository.Name)
+      containerregistrytype: 'Container Registry'
+      dockerComposeFile: '../.docker/docker-compose.build.yml'
+      action: 'Build services'
       qualifyImageNames: true
-      additionalImageTags:
-        - $(Build.SourceBranchName)
-        - $(Build.BuildId)
+      additionalImageTags: '$(Build.BuildId)'
+      includeSourceTags: true
+      includeLatestTag: true
 
   - task: DockerCompose@0
-    displayName: "Push services"
+    displayName: 'Push services'
     inputs:
-      action: Push services
-      containerregistrytype: Container Registry
       # dockerRegistryEndpoint: SteffsContainerRegistry
-      dockerComposeFile: ../.docker/docker-compose.build.yml
-      projectName: $(Build.Repository.Name)
+      containerregistrytype: 'Container Registry'
+      dockerComposeFile: '../.docker/docker-compose.build.yml'
+      action: 'Push services'
       qualifyImageNames: true
-      additionalImageTags:
-        - $(Build.SourceBranchName)
-        - $(Build.BuildId)
+      additionalImageTags: '$(Build.BuildId)'
+      includeSourceTags: true
+      includeLatestTag: true
