@@ -22,7 +22,9 @@ steps:
       dockerComposeFile: ../.docker/docker-compose.build.yml
       projectName: $(Build.Repository.Name)
       qualifyImageNames: true
-      additionalImageTags: $(Build.SourceBranchName)
+      additionalImageTags:
+        - $(Build.SourceBranchName)
+        - $(Build.BuildId)
 
   - task: DockerCompose@0
     displayName: "Push services"
@@ -33,4 +35,6 @@ steps:
       dockerComposeFile: ../.docker/docker-compose.build.yml
       projectName: $(Build.Repository.Name)
       qualifyImageNames: true
-      additionalImageTags: $(Build.SourceBranchName)
+      additionalImageTags:
+        - $(Build.SourceBranchName)
+        - $(Build.BuildId)
