@@ -1,6 +1,6 @@
 import { Environment } from '@abp/ng.core';
 
-const baseUrl = 'http://localhost:4200';
+const baseUrl = 'https://snooker.steffbeckers.eu';
 
 export const environment = {
   production: true,
@@ -10,7 +10,7 @@ export const environment = {
     logoUrl: '',
   },
   oAuthConfig: {
-    issuer: 'https://localhost:44326',
+    issuer: 'https://api.snooker.steffbeckers.eu',
     redirectUri: baseUrl,
     clientId: 'Snooker_App',
     responseType: 'code',
@@ -18,7 +18,7 @@ export const environment = {
   },
   apis: {
     default: {
-      url: 'https://localhost:44326',
+      url: 'https://api.snooker.steffbeckers.eu',
       rootNamespace: 'Snooker',
     },
   },
