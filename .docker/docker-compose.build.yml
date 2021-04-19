@@ -1,0 +1,14 @@
+version: "3.5"
+
+services:
+  front-end:
+    image: registry.steffbeckers.eu/snooker/front-end/angular
+    build:
+      context: ../front-end/angular/
+      dockerfile: Dockerfile
+
+  # back-end:
+  #   image: registry.steffbeckers.eu/snooker/back-end/dotnet
+  #   build:
+  #     context: ../back-end/dotnet/
+  #     dockerfile: src/Snooker.HttpApi.Host/Dockerfile
