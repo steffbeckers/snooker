@@ -27,6 +27,7 @@ using Volo.Abp.Modularity;
 using Volo.Abp.Swashbuckle;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.VirtualFileSystem;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace Snooker
 {
@@ -59,6 +60,9 @@ namespace Snooker
             ConfigureVirtualFileSystem(context);
             ConfigureCors(context, configuration);
             ConfigureSwaggerServices(context, configuration);
+
+            // Not added by ABP.io framework
+            ConfigureForwardedHeaders();
         }
 
         private void ConfigureBundles()
@@ -186,6 +190,16 @@ namespace Snooker
             });
         }
 
+        // Not added by ABP.io framework
+        private void ConfigureForwardedHeaders()
+        {
+            Configure<ForwardedHeadersOptions>(options =>
+            {
+                options.ForwardedHeaders = ForwardedHeaders.XForwardedFor |
+                    ForwardedHeaders.XForwardedProto;
+            });
+        }
+
         public override void OnApplicationInitialization(ApplicationInitializationContext context)
         {
             var app = context.GetApplicationBuilder();
@@ -195,6 +209,9 @@ namespace Snooker
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            // Not added by ABP.io framework
+            app.UseForwardedHeaders();
 
             app.UseAbpRequestLocalization();
 
