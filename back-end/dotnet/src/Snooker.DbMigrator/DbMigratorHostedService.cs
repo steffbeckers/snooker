@@ -25,6 +25,8 @@ namespace Snooker.DbMigrator
             {
                 options.UseAutofac();
                 options.Services.AddLogging(c => c.AddSerilog());
+
+                // Not added by ABP.io framework
                 options.Services.ReplaceConfiguration(BuildConfiguration());
             }))
             {
@@ -43,6 +45,7 @@ namespace Snooker.DbMigrator
 
         public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
 
+        // Not added by ABP.io framework
         private static IConfiguration BuildConfiguration()
         {
             string environmentName = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT");

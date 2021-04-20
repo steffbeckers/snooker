@@ -10,7 +10,7 @@ export const environment = {
     logoUrl: '',
   },
   oAuthConfig: {
-    issuer: 'https://api.snooker.steffbeckers.eu',
+    issuer: baseUrl,
     redirectUri: baseUrl,
     clientId: 'Snooker_App',
     responseType: 'code',
@@ -18,7 +18,7 @@ export const environment = {
   },
   apis: {
     default: {
-      url: 'https://api.snooker.steffbeckers.eu',
+      url: baseUrl,
       rootNamespace: 'Snooker',
     },
   },
