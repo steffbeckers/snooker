@@ -193,10 +193,14 @@ namespace Snooker
         // Not added by ABP.io framework
         private void ConfigureForwardedHeaders()
         {
+            // Forwarding request headers from proxy
+            // https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/proxy-load-balancer?view=aspnetcore-5.0#forwarded-headers-middleware-order
             Configure<ForwardedHeadersOptions>(options =>
             {
-                options.ForwardedHeaders = ForwardedHeaders.XForwardedFor |
-                    ForwardedHeaders.XForwardedProto;
+                // https://github.com/aspnet/AspNetCore/issues/5970#issuecomment-475388872
+                //options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+                // This works to pass the https scheme protocol to the container
+                options.ForwardedHeaders = ForwardedHeaders.XForwardedProto;
             });
         }
 
@@ -211,6 +215,8 @@ namespace Snooker
             }
 
             // Not added by ABP.io framework
+            // Forwarding request headers from proxy
+            // https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/proxy-load-balancer?view=aspnetcore-5.0#forwarded-headers-middleware-order
             app.UseForwardedHeaders();
 
             app.UseAbpRequestLocalization();
