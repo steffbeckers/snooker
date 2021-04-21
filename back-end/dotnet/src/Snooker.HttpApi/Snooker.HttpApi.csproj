@@ -9,7 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Snooker.Application.Contracts\Snooker.Application.Contracts.csproj" />
-  </ItemGroup>
+  <ProjectReference Include="..\..\modules\Snooker.ClubManagement\src\Snooker.ClubManagement.HttpApi\Snooker.ClubManagement.HttpApi.csproj" /></ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Account.HttpApi" Version="4.2.2" />

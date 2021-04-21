@@ -9,7 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Snooker.Domain.Shared\Snooker.Domain.Shared.csproj" />
-  </ItemGroup>
+  <ProjectReference Include="..\..\modules\Snooker.ClubManagement\src\Snooker.ClubManagement.Application.Contracts\Snooker.ClubManagement.Application.Contracts.csproj" /></ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.ObjectExtending" Version="4.2.2" />

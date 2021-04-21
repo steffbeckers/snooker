@@ -17,7 +17,7 @@
     <PackageReference Include="Volo.Abp.FeatureManagement.Domain.Shared" Version="4.2.2" />
     <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Shared" Version="4.2.2" />
     <PackageReference Include="Volo.Abp.SettingManagement.Domain.Shared" Version="4.2.2" />
-  </ItemGroup>
+  <ProjectReference Include="..\..\modules\Snooker.ClubManagement\src\Snooker.ClubManagement.Domain.Shared\Snooker.ClubManagement.Domain.Shared.csproj" /></ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Localization\Snooker\*.json" />
