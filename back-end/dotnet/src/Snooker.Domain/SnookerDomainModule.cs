@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Snooker.MultiTenancy;
 using Volo.Abp.AuditLogging;
@@ -13,6 +13,7 @@ using Volo.Abp.PermissionManagement.Identity;
 using Volo.Abp.PermissionManagement.IdentityServer;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.TenantManagement;
+using Snooker.ClubManagement;
 
 namespace Snooker
 {
@@ -29,6 +30,7 @@ namespace Snooker
         typeof(AbpTenantManagementDomainModule),
         typeof(AbpEmailingModule)
     )]
+    [DependsOn(typeof(ClubManagementDomainModule))]
     public class SnookerDomainModule : AbpModule
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
