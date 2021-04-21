@@ -28,6 +28,7 @@ using Volo.Abp.Swashbuckle;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.VirtualFileSystem;
 using Microsoft.AspNetCore.HttpOverrides;
+using Volo.Abp.EventBus.RabbitMq;
 
 namespace Snooker
 {
@@ -41,7 +42,8 @@ namespace Snooker
         typeof(AbpAspNetCoreAuthenticationJwtBearerModule),
         typeof(AbpAccountWebIdentityServerModule),
         typeof(AbpAspNetCoreSerilogModule),
-        typeof(AbpSwashbuckleModule)
+        typeof(AbpSwashbuckleModule),
+        typeof(AbpEventBusRabbitMqModule)
     )]
     public class SnookerHttpApiHostModule : AbpModule
     {
