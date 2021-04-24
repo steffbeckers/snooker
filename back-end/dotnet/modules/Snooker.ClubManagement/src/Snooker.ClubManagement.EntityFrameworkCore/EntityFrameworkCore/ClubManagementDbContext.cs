@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Snooker.ClubManagement.Clubs;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
 
@@ -10,6 +11,7 @@ namespace Snooker.ClubManagement.EntityFrameworkCore
         /* Add DbSet for each Aggregate Root here. Example:
          * public DbSet<Question> Questions { get; set; }
          */
+        public DbSet<Club> Clubs { get; set; }
 
         public ClubManagementDbContext(DbContextOptions<ClubManagementDbContext> options) 
             : base(options)
