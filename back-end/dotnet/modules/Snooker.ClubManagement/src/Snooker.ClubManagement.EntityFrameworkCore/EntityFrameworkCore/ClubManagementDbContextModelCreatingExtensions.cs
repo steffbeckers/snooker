@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
+using Snooker.ClubManagement.Clubs;
 using Volo.Abp;
+using Volo.Abp.EntityFrameworkCore.Modeling;
 
 namespace Snooker.ClubManagement.EntityFrameworkCore
 {
@@ -23,21 +25,38 @@ namespace Snooker.ClubManagement.EntityFrameworkCore
 
             builder.Entity<Question>(b =>
             {
-                //Configure table & schema name
+                // Configure table & schema name
                 b.ToTable(options.TablePrefix + "Questions", options.Schema);
             
                 b.ConfigureByConvention();
             
-                //Properties
+                // Properties
                 b.Property(q => q.Title).IsRequired().HasMaxLength(QuestionConsts.MaxTitleLength);
                 
-                //Relations
+                // Relations
                 b.HasMany(question => question.Tags).WithOne().HasForeignKey(qt => qt.QuestionId);
 
-                //Indexes
+                // Indexes
                 b.HasIndex(q => q.CreationTime);
             });
             */
+
+            builder.Entity<Club>(b =>
+            {
+                // Configure table & schema name
+                b.ToTable(options.TablePrefix + "Clubs", options.Schema);
+
+                b.ConfigureByConvention();
+
+                // Properties
+                b.Property(x => x.Name)
+                    .IsRequired()
+                    .HasMaxLength(ClubConsts.NameMaxLength);
+
+                // Indexes
+                b.HasIndex(x => x.Name)
+                    .IsUnique();
+            });
         }
     }
 }
