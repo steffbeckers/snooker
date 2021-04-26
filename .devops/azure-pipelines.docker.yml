@@ -3,6 +3,9 @@
 trigger:
   - main
 
+# no PR triggers
+pr: none
+  
 pool:
   name: Default
 

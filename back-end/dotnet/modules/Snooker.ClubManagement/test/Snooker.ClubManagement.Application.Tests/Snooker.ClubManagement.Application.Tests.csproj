@@ -10,7 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Snooker.ClubManagement.Application\Snooker.ClubManagement.Application.csproj" />
     <ProjectReference Include="..\Snooker.ClubManagement.Domain.Tests\Snooker.ClubManagement.Domain.Tests.csproj" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
   </ItemGroup>
 
 </Project>
