@@ -21,6 +21,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('@abp/ng.setting-management').then(m => m.SettingManagementModule.forLazy()),
   },
+  {
+    path: 'club-management',
+    loadChildren: () =>
+      import('./admin/club-management/club-management.module').then(m => m.ClubManagementModule),
+  },
 ];
 
 @NgModule({
