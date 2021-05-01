@@ -17,10 +17,12 @@ namespace Snooker.ClubManagement
             CreateMap<CreateClubDto, Club>()
                 .ForMember(x => x.ExtraProperties, x => x.Ignore())
                 .ForMember(x => x.ConcurrencyStamp, x => x.Ignore())
+                .ForMember(x => x.Players, x => x.Ignore())
                 .IgnoreFullAuditedObjectProperties();
             CreateMap<UpdateClubDto, Club>()
                 .ForMember(x => x.ExtraProperties, x => x.Ignore())
                 .ForMember(x => x.ConcurrencyStamp, x => x.Ignore())
+                .ForMember(x => x.Players, x => x.Ignore())
                 .IgnoreFullAuditedObjectProperties();
         }
     }

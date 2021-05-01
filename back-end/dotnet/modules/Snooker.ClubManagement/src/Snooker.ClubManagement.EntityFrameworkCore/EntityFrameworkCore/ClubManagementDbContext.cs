@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Snooker.ClubManagement.Clubs;
+using Snooker.ClubManagement.Players;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
 
@@ -12,6 +13,7 @@ namespace Snooker.ClubManagement.EntityFrameworkCore
          * public DbSet<Question> Questions { get; set; }
          */
         public DbSet<Club> Clubs { get; set; }
+        public DbSet<Player> Players { get; set; }
 
         public ClubManagementDbContext(DbContextOptions<ClubManagementDbContext> options) 
             : base(options)

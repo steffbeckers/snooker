@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Snooker.ClubManagement.Clubs;
+using Snooker.ClubManagement.Players;
 using Volo.Abp;
 using Volo.Abp.EntityFrameworkCore.Modeling;
 
@@ -56,6 +57,36 @@ namespace Snooker.ClubManagement.EntityFrameworkCore
                 // Indexes
                 b.HasIndex(x => x.Name)
                     .IsUnique();
+            });
+
+            builder.Entity<ClubPlayer>(b =>
+            {
+                // Configure table & schema name
+                b.ToTable(options.TablePrefix + "ClubPlayers", options.Schema);
+
+                b.ConfigureByConvention();
+
+                // Properties
+                b.HasKey(x => new { x.ClubId, x.PlayerId });
+            });
+
+            builder.Entity<Player>(b =>
+            {
+                // Configure table & schema name
+                b.ToTable(options.TablePrefix + "Players", options.Schema);
+
+                b.ConfigureByConvention();
+
+                // Properties
+                b.Property(x => x.FirstName)
+                    .IsRequired()
+                    .HasMaxLength(PlayerConsts.FirstNameMaxLength);
+
+                b.Property(x => x.LastName)
+                    .IsRequired()
+                    .HasMaxLength(PlayerConsts.LastNameMaxLength);
+
+                // Indexes
             });
         }
     }
