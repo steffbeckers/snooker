@@ -49,5 +49,20 @@ namespace Snooker.ClubManagement.Clubs
 
             return ObjectMapper.Map<Club, ClubDto>(club);
         }
+
+        [Authorize(ClubManagementPermissions.CreateClubs)]
+        public async Task<ClubDto> CreatePlayerAsync(Guid id, Guid playerId)
+        {
+            Club club = await _clubRepository.GetAsync(id);
+
+            // TODO: Throw Club not found exception?
+            if (club == null) { return null; }
+
+            club.AddPlayer(playerId);
+
+            await _clubRepository.UpdateAsync(club);
+
+            return ObjectMapper.Map<Club, ClubDto>(club);
+        }
     }
 }
