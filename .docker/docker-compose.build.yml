@@ -4,11 +4,11 @@ services:
   front-end:
     image: registry.steffbeckers.eu/snooker/front-end/angular
     build:
-      context: ../front-end/angular/
+      context: ../angular/
       dockerfile: Dockerfile
 
   back-end:
     image: registry.steffbeckers.eu/snooker/back-end/dotnet
     build:
-      context: ../back-end/dotnet/
+      context: ../aspnet-core/
       dockerfile: src/Snooker.HttpApi.Host/Dockerfile
