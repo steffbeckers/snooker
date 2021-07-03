@@ -10,7 +10,6 @@ using Volo.Abp.Modularity;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
-using Snooker.ClubManagement.EntityFrameworkCore;
 
 namespace Snooker.EntityFrameworkCore
 {
@@ -26,7 +25,6 @@ namespace Snooker.EntityFrameworkCore
         typeof(AbpTenantManagementEntityFrameworkCoreModule),
         typeof(AbpFeatureManagementEntityFrameworkCoreModule)
         )]
-    [DependsOn(typeof(ClubManagementEntityFrameworkCoreModule))]
     public class SnookerEntityFrameworkCoreModule : AbpModule
     {
         public override void PreConfigureServices(ServiceConfigurationContext context)

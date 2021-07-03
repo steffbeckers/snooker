@@ -9,7 +9,6 @@ using Volo.Abp.IdentityServer.EntityFrameworkCore;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
-using Snooker.ClubManagement.EntityFrameworkCore;
 
 namespace Snooker.EntityFrameworkCore
 {
@@ -18,12 +17,12 @@ namespace Snooker.EntityFrameworkCore
      * It is a unified model that includes configuration for
      * all used modules and your application.
      */
+
     public class SnookerMigrationsDbContext : AbpDbContext<SnookerMigrationsDbContext>
     {
-        public SnookerMigrationsDbContext(DbContextOptions<SnookerMigrationsDbContext> options) 
+        public SnookerMigrationsDbContext(DbContextOptions<SnookerMigrationsDbContext> options)
             : base(options)
         {
-
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -44,7 +43,6 @@ namespace Snooker.EntityFrameworkCore
             /* Configure your own tables/entities inside the ConfigureSnooker method */
 
             builder.ConfigureSnooker();
-            builder.ConfigureClubManagement();
         }
     }
 }

@@ -29,7 +29,6 @@ using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.VirtualFileSystem;
 using Microsoft.AspNetCore.HttpOverrides;
 using Volo.Abp.EventBus.RabbitMq;
-using Snooker.ClubManagement;
 
 namespace Snooker
 {
@@ -117,15 +116,6 @@ namespace Snooker
             Configure<AbpAspNetCoreMvcOptions>(options =>
             {
                 options.ConventionalControllers.Create(typeof(SnookerApplicationModule).Assembly);
-                
-                // Add other modules here
-                options.ConventionalControllers.Create(
-                    typeof(ClubManagementApplicationModule).Assembly,
-                    options =>
-                    {
-                        options.RootPath = "app/club-management";
-                    }
-                );
             });
         }
 
@@ -155,7 +145,7 @@ namespace Snooker
                 },
                 options =>
                 {
-                    options.SwaggerDoc("v1", new OpenApiInfo {Title = "Snooker API", Version = "v1"});
+                    options.SwaggerDoc("v1", new OpenApiInfo { Title = "Snooker API", Version = "v1" });
                     options.DocInclusionPredicate((docName, description) => true);
                 });
         }
