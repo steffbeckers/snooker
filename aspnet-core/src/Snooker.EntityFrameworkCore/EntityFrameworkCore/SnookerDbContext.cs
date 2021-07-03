@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Snooker.Clubs;
 using Snooker.Users;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
@@ -17,6 +18,7 @@ namespace Snooker.EntityFrameworkCore
      * Don't use this DbContext for database migrations since it does not contain tables of the
      * used modules (as explained above). See SnookerMigrationsDbContext for migrations.
      */
+
     [ConnectionStringName("Default")]
     public class SnookerDbContext : AbpDbContext<SnookerDbContext>
     {
@@ -25,11 +27,11 @@ namespace Snooker.EntityFrameworkCore
         /* Add DbSet properties for your Aggregate Roots / Entities here.
          * Also map them inside SnookerDbContextModelCreatingExtensions.ConfigureSnooker
          */
+        public DbSet<Club> Clubs { get; set; }
 
         public SnookerDbContext(DbContextOptions<SnookerDbContext> options)
             : base(options)
         {
-
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -41,7 +43,7 @@ namespace Snooker.EntityFrameworkCore
             builder.Entity<AppUser>(b =>
             {
                 b.ToTable(AbpIdentityDbProperties.DbTablePrefix + "Users"); //Sharing the same table "AbpUsers" with the IdentityUser
-                
+
                 b.ConfigureByConvention();
                 b.ConfigureAbpUser();
 

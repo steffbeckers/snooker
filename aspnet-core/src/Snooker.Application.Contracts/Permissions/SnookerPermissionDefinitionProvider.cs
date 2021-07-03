@@ -8,10 +8,15 @@ namespace Snooker.Permissions
     {
         public override void Define(IPermissionDefinitionContext context)
         {
-            var myGroup = context.AddGroup(SnookerPermissions.GroupName);
+            var snookerGroup = context.AddGroup(SnookerPermissions.GroupName);
 
             //Define your own permissions here. Example:
             //myGroup.AddPermission(SnookerPermissions.MyPermission1, L("Permission:MyPermission1"));
+
+            var clubPermission = snookerGroup.AddPermission(SnookerPermissions.Clubs.Default, L("Permission:Clubs"));
+            clubPermission.AddChild(SnookerPermissions.Clubs.Create, L("Permission:Create"));
+            clubPermission.AddChild(SnookerPermissions.Clubs.Edit, L("Permission:Edit"));
+            clubPermission.AddChild(SnookerPermissions.Clubs.Delete, L("Permission:Delete"));
         }
 
         private static LocalizableString L(string name)

@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Snooker.Clubs;
 using Volo.Abp;
+using Volo.Abp.EntityFrameworkCore.Modeling;
 
 namespace Snooker.EntityFrameworkCore
 {
@@ -17,6 +19,16 @@ namespace Snooker.EntityFrameworkCore
             //    b.ConfigureByConvention(); //auto configure for the base class props
             //    //...
             //});
+
+            builder.Entity<Club>(b =>
+            {
+                b.ToTable(SnookerConsts.DbTablePrefix + "Clubs", SnookerConsts.DbSchema);
+                b.ConfigureByConvention();
+                b.Property(x => x.Name)
+                    .HasColumnName(nameof(Club.Name))
+                    .IsRequired()
+                    .HasMaxLength(ClubConsts.NameMaxLength);
+            });
         }
     }
 }

@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Snooker.Migrations
 {
-    public partial class ClubManagementClubAdded : Migration
+    public partial class ClubAdded : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "ClubManagementClubs",
+                name: "AppClubs",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -25,20 +25,14 @@ namespace Snooker.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ClubManagementClubs", x => x.Id);
+                    table.PrimaryKey("PK_AppClubs", x => x.Id);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ClubManagementClubs_Name",
-                table: "ClubManagementClubs",
-                column: "Name",
-                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ClubManagementClubs");
+                name: "AppClubs");
         }
     }
 }

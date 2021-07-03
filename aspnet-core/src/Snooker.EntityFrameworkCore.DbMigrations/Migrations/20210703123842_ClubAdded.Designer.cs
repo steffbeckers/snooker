@@ -11,8 +11,8 @@ using Volo.Abp.EntityFrameworkCore;
 namespace Snooker.Migrations
 {
     [DbContext(typeof(SnookerMigrationsDbContext))]
-    [Migration("20210424115242_ClubManagementClubAdded")]
-    partial class ClubManagementClubAdded
+    [Migration("20210703123842_ClubAdded")]
+    partial class ClubAdded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,10 +20,10 @@ namespace Snooker.Migrations
             modelBuilder
                 .HasAnnotation("_Abp_DatabaseProvider", EfCoreDatabaseProvider.SqlServer)
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.5")
+                .HasAnnotation("ProductVersion", "5.0.7")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Snooker.ClubManagement.Clubs.Club", b =>
+            modelBuilder.Entity("Snooker.Clubs.Club", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -72,14 +72,12 @@ namespace Snooker.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("Name");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Name")
-                        .IsUnique();
-
-                    b.ToTable("ClubManagementClubs");
+                    b.ToTable("AppClubs");
                 });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLog", b =>
