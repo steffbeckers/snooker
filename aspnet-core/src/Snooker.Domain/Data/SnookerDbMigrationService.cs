@@ -16,12 +16,12 @@ namespace Snooker.Data
 {
     public class SnookerDbMigrationService : ITransientDependency
     {
-        public ILogger<SnookerDbMigrationService> Logger { get; set; }
-
+        private readonly ICurrentTenant _currentTenant;
         private readonly IDataSeeder _dataSeeder;
         private readonly IEnumerable<ISnookerDbSchemaMigrator> _dbSchemaMigrators;
         private readonly ITenantRepository _tenantRepository;
-        private readonly ICurrentTenant _currentTenant;
+
+        public ILogger<SnookerDbMigrationService> Logger { get; set; }
 
         public SnookerDbMigrationService(
             IDataSeeder dataSeeder,
@@ -90,38 +90,6 @@ namespace Snooker.Data
             Logger.LogInformation("You can safely end this process...");
         }
 
-        private async Task MigrateDatabaseSchemaAsync(Tenant tenant = null)
-        {
-            Logger.LogInformation(
-                $"Migrating schema for {(tenant == null ? "host" : tenant.Name + " tenant")} database...");
-
-            foreach (ISnookerDbSchemaMigrator migrator in _dbSchemaMigrators)
-            {
-                await migrator.MigrateAsync();
-            }
-        }
-
-        private async Task SeedDataAsync(Tenant tenant = null)
-        {
-            Logger.LogInformation($"Executing {(tenant == null ? "host" : tenant.Name + " tenant")} database seed...");
-
-            await _dataSeeder.SeedAsync(tenant?.Id);
-        }
-
-        private bool DbMigrationsProjectExists()
-        {
-            string dbMigrationsProjectFolder = GetDbMigrationsProjectFolderPath();
-
-            return dbMigrationsProjectFolder != null;
-        }
-
-        private bool MigrationsFolderExists()
-        {
-            string dbMigrationsProjectFolder = GetDbMigrationsProjectFolderPath();
-
-            return Directory.Exists(Path.Combine(dbMigrationsProjectFolder, "migrations"));
-        }
-
         private void AddInitialMigration()
         {
             Logger.LogInformation("Creating initial migration...");
@@ -154,6 +122,13 @@ namespace Snooker.Data
             }
         }
 
+        private bool DbMigrationsProjectExists()
+        {
+            string dbMigrationsProjectFolder = GetDbMigrationsProjectFolderPath();
+
+            return dbMigrationsProjectFolder != null;
+        }
+
         private string GetDbMigrationsProjectFolderPath()
         {
             string slnDirectoryPath = GetSolutionDirectoryPath();
@@ -184,6 +159,31 @@ namespace Snooker.Data
             }
 
             return null;
+        }
+
+        private async Task MigrateDatabaseSchemaAsync(Tenant tenant = null)
+        {
+            Logger.LogInformation(
+                $"Migrating schema for {(tenant == null ? "host" : tenant.Name + " tenant")} database...");
+
+            foreach (ISnookerDbSchemaMigrator migrator in _dbSchemaMigrators)
+            {
+                await migrator.MigrateAsync();
+            }
+        }
+
+        private bool MigrationsFolderExists()
+        {
+            string dbMigrationsProjectFolder = GetDbMigrationsProjectFolderPath();
+
+            return Directory.Exists(Path.Combine(dbMigrationsProjectFolder, "migrations"));
+        }
+
+        private async Task SeedDataAsync(Tenant tenant = null)
+        {
+            Logger.LogInformation($"Executing {(tenant == null ? "host" : tenant.Name + " tenant")} database seed...");
+
+            await _dataSeeder.SeedAsync(tenant?.Id);
         }
     }
 }

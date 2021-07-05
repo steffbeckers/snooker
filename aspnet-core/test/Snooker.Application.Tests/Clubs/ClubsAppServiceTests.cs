@@ -10,13 +10,13 @@ namespace Snooker.Clubs
 {
     public class ClubsAppServiceTests : SnookerApplicationTestBase
     {
-        private readonly IRepository<Club, Guid> _clubRepository;
+        private readonly IClubRepository _clubRepository;
         private readonly IClubsAppService _clubsAppService;
 
         public ClubsAppServiceTests()
         {
+            _clubRepository = GetRequiredService<IClubRepository>();
             _clubsAppService = GetRequiredService<IClubsAppService>();
-            _clubRepository = GetRequiredService<IRepository<Club, Guid>>();
         }
 
         [Fact]

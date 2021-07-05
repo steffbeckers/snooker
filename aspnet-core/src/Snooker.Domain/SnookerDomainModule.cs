@@ -17,18 +17,17 @@ using Volo.Abp.TenantManagement;
 namespace Snooker
 {
     [DependsOn(
-        typeof(SnookerDomainSharedModule),
         typeof(AbpAuditLoggingDomainModule),
         typeof(AbpBackgroundJobsDomainModule),
+        typeof(AbpEmailingModule),
         typeof(AbpFeatureManagementDomainModule),
         typeof(AbpIdentityDomainModule),
-        typeof(AbpPermissionManagementDomainIdentityModule),
         typeof(AbpIdentityServerDomainModule),
+        typeof(AbpPermissionManagementDomainIdentityModule),
         typeof(AbpPermissionManagementDomainIdentityServerModule),
         typeof(AbpSettingManagementDomainModule),
         typeof(AbpTenantManagementDomainModule),
-        typeof(AbpEmailingModule)
-    )]
+        typeof(SnookerDomainSharedModule))]
     public class SnookerDomainModule : AbpModule
     {
         public override void ConfigureServices(ServiceConfigurationContext context)

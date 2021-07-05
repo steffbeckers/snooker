@@ -3,11 +3,8 @@ using Volo.Abp.Modularity;
 
 namespace Snooker
 {
-    [DependsOn(
-        typeof(SnookerEntityFrameworkCoreTestModule)
-        )]
+    [DependsOn(typeof(SnookerEntityFrameworkCoreTestModule))]
     public class SnookerDomainTestModule : AbpModule
     {
-
     }
 }

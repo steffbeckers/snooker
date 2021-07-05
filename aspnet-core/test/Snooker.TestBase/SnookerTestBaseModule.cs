@@ -11,26 +11,12 @@ using Volo.Abp.Threading;
 namespace Snooker
 {
     [DependsOn(
+        typeof(AbpAuthorizationModule),
         typeof(AbpAutofacModule),
         typeof(AbpTestBaseModule),
-        typeof(AbpAuthorizationModule),
-        typeof(SnookerDomainModule)
-        )]
+        typeof(SnookerDomainModule))]
     public class SnookerTestBaseModule : AbpModule
     {
-        public override void PreConfigureServices(ServiceConfigurationContext context)
-        {
-            PreConfigure<AbpIdentityServerBuilderOptions>(options =>
-            {
-                options.AddDeveloperSigningCredential = false;
-            });
-
-            PreConfigure<IIdentityServerBuilder>(identityServerBuilder =>
-            {
-                identityServerBuilder.AddDeveloperSigningCredential(false, System.Guid.NewGuid().ToString());
-            });
-        }
-
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
             Configure<AbpBackgroundJobOptions>(options =>
@@ -44,6 +30,19 @@ namespace Snooker
         public override void OnApplicationInitialization(ApplicationInitializationContext context)
         {
             SeedTestData(context);
+        }
+
+        public override void PreConfigureServices(ServiceConfigurationContext context)
+        {
+            PreConfigure<AbpIdentityServerBuilderOptions>(options =>
+            {
+                options.AddDeveloperSigningCredential = false;
+            });
+
+            PreConfigure<IIdentityServerBuilder>(identityServerBuilder =>
+            {
+                identityServerBuilder.AddDeveloperSigningCredential(false, System.Guid.NewGuid().ToString());
+            });
         }
 
         private static void SeedTestData(ApplicationInitializationContext context)

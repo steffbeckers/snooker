@@ -9,14 +9,13 @@ using Volo.Abp.TenantManagement;
 namespace Snooker
 {
     [DependsOn(
-        typeof(SnookerDomainModule),
         typeof(AbpAccountApplicationModule),
-        typeof(SnookerApplicationContractsModule),
+        typeof(AbpFeatureManagementApplicationModule),
         typeof(AbpIdentityApplicationModule),
         typeof(AbpPermissionManagementApplicationModule),
         typeof(AbpTenantManagementApplicationModule),
-        typeof(AbpFeatureManagementApplicationModule)
-        )]
+        typeof(SnookerApplicationContractsModule),
+        typeof(SnookerDomainModule))]
     public class SnookerApplicationModule : AbpModule
     {
         public override void ConfigureServices(ServiceConfigurationContext context)

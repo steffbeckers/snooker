@@ -8,9 +8,8 @@ using Volo.Abp.Modularity;
 namespace Snooker.HttpApi.Client.ConsoleTestApp
 {
     [DependsOn(
-        typeof(SnookerHttpApiClientModule),
-        typeof(AbpHttpClientIdentityModelModule)
-        )]
+        typeof(AbpHttpClientIdentityModelModule),
+        typeof(SnookerHttpApiClientModule))]
     public class SnookerConsoleApiClientModule : AbpModule
     {
         public override void PreConfigureServices(ServiceConfigurationContext context)

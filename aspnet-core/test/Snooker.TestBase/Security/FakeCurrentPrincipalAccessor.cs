@@ -8,12 +8,12 @@ namespace Snooker.Security
     [Dependency(ReplaceServices = true)]
     public class FakeCurrentPrincipalAccessor : ThreadCurrentPrincipalAccessor
     {
+        private ClaimsPrincipal _principal;
+
         protected override ClaimsPrincipal GetClaimsPrincipal()
         {
             return GetPrincipal();
         }
-
-        private ClaimsPrincipal _principal;
 
         private ClaimsPrincipal GetPrincipal()
         {

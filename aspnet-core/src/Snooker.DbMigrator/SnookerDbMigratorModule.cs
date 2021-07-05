@@ -7,9 +7,8 @@ namespace Snooker.DbMigrator
 {
     [DependsOn(
         typeof(AbpAutofacModule),
-        typeof(SnookerEntityFrameworkCoreDbMigrationsModule),
-        typeof(SnookerApplicationContractsModule)
-        )]
+        typeof(SnookerApplicationContractsModule),
+        typeof(SnookerEntityFrameworkCoreDbMigrationsModule))]
     public class SnookerDbMigratorModule : AbpModule
     {
         public override void ConfigureServices(ServiceConfigurationContext context)

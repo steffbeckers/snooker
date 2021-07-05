@@ -11,10 +11,9 @@ using Volo.Abp.Modularity;
 namespace Snooker.EntityFrameworkCore
 {
     [DependsOn(
+        typeof(AbpEntityFrameworkCoreSqliteModule),
         typeof(SnookerEntityFrameworkCoreDbMigrationsModule),
-        typeof(SnookerTestBaseModule),
-        typeof(AbpEntityFrameworkCoreSqliteModule)
-        )]
+        typeof(SnookerTestBaseModule))]
     public class SnookerEntityFrameworkCoreTestModule : AbpModule
     {
         private SqliteConnection _sqliteConnection;
@@ -22,19 +21,6 @@ namespace Snooker.EntityFrameworkCore
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
             ConfigureInMemorySqlite(context.Services);
-        }
-
-        private void ConfigureInMemorySqlite(IServiceCollection services)
-        {
-            _sqliteConnection = CreateDatabaseAndGetConnection();
-
-            services.Configure<AbpDbContextOptions>(options =>
-            {
-                options.Configure(context =>
-                {
-                    context.DbContextOptions.UseSqlite(_sqliteConnection);
-                });
-            });
         }
 
         public override void OnApplicationShutdown(ApplicationShutdownContext context)
@@ -57,6 +43,19 @@ namespace Snooker.EntityFrameworkCore
             }
 
             return connection;
+        }
+
+        private void ConfigureInMemorySqlite(IServiceCollection services)
+        {
+            _sqliteConnection = CreateDatabaseAndGetConnection();
+
+            services.Configure<AbpDbContextOptions>(options =>
+            {
+                options.Configure(context =>
+                {
+                    context.DbContextOptions.UseSqlite(_sqliteConnection);
+                });
+            });
         }
     }
 }

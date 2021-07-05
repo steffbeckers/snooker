@@ -8,10 +8,8 @@ using Volo.Abp.Uow;
 
 namespace Snooker
 {
-    /* All test classes are derived from this class, directly or indirectly.
-     */
-    public abstract class SnookerTestBase<TStartupModule> : AbpIntegratedTest<TStartupModule>
-        where TStartupModule : IAbpModule
+    // All test classes are derived from this class, directly or indirectly.
+    public abstract class SnookerTestBase<TStartupModule> : AbpIntegratedTest<TStartupModule> where TStartupModule : IAbpModule
     {
         protected override void SetAbpApplicationCreationOptions(AbpApplicationCreationOptions options)
         {

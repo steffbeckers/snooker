@@ -3,9 +3,7 @@ using Volo.Abp.Modularity;
 
 namespace Snooker.EntityFrameworkCore
 {
-    [DependsOn(
-        typeof(SnookerEntityFrameworkCoreModule)
-        )]
+    [DependsOn(typeof(SnookerEntityFrameworkCoreModule))]
     public class SnookerEntityFrameworkCoreDbMigrationsModule : AbpModule
     {
         public override void ConfigureServices(ServiceConfigurationContext context)

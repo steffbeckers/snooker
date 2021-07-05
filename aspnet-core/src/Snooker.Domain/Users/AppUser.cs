@@ -12,6 +12,7 @@ namespace Snooker.Users
      * - You can query users from database with this entity.
      * - You can update values of your custom properties.
      */
+
     public class AppUser : FullAuditedAggregateRoot<Guid>, IUser
     {
         #region Base properties
@@ -22,23 +23,17 @@ namespace Snooker.Users
          * So, this properties are designed as read only!
          */
 
+        public virtual string Email { get; private set; }
+        public virtual bool EmailConfirmed { get; private set; }
+        public virtual string Name { get; private set; }
+        public virtual string PhoneNumber { get; private set; }
+        public virtual bool PhoneNumberConfirmed { get; private set; }
+        public virtual string Surname { get; private set; }
         public virtual Guid? TenantId { get; private set; }
 
         public virtual string UserName { get; private set; }
 
-        public virtual string Name { get; private set; }
-
-        public virtual string Surname { get; private set; }
-
-        public virtual string Email { get; private set; }
-
-        public virtual bool EmailConfirmed { get; private set; }
-
-        public virtual string PhoneNumber { get; private set; }
-
-        public virtual bool PhoneNumberConfirmed { get; private set; }
-
-        #endregion
+        #endregion Base properties
 
         /* Add your own properties here. Example:
          *
@@ -57,7 +52,6 @@ namespace Snooker.Users
 
         private AppUser()
         {
-
         }
     }
 }

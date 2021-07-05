@@ -18,6 +18,15 @@ namespace Snooker.Clubs
         {
         }
 
+        public async Task<long> GetCountAsync(
+            string filterText = null,
+            string name = null,
+            CancellationToken cancellationToken = default)
+        {
+            IQueryable<Club> query = ApplyFilter((await GetDbSetAsync()), filterText, name);
+            return await query.LongCountAsync(GetCancellationToken(cancellationToken));
+        }
+
         public async Task<List<Club>> GetListAsync(
             string filterText = null,
             string name = null,
@@ -29,15 +38,6 @@ namespace Snooker.Clubs
             IQueryable<Club> query = ApplyFilter((await GetQueryableAsync()), filterText, name);
             query = query.OrderBy(string.IsNullOrWhiteSpace(sorting) ? ClubConsts.GetDefaultSorting(false) : sorting);
             return await query.PageBy(skipCount, maxResultCount).ToListAsync(cancellationToken);
-        }
-
-        public async Task<long> GetCountAsync(
-            string filterText = null,
-            string name = null,
-            CancellationToken cancellationToken = default)
-        {
-            IQueryable<Club> query = ApplyFilter((await GetDbSetAsync()), filterText, name);
-            return await query.LongCountAsync(GetCancellationToken(cancellationToken));
         }
 
         protected virtual IQueryable<Club> ApplyFilter(

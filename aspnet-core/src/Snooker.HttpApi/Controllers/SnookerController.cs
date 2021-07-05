@@ -3,8 +3,7 @@ using Volo.Abp.AspNetCore.Mvc;
 
 namespace Snooker.Controllers
 {
-    /* Inherit your controllers from this class.
-     */
+    // Inherit your controllers from this class.
     public abstract class SnookerController : AbpController
     {
         protected SnookerController()

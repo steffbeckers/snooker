@@ -25,11 +25,11 @@ namespace Snooker.IdentityServer
         private readonly IApiResourceRepository _apiResourceRepository;
         private readonly IApiScopeRepository _apiScopeRepository;
         private readonly IClientRepository _clientRepository;
-        private readonly IIdentityResourceDataSeeder _identityResourceDataSeeder;
-        private readonly IGuidGenerator _guidGenerator;
-        private readonly IPermissionDataSeeder _permissionDataSeeder;
         private readonly IConfiguration _configuration;
         private readonly ICurrentTenant _currentTenant;
+        private readonly IGuidGenerator _guidGenerator;
+        private readonly IIdentityResourceDataSeeder _identityResourceDataSeeder;
+        private readonly IPermissionDataSeeder _permissionDataSeeder;
 
         public IdentityServerDataSeedContributor(
             IClientRepository clientRepository,
@@ -63,26 +63,6 @@ namespace Snooker.IdentityServer
             }
         }
 
-        private async Task CreateApiScopesAsync()
-        {
-            await CreateApiScopeAsync("Snooker");
-        }
-
-        private async Task CreateApiResourcesAsync()
-        {
-            string[] commonApiUserClaims = new[]
-            {
-                "email",
-                "email_verified",
-                "name",
-                "phone_number",
-                "phone_number_verified",
-                "role"
-            };
-
-            await CreateApiResourceAsync("Snooker", commonApiUserClaims);
-        }
-
         private async Task<ApiResource> CreateApiResourceAsync(string name, IEnumerable<string> claims)
         {
             ApiResource apiResource = await _apiResourceRepository.FindByNameAsync(name);
@@ -109,6 +89,21 @@ namespace Snooker.IdentityServer
             return await _apiResourceRepository.UpdateAsync(apiResource);
         }
 
+        private async Task CreateApiResourcesAsync()
+        {
+            string[] commonApiUserClaims = new[]
+            {
+                "email",
+                "email_verified",
+                "name",
+                "phone_number",
+                "phone_number_verified",
+                "role"
+            };
+
+            await CreateApiResourceAsync("Snooker", commonApiUserClaims);
+        }
+
         private async Task<ApiScope> CreateApiScopeAsync(string name)
         {
             ApiScope apiScope = await _apiScopeRepository.GetByNameAsync(name);
@@ -127,94 +122,9 @@ namespace Snooker.IdentityServer
             return apiScope;
         }
 
-        private async Task CreateClientsAsync()
+        private async Task CreateApiScopesAsync()
         {
-            string[] commonScopes = new[]
-            {
-                "email",
-                "openid",
-                "profile",
-                "role",
-                "phone",
-                "address",
-                "Snooker"
-            };
-
-            IConfigurationSection configurationSection = _configuration.GetSection("IdentityServer:Clients");
-
-            //Web Client
-            string webClientId = configurationSection["Snooker_Web:ClientId"];
-            if (!webClientId.IsNullOrWhiteSpace())
-            {
-                string webClientRootUrl = configurationSection["Snooker_Web:RootUrl"].EnsureEndsWith('/');
-
-                /* Snooker_Web client is only needed if you created a tiered
-                 * solution. Otherwise, you can delete this client. */
-
-                await CreateClientAsync(
-                    name: webClientId,
-                    scopes: commonScopes,
-                    grantTypes: new[] { "hybrid" },
-                    secret: (configurationSection["Snooker_Web:ClientSecret"] ?? "1q2w3e*").Sha256(),
-                    redirectUri: $"{webClientRootUrl}signin-oidc",
-                    postLogoutRedirectUri: $"{webClientRootUrl}signout-callback-oidc",
-                    frontChannelLogoutUri: $"{webClientRootUrl}Account/FrontChannelLogout",
-                    corsOrigins: new[] { webClientRootUrl.RemovePostFix("/") }
-                );
-            }
-
-            //Console Test / Angular Client
-            string consoleAndAngularClientId = configurationSection["Snooker_App:ClientId"];
-            if (!consoleAndAngularClientId.IsNullOrWhiteSpace())
-            {
-                string webClientRootUrl = configurationSection["Snooker_App:RootUrl"]?.TrimEnd('/');
-
-                await CreateClientAsync(
-                    name: consoleAndAngularClientId,
-                    scopes: commonScopes,
-                    grantTypes: new[] { "password", "client_credentials", "authorization_code" },
-                    secret: (configurationSection["Snooker_App:ClientSecret"] ?? "1q2w3e*").Sha256(),
-                    requireClientSecret: false,
-                    redirectUri: webClientRootUrl,
-                    postLogoutRedirectUri: webClientRootUrl,
-                    corsOrigins: new[] { webClientRootUrl.RemovePostFix("/") }
-                );
-            }
-
-            // Blazor Client
-            string blazorClientId = configurationSection["Snooker_Blazor:ClientId"];
-            if (!blazorClientId.IsNullOrWhiteSpace())
-            {
-                string blazorRootUrl = configurationSection["Snooker_Blazor:RootUrl"].TrimEnd('/');
-
-                await CreateClientAsync(
-                    name: blazorClientId,
-                    scopes: commonScopes,
-                    grantTypes: new[] { "authorization_code" },
-                    secret: configurationSection["Snooker_Blazor:ClientSecret"]?.Sha256(),
-                    requireClientSecret: false,
-                    redirectUri: $"{blazorRootUrl}/authentication/login-callback",
-                    postLogoutRedirectUri: $"{blazorRootUrl}/authentication/logout-callback",
-                    corsOrigins: new[] { blazorRootUrl.RemovePostFix("/") }
-                );
-            }
-
-            // Swagger Client
-            string swaggerClientId = configurationSection["Snooker_Swagger:ClientId"];
-            if (!swaggerClientId.IsNullOrWhiteSpace())
-            {
-                string swaggerRootUrl = configurationSection["Snooker_Swagger:RootUrl"].TrimEnd('/');
-
-                await CreateClientAsync(
-                    name: swaggerClientId,
-                    scopes: commonScopes,
-                    grantTypes: new[] { "authorization_code" },
-                    secret: configurationSection["Snooker_Swagger:ClientSecret"]?.Sha256(),
-                    requireClientSecret: false,
-                    redirectUri: $"{swaggerRootUrl}/swagger/oauth2-redirect.html",
-                    corsOrigins: new[] { swaggerRootUrl.RemovePostFix("/") }
-                );
-            }
+            await CreateApiScopeAsync("Snooker");
         }
 
         private async Task<Client> CreateClientAsync(
@@ -319,6 +229,96 @@ namespace Snooker.IdentityServer
             }
 
             return await _clientRepository.UpdateAsync(client);
+        }
+
+        private async Task CreateClientsAsync()
+        {
+            string[] commonScopes = new[]
+            {
+                "email",
+                "openid",
+                "profile",
+                "role",
+                "phone",
+                "address",
+                "Snooker"
+            };
+
+            IConfigurationSection configurationSection = _configuration.GetSection("IdentityServer:Clients");
+
+            //Web Client
+            string webClientId = configurationSection["Snooker_Web:ClientId"];
+            if (!webClientId.IsNullOrWhiteSpace())
+            {
+                string webClientRootUrl = configurationSection["Snooker_Web:RootUrl"].EnsureEndsWith('/');
+
+                /* Snooker_Web client is only needed if you created a tiered
+                 * solution. Otherwise, you can delete this client. */
+
+                await CreateClientAsync(
+                    name: webClientId,
+                    scopes: commonScopes,
+                    grantTypes: new[] { "hybrid" },
+                    secret: (configurationSection["Snooker_Web:ClientSecret"] ?? "1q2w3e*").Sha256(),
+                    redirectUri: $"{webClientRootUrl}signin-oidc",
+                    postLogoutRedirectUri: $"{webClientRootUrl}signout-callback-oidc",
+                    frontChannelLogoutUri: $"{webClientRootUrl}Account/FrontChannelLogout",
+                    corsOrigins: new[] { webClientRootUrl.RemovePostFix("/") }
+                );
+            }
+
+            //Console Test / Angular Client
+            string consoleAndAngularClientId = configurationSection["Snooker_App:ClientId"];
+            if (!consoleAndAngularClientId.IsNullOrWhiteSpace())
+            {
+                string webClientRootUrl = configurationSection["Snooker_App:RootUrl"]?.TrimEnd('/');
+
+                await CreateClientAsync(
+                    name: consoleAndAngularClientId,
+                    scopes: commonScopes,
+                    grantTypes: new[] { "password", "client_credentials", "authorization_code" },
+                    secret: (configurationSection["Snooker_App:ClientSecret"] ?? "1q2w3e*").Sha256(),
+                    requireClientSecret: false,
+                    redirectUri: webClientRootUrl,
+                    postLogoutRedirectUri: webClientRootUrl,
+                    corsOrigins: new[] { webClientRootUrl.RemovePostFix("/") }
+                );
+            }
+
+            // Blazor Client
+            string blazorClientId = configurationSection["Snooker_Blazor:ClientId"];
+            if (!blazorClientId.IsNullOrWhiteSpace())
+            {
+                string blazorRootUrl = configurationSection["Snooker_Blazor:RootUrl"].TrimEnd('/');
+
+                await CreateClientAsync(
+                    name: blazorClientId,
+                    scopes: commonScopes,
+                    grantTypes: new[] { "authorization_code" },
+                    secret: configurationSection["Snooker_Blazor:ClientSecret"]?.Sha256(),
+                    requireClientSecret: false,
+                    redirectUri: $"{blazorRootUrl}/authentication/login-callback",
+                    postLogoutRedirectUri: $"{blazorRootUrl}/authentication/logout-callback",
+                    corsOrigins: new[] { blazorRootUrl.RemovePostFix("/") }
+                );
+            }
+
+            // Swagger Client
+            string swaggerClientId = configurationSection["Snooker_Swagger:ClientId"];
+            if (!swaggerClientId.IsNullOrWhiteSpace())
+            {
+                string swaggerRootUrl = configurationSection["Snooker_Swagger:RootUrl"].TrimEnd('/');
+
+                await CreateClientAsync(
+                    name: swaggerClientId,
+                    scopes: commonScopes,
+                    grantTypes: new[] { "authorization_code" },
+                    secret: configurationSection["Snooker_Swagger:ClientSecret"]?.Sha256(),
+                    requireClientSecret: false,
+                    redirectUri: $"{swaggerRootUrl}/swagger/oauth2-redirect.html",
+                    corsOrigins: new[] { swaggerRootUrl.RemovePostFix("/") }
+                );
+            }
         }
     }
 }

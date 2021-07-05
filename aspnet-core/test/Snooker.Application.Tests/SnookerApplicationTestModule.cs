@@ -4,10 +4,8 @@ namespace Snooker
 {
     [DependsOn(
         typeof(SnookerApplicationModule),
-        typeof(SnookerDomainTestModule)
-        )]
+        typeof(SnookerDomainTestModule))]
     public class SnookerApplicationTestModule : AbpModule
     {
-
     }
 }
