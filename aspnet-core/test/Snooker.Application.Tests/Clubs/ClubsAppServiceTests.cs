@@ -65,11 +65,11 @@ namespace Snooker.Clubs
         public async Task GetListAsync()
         {
             // Act
-            PagedResultDto<ClubDto> result = await _clubsAppService.GetListAsync(new GetClubsInput());
+            PagedResultDto<ClubDto> result = await _clubsAppService.GetListAsync(new GetClubsInput() { MaxResultCount = 20 });
 
             // Assert
-            result.TotalCount.ShouldBe(2);
-            result.Items.Count.ShouldBe(2);
+            result.TotalCount.ShouldBe(15);
+            result.Items.Count.ShouldBe(15);
             result.Items.Any(x => x.Id == Guid.Parse("d772238a-9871-47d7-84d5-c45083799954")).ShouldBe(true);
             result.Items.Any(x => x.Id == Guid.Parse("51b646da-9b05-454a-8fed-39371f1c6710")).ShouldBe(true);
         }
