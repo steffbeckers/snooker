@@ -1,7 +1,7 @@
-﻿using System.IO;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace Snooker.EntityFrameworkCore
 {
@@ -13,9 +13,9 @@ namespace Snooker.EntityFrameworkCore
         {
             SnookerEfCoreEntityExtensionMappings.Configure();
 
-            var configuration = BuildConfiguration();
+            IConfigurationRoot configuration = BuildConfiguration();
 
-            var builder = new DbContextOptionsBuilder<SnookerMigrationsDbContext>()
+            DbContextOptionsBuilder<SnookerMigrationsDbContext> builder = new DbContextOptionsBuilder<SnookerMigrationsDbContext>()
                 .UseSqlServer(configuration.GetConnectionString("Default"));
 
             return new SnookerMigrationsDbContext(builder.Options);
@@ -23,7 +23,7 @@ namespace Snooker.EntityFrameworkCore
 
         private static IConfigurationRoot BuildConfiguration()
         {
-            var builder = new ConfigurationBuilder()
+            IConfigurationBuilder builder = new ConfigurationBuilder()
                 .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../Snooker.DbMigrator/"))
                 .AddJsonFile("appsettings.json", optional: false);
 

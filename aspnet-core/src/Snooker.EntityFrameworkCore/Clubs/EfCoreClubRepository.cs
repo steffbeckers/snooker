@@ -26,7 +26,7 @@ namespace Snooker.Clubs
             int skipCount = 0,
             CancellationToken cancellationToken = default)
         {
-            var query = ApplyFilter((await GetQueryableAsync()), filterText, name);
+            IQueryable<Club> query = ApplyFilter((await GetQueryableAsync()), filterText, name);
             query = query.OrderBy(string.IsNullOrWhiteSpace(sorting) ? ClubConsts.GetDefaultSorting(false) : sorting);
             return await query.PageBy(skipCount, maxResultCount).ToListAsync(cancellationToken);
         }
@@ -36,7 +36,7 @@ namespace Snooker.Clubs
             string name = null,
             CancellationToken cancellationToken = default)
         {
-            var query = ApplyFilter((await GetDbSetAsync()), filterText, name);
+            IQueryable<Club> query = ApplyFilter((await GetDbSetAsync()), filterText, name);
             return await query.LongCountAsync(GetCancellationToken(cancellationToken));
         }
 

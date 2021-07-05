@@ -1,5 +1,6 @@
 ﻿using Shouldly;
 using System.Threading.Tasks;
+using Volo.Abp.Application.Dtos;
 using Volo.Abp.Identity;
 using Xunit;
 
@@ -10,6 +11,7 @@ namespace Snooker.Samples
      * (like IIdentityUserAppService here).
      * Only test your own application services.
      */
+
     public class SampleAppServiceTests : SnookerApplicationTestBase
     {
         private readonly IIdentityUserAppService _userAppService;
@@ -23,7 +25,7 @@ namespace Snooker.Samples
         public async Task Initial_Data_Should_Contain_Admin_User()
         {
             //Act
-            var result = await _userAppService.GetListAsync(new GetIdentityUsersInput());
+            PagedResultDto<IdentityUserDto> result = await _userAppService.GetListAsync(new GetIdentityUsersInput());
 
             //Assert
             result.TotalCount.ShouldBeGreaterThan(0);

@@ -44,14 +44,14 @@ namespace Snooker.EntityFrameworkCore
 
         private static SqliteConnection CreateDatabaseAndGetConnection()
         {
-            var connection = new SqliteConnection("Data Source=:memory:");
+            SqliteConnection connection = new SqliteConnection("Data Source=:memory:");
             connection.Open();
 
-            var options = new DbContextOptionsBuilder<SnookerMigrationsDbContext>()
+            DbContextOptions<SnookerMigrationsDbContext> options = new DbContextOptionsBuilder<SnookerMigrationsDbContext>()
                 .UseSqlite(connection)
                 .Options;
 
-            using (var context = new SnookerMigrationsDbContext(options))
+            using (SnookerMigrationsDbContext context = new SnookerMigrationsDbContext(options))
             {
                 context.GetService<IRelationalDatabaseCreator>().CreateTables();
             }

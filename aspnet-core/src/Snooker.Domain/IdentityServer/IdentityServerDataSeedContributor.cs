@@ -1,8 +1,8 @@
+using IdentityServer4.Models;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using IdentityServer4.Models;
-using Microsoft.Extensions.Configuration;
 using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
@@ -70,7 +70,7 @@ namespace Snooker.IdentityServer
 
         private async Task CreateApiResourcesAsync()
         {
-            var commonApiUserClaims = new[]
+            string[] commonApiUserClaims = new[]
             {
                 "email",
                 "email_verified",
@@ -85,7 +85,7 @@ namespace Snooker.IdentityServer
 
         private async Task<ApiResource> CreateApiResourceAsync(string name, IEnumerable<string> claims)
         {
-            var apiResource = await _apiResourceRepository.FindByNameAsync(name);
+            ApiResource apiResource = await _apiResourceRepository.FindByNameAsync(name);
             if (apiResource == null)
             {
                 apiResource = await _apiResourceRepository.InsertAsync(
@@ -98,7 +98,7 @@ namespace Snooker.IdentityServer
                 );
             }
 
-            foreach (var claim in claims)
+            foreach (string claim in claims)
             {
                 if (apiResource.FindClaim(claim) == null)
                 {
@@ -111,7 +111,7 @@ namespace Snooker.IdentityServer
 
         private async Task<ApiScope> CreateApiScopeAsync(string name)
         {
-            var apiScope = await _apiScopeRepository.GetByNameAsync(name);
+            ApiScope apiScope = await _apiScopeRepository.GetByNameAsync(name);
             if (apiScope == null)
             {
                 apiScope = await _apiScopeRepository.InsertAsync(
@@ -129,7 +129,7 @@ namespace Snooker.IdentityServer
 
         private async Task CreateClientsAsync()
         {
-            var commonScopes = new[]
+            string[] commonScopes = new[]
             {
                 "email",
                 "openid",
@@ -140,13 +140,13 @@ namespace Snooker.IdentityServer
                 "Snooker"
             };
 
-            var configurationSection = _configuration.GetSection("IdentityServer:Clients");
+            IConfigurationSection configurationSection = _configuration.GetSection("IdentityServer:Clients");
 
             //Web Client
-            var webClientId = configurationSection["Snooker_Web:ClientId"];
+            string webClientId = configurationSection["Snooker_Web:ClientId"];
             if (!webClientId.IsNullOrWhiteSpace())
             {
-                var webClientRootUrl = configurationSection["Snooker_Web:RootUrl"].EnsureEndsWith('/');
+                string webClientRootUrl = configurationSection["Snooker_Web:RootUrl"].EnsureEndsWith('/');
 
                 /* Snooker_Web client is only needed if you created a tiered
                  * solution. Otherwise, you can delete this client. */
@@ -164,10 +164,10 @@ namespace Snooker.IdentityServer
             }
 
             //Console Test / Angular Client
-            var consoleAndAngularClientId = configurationSection["Snooker_App:ClientId"];
+            string consoleAndAngularClientId = configurationSection["Snooker_App:ClientId"];
             if (!consoleAndAngularClientId.IsNullOrWhiteSpace())
             {
-                var webClientRootUrl = configurationSection["Snooker_App:RootUrl"]?.TrimEnd('/');
+                string webClientRootUrl = configurationSection["Snooker_App:RootUrl"]?.TrimEnd('/');
 
                 await CreateClientAsync(
                     name: consoleAndAngularClientId,
@@ -182,10 +182,10 @@ namespace Snooker.IdentityServer
             }
 
             // Blazor Client
-            var blazorClientId = configurationSection["Snooker_Blazor:ClientId"];
+            string blazorClientId = configurationSection["Snooker_Blazor:ClientId"];
             if (!blazorClientId.IsNullOrWhiteSpace())
             {
-                var blazorRootUrl = configurationSection["Snooker_Blazor:RootUrl"].TrimEnd('/');
+                string blazorRootUrl = configurationSection["Snooker_Blazor:RootUrl"].TrimEnd('/');
 
                 await CreateClientAsync(
                     name: blazorClientId,
@@ -200,10 +200,10 @@ namespace Snooker.IdentityServer
             }
 
             // Swagger Client
-            var swaggerClientId = configurationSection["Snooker_Swagger:ClientId"];
+            string swaggerClientId = configurationSection["Snooker_Swagger:ClientId"];
             if (!swaggerClientId.IsNullOrWhiteSpace())
             {
-                var swaggerRootUrl = configurationSection["Snooker_Swagger:RootUrl"].TrimEnd('/');
+                string swaggerRootUrl = configurationSection["Snooker_Swagger:RootUrl"].TrimEnd('/');
 
                 await CreateClientAsync(
                     name: swaggerClientId,
@@ -230,7 +230,7 @@ namespace Snooker.IdentityServer
             IEnumerable<string> permissions = null,
             IEnumerable<string> corsOrigins = null)
         {
-            var client = await _clientRepository.FindByClientIdAsync(name);
+            Client client = await _clientRepository.FindByClientIdAsync(name);
             if (client == null)
             {
                 client = await _clientRepository.InsertAsync(
@@ -257,7 +257,7 @@ namespace Snooker.IdentityServer
                 );
             }
 
-            foreach (var scope in scopes)
+            foreach (string scope in scopes)
             {
                 if (client.FindScope(scope) == null)
                 {
@@ -265,7 +265,7 @@ namespace Snooker.IdentityServer
                 }
             }
 
-            foreach (var grantType in grantTypes)
+            foreach (string grantType in grantTypes)
             {
                 if (client.FindGrantType(grantType) == null)
                 {
@@ -309,7 +309,7 @@ namespace Snooker.IdentityServer
 
             if (corsOrigins != null)
             {
-                foreach (var origin in corsOrigins)
+                foreach (string origin in corsOrigins)
                 {
                     if (!origin.IsNullOrWhiteSpace() && client.FindCorsOrigin(origin) == null)
                     {

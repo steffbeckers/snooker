@@ -57,7 +57,7 @@ namespace Snooker.Users
 
         private AppUser()
         {
-            
+
         }
     }
 }

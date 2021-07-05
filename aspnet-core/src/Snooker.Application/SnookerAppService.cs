@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Snooker.Localization;
+﻿using Snooker.Localization;
 using Volo.Abp.Application.Services;
 
 namespace Snooker

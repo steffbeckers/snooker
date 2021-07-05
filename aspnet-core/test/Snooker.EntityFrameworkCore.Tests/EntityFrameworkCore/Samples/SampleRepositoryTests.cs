@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Snooker.Users;
 using Shouldly;
+using Snooker.Users;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -32,7 +32,7 @@ namespace Snooker.EntityFrameworkCore.Samples
             await WithUnitOfWorkAsync(async () =>
             {
                 //Act
-                var adminUser = await (await _appUserRepository.GetQueryableAsync())
+                AppUser adminUser = await (await _appUserRepository.GetQueryableAsync())
                     .Where(u => u.UserName == "admin")
                     .FirstOrDefaultAsync();
 

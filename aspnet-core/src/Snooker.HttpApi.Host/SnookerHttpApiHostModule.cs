@@ -1,34 +1,35 @@
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
+using Snooker.EntityFrameworkCore;
+using Snooker.MultiTenancy;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Cors;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Snooker.EntityFrameworkCore;
-using Snooker.MultiTenancy;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
-using Microsoft.OpenApi.Models;
 using Volo.Abp;
 using Volo.Abp.Account.Web;
 using Volo.Abp.AspNetCore.Authentication.JwtBearer;
 using Volo.Abp.AspNetCore.MultiTenancy;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Autofac;
+using Volo.Abp.EventBus.RabbitMq;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.Swashbuckle;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.VirtualFileSystem;
-using Microsoft.AspNetCore.HttpOverrides;
-using Volo.Abp.EventBus.RabbitMq;
 
 namespace Snooker
 {
@@ -51,8 +52,8 @@ namespace Snooker
 
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
-            var configuration = context.Services.GetConfiguration();
-            var hostingEnvironment = context.Services.GetHostingEnvironment();
+            IConfiguration configuration = context.Services.GetConfiguration();
+            IWebHostEnvironment hostingEnvironment = context.Services.GetHostingEnvironment();
 
             ConfigureBundles();
             ConfigureUrls(configuration);
@@ -89,7 +90,7 @@ namespace Snooker
 
         private void ConfigureVirtualFileSystem(ServiceConfigurationContext context)
         {
-            var hostingEnvironment = context.Services.GetHostingEnvironment();
+            IWebHostEnvironment hostingEnvironment = context.Services.GetHostingEnvironment();
 
             if (hostingEnvironment.IsDevelopment())
             {
@@ -195,8 +196,7 @@ namespace Snooker
         // Not added by ABP.io framework
         private void ConfigureForwardedHeaders()
         {
-            // Forwarding request headers from proxy
-            // https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/proxy-load-balancer?view=aspnetcore-5.0#forwarded-headers-middleware-order
+            // Forwarding request headers from proxy https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/proxy-load-balancer?view=aspnetcore-5.0#forwarded-headers-middleware-order
             Configure<ForwardedHeadersOptions>(options =>
             {
                 // https://github.com/aspnet/AspNetCore/issues/5970#issuecomment-475388872
@@ -208,17 +208,15 @@ namespace Snooker
 
         public override void OnApplicationInitialization(ApplicationInitializationContext context)
         {
-            var app = context.GetApplicationBuilder();
-            var env = context.GetEnvironment();
+            IApplicationBuilder app = context.GetApplicationBuilder();
+            IWebHostEnvironment env = context.GetEnvironment();
 
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
-            // Not added by ABP.io framework
-            // Forwarding request headers from proxy
-            // https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/proxy-load-balancer?view=aspnetcore-5.0#forwarded-headers-middleware-order
+            // Not added by ABP.io framework Forwarding request headers from proxy https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/proxy-load-balancer?view=aspnetcore-5.0#forwarded-headers-middleware-order
             app.UseForwardedHeaders();
 
             app.UseAbpRequestLocalization();
@@ -249,7 +247,7 @@ namespace Snooker
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Snooker API");
 
-                var configuration = context.ServiceProvider.GetRequiredService<IConfiguration>();
+                IConfiguration configuration = context.ServiceProvider.GetRequiredService<IConfiguration>();
                 c.OAuthClientId(configuration["AuthServer:SwaggerClientId"]);
                 c.OAuthClientSecret(configuration["AuthServer:SwaggerClientSecret"]);
             });
