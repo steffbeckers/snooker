@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Repositories;
@@ -13,13 +14,19 @@ namespace Snooker.Clubs
             string name = null,
             CancellationToken cancellationToken = default);
 
+        Task<IQueryable<Club>> GetFilteredQueryableAsync(
+            string filterText = null,
+            string name = null,
+            string sorting = null,
+            int maxResultCount = int.MaxValue,
+            int skipCount = 0);
+
         Task<List<Club>> GetListAsync(
-                    string filterText = null,
+            string filterText = null,
             string name = null,
             string sorting = null,
             int maxResultCount = int.MaxValue,
             int skipCount = 0,
-            CancellationToken cancellationToken = default
-        );
+            CancellationToken cancellationToken = default);
     }
 }

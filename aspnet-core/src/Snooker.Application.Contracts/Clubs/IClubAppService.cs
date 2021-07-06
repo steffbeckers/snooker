@@ -13,7 +13,7 @@ namespace Snooker.Clubs
 
         Task<ClubDto> GetAsync(Guid id);
 
-        Task<PagedResultDto<ClubDto>> GetListAsync(GetClubsInput input);
+        Task<PagedResultDto<ClubSimpleDto>> GetListAsync(GetClubsInput input);
 
         Task<ClubDto> UpdateAsync(Guid id, ClubUpdateDto input);
     }

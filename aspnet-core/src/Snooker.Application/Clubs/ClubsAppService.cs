@@ -1,10 +1,11 @@
 using Microsoft.AspNetCore.Authorization;
 using Snooker.Permissions;
 using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
+using Volo.Abp.ObjectMapping;
 
 namespace Snooker.Clubs
 {
@@ -41,15 +42,30 @@ namespace Snooker.Clubs
             return ObjectMapper.Map<Club, ClubDto>(club);
         }
 
-        public virtual async Task<PagedResultDto<ClubDto>> GetListAsync(GetClubsInput input)
+        public virtual async Task<PagedResultDto<ClubSimpleDto>> GetListAsync(GetClubsInput input)
         {
-            long totalCount = await _clubRepository.GetCountAsync(input.FilterText, input.Name);
-            List<Club> clubs = await _clubRepository.GetListAsync(input.FilterText, input.Name, input.Sorting, input.MaxResultCount, input.SkipCount);
+            //long totalCount = await _clubRepository.GetCountAsync(input.FilterText, input.Name);
+            //List<Club> clubs = await _clubRepository.GetListAsync(input.FilterText, input.Name, input.Sorting, input.MaxResultCount, input.SkipCount);
 
-            return new PagedResultDto<ClubDto>
+            //return new PagedResultDto<ClubDto>
+            //{
+            //    TotalCount = totalCount,
+            //    Items = ObjectMapper.Map<List<Club>, List<ClubDto>>(clubs)
+            //};
+
+            long totalCount = await _clubRepository.GetCountAsync(input.FilterText, input.Name);
+            IQueryable<Club> clubQueryable = await _clubRepository.GetFilteredQueryableAsync(
+                input.FilterText,
+                input.Name,
+                input.Sorting,
+                input.MaxResultCount,
+                input.SkipCount);
+            IQueryable<ClubSimpleDto> clubDtoQueryable = ObjectMapper.GetMapper().ProjectTo<ClubSimpleDto>(clubQueryable);
+
+            return new PagedResultDto<ClubSimpleDto>
             {
                 TotalCount = totalCount,
-                Items = ObjectMapper.Map<List<Club>, List<ClubDto>>(clubs)
+                Items = await AsyncExecuter.ToListAsync(clubDtoQueryable)
             };
         }
 

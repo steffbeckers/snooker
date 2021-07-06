@@ -22,7 +22,7 @@ namespace Snooker
         {
             Configure<AbpAutoMapperOptions>(options =>
             {
-                options.AddMaps<SnookerApplicationModule>();
+                options.AddMaps<SnookerApplicationModule>(validate: true);
             });
         }
     }
