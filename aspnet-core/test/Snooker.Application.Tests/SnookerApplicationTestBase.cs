@@ -1,7 +1,6 @@
 ﻿namespace Snooker
 {
-    public abstract class SnookerApplicationTestBase : SnookerTestBase<SnookerApplicationTestModule> 
+    public abstract class SnookerApplicationTestBase : SnookerTestBase<SnookerApplicationTestModule>
     {
-
     }
 }

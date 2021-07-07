@@ -1,2 +1,3 @@
 ﻿using System.Runtime.CompilerServices;
-[assembly:InternalsVisibleToAttribute("Snooker.EntityFrameworkCore.Tests")]
+
+[assembly: InternalsVisibleToAttribute("Snooker.EntityFrameworkCore.Tests")]

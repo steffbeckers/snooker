@@ -41,7 +41,7 @@ namespace Snooker.Controllers.Clubs
         }
 
         [HttpGet]
-        public virtual Task<PagedResultDto<ClubDto>> GetListAsync(GetClubsInput input)
+        public virtual Task<PagedResultDto<ClubListDto>> GetListAsync(GetClubsInput input)
         {
             return _clubsAppService.GetListAsync(input);
         }

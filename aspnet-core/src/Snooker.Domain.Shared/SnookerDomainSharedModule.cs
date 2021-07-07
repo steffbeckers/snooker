@@ -23,16 +23,9 @@ namespace Snooker
         typeof(AbpIdentityServerDomainSharedModule),
         typeof(AbpPermissionManagementDomainSharedModule),
         typeof(AbpSettingManagementDomainSharedModule),
-        typeof(AbpTenantManagementDomainSharedModule)
-        )]
+        typeof(AbpTenantManagementDomainSharedModule))]
     public class SnookerDomainSharedModule : AbpModule
     {
-        public override void PreConfigureServices(ServiceConfigurationContext context)
-        {
-            SnookerGlobalFeatureConfigurator.Configure();
-            SnookerModuleExtensionConfigurator.Configure();
-        }
-
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
             Configure<AbpVirtualFileSystemOptions>(options =>
@@ -54,6 +47,12 @@ namespace Snooker
             {
                 options.MapCodeNamespace("Snooker", typeof(SnookerResource));
             });
+        }
+
+        public override void PreConfigureServices(ServiceConfigurationContext context)
+        {
+            SnookerGlobalFeatureConfigurator.Configure();
+            SnookerModuleExtensionConfigurator.Configure();
         }
     }
 }

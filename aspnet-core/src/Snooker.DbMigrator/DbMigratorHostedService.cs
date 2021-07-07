@@ -1,12 +1,12 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Snooker.Data;
 using Serilog;
-using Volo.Abp;
-using Microsoft.Extensions.Configuration;
+using Snooker.Data;
 using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Volo.Abp;
 
 namespace Snooker.DbMigrator
 {
@@ -21,7 +21,7 @@ namespace Snooker.DbMigrator
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
-            using (var application = AbpApplicationFactory.Create<SnookerDbMigratorModule>(options =>
+            using (IAbpApplicationWithInternalServiceProvider application = AbpApplicationFactory.Create<SnookerDbMigratorModule>(options =>
             {
                 options.UseAutofac();
                 options.Services.AddLogging(c => c.AddSerilog());

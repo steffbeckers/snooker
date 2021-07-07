@@ -22,15 +22,11 @@ namespace Snooker.EntityFrameworkCore
     [ConnectionStringName("Default")]
     public class SnookerDbContext : AbpDbContext<SnookerDbContext>
     {
+        public DbSet<Club> Clubs { get; set; }
         public DbSet<AppUser> Users { get; set; }
 
-        /* Add DbSet properties for your Aggregate Roots / Entities here.
-         * Also map them inside SnookerDbContextModelCreatingExtensions.ConfigureSnooker
-         */
-        public DbSet<Club> Clubs { get; set; }
-
-        public SnookerDbContext(DbContextOptions<SnookerDbContext> options)
-            : base(options)
+        // Add DbSet properties for your Aggregate Roots / Entities here. Also map them inside SnookerDbContextModelCreatingExtensions.ConfigureSnooker
+        public SnookerDbContext(DbContextOptions<SnookerDbContext> options) : base(options)
         {
         }
 
@@ -42,7 +38,7 @@ namespace Snooker.EntityFrameworkCore
 
             builder.Entity<AppUser>(b =>
             {
-                b.ToTable(AbpIdentityDbProperties.DbTablePrefix + "Users"); //Sharing the same table "AbpUsers" with the IdentityUser
+                b.ToTable(AbpIdentityDbProperties.DbTablePrefix + "Users"); // Sharing the same table "AbpUsers" with the IdentityUser
 
                 b.ConfigureByConvention();
                 b.ConfigureAbpUser();

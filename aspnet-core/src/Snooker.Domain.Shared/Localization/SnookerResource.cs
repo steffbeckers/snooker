@@ -5,6 +5,5 @@ namespace Snooker.Localization
     [LocalizationResourceName("Snooker")]
     public class SnookerResource
     {
-
     }
 }

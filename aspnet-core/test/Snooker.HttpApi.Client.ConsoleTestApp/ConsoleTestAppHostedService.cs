@@ -1,7 +1,7 @@
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp;
 
 namespace Snooker.HttpApi.Client.ConsoleTestApp
@@ -10,11 +10,11 @@ namespace Snooker.HttpApi.Client.ConsoleTestApp
     {
         public async Task StartAsync(CancellationToken cancellationToken)
         {
-            using (var application = AbpApplicationFactory.Create<SnookerConsoleApiClientModule>())
+            using (IAbpApplicationWithInternalServiceProvider application = AbpApplicationFactory.Create<SnookerConsoleApiClientModule>())
             {
                 application.Initialize();
 
-                var demo = application.ServiceProvider.GetRequiredService<ClientDemoService>();
+                ClientDemoService demo = application.ServiceProvider.GetRequiredService<ClientDemoService>();
                 await demo.RunAsync();
 
                 application.Shutdown();

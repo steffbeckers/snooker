@@ -1,17 +1,17 @@
 using Microsoft.AspNetCore.Authorization;
 using Snooker.Permissions;
 using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
-using Volo.Abp.Application.Services;
+using Volo.Abp.ObjectMapping;
 
 namespace Snooker.Clubs
 {
     [RemoteService(IsEnabled = false)]
     [Authorize(SnookerPermissions.Clubs.Default)]
-    public class ClubsAppService : ApplicationService, IClubsAppService
+    public class ClubsAppService : SnookerAppService, IClubsAppService
     {
         private readonly IClubRepository _clubRepository;
 
@@ -42,15 +42,21 @@ namespace Snooker.Clubs
             return ObjectMapper.Map<Club, ClubDto>(club);
         }
 
-        public virtual async Task<PagedResultDto<ClubDto>> GetListAsync(GetClubsInput input)
+        public virtual async Task<PagedResultDto<ClubListDto>> GetListAsync(GetClubsInput input)
         {
             long totalCount = await _clubRepository.GetCountAsync(input.FilterText, input.Name);
-            List<Club> clubs = await _clubRepository.GetListAsync(input.FilterText, input.Name, input.Sorting, input.MaxResultCount, input.SkipCount);
+            IQueryable<Club> clubQueryable = await _clubRepository.GetFilteredQueryableAsync(
+                input.FilterText,
+                input.Name,
+                input.Sorting,
+                input.MaxResultCount,
+                input.SkipCount);
+            IQueryable<ClubListDto> clubDtoQueryable = ObjectMapper.GetMapper().ProjectTo<ClubListDto>(clubQueryable);
 
-            return new PagedResultDto<ClubDto>
+            return new PagedResultDto<ClubListDto>
             {
                 TotalCount = totalCount,
-                Items = ObjectMapper.Map<List<Club>, List<ClubDto>>(clubs)
+                Items = await AsyncExecuter.ToListAsync(clubDtoQueryable)
             };
         }
 

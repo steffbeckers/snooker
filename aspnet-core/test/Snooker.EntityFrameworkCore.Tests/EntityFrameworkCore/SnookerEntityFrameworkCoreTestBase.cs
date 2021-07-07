@@ -1,9 +1,6 @@
-﻿using Volo.Abp;
-
-namespace Snooker.EntityFrameworkCore
+﻿namespace Snooker.EntityFrameworkCore
 {
-    public abstract class SnookerEntityFrameworkCoreTestBase : SnookerTestBase<SnookerEntityFrameworkCoreTestModule> 
+    public abstract class SnookerEntityFrameworkCoreTestBase : SnookerTestBase<SnookerEntityFrameworkCoreTestModule>
     {
-
     }
 }

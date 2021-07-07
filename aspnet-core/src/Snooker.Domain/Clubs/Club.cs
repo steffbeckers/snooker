@@ -8,16 +8,6 @@ namespace Snooker.Clubs
     {
         private string _name;
 
-        public Club(Guid id, string name)
-        {
-            Id = id;
-            Name = name;
-        }
-
-        private Club()
-        {
-        }
-
         public virtual string Name
         {
             get => _name;
@@ -27,6 +17,16 @@ namespace Snooker.Clubs
                 Check.Length(value, nameof(Name), ClubConsts.NameMaxLength, 0);
                 _name = value;
             }
+        }
+
+        public Club(Guid id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
+
+        private Club()
+        {
         }
     }
 }

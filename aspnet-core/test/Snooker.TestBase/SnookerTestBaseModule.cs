@@ -11,26 +11,12 @@ using Volo.Abp.Threading;
 namespace Snooker
 {
     [DependsOn(
+        typeof(AbpAuthorizationModule),
         typeof(AbpAutofacModule),
         typeof(AbpTestBaseModule),
-        typeof(AbpAuthorizationModule),
-        typeof(SnookerDomainModule)
-        )]
+        typeof(SnookerDomainModule))]
     public class SnookerTestBaseModule : AbpModule
     {
-        public override void PreConfigureServices(ServiceConfigurationContext context)
-        {
-            PreConfigure<AbpIdentityServerBuilderOptions>(options =>
-            {
-                options.AddDeveloperSigningCredential = false;
-            });
-
-            PreConfigure<IIdentityServerBuilder>(identityServerBuilder =>
-            {
-                identityServerBuilder.AddDeveloperSigningCredential(false, System.Guid.NewGuid().ToString());
-            });
-        }
-
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
             Configure<AbpBackgroundJobOptions>(options =>
@@ -46,11 +32,24 @@ namespace Snooker
             SeedTestData(context);
         }
 
+        public override void PreConfigureServices(ServiceConfigurationContext context)
+        {
+            PreConfigure<AbpIdentityServerBuilderOptions>(options =>
+            {
+                options.AddDeveloperSigningCredential = false;
+            });
+
+            PreConfigure<IIdentityServerBuilder>(identityServerBuilder =>
+            {
+                identityServerBuilder.AddDeveloperSigningCredential(false, System.Guid.NewGuid().ToString());
+            });
+        }
+
         private static void SeedTestData(ApplicationInitializationContext context)
         {
             AsyncHelper.RunSync(async () =>
             {
-                using (var scope = context.ServiceProvider.CreateScope())
+                using (IServiceScope scope = context.ServiceProvider.CreateScope())
                 {
                     await scope.ServiceProvider
                         .GetRequiredService<IDataSeeder>()

@@ -9,13 +9,12 @@ using Volo.Abp.TenantManagement;
 namespace Snooker
 {
     [DependsOn(
-        typeof(SnookerApplicationContractsModule),
         typeof(AbpAccountHttpApiClientModule),
+        typeof(AbpFeatureManagementHttpApiClientModule),
         typeof(AbpIdentityHttpApiClientModule),
         typeof(AbpPermissionManagementHttpApiClientModule),
         typeof(AbpTenantManagementHttpApiClientModule),
-        typeof(AbpFeatureManagementHttpApiClientModule)
-    )]
+        typeof(SnookerApplicationContractsModule))]
     public class SnookerHttpApiClientModule : AbpModule
     {
         public const string RemoteServiceName = "Default";
