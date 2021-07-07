@@ -65,7 +65,7 @@ namespace Snooker.Clubs
         public async Task GetListAsync()
         {
             // Act
-            PagedResultDto<ClubSimpleDto> result = await _clubsAppService.GetListAsync(new GetClubsInput() { MaxResultCount = 20 });
+            PagedResultDto<ClubListDto> result = await _clubsAppService.GetListAsync(new GetClubsInput() { MaxResultCount = 20 });
 
             // Assert
             result.TotalCount.ShouldBe(15);

@@ -42,7 +42,7 @@ namespace Snooker.Clubs
             return ObjectMapper.Map<Club, ClubDto>(club);
         }
 
-        public virtual async Task<PagedResultDto<ClubSimpleDto>> GetListAsync(GetClubsInput input)
+        public virtual async Task<PagedResultDto<ClubListDto>> GetListAsync(GetClubsInput input)
         {
             long totalCount = await _clubRepository.GetCountAsync(input.FilterText, input.Name);
             IQueryable<Club> clubQueryable = await _clubRepository.GetFilteredQueryableAsync(
@@ -51,9 +51,9 @@ namespace Snooker.Clubs
                 input.Sorting,
                 input.MaxResultCount,
                 input.SkipCount);
-            IQueryable<ClubSimpleDto> clubDtoQueryable = ObjectMapper.GetMapper().ProjectTo<ClubSimpleDto>(clubQueryable);
+            IQueryable<ClubListDto> clubDtoQueryable = ObjectMapper.GetMapper().ProjectTo<ClubListDto>(clubQueryable);
 
-            return new PagedResultDto<ClubSimpleDto>
+            return new PagedResultDto<ClubListDto>
             {
                 TotalCount = totalCount,
                 Items = await AsyncExecuter.ToListAsync(clubDtoQueryable)
