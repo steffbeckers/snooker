@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Snooker.Clubs;
+using Snooker.Players;
 using Volo.Abp;
 using Volo.Abp.EntityFrameworkCore.Modeling;
+using Volo.Abp.Identity;
 
 namespace Snooker.EntityFrameworkCore
 {
@@ -24,10 +26,32 @@ namespace Snooker.EntityFrameworkCore
             {
                 b.ToTable(SnookerConsts.DbTablePrefix + "Clubs", SnookerConsts.DbSchema);
                 b.ConfigureByConvention();
+
                 b.Property(x => x.Name)
                     .HasColumnName(nameof(Club.Name))
                     .IsRequired()
                     .HasMaxLength(ClubConsts.NameMaxLength);
+            });
+
+            builder.Entity<Player>(b =>
+            {
+                b.ToTable(SnookerConsts.DbTablePrefix + "Players", SnookerConsts.DbSchema);
+                b.ConfigureByConvention();
+
+                b.Property(x => x.FirstName)
+                    .HasColumnName(nameof(Player.FirstName))
+                    .IsRequired()
+                    .HasMaxLength(PlayerConsts.FirstNameMaxLength);
+                b.Property(x => x.LastName)
+                    .HasColumnName(nameof(Player.LastName))
+                    .IsRequired()
+                    .HasMaxLength(PlayerConsts.LastNameMaxLength);
+                b.Property(x => x.UserId)
+                    .HasColumnName(nameof(Player.UserId));
+
+                b.HasOne<IdentityUser>()
+                    .WithMany()
+                    .HasForeignKey(x => x.UserId);
             });
         }
     }

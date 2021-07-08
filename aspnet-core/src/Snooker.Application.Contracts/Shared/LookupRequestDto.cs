@@ -4,7 +4,7 @@ namespace Snooker.Shared
 {
     public class LookupRequestDto : PagedResultRequestDto
     {
-        public string Filter { get; set; }
+        public string FilterText { get; set; }
 
         public LookupRequestDto()
         {

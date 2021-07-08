@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Snooker.Clubs;
+using Snooker.Players;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
@@ -37,6 +38,7 @@ namespace Snooker.EntityFrameworkCore
                 options.AddDefaultRepositories();
 
                 options.AddRepository<Club, EfCoreClubRepository>();
+                options.AddRepository<Player, EfCorePlayerRepository>();
             });
 
             Configure<AbpDbContextOptions>(options =>

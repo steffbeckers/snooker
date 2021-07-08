@@ -9,8 +9,16 @@
 
         public class Clubs
         {
-            public const string Default = GroupName + ".Clubs";
             public const string Create = Default + ".Create";
+            public const string Default = GroupName + ".Clubs";
+            public const string Delete = Default + ".Delete";
+            public const string Edit = Default + ".Edit";
+        }
+
+        public class Players
+        {
+            public const string Create = Default + ".Create";
+            public const string Default = GroupName + ".Players";
             public const string Delete = Default + ".Delete";
             public const string Edit = Default + ".Edit";
         }

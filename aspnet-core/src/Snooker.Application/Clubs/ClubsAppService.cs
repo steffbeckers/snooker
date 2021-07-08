@@ -51,12 +51,12 @@ namespace Snooker.Clubs
                 input.Sorting,
                 input.MaxResultCount,
                 input.SkipCount);
-            IQueryable<ClubListDto> clubDtoQueryable = ObjectMapper.GetMapper().ProjectTo<ClubListDto>(clubQueryable);
+            IQueryable<ClubListDto> clubListDtoQueryable = ObjectMapper.GetMapper().ProjectTo<ClubListDto>(clubQueryable);
 
             return new PagedResultDto<ClubListDto>
             {
                 TotalCount = totalCount,
-                Items = await AsyncExecuter.ToListAsync(clubDtoQueryable)
+                Items = await AsyncExecuter.ToListAsync(clubListDtoQueryable)
             };
         }
 

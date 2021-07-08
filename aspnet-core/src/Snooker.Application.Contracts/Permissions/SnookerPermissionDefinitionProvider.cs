@@ -17,6 +17,11 @@ namespace Snooker.Permissions
             clubPermission.AddChild(SnookerPermissions.Clubs.Create, L("Permission:Create"));
             clubPermission.AddChild(SnookerPermissions.Clubs.Edit, L("Permission:Edit"));
             clubPermission.AddChild(SnookerPermissions.Clubs.Delete, L("Permission:Delete"));
+
+            PermissionDefinition playerPermission = snookerGroup.AddPermission(SnookerPermissions.Players.Default, L("Permission:Players"));
+            playerPermission.AddChild(SnookerPermissions.Players.Create, L("Permission:Create"));
+            playerPermission.AddChild(SnookerPermissions.Players.Edit, L("Permission:Edit"));
+            playerPermission.AddChild(SnookerPermissions.Players.Delete, L("Permission:Delete"));
         }
 
         private static LocalizableString L(string name)

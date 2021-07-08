@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Snooker.Clubs;
+using Snooker.Players;
 
 namespace Snooker
 {
@@ -13,6 +14,9 @@ namespace Snooker
 
             CreateMap<Club, ClubDto>();
             CreateMap<Club, ClubListDto>();
+
+            CreateMap<Player, PlayerDto>();
+            CreateMap<Player, PlayerListDto>();
         }
     }
 }

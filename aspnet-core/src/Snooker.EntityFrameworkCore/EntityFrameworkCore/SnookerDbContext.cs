@@ -1,10 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Snooker.Clubs;
+using Snooker.Players;
 using Snooker.Users;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.Modeling;
 using Volo.Abp.Identity;
+using Volo.Abp.Identity.EntityFrameworkCore;
 using Volo.Abp.Users.EntityFrameworkCore;
 
 namespace Snooker.EntityFrameworkCore
@@ -23,7 +25,8 @@ namespace Snooker.EntityFrameworkCore
     public class SnookerDbContext : AbpDbContext<SnookerDbContext>
     {
         public DbSet<Club> Clubs { get; set; }
-        public DbSet<AppUser> Users { get; set; }
+        public DbSet<Player> Players { get; set; }
+        //public DbSet<AppUser> Users { get; set; }
 
         // Add DbSet properties for your Aggregate Roots / Entities here. Also map them inside SnookerDbContextModelCreatingExtensions.ConfigureSnooker
         public SnookerDbContext(DbContextOptions<SnookerDbContext> options) : base(options)
@@ -36,17 +39,18 @@ namespace Snooker.EntityFrameworkCore
 
             /* Configure the shared tables (with included modules) here */
 
-            builder.Entity<AppUser>(b =>
-            {
-                b.ToTable(AbpIdentityDbProperties.DbTablePrefix + "Users"); // Sharing the same table "AbpUsers" with the IdentityUser
+            //builder.Entity<AppUser>(b =>
+            //{
+            //    b.ToTable(AbpIdentityDbProperties.DbTablePrefix + "Users"); // Sharing the same table "AbpUsers" with the IdentityUser
 
-                b.ConfigureByConvention();
-                b.ConfigureAbpUser();
+            // b.ConfigureByConvention(); b.ConfigureAbpUser();
 
-                /* Configure mappings for your additional properties
-                 * Also see the SnookerEfCoreEntityExtensionMappings class
-                 */
-            });
+            //    /* Configure mappings for your additional properties
+            //     * Also see the SnookerEfCoreEntityExtensionMappings class
+            //     */
+            //});
+
+            builder.ConfigureIdentity();
 
             /* Configure your own tables/entities inside the ConfigureSnooker method */
 
