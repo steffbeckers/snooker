@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Snooker.ClubPlayers;
 using Snooker.Clubs;
 using Snooker.Players;
 using Volo.Abp;
@@ -21,6 +22,26 @@ namespace Snooker.EntityFrameworkCore
             //    b.ConfigureByConvention(); //auto configure for the base class props
             //    //...
             //});
+
+            builder.Entity<ClubPlayer>(b =>
+            {
+                b.ToTable(SnookerConsts.DbTablePrefix + "ClubPlayers", SnookerConsts.DbSchema);
+                b.ConfigureByConvention();
+
+                b.Property(x => x.ClubId)
+                    .HasColumnName(nameof(ClubPlayer.ClubId))
+                    .IsRequired();
+                b.Property(x => x.PlayerId)
+                    .HasColumnName(nameof(ClubPlayer.PlayerId))
+                    .IsRequired();
+
+                b.HasOne<Club>()
+                    .WithMany()
+                    .HasForeignKey(x => x.ClubId);
+                b.HasOne<Player>()
+                    .WithMany()
+                    .HasForeignKey(x => x.PlayerId);
+            });
 
             builder.Entity<Club>(b =>
             {

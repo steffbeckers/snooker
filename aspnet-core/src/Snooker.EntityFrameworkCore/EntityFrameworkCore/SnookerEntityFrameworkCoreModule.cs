@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using Snooker.ClubPlayers;
 using Snooker.Clubs;
 using Snooker.Players;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
@@ -37,6 +38,7 @@ namespace Snooker.EntityFrameworkCore
                 //options.AddDefaultRepositories(includeAllEntities: true);
                 options.AddDefaultRepositories();
 
+                options.AddRepository<ClubPlayer, EfCoreClubPlayerRepository>();
                 options.AddRepository<Club, EfCoreClubRepository>();
                 options.AddRepository<Player, EfCorePlayerRepository>();
             });

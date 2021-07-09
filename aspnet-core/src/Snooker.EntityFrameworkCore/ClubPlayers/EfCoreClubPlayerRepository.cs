@@ -1,0 +1,57 @@
+using Microsoft.EntityFrameworkCore;
+using Snooker.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Dynamic.Core;
+using System.Threading;
+using System.Threading.Tasks;
+using Volo.Abp.Domain.Repositories.EntityFrameworkCore;
+using Volo.Abp.EntityFrameworkCore;
+
+namespace Snooker.ClubPlayers
+{
+    public class EfCoreClubPlayerRepository : EfCoreRepository<SnookerDbContext, ClubPlayer, Guid>, IClubPlayerRepository
+    {
+        public EfCoreClubPlayerRepository(IDbContextProvider<SnookerDbContext> dbContextProvider)
+            : base(dbContextProvider)
+        {
+        }
+
+        public async Task<long> GetCountAsync(
+            string filterText = null,
+            Guid? clubId = null,
+            Guid? playerId = null,
+            CancellationToken cancellationToken = default)
+        {
+            IQueryable<ClubPlayer> query = ApplyFilter((await GetDbSetAsync()), filterText, clubId, playerId);
+            return await query.LongCountAsync(GetCancellationToken(cancellationToken));
+        }
+
+        public async Task<List<ClubPlayer>> GetListAsync(
+            string filterText = null,
+            Guid? clubId = null,
+            Guid? playerId = null,
+            string sorting = null,
+            int maxResultCount = int.MaxValue,
+            int skipCount = 0,
+            CancellationToken cancellationToken = default)
+        {
+            IQueryable<ClubPlayer> query = ApplyFilter((await GetQueryableAsync()), filterText, clubId, playerId);
+            query = query.OrderBy(string.IsNullOrWhiteSpace(sorting) ? ClubPlayerConsts.GetDefaultSorting(false) : sorting);
+            return await query.PageBy(skipCount, maxResultCount).ToListAsync(cancellationToken);
+        }
+
+        protected virtual IQueryable<ClubPlayer> ApplyFilter(
+            IQueryable<ClubPlayer> query,
+            string filterText,
+            Guid? clubId = null,
+            Guid? playerId = null)
+        {
+            return query
+                    .WhereIf(!string.IsNullOrWhiteSpace(filterText), e => true)
+                    .WhereIf(clubId.HasValue, e => e.ClubId == clubId)
+                    .WhereIf(playerId.HasValue, e => e.PlayerId == playerId);
+        }
+    }
+}

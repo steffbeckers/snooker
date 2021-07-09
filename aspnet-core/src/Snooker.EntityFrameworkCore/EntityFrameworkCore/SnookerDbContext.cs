@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Snooker.ClubPlayers;
 using Snooker.Clubs;
 using Snooker.Players;
 using Snooker.Users;
@@ -24,6 +25,7 @@ namespace Snooker.EntityFrameworkCore
     [ConnectionStringName("Default")]
     public class SnookerDbContext : AbpDbContext<SnookerDbContext>
     {
+        public DbSet<ClubPlayer> ClubPlayers { get; set; }
         public DbSet<Club> Clubs { get; set; }
         public DbSet<Player> Players { get; set; }
         //public DbSet<AppUser> Users { get; set; }
