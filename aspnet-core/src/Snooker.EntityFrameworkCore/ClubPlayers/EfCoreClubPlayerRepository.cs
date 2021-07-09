@@ -28,6 +28,23 @@ namespace Snooker.ClubPlayers
             return await query.LongCountAsync(GetCancellationToken(cancellationToken));
         }
 
+        public async Task<IQueryable<ClubPlayer>> GetFilteredQueryableAsync(
+            string filterText = null,
+            Guid? clubId = null,
+            Guid? playerId = null,
+            string sorting = null,
+            int maxResultCount = int.MaxValue,
+            int skipCount = 0)
+        {
+            IQueryable<ClubPlayer> query = ApplyFilter(
+                (await GetQueryableAsync()),
+                filterText,
+                clubId,
+                playerId);
+            query = query.OrderBy(string.IsNullOrWhiteSpace(sorting) ? ClubPlayerConsts.GetDefaultSorting(false) : sorting);
+            return query.PageBy(skipCount, maxResultCount);
+        }
+
         public async Task<List<ClubPlayer>> GetListAsync(
             string filterText = null,
             Guid? clubId = null,
@@ -37,9 +54,14 @@ namespace Snooker.ClubPlayers
             int skipCount = 0,
             CancellationToken cancellationToken = default)
         {
-            IQueryable<ClubPlayer> query = ApplyFilter((await GetQueryableAsync()), filterText, clubId, playerId);
-            query = query.OrderBy(string.IsNullOrWhiteSpace(sorting) ? ClubPlayerConsts.GetDefaultSorting(false) : sorting);
-            return await query.PageBy(skipCount, maxResultCount).ToListAsync(cancellationToken);
+            IQueryable<ClubPlayer> queryable = await GetFilteredQueryableAsync(
+                filterText,
+                clubId,
+                playerId,
+                sorting,
+                maxResultCount,
+                skipCount);
+            return await queryable.ToListAsync(cancellationToken);
         }
 
         protected virtual IQueryable<ClubPlayer> ApplyFilter(

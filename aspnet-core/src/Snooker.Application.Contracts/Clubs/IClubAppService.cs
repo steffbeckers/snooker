@@ -1,3 +1,5 @@
+using Snooker.ClubPlayers;
+using Snooker.Players;
 using System;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
@@ -14,6 +16,8 @@ namespace Snooker.Clubs
         Task<ClubDto> GetAsync(Guid id);
 
         Task<PagedResultDto<ClubListDto>> GetListAsync(GetClubsInput input);
+
+        Task<PagedResultDto<ClubPlayerListDto>> GetPlayersListAsync(Guid id, GetClubPlayersInput input);
 
         Task<ClubDto> UpdateAsync(Guid id, ClubUpdateDto input);
     }

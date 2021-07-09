@@ -25,7 +25,12 @@ namespace Snooker.Players
             Guid? userId = null,
             CancellationToken cancellationToken = default)
         {
-            var query = ApplyFilter((await GetDbSetAsync()), filterText, firstName, lastName, userId);
+            var query = ApplyFilter(
+                (await GetDbSetAsync()),
+                filterText,
+                firstName,
+                lastName,
+                userId);
             return await query.LongCountAsync(GetCancellationToken(cancellationToken));
         }
 
@@ -38,7 +43,12 @@ namespace Snooker.Players
             int maxResultCount = int.MaxValue,
             int skipCount = 0)
         {
-            var query = ApplyFilter((await GetQueryableAsync()), filterText, firstName, lastName, userId);
+            var query = ApplyFilter(
+                (await GetQueryableAsync()),
+                filterText,
+                firstName,
+                lastName,
+                userId);
             query = query.OrderBy(string.IsNullOrWhiteSpace(sorting) ? PlayerConsts.GetDefaultSorting(false) : sorting);
             return query.PageBy(skipCount, maxResultCount);
         }

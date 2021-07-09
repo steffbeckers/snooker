@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authorization;
+using Snooker.ClubPlayers;
 using Snooker.Permissions;
 using System;
 using System.Linq;
@@ -58,6 +59,11 @@ namespace Snooker.Clubs
                 TotalCount = totalCount,
                 Items = await AsyncExecuter.ToListAsync(clubListDtoQueryable)
             };
+        }
+
+        public Task<PagedResultDto<ClubPlayerListDto>> GetPlayersListAsync(Guid id, GetClubPlayersInput input)
+        {
+            throw new NotImplementedException();
         }
 
         [Authorize(SnookerPermissions.Clubs.Edit)]
