@@ -34,6 +34,8 @@ namespace Snooker.EntityFrameworkCore
                 b.Property(x => x.PlayerId)
                     .HasColumnName(nameof(ClubPlayer.PlayerId))
                     .IsRequired();
+                b.Property(x => x.IsPrimaryClubOfPlayer)
+                    .HasColumnName(nameof(ClubPlayer.IsPrimaryClubOfPlayer));
 
                 b.HasOne<Club>()
                     .WithMany()

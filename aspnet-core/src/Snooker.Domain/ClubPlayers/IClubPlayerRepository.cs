@@ -24,7 +24,7 @@ namespace Snooker.ClubPlayers
             int skipCount = 0);
 
         Task<List<ClubPlayer>> GetListAsync(
-                            string filterText = null,
+            string filterText = null,
             Guid? clubId = null,
             Guid? playerId = null,
             string sorting = null,

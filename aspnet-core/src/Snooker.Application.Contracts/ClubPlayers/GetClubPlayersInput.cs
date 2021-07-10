@@ -7,6 +7,7 @@ namespace Snooker.ClubPlayers
     {
         public Guid? ClubId { get; set; }
         public string FilterText { get; set; }
+        public bool? IsPrimaryClubOfPlayer { get; set; }
         public Guid? PlayerId { get; set; }
     }
 }
