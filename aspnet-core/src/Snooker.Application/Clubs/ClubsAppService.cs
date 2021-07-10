@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Snooker.ClubPlayers;
 using Snooker.Permissions;
+using Snooker.Players;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,11 +15,18 @@ namespace Snooker.Clubs
     [Authorize(SnookerPermissions.Clubs.Default)]
     public class ClubsAppService : SnookerAppService, IClubsAppService
     {
+        private readonly IClubPlayerRepository _clubPlayerRepository;
         private readonly IClubRepository _clubRepository;
+        private readonly IPlayerRepository _playerRepository;
 
-        public ClubsAppService(IClubRepository clubRepository)
+        public ClubsAppService(
+            IClubPlayerRepository clubPlayerRepository,
+            IClubRepository clubRepository,
+            IPlayerRepository playerRepository)
         {
+            _clubPlayerRepository = clubPlayerRepository;
             _clubRepository = clubRepository;
+            _playerRepository = playerRepository;
         }
 
         [Authorize(SnookerPermissions.Clubs.Create)]
@@ -54,16 +62,44 @@ namespace Snooker.Clubs
                 input.SkipCount);
             IQueryable<ClubListDto> clubListDtoQueryable = ObjectMapper.GetMapper().ProjectTo<ClubListDto>(clubQueryable);
 
-            return new PagedResultDto<ClubListDto>
+            return new PagedResultDto<ClubListDto>()
             {
                 TotalCount = totalCount,
                 Items = await AsyncExecuter.ToListAsync(clubListDtoQueryable)
             };
         }
 
-        public Task<PagedResultDto<ClubPlayerListDto>> GetPlayersListAsync(Guid id, GetClubPlayersInput input)
+        public virtual async Task<PagedResultDto<ClubPlayerListDto>> GetPlayersListAsync(Guid id, GetClubPlayersInput input)
         {
-            throw new NotImplementedException();
+            long totalCount = await _clubPlayerRepository.GetCountAsync(
+                filterText: input.FilterText,
+                clubId: id);
+            IQueryable<ClubPlayer> clubPlayerQueryable = await _clubPlayerRepository.GetFilteredQueryableAsync(
+                filterText: input.FilterText,
+                clubId: id,
+                sorting: input.Sorting,
+                maxResultCount: input.MaxResultCount);
+            IQueryable<Player> playerQueryable = await _playerRepository.GetQueryableAsync();
+
+            IQueryable<ClubPlayerWithNavigationProperties> clubPlayerWithNavigationPropertiesQueryable = clubPlayerQueryable.Join(
+                playerQueryable,
+                x => x.PlayerId,
+                x => x.Id,
+                (clubPlayer, player) => new ClubPlayerWithNavigationProperties()
+                {
+                    Id = clubPlayer.Id,
+                    ClubId = clubPlayer.ClubId,
+                    PlayerId = clubPlayer.PlayerId,
+                    Player = player
+                });
+
+            IQueryable<ClubPlayerListDto> clubPlayerListDtoQueryable = ObjectMapper.GetMapper().ProjectTo<ClubPlayerListDto>(clubPlayerWithNavigationPropertiesQueryable);
+
+            return new PagedResultDto<ClubPlayerListDto>()
+            {
+                TotalCount = totalCount,
+                Items = await AsyncExecuter.ToListAsync(clubPlayerListDtoQueryable)
+            };
         }
 
         [Authorize(SnookerPermissions.Clubs.Edit)]

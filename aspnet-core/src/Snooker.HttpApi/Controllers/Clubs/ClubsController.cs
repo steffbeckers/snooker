@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Snooker.ClubPlayers;
 using Snooker.Clubs;
 using System;
 using System.Threading.Tasks;
@@ -44,6 +45,13 @@ namespace Snooker.Controllers.Clubs
         public virtual Task<PagedResultDto<ClubListDto>> GetListAsync(GetClubsInput input)
         {
             return _clubsAppService.GetListAsync(input);
+        }
+
+        [HttpGet]
+        [Route("{id}/players")]
+        public virtual Task<PagedResultDto<ClubPlayerListDto>> GetPlayersListAsync(Guid id, GetClubPlayersInput input)
+        {
+            return _clubsAppService.GetPlayersListAsync(id, input);
         }
 
         [HttpPut]

@@ -14,6 +14,7 @@ namespace Snooker
              * into multiple profile classes for a better organization. */
 
             CreateMap<ClubPlayer, ClubPlayerDto>();
+            CreateMap<ClubPlayerWithNavigationProperties, ClubPlayerListDto>();
 
             CreateMap<Club, ClubDto>();
             CreateMap<Club, ClubListDto>();
