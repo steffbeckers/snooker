@@ -70,8 +70,8 @@ namespace Snooker.Players
             PagedResultDto<PlayerListDto> result = await _playersAppService.GetListAsync(new GetPlayersInput());
 
             // Assert
-            result.TotalCount.ShouldBe(2);
-            result.Items.Count.ShouldBe(2);
+            result.TotalCount.ShouldBe(6);
+            result.Items.Count.ShouldBe(6);
             result.Items.Any(x => x.Id == Guid.Parse("85ea0ccf-0fad-4c6f-b660-23e6004a777d")).ShouldBe(true);
             result.Items.Any(x => x.Id == Guid.Parse("7b0b86ff-df6b-4b5f-8f6c-a226d00949cc")).ShouldBe(true);
         }
