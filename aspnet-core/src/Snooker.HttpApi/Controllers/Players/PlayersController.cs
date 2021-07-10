@@ -1,10 +1,9 @@
+using Microsoft.AspNetCore.Mvc;
+using Snooker.Players;
 using System;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using Volo.Abp;
-using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.Application.Dtos;
-using Snooker.Players;
 
 namespace Snooker.Controllers.Players
 {

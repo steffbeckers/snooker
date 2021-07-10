@@ -2,13 +2,9 @@
 using Snooker.ClubPlayers;
 using Snooker.Clubs;
 using Snooker.Players;
-using Snooker.Users;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
-using Volo.Abp.EntityFrameworkCore.Modeling;
-using Volo.Abp.Identity;
 using Volo.Abp.Identity.EntityFrameworkCore;
-using Volo.Abp.Users.EntityFrameworkCore;
 
 namespace Snooker.EntityFrameworkCore
 {

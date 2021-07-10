@@ -1,13 +1,13 @@
+using Microsoft.EntityFrameworkCore;
+using Snooker.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using Volo.Abp.Domain.Repositories.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
-using Snooker.EntityFrameworkCore;
 
 namespace Snooker.Players
 {
@@ -25,7 +25,7 @@ namespace Snooker.Players
             Guid? userId = null,
             CancellationToken cancellationToken = default)
         {
-            var query = ApplyFilter(
+            IQueryable<Player> query = ApplyFilter(
                 (await GetDbSetAsync()),
                 filterText,
                 firstName,
@@ -43,7 +43,7 @@ namespace Snooker.Players
             int maxResultCount = int.MaxValue,
             int skipCount = 0)
         {
-            var query = ApplyFilter(
+            IQueryable<Player> query = ApplyFilter(
                 (await GetQueryableAsync()),
                 filterText,
                 firstName,

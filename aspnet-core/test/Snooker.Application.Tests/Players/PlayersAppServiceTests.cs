@@ -1,8 +1,8 @@
+using Shouldly;
 using System;
 using System.Linq;
-using Shouldly;
 using System.Threading.Tasks;
-using Volo.Abp.Domain.Repositories;
+using Volo.Abp.Application.Dtos;
 using Xunit;
 
 namespace Snooker.Players
@@ -22,17 +22,17 @@ namespace Snooker.Players
         public async Task CreateAsync()
         {
             // Arrange
-            var input = new PlayerCreateDto
+            PlayerCreateDto input = new PlayerCreateDto
             {
                 FirstName = "e3932db638d248c384f42299175559e087ad8a304e7041aba2",
                 LastName = "5afda06d26e448b5b03a290d0efad5fe9b5adb78bda44732bd"
             };
 
             // Act
-            var serviceResult = await _playersAppService.CreateAsync(input);
+            PlayerDto serviceResult = await _playersAppService.CreateAsync(input);
 
             // Assert
-            var result = await _playerRepository.FindAsync(c => c.Id == serviceResult.Id);
+            Player result = await _playerRepository.FindAsync(c => c.Id == serviceResult.Id);
 
             result.ShouldNotBe(null);
             result.FirstName.ShouldBe("e3932db638d248c384f42299175559e087ad8a304e7041aba2");
@@ -47,7 +47,7 @@ namespace Snooker.Players
             await _playersAppService.DeleteAsync(Guid.Parse("85ea0ccf-0fad-4c6f-b660-23e6004a777d"));
 
             // Assert
-            var result = await _playerRepository.FindAsync(c => c.Id == Guid.Parse("85ea0ccf-0fad-4c6f-b660-23e6004a777d"));
+            Player result = await _playerRepository.FindAsync(c => c.Id == Guid.Parse("85ea0ccf-0fad-4c6f-b660-23e6004a777d"));
 
             result.ShouldBeNull();
         }
@@ -56,7 +56,7 @@ namespace Snooker.Players
         public async Task GetAsync()
         {
             // Act
-            var result = await _playersAppService.GetAsync(Guid.Parse("85ea0ccf-0fad-4c6f-b660-23e6004a777d"));
+            PlayerDto result = await _playersAppService.GetAsync(Guid.Parse("85ea0ccf-0fad-4c6f-b660-23e6004a777d"));
 
             // Assert
             result.ShouldNotBeNull();
@@ -67,7 +67,7 @@ namespace Snooker.Players
         public async Task GetListAsync()
         {
             // Act
-            var result = await _playersAppService.GetListAsync(new GetPlayersInput());
+            PagedResultDto<PlayerListDto> result = await _playersAppService.GetListAsync(new GetPlayersInput());
 
             // Assert
             result.TotalCount.ShouldBe(2);
@@ -80,17 +80,17 @@ namespace Snooker.Players
         public async Task UpdateAsync()
         {
             // Arrange
-            var input = new PlayerUpdateDto()
+            PlayerUpdateDto input = new PlayerUpdateDto()
             {
                 FirstName = "3a391adb63814390bfffd312569af8c983856925cd0546fb86",
                 LastName = "727a939d47fd49fcb7dc03c8231ad571ae210cb7fc634ef6b1"
             };
 
             // Act
-            var serviceResult = await _playersAppService.UpdateAsync(Guid.Parse("85ea0ccf-0fad-4c6f-b660-23e6004a777d"), input);
+            PlayerDto serviceResult = await _playersAppService.UpdateAsync(Guid.Parse("85ea0ccf-0fad-4c6f-b660-23e6004a777d"), input);
 
             // Assert
-            var result = await _playerRepository.FindAsync(c => c.Id == serviceResult.Id);
+            Player result = await _playerRepository.FindAsync(c => c.Id == serviceResult.Id);
 
             result.ShouldNotBe(null);
             result.FirstName.ShouldBe("3a391adb63814390bfffd312569af8c983856925cd0546fb86");
