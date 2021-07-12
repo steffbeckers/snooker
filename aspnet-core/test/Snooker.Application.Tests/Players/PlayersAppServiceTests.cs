@@ -1,5 +1,6 @@
 using Shouldly;
 using Snooker.ClubPlayers;
+using Snooker.Clubs;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -62,6 +63,17 @@ namespace Snooker.Players
             // Assert
             result.ShouldNotBeNull();
             result.Id.ShouldBe(Guid.Parse("85ea0ccf-0fad-4c6f-b660-23e6004a777d"));
+        }
+
+        [Fact]
+        public async Task GetClubAsync()
+        {
+            // Act
+            ClubDto result = await _playersAppService.GetClubAsync(Guid.Parse("85ea0ccf-0fad-4c6f-b660-23e6004a777d"));
+
+            // Assert
+            result.Id.ShouldBe(Guid.Parse("d772238a-9871-47d7-84d5-c45083799954"));
+            result.Name.ShouldBe("c724f8dbebb842ed80ad9868fa0b01ce5b3c6b05709a4ed6a757de142a6822b89788c5f5bc6641db8d5a868f35708ce3cda5");
         }
 
         [Fact]

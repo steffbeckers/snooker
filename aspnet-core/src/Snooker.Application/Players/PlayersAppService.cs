@@ -56,6 +56,23 @@ namespace Snooker.Players
             return ObjectMapper.Map<Player, PlayerDto>(player);
         }
 
+        public virtual async Task<ClubDto> GetClubAsync(Guid id)
+        {
+            ClubPlayer clubPlayer = await _clubPlayerRepository.FindAsync(x => x.PlayerId == id && x.IsPrimaryClubOfPlayer);
+            if (clubPlayer == null)
+            {
+                return null;
+            }
+
+            IQueryable<Club> clubQueryable = await _clubRepository.GetQueryableAsync();
+
+            IQueryable<ClubDto> clubDtoQueryable = ObjectMapper
+                .GetMapper()
+                .ProjectTo<ClubDto>(clubQueryable.Where(x => x.Id == clubPlayer.ClubId));
+
+            return await AsyncExecuter.FirstOrDefaultAsync(clubDtoQueryable);
+        }
+
         [Authorize(SnookerPermissions.Clubs.Default)]
         public virtual async Task<PagedResultDto<ClubPlayerListDto>> GetClubsListAsync(Guid id, GetClubPlayersInput input)
         {
