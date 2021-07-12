@@ -13,12 +13,14 @@ namespace Snooker.ClubPlayers
             string filterText = null,
             Guid? clubId = null,
             Guid? playerId = null,
+            bool? isPrimaryClubOfPlayer = null,
             CancellationToken cancellationToken = default);
 
         Task<IQueryable<ClubPlayer>> GetFilteredQueryableAsync(
             string filterText = null,
             Guid? clubId = null,
             Guid? playerId = null,
+            bool? isPrimaryClubOfPlayer = null,
             string sorting = null,
             int maxResultCount = int.MaxValue,
             int skipCount = 0);
@@ -27,6 +29,7 @@ namespace Snooker.ClubPlayers
             string filterText = null,
             Guid? clubId = null,
             Guid? playerId = null,
+            bool? isPrimaryClubOfPlayer = null,
             string sorting = null,
             int maxResultCount = int.MaxValue,
             int skipCount = 0,

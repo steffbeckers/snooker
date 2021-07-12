@@ -66,7 +66,8 @@ namespace Snooker.Clubs
         public async Task GetListAsync()
         {
             // Act
-            PagedResultDto<ClubListDto> result = await _clubsAppService.GetListAsync(new GetClubsInput() { MaxResultCount = 20 });
+            PagedResultDto<ClubListDto> result = await _clubsAppService.GetListAsync(
+                new GetClubsInput() { MaxResultCount = 20 });
 
             // Assert
             result.TotalCount.ShouldBe(15);
@@ -89,10 +90,12 @@ namespace Snooker.Clubs
             result.Items.Any(x => x.Id == Guid.Parse("d6f4c147-22a2-475b-80bb-bacf18d08ce2")).ShouldBe(true);
             result.Items.Any(x => x.Id == Guid.Parse("7278ac73-6d82-459b-9289-aa760dcb2722")).ShouldBe(true);
 
-            PlayerListDto playerListDto = result.Items.FirstOrDefault(x => x.Id == Guid.Parse("d6f4c147-22a2-475b-80bb-bacf18d08ce2")).Player;
-            playerListDto.Id.ShouldBe(Guid.Parse("85ea0ccf-0fad-4c6f-b660-23e6004a777d"));
-            playerListDto.FirstName.ShouldBe("c834078813df481ca791798436068aa463dd9a2a58f84c4ea4");
-            playerListDto.LastName.ShouldBe("da78c9ae5a414229835179bc737a7b11e5739bef966448cdb0");
+            ClubPlayerListDto clubPlayerListDto = result.Items.FirstOrDefault(x => x.Id == Guid.Parse("d6f4c147-22a2-475b-80bb-bacf18d08ce2"));
+            clubPlayerListDto.Id.ShouldBe(Guid.Parse("d6f4c147-22a2-475b-80bb-bacf18d08ce2"));
+            clubPlayerListDto.Player.Id.ShouldBe(Guid.Parse("85ea0ccf-0fad-4c6f-b660-23e6004a777d"));
+            clubPlayerListDto.Player.FirstName.ShouldBe("c834078813df481ca791798436068aa463dd9a2a58f84c4ea4");
+            clubPlayerListDto.Player.LastName.ShouldBe("da78c9ae5a414229835179bc737a7b11e5739bef966448cdb0");
+            clubPlayerListDto.IsPrimaryClubOfPlayer.ShouldBe(true);
         }
 
         [Fact]

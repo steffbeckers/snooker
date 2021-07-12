@@ -33,6 +33,7 @@ namespace Snooker.Clubs
         public virtual async Task<ClubDto> CreateAsync(ClubCreateDto input)
         {
             Club club = new Club(GuidGenerator.Create(), input.Name);
+
             club = await _clubRepository.InsertAsync(club, autoSave: true);
 
             return ObjectMapper.Map<Club, ClubDto>(club);
@@ -54,12 +55,14 @@ namespace Snooker.Clubs
         public virtual async Task<PagedResultDto<ClubListDto>> GetListAsync(GetClubsInput input)
         {
             long totalCount = await _clubRepository.GetCountAsync(input.FilterText, input.Name);
+
             IQueryable<Club> clubQueryable = await _clubRepository.GetFilteredQueryableAsync(
                 input.FilterText,
                 input.Name,
                 input.Sorting,
                 input.MaxResultCount,
                 input.SkipCount);
+
             IQueryable<ClubListDto> clubListDtoQueryable = ObjectMapper.GetMapper().ProjectTo<ClubListDto>(clubQueryable);
 
             return new PagedResultDto<ClubListDto>()
@@ -74,14 +77,19 @@ namespace Snooker.Clubs
         {
             long totalCount = await _clubPlayerRepository.GetCountAsync(
                 input.FilterText,
-                id);
+                id,
+                null,
+                input.IsPrimaryClubOfPlayer);
+
             IQueryable<ClubPlayer> clubPlayerQueryable = await _clubPlayerRepository.GetFilteredQueryableAsync(
                 input.FilterText,
                 id,
                 null,
+                input.IsPrimaryClubOfPlayer,
                 input.Sorting,
                 input.MaxResultCount);
-            IQueryable<Player> playerQueryable = await _playerRepository.GetQueryableAsync();
+
+            IQueryable<Player> playerQueryable = await _playerRepository.GetFilteredQueryableAsync(input.FilterText);
 
             IQueryable<ClubPlayerWithNavigationProperties> clubPlayerWithNavigationPropertiesQueryable = clubPlayerQueryable.Join(
                 playerQueryable,
@@ -92,7 +100,8 @@ namespace Snooker.Clubs
                     Id = clubPlayer.Id,
                     ClubId = clubPlayer.ClubId,
                     PlayerId = clubPlayer.PlayerId,
-                    Player = player
+                    Player = player,
+                    IsPrimaryClubOfPlayer = clubPlayer.IsPrimaryClubOfPlayer
                 });
 
             IQueryable<ClubPlayerListDto> clubPlayerListDtoQueryable = ObjectMapper
@@ -110,7 +119,9 @@ namespace Snooker.Clubs
         public virtual async Task<ClubDto> UpdateAsync(Guid id, ClubUpdateDto input)
         {
             Club club = await _clubRepository.GetAsync(id);
+
             club.Name = input.Name;
+
             club = await _clubRepository.UpdateAsync(club, autoSave: true);
 
             return ObjectMapper.Map<Club, ClubDto>(club);

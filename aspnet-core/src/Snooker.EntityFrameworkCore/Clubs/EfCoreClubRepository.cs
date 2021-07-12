@@ -23,7 +23,10 @@ namespace Snooker.Clubs
             string name = null,
             CancellationToken cancellationToken = default)
         {
-            IQueryable<Club> query = ApplyFilter((await GetDbSetAsync()), filterText, name);
+            IQueryable<Club> query = ApplyFilter(
+                (await GetDbSetAsync()),
+                filterText,
+                name);
             return await query.LongCountAsync(GetCancellationToken(cancellationToken));
         }
 

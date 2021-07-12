@@ -22,9 +22,15 @@ namespace Snooker.ClubPlayers
             string filterText = null,
             Guid? clubId = null,
             Guid? playerId = null,
+            bool? isPrimaryClubOfPlayer = null,
             CancellationToken cancellationToken = default)
         {
-            IQueryable<ClubPlayer> query = ApplyFilter((await GetDbSetAsync()), filterText, clubId, playerId);
+            IQueryable<ClubPlayer> query = ApplyFilter(
+                (await GetDbSetAsync()),
+                filterText,
+                clubId,
+                playerId,
+                isPrimaryClubOfPlayer);
             return await query.LongCountAsync(GetCancellationToken(cancellationToken));
         }
 
@@ -32,6 +38,7 @@ namespace Snooker.ClubPlayers
             string filterText = null,
             Guid? clubId = null,
             Guid? playerId = null,
+            bool? isPrimaryClubOfPlayer = null,
             string sorting = null,
             int maxResultCount = int.MaxValue,
             int skipCount = 0)
@@ -40,7 +47,8 @@ namespace Snooker.ClubPlayers
                 (await GetQueryableAsync()),
                 filterText,
                 clubId,
-                playerId);
+                playerId,
+                isPrimaryClubOfPlayer);
             query = query.OrderBy(string.IsNullOrWhiteSpace(sorting) ? ClubPlayerConsts.GetDefaultSorting(false) : sorting);
             return query.PageBy(skipCount, maxResultCount);
         }
@@ -49,6 +57,7 @@ namespace Snooker.ClubPlayers
             string filterText = null,
             Guid? clubId = null,
             Guid? playerId = null,
+            bool? isPrimaryClubOfPlayer = null,
             string sorting = null,
             int maxResultCount = int.MaxValue,
             int skipCount = 0,
@@ -58,6 +67,7 @@ namespace Snooker.ClubPlayers
                 filterText,
                 clubId,
                 playerId,
+                isPrimaryClubOfPlayer,
                 sorting,
                 maxResultCount,
                 skipCount);
@@ -68,12 +78,14 @@ namespace Snooker.ClubPlayers
             IQueryable<ClubPlayer> query,
             string filterText,
             Guid? clubId = null,
-            Guid? playerId = null)
+            Guid? playerId = null,
+            bool? isPrimaryClubOfPlayer = null)
         {
             return query
                     .WhereIf(!string.IsNullOrWhiteSpace(filterText), e => true)
                     .WhereIf(clubId.HasValue, e => e.ClubId == clubId)
-                    .WhereIf(playerId.HasValue, e => e.PlayerId == playerId);
+                    .WhereIf(playerId.HasValue, e => e.PlayerId == playerId)
+                    .WhereIf(isPrimaryClubOfPlayer.HasValue, e => e.IsPrimaryClubOfPlayer == isPrimaryClubOfPlayer);
         }
     }
 }
