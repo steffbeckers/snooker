@@ -21,6 +21,8 @@ namespace Snooker.Players
 
         Task<PagedResultDto<PlayerListDto>> GetListAsync(GetPlayersInput input);
 
+        Task<PlayerProfileDto> GetProfileAsync(Guid id);
+
         Task<PlayerDto> UpdateAsync(Guid id, PlayerUpdateDto input);
     }
 }

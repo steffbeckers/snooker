@@ -34,6 +34,7 @@ namespace Snooker.Data.Seeders
                 new Club(Guid.Parse("9b0b972c-8697-47e5-99b1-71f2c5e1ba55"), "Re-Spot"),
                 new Club(Guid.Parse("f3c33b5d-e3fd-48ce-9d85-3f91480b0b4a"), "Riley Inn"),
                 new Club(Guid.Parse("0e17af1d-3bcc-45ea-bc24-f5894f2701d3"), "Snooker Sports"),
+                new Club(Guid.Parse("e1160f82-7f22-434c-9bae-9e1f0f9ed8d5"), "Steff's Club"),
                 new Club(Guid.Parse("e57f7faf-d74d-46d6-ad6e-0fe91c8093fc"), "Zuma")
             };
 

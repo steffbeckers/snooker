@@ -28,22 +28,39 @@ namespace Snooker.Data.Seeders
                 new ClubPlayer(
                     Guid.Parse("96b862ec-5948-43b9-af82-eb1746e1f81a"),
                     nrgClubId,
+                    Guid.Parse("2c9332b8-8500-4df8-9ba2-ceb7100bbcf0"))
+                {
+                    IsPrimaryClubOfPlayer = true
+                },
+                new ClubPlayer(
+                    Guid.Parse("f1180e5e-a2e5-4087-8813-78c1e7e776a3"),
+                    // Steff's Club
+                    Guid.Parse("e1160f82-7f22-434c-9bae-9e1f0f9ed8d5"),
                     Guid.Parse("2c9332b8-8500-4df8-9ba2-ceb7100bbcf0")),
                 // Marco Vitali
                 new ClubPlayer(
                     Guid.Parse("af8ad872-f724-4232-8522-dffdc3a15fdb"),
                     nrgClubId,
-                    Guid.Parse("dcac11b3-c666-44c9-979a-3160c62d44cc")),
+                    Guid.Parse("dcac11b3-c666-44c9-979a-3160c62d44cc"))
+                {
+                    IsPrimaryClubOfPlayer = true
+                },
                 // Ronny Bekkers
                 new ClubPlayer(
                     Guid.Parse("ebf15cc9-50b1-4356-8d4c-a3eb0ae1643c"),
                     nrgClubId,
-                    Guid.Parse("0362fe6b-c173-4602-873f-a08b9b49fe80")),
+                    Guid.Parse("0362fe6b-c173-4602-873f-a08b9b49fe80"))
+                {
+                    IsPrimaryClubOfPlayer = true
+                },
                 // Ronny Foets
                 new ClubPlayer(
                     Guid.Parse("846f4109-4a56-460b-87a8-df49b0bcc86e"),
                     nrgClubId,
                     Guid.Parse("fca989ed-d314-4121-9fbe-e52dc81f5a9a"))
+                {
+                    IsPrimaryClubOfPlayer = true
+                }
             };
 
             await _clubPlayerRepository.InsertManyAsync(clubPlayers);

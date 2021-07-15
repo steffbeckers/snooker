@@ -62,6 +62,13 @@ namespace Snooker.Controllers.Players
             return _playersAppService.GetListAsync(input);
         }
 
+        [HttpGet]
+        [Route("{id}/profile")]
+        public virtual Task<PlayerProfileDto> GetProfileAsync(Guid id)
+        {
+            return _playersAppService.GetProfileAsync(id);
+        }
+
         [HttpPut]
         [Route("{id}")]
         public virtual Task<PlayerDto> UpdateAsync(Guid id, PlayerUpdateDto input)

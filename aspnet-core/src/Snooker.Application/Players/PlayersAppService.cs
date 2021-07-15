@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
+using Volo.Abp.Identity;
 using Volo.Abp.ObjectMapping;
 
 namespace Snooker.Players
@@ -18,15 +19,24 @@ namespace Snooker.Players
     {
         private readonly IClubPlayerRepository _clubPlayerRepository;
         private readonly IClubRepository _clubRepository;
+        private readonly IdentityUserManager _identityUserManager;
+        private readonly IIdentityUserRepository _identityUserRepository;
+        private readonly PlayerManager _playerManager;
         private readonly IPlayerRepository _playerRepository;
 
         public PlayersAppService(
             IClubPlayerRepository clubPlayerRepository,
             IClubRepository clubRepository,
+            IdentityUserManager identityUserManager,
+            IIdentityUserRepository identityUserRepository,
+            PlayerManager playerManager,
             IPlayerRepository playerRepository)
         {
             _clubPlayerRepository = clubPlayerRepository;
             _clubRepository = clubRepository;
+            _identityUserManager = identityUserManager;
+            _identityUserRepository = identityUserRepository;
+            _playerManager = playerManager;
             _playerRepository = playerRepository;
         }
 
@@ -37,6 +47,26 @@ namespace Snooker.Players
                 GuidGenerator.Create(),
                 input.FirstName,
                 input.LastName);
+
+            if (input.UserId.HasValue)
+            {
+                IdentityUser user = await _identityUserRepository.GetAsync(input.UserId.Value);
+                await _playerManager.LinkUserToPlayer(player, user);
+            }
+            else if (!string.IsNullOrEmpty(input.Email))
+            {
+                IdentityUser user = await _identityUserRepository.FindByNormalizedEmailAsync(input.Email);
+                if (user == null)
+                {
+                    user = new IdentityUser(
+                        GuidGenerator.Create(),
+                        input.Email.ToLower(),
+                        input.Email.ToLower());
+                    await _identityUserManager.CreateAsync(user, input.Password);
+                }
+
+                await _playerManager.LinkUserToPlayer(player, user);
+            }
 
             player = await _playerRepository.InsertAsync(player, autoSave: true);
 
@@ -136,6 +166,27 @@ namespace Snooker.Players
                 TotalCount = totalCount,
                 Items = await AsyncExecuter.ToListAsync(playerListDtoQueryable)
             };
+        }
+
+        public virtual async Task<PlayerProfileDto> GetProfileAsync(Guid id)
+        {
+            IQueryable<Player> playerQueryable = await _playerRepository.GetQueryableAsync();
+            IQueryable<ClubPlayer> clubPlayerQueryable = await _clubPlayerRepository.GetQueryableAsync();
+            IQueryable<Club> clubQueryable = await _clubRepository.GetQueryableAsync();
+
+            IQueryable<ClubPlayerWithNavigationProperties> clubPlayerWithNavigationPropertiesQueryable = playerQueryable.Where(x => x.Id == id)
+                .SelectMany(x => clubPlayerQueryable.Where(y => y.PlayerId == id && y.IsPrimaryClubOfPlayer).DefaultIfEmpty(),
+                (player, clubPlayer) => new { Player = player, ClubPlayer = clubPlayer })
+                .SelectMany(x => clubQueryable.Where(y => y.Id == x.ClubPlayer.ClubId).DefaultIfEmpty(),
+                (x, club) => new ClubPlayerWithNavigationProperties()
+                {
+                    Player = x.Player,
+                    Club = club,
+                });
+
+            IQueryable<PlayerProfileDto> playerProfileDtoQueryable = ObjectMapper.GetMapper().ProjectTo<PlayerProfileDto>(clubPlayerWithNavigationPropertiesQueryable);
+
+            return await AsyncExecuter.FirstOrDefaultAsync(playerProfileDtoQueryable);
         }
 
         [Authorize(SnookerPermissions.Players.Edit)]

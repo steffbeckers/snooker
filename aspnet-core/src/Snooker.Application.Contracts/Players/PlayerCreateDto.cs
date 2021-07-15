@@ -5,6 +5,8 @@ namespace Snooker.Players
 {
     public class PlayerCreateDto
     {
+        public string Email { get; set; }
+
         [Required]
         [StringLength(PlayerConsts.FirstNameMaxLength)]
         public string FirstName { get; set; }
@@ -12,6 +14,8 @@ namespace Snooker.Players
         [Required]
         [StringLength(PlayerConsts.LastNameMaxLength)]
         public string LastName { get; set; }
+
+        public string Password { get; set; }
 
         public Guid? UserId { get; set; }
     }

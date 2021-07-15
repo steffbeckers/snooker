@@ -111,6 +111,21 @@ namespace Snooker.Players
         }
 
         [Fact]
+        public async Task GetProfileAsync()
+        {
+            // Act
+            PlayerProfileDto result = await _playersAppService.GetProfileAsync(Guid.Parse("85ea0ccf-0fad-4c6f-b660-23e6004a777d"));
+
+            // Assert
+            result.ShouldNotBeNull();
+            result.Id.ShouldBe(Guid.Parse("85ea0ccf-0fad-4c6f-b660-23e6004a777d"));
+            result.FirstName.ShouldBe("c834078813df481ca791798436068aa463dd9a2a58f84c4ea4");
+            result.LastName.ShouldBe("da78c9ae5a414229835179bc737a7b11e5739bef966448cdb0");
+            result.Club.Id.ShouldBe(Guid.Parse("d772238a-9871-47d7-84d5-c45083799954"));
+            result.Club.Name.ShouldBe("c724f8dbebb842ed80ad9868fa0b01ce5b3c6b05709a4ed6a757de142a6822b89788c5f5bc6641db8d5a868f35708ce3cda5");
+        }
+
+        [Fact]
         public async Task UpdateAsync()
         {
             // Arrange
