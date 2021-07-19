@@ -6,5 +6,7 @@ namespace Snooker.Samples
     public interface ISamplesAppService : IApplicationService
     {
         Task QueueManyEmails();
+
+        Task QueueManyEmailsWithDefaultEmailSender();
     }
 }

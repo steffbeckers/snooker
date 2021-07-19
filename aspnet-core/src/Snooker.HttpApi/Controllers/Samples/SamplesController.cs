@@ -24,5 +24,12 @@ namespace Snooker.Controllers.Samples
         {
             return _samplesAppService.QueueManyEmails();
         }
+
+        [HttpGet]
+        [Route("queue-many-emails-with-default-email-sender")]
+        public virtual Task QueueManyEmailsWithDefaultEmailSender()
+        {
+            return _samplesAppService.QueueManyEmailsWithDefaultEmailSender();
+        }
     }
 }

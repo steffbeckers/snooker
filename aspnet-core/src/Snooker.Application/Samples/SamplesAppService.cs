@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Volo.Abp;
 using Volo.Abp.BackgroundJobs;
+using Volo.Abp.Emailing;
 
 namespace Snooker.Samples
 {
@@ -9,10 +10,14 @@ namespace Snooker.Samples
     public class SamplesAppService : SnookerAppService, ISamplesAppService
     {
         private readonly IBackgroundJobManager _backgroundJobManager;
+        private readonly IEmailSender _emailSender;
 
-        public SamplesAppService(IBackgroundJobManager backgroundJobManager)
+        public SamplesAppService(
+            IBackgroundJobManager backgroundJobManager,
+            IEmailSender emailSender)
         {
             _backgroundJobManager = backgroundJobManager;
+            _emailSender = emailSender;
         }
 
         public async Task QueueManyEmails()
@@ -25,6 +30,17 @@ namespace Snooker.Samples
                     Subject = "Snooker",
                     Body = $"Test email #{i}"
                 });
+            }
+        }
+
+        public async Task QueueManyEmailsWithDefaultEmailSender()
+        {
+            for (int i = 1; i <= 10; i++)
+            {
+                await _emailSender.QueueAsync(
+                    "steff@steffbeckers.eu",
+                    "Snooker",
+                    $"Test email #{i}");
             }
         }
     }
