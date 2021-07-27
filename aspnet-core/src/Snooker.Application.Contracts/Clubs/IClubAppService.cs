@@ -8,6 +8,8 @@ namespace Snooker.Clubs
 {
     public interface IClubsAppService : IApplicationService
     {
+        Task<ClubPlayerDto> AddPlayerAsync(Guid id, Guid playerId);
+
         Task<ClubDto> CreateAsync(ClubCreateDto input);
 
         Task DeleteAsync(Guid id);

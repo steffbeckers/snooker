@@ -8,7 +8,7 @@ namespace Snooker.MyPlayer
 {
     [RemoteService(IsEnabled = false)]
     [Authorize]
-    public class MyPlayerAppService : ApplicationService, IMyPlayerAppService
+    public class MyPlayerAppService : SnookerAppService, IMyPlayerAppService
     {
         private readonly IPlayerRepository _playerRepository;
 

@@ -1,6 +1,7 @@
 ﻿using Snooker.BackgroundJobs;
 using System.Threading.Tasks;
 using Volo.Abp;
+using Volo.Abp.Application.Services;
 using Volo.Abp.BackgroundJobs;
 using Volo.Abp.Emailing;
 
@@ -42,6 +43,14 @@ namespace Snooker.Samples
                     "Snooker",
                     $"Test email #{i}");
             }
+        }
+
+        public Task ThrowErrorFromDomainEntity()
+        {
+            EntityWithErrorMethod entityWithErrorMethod = new EntityWithErrorMethod();
+            entityWithErrorMethod.ThrowBusinessException();
+
+            return Task.CompletedTask;
         }
     }
 }

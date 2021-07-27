@@ -31,5 +31,12 @@ namespace Snooker.Controllers.Samples
         {
             return _samplesAppService.QueueManyEmailsWithDefaultEmailSender();
         }
+
+        [HttpGet]
+        [Route("throw-error-from-domain-entity")]
+        public virtual Task ThrowErrorFromDomainEntity()
+        {
+            return _samplesAppService.ThrowErrorFromDomainEntity();
+        }
     }
 }

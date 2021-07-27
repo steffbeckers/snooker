@@ -15,18 +15,31 @@ namespace Snooker.Clubs
     [Authorize(SnookerPermissions.Clubs.Default)]
     public class ClubsAppService : SnookerAppService, IClubsAppService
     {
+        private readonly ClubPlayerManager _clubPlayerManager;
         private readonly IClubPlayerRepository _clubPlayerRepository;
         private readonly IClubRepository _clubRepository;
         private readonly IPlayerRepository _playerRepository;
 
         public ClubsAppService(
+            ClubPlayerManager clubPlayerManager,
             IClubPlayerRepository clubPlayerRepository,
             IClubRepository clubRepository,
             IPlayerRepository playerRepository)
         {
+            _clubPlayerManager = clubPlayerManager;
             _clubPlayerRepository = clubPlayerRepository;
             _clubRepository = clubRepository;
             _playerRepository = playerRepository;
+        }
+
+        [Authorize(SnookerPermissions.Clubs.Edit)]
+        public virtual async Task<ClubPlayerDto> AddPlayerAsync(Guid id, Guid playerId)
+        {
+            ClubPlayer clubPlayer = await _clubPlayerManager.CreateClubPlayerAsync(id, playerId);
+
+            clubPlayer = await _clubPlayerRepository.InsertAsync(clubPlayer);
+
+            return ObjectMapper.Map<ClubPlayer, ClubPlayerDto>(clubPlayer);
         }
 
         [Authorize(SnookerPermissions.Clubs.Create)]

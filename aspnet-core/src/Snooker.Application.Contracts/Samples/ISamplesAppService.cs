@@ -8,5 +8,7 @@ namespace Snooker.Samples
         Task QueueManyEmails();
 
         Task QueueManyEmailsWithDefaultEmailSender();
+
+        Task ThrowErrorFromDomainEntity();
     }
 }

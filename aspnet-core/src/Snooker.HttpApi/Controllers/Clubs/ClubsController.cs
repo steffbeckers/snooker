@@ -22,6 +22,13 @@ namespace Snooker.Controllers.Clubs
         }
 
         [HttpPost]
+        [Route("{id}/players")]
+        public virtual Task<ClubPlayerDto> AddPlayerAsync(Guid id, Guid playerId)
+        {
+            return _clubsAppService.AddPlayerAsync(id, playerId);
+        }
+
+        [HttpPost]
         public virtual Task<ClubDto> CreateAsync(ClubCreateDto input)
         {
             return _clubsAppService.CreateAsync(input);

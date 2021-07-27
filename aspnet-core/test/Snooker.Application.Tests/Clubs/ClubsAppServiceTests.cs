@@ -11,13 +11,34 @@ namespace Snooker.Clubs
 {
     public class ClubsAppServiceTests : SnookerApplicationTestBase
     {
+        private readonly IClubPlayerRepository _clubPlayerRepository;
         private readonly IClubRepository _clubRepository;
         private readonly IClubsAppService _clubsAppService;
 
         public ClubsAppServiceTests()
         {
+            _clubPlayerRepository = GetRequiredService<IClubPlayerRepository>();
             _clubRepository = GetRequiredService<IClubRepository>();
             _clubsAppService = GetRequiredService<IClubsAppService>();
+        }
+
+        [Fact]
+        public async Task AddPlayerAsync()
+        {
+            // Arrange
+            Guid clubId = Guid.Parse("51b646da-9b05-454a-8fed-39371f1c6710");
+            Guid playerId = Guid.Parse("7b0b86ff-df6b-4b5f-8f6c-a226d00949cc");
+
+            // Act
+            ClubPlayerDto serviceResult = await _clubsAppService.AddPlayerAsync(clubId, playerId);
+
+            // Assert
+            ClubPlayer result = await _clubPlayerRepository.FindAsync(x => x.Id == serviceResult.Id);
+
+            result.ShouldNotBe(null);
+            result.ClubId.ShouldBe(clubId);
+            result.PlayerId.ShouldBe(playerId);
+            result.IsPrimaryClubOfPlayer.ShouldBe(false);
         }
 
         [Fact]
@@ -33,7 +54,7 @@ namespace Snooker.Clubs
             ClubDto serviceResult = await _clubsAppService.CreateAsync(input);
 
             // Assert
-            Club result = await _clubRepository.FindAsync(c => c.Id == serviceResult.Id);
+            Club result = await _clubRepository.FindAsync(x => x.Id == serviceResult.Id);
 
             result.ShouldNotBe(null);
             result.Name.ShouldBe("bba11c3003ac4085a238b470f78c262d18e0a974712a4fd4a3bd405ba7521daadb7473f92d85418fb1acb8bc81880207ebf2");
@@ -46,7 +67,7 @@ namespace Snooker.Clubs
             await _clubsAppService.DeleteAsync(Guid.Parse("d772238a-9871-47d7-84d5-c45083799954"));
 
             // Assert
-            Club result = await _clubRepository.FindAsync(c => c.Id == Guid.Parse("d772238a-9871-47d7-84d5-c45083799954"));
+            Club result = await _clubRepository.FindAsync(x => x.Id == Guid.Parse("d772238a-9871-47d7-84d5-c45083799954"));
 
             result.ShouldBeNull();
         }
@@ -111,7 +132,7 @@ namespace Snooker.Clubs
             ClubDto serviceResult = await _clubsAppService.UpdateAsync(Guid.Parse("d772238a-9871-47d7-84d5-c45083799954"), input);
 
             // Assert
-            Club result = await _clubRepository.FindAsync(c => c.Id == serviceResult.Id);
+            Club result = await _clubRepository.FindAsync(x => x.Id == serviceResult.Id);
 
             result.ShouldNotBe(null);
             result.Name.ShouldBe("143871a4e4294ced94757d8ba4e861f2ab712c1241e24d058540666876d7289b02b17a8cc7d3431ab37381fa6923f624de67");

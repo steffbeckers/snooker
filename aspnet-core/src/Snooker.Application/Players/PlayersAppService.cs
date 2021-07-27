@@ -15,7 +15,7 @@ namespace Snooker.Players
 {
     [RemoteService(IsEnabled = false)]
     [Authorize(SnookerPermissions.Players.Default)]
-    public class PlayersAppService : ApplicationService, IPlayersAppService
+    public class PlayersAppService : SnookerAppService, IPlayersAppService
     {
         private readonly IClubPlayerRepository _clubPlayerRepository;
         private readonly IClubRepository _clubRepository;
