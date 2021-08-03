@@ -4,7 +4,7 @@
     "Menu:Home": "Home",
     "Welcome": "Welcome",
     "LongWelcomeMessage": "Welcome to the application. This is a startup project based on the ABP framework. For more information, visit abp.io.",
-    "Snooker:SampleError": "This is a sample error.",
-    "Snooker:PlayerAlreadyLinkedToClub": "Player is already linked to club."
+    "Samples:SampleError": "This is a sample error.",
+    "ClubPlayers:PlayerAlreadyLinkedToClub": "Player is already linked to club."
   }
 }

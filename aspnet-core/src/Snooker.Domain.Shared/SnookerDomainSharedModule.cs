@@ -45,7 +45,8 @@ namespace Snooker
 
             Configure<AbpExceptionLocalizationOptions>(options =>
             {
-                options.MapCodeNamespace("Snooker", typeof(SnookerResource));
+                options.MapCodeNamespace(nameof(SnookerDomainErrorCodes.ClubPlayers), typeof(SnookerResource));
+                options.MapCodeNamespace(nameof(SnookerDomainErrorCodes.Samples), typeof(SnookerResource));
             });
         }
 

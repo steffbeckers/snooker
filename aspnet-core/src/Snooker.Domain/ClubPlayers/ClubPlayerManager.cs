@@ -24,7 +24,7 @@ namespace Snooker.ClubPlayers
 
             if (clubPlayer != null)
             {
-                throw new BusinessException("Snooker:PlayerAlreadyLinkedToClub");
+                throw new BusinessException(SnookerDomainErrorCodes.ClubPlayers.PlayerAlreadyLinkedToClub);
             }
 
             return new ClubPlayer(GuidGenerator.Create(), clubId, playerId);

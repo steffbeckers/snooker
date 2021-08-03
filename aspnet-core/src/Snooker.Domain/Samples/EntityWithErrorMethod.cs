@@ -6,7 +6,7 @@ namespace Snooker.Samples
     {
         public void ThrowBusinessException()
         {
-            throw new BusinessException("Snooker:SampleError");
+            throw new BusinessException(SnookerDomainErrorCodes.Samples.SampleError);
         }
     }
 }
