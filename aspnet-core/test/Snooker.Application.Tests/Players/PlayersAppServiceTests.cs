@@ -26,8 +26,8 @@ namespace Snooker.Players
             // Arrange
             PlayerCreateDto input = new PlayerCreateDto
             {
-                FirstName = "e3932db638d248c384f42299175559e087ad8a304e7041aba2",
-                LastName = "5afda06d26e448b5b03a290d0efad5fe9b5adb78bda44732bd"
+                FirstName = "John",
+                LastName = "Doe"
             };
 
             // Act
@@ -37,8 +37,8 @@ namespace Snooker.Players
             Player result = await _playerRepository.FindAsync(c => c.Id == serviceResult.Id);
 
             result.ShouldNotBe(null);
-            result.FirstName.ShouldBe("e3932db638d248c384f42299175559e087ad8a304e7041aba2");
-            result.LastName.ShouldBe("5afda06d26e448b5b03a290d0efad5fe9b5adb78bda44732bd");
+            result.FirstName.ShouldBe("John");
+            result.LastName.ShouldBe("Doe");
             result.UserId.ShouldBeNull();
         }
 
@@ -73,7 +73,7 @@ namespace Snooker.Players
 
             // Assert
             result.Id.ShouldBe(Guid.Parse("d772238a-9871-47d7-84d5-c45083799954"));
-            result.Name.ShouldBe("c724f8dbebb842ed80ad9868fa0b01ce5b3c6b05709a4ed6a757de142a6822b89788c5f5bc6641db8d5a868f35708ce3cda5");
+            result.Name.ShouldBe("Snooker Club 1");
         }
 
         [Fact]
@@ -93,7 +93,7 @@ namespace Snooker.Players
             ClubPlayerListDto clubPlayerListDto = result.Items.First(x => x.Id == Guid.Parse("d6f4c147-22a2-475b-80bb-bacf18d08ce2"));
             clubPlayerListDto.Id.ShouldBe(Guid.Parse("d6f4c147-22a2-475b-80bb-bacf18d08ce2"));
             clubPlayerListDto.Club.Id.ShouldBe(Guid.Parse("d772238a-9871-47d7-84d5-c45083799954"));
-            clubPlayerListDto.Club.Name.ShouldBe("c724f8dbebb842ed80ad9868fa0b01ce5b3c6b05709a4ed6a757de142a6822b89788c5f5bc6641db8d5a868f35708ce3cda5");
+            clubPlayerListDto.Club.Name.ShouldBe("Snooker Club 1");
             clubPlayerListDto.IsPrimaryClubOfPlayer.ShouldBeTrue();
         }
 
@@ -119,10 +119,10 @@ namespace Snooker.Players
             // Assert
             result.ShouldNotBeNull();
             result.Id.ShouldBe(Guid.Parse("85ea0ccf-0fad-4c6f-b660-23e6004a777d"));
-            result.FirstName.ShouldBe("c834078813df481ca791798436068aa463dd9a2a58f84c4ea4");
-            result.LastName.ShouldBe("da78c9ae5a414229835179bc737a7b11e5739bef966448cdb0");
+            result.FirstName.ShouldBe("John");
+            result.LastName.ShouldBe("Doe");
             result.Club.Id.ShouldBe(Guid.Parse("d772238a-9871-47d7-84d5-c45083799954"));
-            result.Club.Name.ShouldBe("c724f8dbebb842ed80ad9868fa0b01ce5b3c6b05709a4ed6a757de142a6822b89788c5f5bc6641db8d5a868f35708ce3cda5");
+            result.Club.Name.ShouldBe("Snooker Club 1");
         }
 
         [Fact]

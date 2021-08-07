@@ -114,8 +114,8 @@ namespace Snooker.Clubs
             ClubPlayerListDto clubPlayerListDto = result.Items.FirstOrDefault(x => x.Id == Guid.Parse("d6f4c147-22a2-475b-80bb-bacf18d08ce2"));
             clubPlayerListDto.Id.ShouldBe(Guid.Parse("d6f4c147-22a2-475b-80bb-bacf18d08ce2"));
             clubPlayerListDto.Player.Id.ShouldBe(Guid.Parse("85ea0ccf-0fad-4c6f-b660-23e6004a777d"));
-            clubPlayerListDto.Player.FirstName.ShouldBe("c834078813df481ca791798436068aa463dd9a2a58f84c4ea4");
-            clubPlayerListDto.Player.LastName.ShouldBe("da78c9ae5a414229835179bc737a7b11e5739bef966448cdb0");
+            clubPlayerListDto.Player.FirstName.ShouldBe("John");
+            clubPlayerListDto.Player.LastName.ShouldBe("Doe");
             clubPlayerListDto.IsPrimaryClubOfPlayer.ShouldBe(true);
         }
 

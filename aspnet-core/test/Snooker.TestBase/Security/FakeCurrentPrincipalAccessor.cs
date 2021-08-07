@@ -28,8 +28,8 @@ namespace Snooker.Security
                                 new List<Claim>
                                 {
                                     new Claim(AbpClaimTypes.UserId,"4a05a121-7e89-4998-bb46-9d88cc49973f"),
-                                    new Claim(AbpClaimTypes.UserName,"player@snooker.com"),
-                                    new Claim(AbpClaimTypes.Email,"player@snooker.com")
+                                    new Claim(AbpClaimTypes.UserName,"john@doe.com"),
+                                    new Claim(AbpClaimTypes.Email,"john@doe.com")
                                 }
                             )
                         );

@@ -19,8 +19,8 @@ namespace Snooker.Players
         {
             IdentityUser player = new IdentityUser(
                 Guid.Parse("4a05a121-7e89-4998-bb46-9d88cc49973f"),
-                "player@snooker.com",
-                "player@snooker.com");
+                "john@doe.com",
+                "john@doe.com");
 
             await _identityUserRepository.InsertAsync(player);
         }

@@ -25,8 +25,8 @@ namespace Snooker.Players
             {
                 // Act
                 long result = await _playerRepository.GetCountAsync(
-                    firstName: "8a2507a2413b443f8ebfd8e959e6d399a6c3f53aa5a444cd9f",
-                    lastName: "0c3dd4065927406da16668a73df94b7ec52390b6679c47b6a5"
+                    firstName: "Jane",
+                    lastName: "Doe"
                 );
 
                 // Assert
@@ -42,8 +42,8 @@ namespace Snooker.Players
             {
                 // Act
                 List<Player> result = await _playerRepository.GetListAsync(
-                    firstName: "c834078813df481ca791798436068aa463dd9a2a58f84c4ea4",
-                    lastName: "da78c9ae5a414229835179bc737a7b11e5739bef966448cdb0"
+                    firstName: "John",
+                    lastName: "Doe"
                 );
 
                 // Assert
