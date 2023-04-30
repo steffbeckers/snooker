@@ -1,6 +1,14 @@
 # Snooker
 
-## Entities
+## Project setup
+
+```
+abp new Snooker -t app --no-ui
+```
+
+## Notes
+
+### Entities
 
 - Associations (BBSA Limburg)
 - Seasons (2022-2023)
@@ -15,7 +23,7 @@
 - Frames (1 game of snooker)
 - Breaks (snooker break higher than X)
 
-## Platform functionality
+### Platform functionality
 
 - Users can have a player profile
 - Clubs have management users
@@ -23,7 +31,7 @@
 - Clubs are linked to an association
 - Players can register for tournaments
 
-## League planning
+### League planning
 
 - Teams play 1 home and 1 away match against all other teams in the same division
 - Clubs have a number of available tables which need to be match ready
