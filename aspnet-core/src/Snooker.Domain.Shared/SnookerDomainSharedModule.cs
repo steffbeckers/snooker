@@ -1,4 +1,4 @@
-﻿using Snooker.Localization;
+using Snooker.Localization;
 using Volo.Abp.AuditLogging;
 using Volo.Abp.BackgroundJobs;
 using Volo.Abp.FeatureManagement;
@@ -23,16 +23,10 @@ namespace Snooker;
     typeof(AbpOpenIddictDomainSharedModule),
     typeof(AbpPermissionManagementDomainSharedModule),
     typeof(AbpSettingManagementDomainSharedModule),
-    typeof(AbpTenantManagementDomainSharedModule)    
+    typeof(AbpTenantManagementDomainSharedModule)
     )]
 public class SnookerDomainSharedModule : AbpModule
 {
-    public override void PreConfigureServices(ServiceConfigurationContext context)
-    {
-        SnookerGlobalFeatureConfigurator.Configure();
-        SnookerModuleExtensionConfigurator.Configure();
-    }
-
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         Configure<AbpVirtualFileSystemOptions>(options =>
@@ -52,7 +46,13 @@ public class SnookerDomainSharedModule : AbpModule
 
         Configure<AbpExceptionLocalizationOptions>(options =>
         {
-            options.MapCodeNamespace("Snooker", typeof(SnookerResource));
+            options.MapCodeNamespace("Clubs", typeof(SnookerResource));
         });
+    }
+
+    public override void PreConfigureServices(ServiceConfigurationContext context)
+    {
+        SnookerGlobalFeatureConfigurator.Configure();
+        SnookerModuleExtensionConfigurator.Configure();
     }
 }

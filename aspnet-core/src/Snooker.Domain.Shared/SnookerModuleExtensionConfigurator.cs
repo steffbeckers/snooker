@@ -1,17 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Volo.Abp.Identity;
-using Volo.Abp.ObjectExtending;
 using Volo.Abp.Threading;
 
 namespace Snooker;
 
 public static class SnookerModuleExtensionConfigurator
 {
-    private static readonly OneTimeRunner OneTimeRunner = new OneTimeRunner();
+    private static readonly OneTimeRunner _oneTimeRunner = new OneTimeRunner();
 
     public static void Configure()
     {
-        OneTimeRunner.Run(() =>
+        _oneTimeRunner.Run(() =>
         {
             ConfigureExistingProperties();
             ConfigureExtraProperties();
@@ -57,7 +54,7 @@ public static class SnookerModuleExtensionConfigurator
                               //validation rules
                               property.Attributes.Add(new RequiredAttribute());
                               property.Attributes.Add(new StringLengthAttribute(64) {MinimumLength = 4});
-                              
+
                               property.Configuration[IdentityModuleExtensionConsts.ConfigurationNames.AllowUserToEdit] = true;
 
                               //...other configurations for this property

@@ -1,4 +1,4 @@
-﻿using Snooker.EntityFrameworkCore;
+using Snooker.EntityFrameworkCore;
 using Volo.Abp.Autofac;
 using Volo.Abp.Modularity;
 
@@ -6,10 +6,8 @@ namespace Snooker.DbMigrator;
 
 [DependsOn(
     typeof(AbpAutofacModule),
-    typeof(SnookerEntityFrameworkCoreModule),
-    typeof(SnookerApplicationContractsModule)
-    )]
+    typeof(SnookerApplicationContractsModule),
+    typeof(SnookerEntityFrameworkCoreModule))]
 public class SnookerDbMigratorModule : AbpModule
 {
-
 }

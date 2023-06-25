@@ -1,13 +1,110 @@
-﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using System;
 
 #nullable disable
 
-namespace Snooker.Migrations
+namespace Snooker.EntityFrameworkCore.Migrations
 {
     /// <inheritdoc />
     public partial class Initial : Migration
     {
+        /// <inheritdoc />
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropTable(
+                name: "AbpAuditLogActions");
+
+            migrationBuilder.DropTable(
+                name: "AbpBackgroundJobs");
+
+            migrationBuilder.DropTable(
+                name: "AbpClaimTypes");
+
+            migrationBuilder.DropTable(
+                name: "AbpEntityPropertyChanges");
+
+            migrationBuilder.DropTable(
+                name: "AbpFeatureGroups");
+
+            migrationBuilder.DropTable(
+                name: "AbpFeatures");
+
+            migrationBuilder.DropTable(
+                name: "AbpFeatureValues");
+
+            migrationBuilder.DropTable(
+                name: "AbpLinkUsers");
+
+            migrationBuilder.DropTable(
+                name: "AbpOrganizationUnitRoles");
+
+            migrationBuilder.DropTable(
+                name: "AbpPermissionGrants");
+
+            migrationBuilder.DropTable(
+                name: "AbpPermissionGroups");
+
+            migrationBuilder.DropTable(
+                name: "AbpPermissions");
+
+            migrationBuilder.DropTable(
+                name: "AbpRoleClaims");
+
+            migrationBuilder.DropTable(
+                name: "AbpSecurityLogs");
+
+            migrationBuilder.DropTable(
+                name: "AbpSettings");
+
+            migrationBuilder.DropTable(
+                name: "AbpTenantConnectionStrings");
+
+            migrationBuilder.DropTable(
+                name: "AbpUserClaims");
+
+            migrationBuilder.DropTable(
+                name: "AbpUserLogins");
+
+            migrationBuilder.DropTable(
+                name: "AbpUserOrganizationUnits");
+
+            migrationBuilder.DropTable(
+                name: "AbpUserRoles");
+
+            migrationBuilder.DropTable(
+                name: "AbpUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "OpenIddictScopes");
+
+            migrationBuilder.DropTable(
+                name: "OpenIddictTokens");
+
+            migrationBuilder.DropTable(
+                name: "AbpEntityChanges");
+
+            migrationBuilder.DropTable(
+                name: "AbpTenants");
+
+            migrationBuilder.DropTable(
+                name: "AbpOrganizationUnits");
+
+            migrationBuilder.DropTable(
+                name: "AbpRoles");
+
+            migrationBuilder.DropTable(
+                name: "AbpUsers");
+
+            migrationBuilder.DropTable(
+                name: "OpenIddictAuthorizations");
+
+            migrationBuilder.DropTable(
+                name: "AbpAuditLogs");
+
+            migrationBuilder.DropTable(
+                name: "OpenIddictApplications");
+        }
+
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -961,103 +1058,6 @@ namespace Snooker.Migrations
                 name: "IX_OpenIddictTokens_ReferenceId",
                 table: "OpenIddictTokens",
                 column: "ReferenceId");
-        }
-
-        /// <inheritdoc />
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropTable(
-                name: "AbpAuditLogActions");
-
-            migrationBuilder.DropTable(
-                name: "AbpBackgroundJobs");
-
-            migrationBuilder.DropTable(
-                name: "AbpClaimTypes");
-
-            migrationBuilder.DropTable(
-                name: "AbpEntityPropertyChanges");
-
-            migrationBuilder.DropTable(
-                name: "AbpFeatureGroups");
-
-            migrationBuilder.DropTable(
-                name: "AbpFeatures");
-
-            migrationBuilder.DropTable(
-                name: "AbpFeatureValues");
-
-            migrationBuilder.DropTable(
-                name: "AbpLinkUsers");
-
-            migrationBuilder.DropTable(
-                name: "AbpOrganizationUnitRoles");
-
-            migrationBuilder.DropTable(
-                name: "AbpPermissionGrants");
-
-            migrationBuilder.DropTable(
-                name: "AbpPermissionGroups");
-
-            migrationBuilder.DropTable(
-                name: "AbpPermissions");
-
-            migrationBuilder.DropTable(
-                name: "AbpRoleClaims");
-
-            migrationBuilder.DropTable(
-                name: "AbpSecurityLogs");
-
-            migrationBuilder.DropTable(
-                name: "AbpSettings");
-
-            migrationBuilder.DropTable(
-                name: "AbpTenantConnectionStrings");
-
-            migrationBuilder.DropTable(
-                name: "AbpUserClaims");
-
-            migrationBuilder.DropTable(
-                name: "AbpUserLogins");
-
-            migrationBuilder.DropTable(
-                name: "AbpUserOrganizationUnits");
-
-            migrationBuilder.DropTable(
-                name: "AbpUserRoles");
-
-            migrationBuilder.DropTable(
-                name: "AbpUserTokens");
-
-            migrationBuilder.DropTable(
-                name: "OpenIddictScopes");
-
-            migrationBuilder.DropTable(
-                name: "OpenIddictTokens");
-
-            migrationBuilder.DropTable(
-                name: "AbpEntityChanges");
-
-            migrationBuilder.DropTable(
-                name: "AbpTenants");
-
-            migrationBuilder.DropTable(
-                name: "AbpOrganizationUnits");
-
-            migrationBuilder.DropTable(
-                name: "AbpRoles");
-
-            migrationBuilder.DropTable(
-                name: "AbpUsers");
-
-            migrationBuilder.DropTable(
-                name: "OpenIddictAuthorizations");
-
-            migrationBuilder.DropTable(
-                name: "AbpAuditLogs");
-
-            migrationBuilder.DropTable(
-                name: "OpenIddictApplications");
         }
     }
 }

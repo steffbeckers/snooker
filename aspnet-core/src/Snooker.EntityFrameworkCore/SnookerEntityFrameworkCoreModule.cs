@@ -1,6 +1,6 @@
-﻿using System;
 using Microsoft.Extensions.DependencyInjection;
-using Volo.Abp.Uow;
+using Snooker.Clubs;
+using Snooker.EntityFrameworkCore.Clubs;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
@@ -29,26 +29,22 @@ namespace Snooker.EntityFrameworkCore;
     )]
 public class SnookerEntityFrameworkCoreModule : AbpModule
 {
-    public override void PreConfigureServices(ServiceConfigurationContext context)
-    {
-        SnookerEfCoreEntityExtensionMappings.Configure();
-    }
-
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         context.Services.AddAbpDbContext<SnookerDbContext>(options =>
         {
-                /* Remove "includeAllEntities: true" to create
-                 * default repositories only for aggregate roots */
-            options.AddDefaultRepositories(includeAllEntities: true);
+            options.AddDefaultRepositories();
+            options.AddRepository<Club, EfCoreClubRepository>();
         });
 
         Configure<AbpDbContextOptions>(options =>
         {
-                /* The main point to change your DBMS.
-                 * See also SnookerMigrationsDbContextFactory for EF Core tooling. */
             options.UseSqlServer();
         });
+    }
 
+    public override void PreConfigureServices(ServiceConfigurationContext context)
+    {
+        SnookerEfCoreEntityExtensionMappings.Configure();
     }
 }

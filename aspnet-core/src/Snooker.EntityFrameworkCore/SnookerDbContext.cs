@@ -1,9 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using Snooker.Addresses;
+using Snooker.Clubs;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
+using Volo.Abp.EntityFrameworkCore.Modeling;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Identity;
 using Volo.Abp.Identity.EntityFrameworkCore;
@@ -23,46 +26,32 @@ public class SnookerDbContext :
     IIdentityDbContext,
     ITenantManagementDbContext
 {
-    /* Add DbSet properties for your Aggregate Roots / Entities here. */
-
-    #region Entities from the modules
-
-    /* Notice: We only implemented IIdentityDbContext and ITenantManagementDbContext
-     * and replaced them for this DbContext. This allows you to perform JOIN
-     * queries for the entities of these modules over the repositories easily. You
-     * typically don't need that for other modules. But, if you need, you can
-     * implement the DbContext interface of the needed module and use ReplaceDbContext
-     * attribute just like IIdentityDbContext and ITenantManagementDbContext.
-     *
-     * More info: Replacing a DbContext of a module ensures that the related module
-     * uses this DbContext on runtime. Otherwise, it will use its own DbContext class.
-     */
-
-    //Identity
-    public DbSet<IdentityUser> Users { get; set; }
-    public DbSet<IdentityRole> Roles { get; set; }
-    public DbSet<IdentityClaimType> ClaimTypes { get; set; }
-    public DbSet<OrganizationUnit> OrganizationUnits { get; set; }
-    public DbSet<IdentitySecurityLog> SecurityLogs { get; set; }
-    public DbSet<IdentityLinkUser> LinkUsers { get; set; }
-
-    // Tenant Management
-    public DbSet<Tenant> Tenants { get; set; }
-    public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
-
-    #endregion
-
     public SnookerDbContext(DbContextOptions<SnookerDbContext> options)
         : base(options)
     {
-
     }
+
+    public DbSet<IdentityClaimType> ClaimTypes { get; set; }
+
+    public DbSet<Club> Clubs { get; set; }
+
+    public DbSet<IdentityLinkUser> LinkUsers { get; set; }
+
+    public DbSet<OrganizationUnit> OrganizationUnits { get; set; }
+
+    public DbSet<IdentityRole> Roles { get; set; }
+
+    public DbSet<IdentitySecurityLog> SecurityLogs { get; set; }
+
+    public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
+
+    public DbSet<Tenant> Tenants { get; set; }
+
+    public DbSet<IdentityUser> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
-
-        /* Include modules to your migration db context */
 
         builder.ConfigurePermissionManagement();
         builder.ConfigureSettingManagement();
@@ -73,13 +62,24 @@ public class SnookerDbContext :
         builder.ConfigureFeatureManagement();
         builder.ConfigureTenantManagement();
 
-        /* Configure your own tables/entities inside here */
-
-        //builder.Entity<YourEntity>(b =>
-        //{
-        //    b.ToTable(SnookerConsts.DbTablePrefix + "YourEntities", SnookerConsts.DbSchema);
-        //    b.ConfigureByConvention(); //auto configure for the base class props
-        //    //...
-        //});
+        builder.Entity<Club>(b =>
+        {
+            b.ToTable(SnookerConsts.DbTablePrefix + "Clubs", SnookerConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.Property(x => x.Name).IsRequired().HasMaxLength(ClubConsts.NameMaxLength);
+            b.Property(x => x.Email).HasMaxLength(ClubConsts.EmailMaxLength);
+            b.Property(x => x.PhoneNumber).HasMaxLength(ClubConsts.PhoneNumberMaxLength);
+            b.Property(x => x.Website).HasMaxLength(ClubConsts.WebsiteMaxLength);
+            b.OwnsOne(
+                x => x.Address,
+                b =>
+                {
+                    b.ToTable(SnookerConsts.DbTablePrefix + "ClubAddresses", SnookerConsts.DbSchema);
+                    b.Property(x => x.Street).HasMaxLength(AddressConsts.StreetMaxLength);
+                    b.Property(x => x.Number).HasMaxLength(AddressConsts.NumberMaxLength);
+                    b.Property(x => x.PostalCode).HasMaxLength(AddressConsts.PostalCodeMaxLength);
+                    b.Property(x => x.City).HasMaxLength(AddressConsts.CityMaxLength);
+                });
+        });
     }
 }
