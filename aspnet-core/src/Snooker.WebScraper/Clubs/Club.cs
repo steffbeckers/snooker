@@ -1,5 +1,5 @@
 using Snooker.WebScraper.Addresses;
-using Snooker.WebScraper.Players;
+using Snooker.WebScraper.Teams;
 
 namespace Snooker.WebScraper.Clubs;
 
@@ -15,7 +15,7 @@ public class Club
 
     public string? PhoneNumber { get; set; }
 
-    public IList<Player> Players { get; set; } = new List<Player>();
+    public IList<Team> Teams { get; set; } = new List<Team>();
 
     public string? Website { get; set; }
 }

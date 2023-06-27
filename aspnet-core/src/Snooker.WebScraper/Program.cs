@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Snooker.WebScraper.Addresses;
 using Snooker.WebScraper.Clubs;
 using Snooker.WebScraper.Players;
+using Snooker.WebScraper.Teams;
 
 namespace Snooker.WebScraper;
 
@@ -44,15 +45,19 @@ public static class Program
 
             foreach (HtmlNode teamRow in teamRows)
             {
-                string team = teamRow.SelectSingleNode(".//p[starts-with(@style, 'font-size: 1.6em;')]").InnerText;
-                bool backupPlayers = team == "Reserven";
+                string teamName = teamRow.SelectSingleNode(".//p[starts-with(@style, 'font-size: 1.6em;')]").InnerText;
+
+                Team team = new Team()
+                {
+                    Name = teamName
+                };
 
                 HtmlNodeCollection playerDivs = teamRow.SelectNodes(".//div[starts-with(@style, 'float:left; clear: none; min-width: 168px;')]");
 
                 foreach (HtmlNode playerDiv in playerDivs)
                 {
                     // Extract the player's image source
-                    string imageSrc = playerDiv.SelectSingleNode(".//img").GetAttributeValue("src", "");
+                    //string imageSrc = playerDiv.SelectSingleNode(".//img").GetAttributeValue("src", "");
 
                     // Extract the player's details
                     HtmlNode playerDetailsNode = playerDiv.SelectSingleNode(".//p[contains(@style, 'color: #032800;')]");
@@ -70,17 +75,19 @@ public static class Program
                     int? playerClass = int.Parse(detailsParts[1].Trim().Replace("klasse: ", string.Empty));
                     DateTime playerDateOfBirth = DateTime.ParseExact(detailsParts[2].Trim(), "dd-MM-yyyy", null);
 
-                    club.Players.Add(new Player()
+                    team.Players.Add(new Player()
                     {
                         FirstName = firstName,
                         LastName = lastName,
                         Class = playerClass,
                         DateOfBirth = playerDateOfBirth,
-                        TeamLetter = !backupPlayers ? team : null,
-                        Backup = backupPlayers,
-                        Image = imageSrc
+                        //Image = imageSrc
                     });
+
+                    team.Players = team.Players.OrderBy(x => x.FirstName).ToList();
                 }
+
+                club.Teams.Add(team);
             }
         }
 
