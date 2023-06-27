@@ -28,11 +28,11 @@ public class Player : FullAuditedAggregateRoot<Guid>, IMultiTenant
 
     public Guid? ClubId { get; set; }
 
+    public DateTime? DateOfBirth { get; set; }
+
     public string FirstName { get; set; }
 
     public string LastName { get; set; }
-
-    public DateTime? MyProperty { get; set; }
 
     public Guid? ProfilePictureFileId { get; set; }
 
