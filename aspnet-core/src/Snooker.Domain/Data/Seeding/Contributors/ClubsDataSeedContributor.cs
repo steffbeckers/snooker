@@ -1,5 +1,9 @@
 using Newtonsoft.Json;
+using Snooker.Addresses;
 using Snooker.Clubs;
+using Snooker.Players;
+using Snooker.TeamPlayers;
+using Snooker.Teams;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -15,17 +19,20 @@ public class ClubsDataSeedContributor : IDataSeedContributor, ITransientDependen
     private readonly ClubManager _clubManager;
     private readonly IClubRepository _clubRepository;
     private readonly IGuidGenerator _guidGenerator;
+    private readonly ITeamRepository _teamRepository;
     private readonly ITenantRepository _tenantRepository;
 
     public ClubsDataSeedContributor(
         ClubManager clubManager,
         IClubRepository clubRepository,
         IGuidGenerator guidGenerator,
+        ITeamRepository teamRepository,
         ITenantRepository tenantRepository)
     {
         _clubManager = clubManager;
         _clubRepository = clubRepository;
         _guidGenerator = guidGenerator;
+        _teamRepository = teamRepository;
         _tenantRepository = tenantRepository;
     }
 
@@ -45,7 +52,61 @@ public class ClubsDataSeedContributor : IDataSeedContributor, ITransientDependen
 
             foreach (WebScraper.Clubs.Club limburgClub in limburgClubs)
             {
+                Club? club = await _clubRepository.FindAsync(x => x.Name == limburgClub.Name);
+
+                if (club == null)
+                {
+                    club = await _clubManager.CreateAsync(
+                        id: _guidGenerator.Create(),
+                        name: limburgClub.Name);
+                    club.Email = limburgClub.Email;
+                    club.PhoneNumber = limburgClub.PhoneNumber;
+                    club.Website = limburgClub.Website;
+                    club.Address = new Address()
+                    {
+                        Street = limburgClub.Address?.Street,
+                        Number = limburgClub.Address?.Number,
+                        PostalCode = limburgClub.Address?.PostalCode,
+                        City = limburgClub.Address?.City
+                    };
+
+                    foreach (WebScraper.Teams.Team limburgTeam in limburgClub.Teams)
+                    {
+                        Team team = new Team(_guidGenerator.Create(), limburgTeam.Name)
+                        {
+                            ClubId = club.Id
+                        };
+
+                        foreach (WebScraper.Players.Player limburgPlayer in limburgTeam.Players)
+                        {
+                            Player player = new Player(
+                                id: _guidGenerator.Create(),
+                                firstName: limburgPlayer.FirstName,
+                                lastName: limburgPlayer.LastName)
+                            {
+                                ClubId = club.Id,
+                                Class = limburgPlayer.Class,
+                                DateOfBirth = limburgPlayer.DateOfBirth
+                            };
+
+                            club.Players.Add(player);
+
+                            TeamPlayer teamPlayer = new TeamPlayer(
+                                id: _guidGenerator.Create(),
+                                team.Id,
+                                player.Id);
+
+                            team.Players.Add(teamPlayer);
+                        }
+
+                        club.Teams.Add(team);
+                    }
+
+                    await _clubRepository.InsertAsync(club);
+                }
             }
+
+            // TODO: Remove old data seeding code?
 
             //Club? clubBiljartLounge = await _clubRepository.FindAsync(x => x.Name == "Biljart Lounge");
 

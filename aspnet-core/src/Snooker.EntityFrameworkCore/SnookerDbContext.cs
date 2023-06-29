@@ -1,6 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Snooker.Addresses;
 using Snooker.Clubs;
+using Snooker.Players;
+using Snooker.TeamPlayers;
+using Snooker.Teams;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
@@ -43,6 +46,10 @@ public class SnookerDbContext :
 
     public DbSet<IdentitySecurityLog> SecurityLogs { get; set; }
 
+    public DbSet<TeamPlayer> TeamPlayers { get; set; }
+
+    public DbSet<Team> Teams { get; set; }
+
     public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
 
     public DbSet<Tenant> Tenants { get; set; }
@@ -80,6 +87,32 @@ public class SnookerDbContext :
                     b.Property(x => x.PostalCode).HasMaxLength(AddressConsts.PostalCodeMaxLength);
                     b.Property(x => x.City).HasMaxLength(AddressConsts.CityMaxLength);
                 });
+        });
+
+        builder.Entity<Player>(b =>
+        {
+            b.ToTable(SnookerConsts.DbTablePrefix + "Players", SnookerConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.Property(x => x.FirstName).IsRequired().HasMaxLength(PlayerConsts.FirstNameMaxLength);
+            b.Property(x => x.LastName).IsRequired().HasMaxLength(PlayerConsts.LastNameMaxLength);
+            b.HasOne(x => x.Club).WithMany(x => x.Players).HasForeignKey(x => x.ClubId);
+            b.HasOne(x => x.User).WithMany().HasForeignKey(x => x.UserId);
+        });
+
+        builder.Entity<Team>(b =>
+        {
+            b.ToTable(SnookerConsts.DbTablePrefix + "Teams", SnookerConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.Property(x => x.Name).IsRequired().HasMaxLength(ClubConsts.NameMaxLength);
+            b.HasOne(x => x.Club).WithMany(x => x.Teams).HasForeignKey(x => x.ClubId);
+        });
+
+        builder.Entity<TeamPlayer>(b =>
+        {
+            b.ToTable(SnookerConsts.DbTablePrefix + "TeamPlayers", SnookerConsts.DbSchema);
+            b.ConfigureByConvention();
+            b.HasOne(x => x.Team).WithMany(x => x.Players).HasForeignKey(x => x.TeamId);
+            b.HasOne(x => x.Player).WithMany(x => x.Teams).HasForeignKey(x => x.PlayerId);
         });
     }
 }

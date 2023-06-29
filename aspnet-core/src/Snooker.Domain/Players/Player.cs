@@ -1,5 +1,8 @@
 using Snooker.Clubs;
+using Snooker.TeamPlayers;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Volo.Abp.Domain.Entities.Auditing;
 using Volo.Abp.Identity;
 using Volo.Abp.MultiTenancy;
@@ -35,6 +38,8 @@ public class Player : FullAuditedAggregateRoot<Guid>, IMultiTenant
     public string LastName { get; set; }
 
     public Guid? ProfilePictureFileId { get; set; }
+
+    public ICollection<TeamPlayer> Teams { get; set; } = new Collection<TeamPlayer>();
 
     public Guid? TenantId { get; private set; }
 
