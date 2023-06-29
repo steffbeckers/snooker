@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Snooker.Domain.Shared\Snooker.Domain.Shared.csproj" />
+    <ProjectReference Include="..\Snooker.WebScraper\Snooker.WebScraper.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,6 +24,13 @@
     <PackageReference Include="Volo.Abp.SettingManagement.Domain" Version="7.1.1" />
     <PackageReference Include="Volo.Abp.OpenIddict.Domain" Version="7.1.1" />
     <PackageReference Include="Volo.Abp.PermissionManagement.Domain.OpenIddict" Version="7.1.1" />
+  </ItemGroup>
+    
+  <ItemGroup>
+    <Content Include="Data\Seeding\**\*.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Remove="Data\Seeding\**\*.json" />
   </ItemGroup>
 
 </Project>

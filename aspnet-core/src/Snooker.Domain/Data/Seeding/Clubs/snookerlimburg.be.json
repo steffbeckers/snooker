@@ -1,0 +1,3594 @@
+[
+  {
+    "Address": {
+      "City": "St Truiden",
+      "Number": "59",
+      "PostalCode": "3800",
+      "Street": "Tramstraat"
+    },
+    "Email": "hendrik.destaelen@skynet.be",
+    "Name": "Biljart Lounge",
+    "Number": 5067,
+    "PhoneNumber": "011884888",
+    "Teams": [
+      {
+        "Name": "A",
+        "Players": [
+          {
+            "Class": 1,
+            "DateOfBirth": "1973-05-26T00:00:00",
+            "FirstName": "Gert",
+            "LastName": "Kempenaers"
+          },
+          {
+            "Class": 1,
+            "DateOfBirth": "2003-02-03T00:00:00",
+            "FirstName": "Julien",
+            "LastName": "Leclercq"
+          },
+          {
+            "Class": 1,
+            "DateOfBirth": "1987-04-23T00:00:00",
+            "FirstName": "Kevin",
+            "LastName": "Vandevoort"
+          },
+          {
+            "Class": 1,
+            "DateOfBirth": "1999-06-30T00:00:00",
+            "FirstName": "Kobe",
+            "LastName": "Vanoppen"
+          }
+        ]
+      },
+      {
+        "Name": "B",
+        "Players": [
+          {
+            "Class": 2,
+            "DateOfBirth": "1966-06-05T00:00:00",
+            "FirstName": "Georges",
+            "LastName": "Lenaerts"
+          },
+          {
+            "Class": 1,
+            "DateOfBirth": "1982-11-02T00:00:00",
+            "FirstName": "Kevin",
+            "LastName": "Van Den Broeck"
+          },
+          {
+            "Class": 1,
+            "DateOfBirth": "1976-02-05T00:00:00",
+            "FirstName": "Pascal",
+            "LastName": "Charot"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1978-07-04T00:00:00",
+            "FirstName": "Robby",
+            "LastName": "Dorissen"
+          }
+        ]
+      },
+      {
+        "Name": "C",
+        "Players": [
+          {
+            "Class": 2,
+            "DateOfBirth": "1970-12-03T00:00:00",
+            "FirstName": "Georges",
+            "LastName": "Leclercq"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1962-09-19T00:00:00",
+            "FirstName": "Hendrik",
+            "LastName": "De Staelen"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1992-03-13T00:00:00",
+            "FirstName": "Jonas",
+            "LastName": "Lacroix"
+          },
+          {
+            "Class": 1,
+            "DateOfBirth": "1973-12-03T00:00:00",
+            "FirstName": "Rohnny",
+            "LastName": "Cleynen"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1969-07-27T00:00:00",
+            "FirstName": "Wim",
+            "LastName": "Ilsbroekx"
+          }
+        ]
+      },
+      {
+        "Name": "D",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1964-08-16T00:00:00",
+            "FirstName": "Erik",
+            "LastName": "Bollen"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1961-11-23T00:00:00",
+            "FirstName": "Jean-Pierre",
+            "LastName": "Vaes"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1983-04-11T00:00:00",
+            "FirstName": "Kristof",
+            "LastName": "Schurmans"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1975-05-03T00:00:00",
+            "FirstName": "Luc",
+            "LastName": "Dirix"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1983-10-05T00:00:00",
+            "FirstName": "Wesley",
+            "LastName": "Jamoul"
+          }
+        ]
+      },
+      {
+        "Name": "E",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1963-07-06T00:00:00",
+            "FirstName": "Danny",
+            "LastName": "Welkenhuysen"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1975-09-03T00:00:00",
+            "FirstName": "Marnix",
+            "LastName": "Vanmechelen"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1951-12-28T00:00:00",
+            "FirstName": "Tilly",
+            "LastName": "Vanmechelen"
+          }
+        ]
+      },
+      {
+        "Name": "Reserven",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1959-05-28T00:00:00",
+            "FirstName": "Jean-Marie",
+            "LastName": "Moniquet"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1992-05-20T00:00:00",
+            "FirstName": "Jelle",
+            "LastName": "Van Oostveldt"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1989-04-04T00:00:00",
+            "FirstName": "Kristof",
+            "LastName": "Hermans"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1963-03-11T00:00:00",
+            "FirstName": "Patrick",
+            "LastName": "Vandermeulen"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1956-04-16T00:00:00",
+            "FirstName": "Theo",
+            "LastName": "Vanmechelen"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1982-10-18T00:00:00",
+            "FirstName": "Tom",
+            "LastName": "Vanoirbeek"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1963-09-24T00:00:00",
+            "FirstName": "Yves",
+            "LastName": "Defoin"
+          }
+        ]
+      }
+    ],
+    "Website": "https://biljartlounge.be/"
+  },
+  {
+    "Address": {
+      "City": "Mol",
+      "Number": "157",
+      "PostalCode": "2400",
+      "Street": "Rozenberg"
+    },
+    "Email": "interclub@buckingham.be",
+    "Name": "Buckingham",
+    "Number": 5073,
+    "PhoneNumber": "014315827",
+    "Teams": [
+      {
+        "Name": "A",
+        "Players": [
+          {
+            "Class": 2,
+            "DateOfBirth": "1964-08-18T00:00:00",
+            "FirstName": "Jan",
+            "LastName": "Huysmans"
+          },
+          {
+            "Class": 1,
+            "DateOfBirth": "1979-05-05T00:00:00",
+            "FirstName": "Kevin",
+            "LastName": "Draulans"
+          },
+          {
+            "Class": 1,
+            "DateOfBirth": "1990-11-21T00:00:00",
+            "FirstName": "Kristof",
+            "LastName": "Vermeiren"
+          },
+          {
+            "Class": 1,
+            "DateOfBirth": "1990-04-12T00:00:00",
+            "FirstName": "Martijn",
+            "LastName": "Hamblok"
+          }
+        ]
+      },
+      {
+        "Name": "B",
+        "Players": [
+          {
+            "Class": 2,
+            "DateOfBirth": "2003-03-19T00:00:00",
+            "FirstName": "Matthijs",
+            "LastName": "Verherstraeten"
+          },
+          {
+            "Class": 1,
+            "DateOfBirth": "1971-03-27T00:00:00",
+            "FirstName": "Ruddy",
+            "LastName": "Hulsmans"
+          },
+          {
+            "Class": 1,
+            "DateOfBirth": "1991-10-27T00:00:00",
+            "FirstName": "Sebastiaan",
+            "LastName": "Vermeylen"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "2000-11-18T00:00:00",
+            "FirstName": "Toon",
+            "LastName": "Hooyberghs"
+          }
+        ]
+      },
+      {
+        "Name": "C",
+        "Players": [
+          {
+            "Class": 1,
+            "DateOfBirth": "1977-05-07T00:00:00",
+            "FirstName": "Bjorn",
+            "LastName": "Kaerts"
+          },
+          {
+            "Class": 1,
+            "DateOfBirth": "1972-12-20T00:00:00",
+            "FirstName": "Chris",
+            "LastName": "T'Syen"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1956-12-29T00:00:00",
+            "FirstName": "Eddy",
+            "LastName": "Douwen"
+          },
+          {
+            "Class": 1,
+            "DateOfBirth": "1978-02-20T00:00:00",
+            "FirstName": "Treepetch",
+            "LastName": "Rochanat"
+          }
+        ]
+      },
+      {
+        "Name": "D",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1980-04-16T00:00:00",
+            "FirstName": "Davy",
+            "LastName": "Loos"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1993-09-04T00:00:00",
+            "FirstName": "Didier",
+            "LastName": "Verachtert"
+          },
+          {
+            "Class": 1,
+            "DateOfBirth": "1982-04-10T00:00:00",
+            "FirstName": "Jan",
+            "LastName": "Goossens"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1979-01-05T00:00:00",
+            "FirstName": "Kris",
+            "LastName": "Van Acoleyen"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1992-05-30T00:00:00",
+            "FirstName": "Roel",
+            "LastName": "Vermeyen"
+          }
+        ]
+      },
+      {
+        "Name": "E",
+        "Players": [
+          {
+            "Class": 2,
+            "DateOfBirth": "1974-03-13T00:00:00",
+            "FirstName": "Marc",
+            "LastName": "Wullems"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1994-06-21T00:00:00",
+            "FirstName": "Matthias",
+            "LastName": "De Wit"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1970-02-22T00:00:00",
+            "FirstName": "Pascal",
+            "LastName": "Lommelen"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1971-01-09T00:00:00",
+            "FirstName": "Peter",
+            "LastName": "Vansteenkiste"
+          },
+          {
+            "Class": 1,
+            "DateOfBirth": "1981-07-18T00:00:00",
+            "FirstName": "Tom",
+            "LastName": "Snyers"
+          }
+        ]
+      },
+      {
+        "Name": "F",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1980-01-16T00:00:00",
+            "FirstName": "Davy",
+            "LastName": "Voordeckers"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1967-03-11T00:00:00",
+            "FirstName": "Kris",
+            "LastName": "Hooyberghs"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1986-01-21T00:00:00",
+            "FirstName": "Niels",
+            "LastName": "Hermans"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1975-07-29T00:00:00",
+            "FirstName": "Stefaan",
+            "LastName": "Boets"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1982-08-28T00:00:00",
+            "FirstName": "Tim",
+            "LastName": "Meekers"
+          }
+        ]
+      },
+      {
+        "Name": "G",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1971-06-03T00:00:00",
+            "FirstName": "Danny",
+            "LastName": "Conjaerts"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1963-10-08T00:00:00",
+            "FirstName": "Niklaas",
+            "LastName": "Boons"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1971-04-28T00:00:00",
+            "FirstName": "Peter",
+            "LastName": "Berkmans"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1968-11-21T00:00:00",
+            "FirstName": "Peter",
+            "LastName": "Theuwissen"
+          }
+        ]
+      },
+      {
+        "Name": "H",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1964-09-19T00:00:00",
+            "FirstName": "Alain",
+            "LastName": "Soffers"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1978-01-09T00:00:00",
+            "FirstName": "Jan",
+            "LastName": "Bijnens"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1974-08-09T00:00:00",
+            "FirstName": "Manuel",
+            "LastName": "Leurs"
+          }
+        ]
+      },
+      {
+        "Name": "I",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1952-09-19T00:00:00",
+            "FirstName": "Andre",
+            "LastName": "Willekens"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1979-09-20T00:00:00",
+            "FirstName": "Danny",
+            "LastName": "Geysen"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1964-04-14T00:00:00",
+            "FirstName": "Dominique",
+            "LastName": "Van Elsen"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1969-05-02T00:00:00",
+            "FirstName": "Jan",
+            "LastName": "Verherstraeten"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1974-11-23T00:00:00",
+            "FirstName": "Patrick",
+            "LastName": "Rooyakkers"
+          }
+        ]
+      },
+      {
+        "Name": "Reserven",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1963-08-09T00:00:00",
+            "FirstName": "Dirk",
+            "LastName": "Blockx"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1967-10-05T00:00:00",
+            "FirstName": "Dirk",
+            "LastName": "Willems"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1995-06-16T00:00:00",
+            "FirstName": "Don",
+            "LastName": "Oeyen"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1961-06-24T00:00:00",
+            "FirstName": "Jan",
+            "LastName": "Mondelaers"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1984-02-07T00:00:00",
+            "FirstName": "Manuel",
+            "LastName": "Paepen"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1971-03-26T00:00:00",
+            "FirstName": "Ronny",
+            "LastName": "Meynen"
+          }
+        ]
+      }
+    ],
+    "Website": "https://www.buckingham.be/"
+  },
+  {
+    "Address": {
+      "City": "Hoeselt",
+      "Number": "2",
+      "PostalCode": "3730",
+      "Street": "Bilzersteenweg"
+    },
+    "Email": "madeleine@russell-nv.com",
+    "Name": "De Kreeft",
+    "Number": 5021,
+    "PhoneNumber": "089492877",
+    "Teams": [
+      {
+        "Name": "A",
+        "Players": [
+          {
+            "Class": 1,
+            "DateOfBirth": "1973-06-23T00:00:00",
+            "FirstName": "Pierre",
+            "LastName": "Dethier"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1966-09-19T00:00:00",
+            "FirstName": "Rudy",
+            "LastName": "Reekmans"
+          },
+          {
+            "Class": 1,
+            "DateOfBirth": "1980-10-01T00:00:00",
+            "FirstName": "Theo",
+            "LastName": "Ruyters"
+          }
+        ]
+      },
+      {
+        "Name": "B",
+        "Players": [
+          {
+            "Class": 2,
+            "DateOfBirth": "1964-08-01T00:00:00",
+            "FirstName": "Rik",
+            "LastName": "Thompson"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1967-12-20T00:00:00",
+            "FirstName": "Robby",
+            "LastName": "Stoffels"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1972-04-01T00:00:00",
+            "FirstName": "Stefan",
+            "LastName": "Wagemans"
+          }
+        ]
+      },
+      {
+        "Name": "C",
+        "Players": [
+          {
+            "Class": 2,
+            "DateOfBirth": "1972-09-19T00:00:00",
+            "FirstName": "Cymon",
+            "LastName": "Birtles"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1972-01-25T00:00:00",
+            "FirstName": "Frederic",
+            "LastName": "Wilhelmy"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1967-11-28T00:00:00",
+            "FirstName": "Olivier",
+            "LastName": "Keller"
+          }
+        ]
+      },
+      {
+        "Name": "D",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1972-07-03T00:00:00",
+            "FirstName": "Marc",
+            "LastName": "Meunier"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1978-12-27T00:00:00",
+            "FirstName": "Vincent",
+            "LastName": "Dingelstadt"
+          }
+        ]
+      },
+      {
+        "Name": "E",
+        "Players": [
+          {
+            "Class": 2,
+            "DateOfBirth": "1981-07-08T00:00:00",
+            "FirstName": "Danek",
+            "LastName": "Van Der Hauwaert"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "2000-12-06T00:00:00",
+            "FirstName": "Dimitrios",
+            "LastName": "Kouklous"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "2005-09-27T00:00:00",
+            "FirstName": "Mathias",
+            "LastName": "Van der Meeren"
+          }
+        ]
+      },
+      {
+        "Name": "F",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1965-01-14T00:00:00",
+            "FirstName": "Marc",
+            "LastName": "Slegers"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1961-10-24T00:00:00",
+            "FirstName": "Serge",
+            "LastName": "Warnier"
+          }
+        ]
+      },
+      {
+        "Name": "G",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1991-08-13T00:00:00",
+            "FirstName": "Martijn",
+            "LastName": "Roox"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "2002-05-13T00:00:00",
+            "FirstName": "Tristan",
+            "LastName": "Vandebosch"
+          }
+        ]
+      },
+      {
+        "Name": "H",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1970-02-04T00:00:00",
+            "FirstName": "Luc",
+            "LastName": "Withofs"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1966-09-13T00:00:00",
+            "FirstName": "Michel",
+            "LastName": "Deborggraeve"
+          }
+        ]
+      },
+      {
+        "Name": "I",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1977-07-22T00:00:00",
+            "FirstName": "Benoit",
+            "LastName": "Depas"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1981-12-22T00:00:00",
+            "FirstName": "Salvatore",
+            "LastName": "Geraci"
+          }
+        ]
+      },
+      {
+        "Name": "J",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1954-01-31T00:00:00",
+            "FirstName": "Jan",
+            "LastName": "Vanhove"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1989-01-10T00:00:00",
+            "FirstName": "Jeffry",
+            "LastName": "Vanhove"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1988-02-05T00:00:00",
+            "FirstName": "Maarten",
+            "LastName": "Brimioul"
+          }
+        ]
+      },
+      {
+        "Name": "K",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1985-08-26T00:00:00",
+            "FirstName": "Bruno",
+            "LastName": "Vassallo"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1991-11-02T00:00:00",
+            "FirstName": "Kevin",
+            "LastName": "Cuypers"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1970-05-23T00:00:00",
+            "FirstName": "Philippe",
+            "LastName": "Cuypers"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1968-09-09T00:00:00",
+            "FirstName": "Stephane",
+            "LastName": "Boxus"
+          }
+        ]
+      },
+      {
+        "Name": "L",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1955-08-10T00:00:00",
+            "FirstName": "Leo",
+            "LastName": "Brabants"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1961-07-08T00:00:00",
+            "FirstName": "Nikolaas",
+            "LastName": "Kennes"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1958-03-18T00:00:00",
+            "FirstName": "Wilfried",
+            "LastName": "Willems"
+          }
+        ]
+      },
+      {
+        "Name": "M",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1968-08-11T00:00:00",
+            "FirstName": "Johan",
+            "LastName": "Stassen"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1972-04-01T00:00:00",
+            "FirstName": "Stefan",
+            "LastName": "Wagemans"
+          }
+        ]
+      },
+      {
+        "Name": "Reserven",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1969-11-28T00:00:00",
+            "FirstName": "David",
+            "LastName": "Fraiture"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1960-03-02T00:00:00",
+            "FirstName": "Didier",
+            "LastName": "Overath"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1973-10-01T00:00:00",
+            "FirstName": "Dirk",
+            "LastName": "Lycops"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1971-05-26T00:00:00",
+            "FirstName": "Fernand",
+            "LastName": "Lefevre"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1968-03-29T00:00:00",
+            "FirstName": "Frank",
+            "LastName": "Bielen"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1966-06-08T00:00:00",
+            "FirstName": "Frederic",
+            "LastName": "Letecheur"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1976-09-15T00:00:00",
+            "FirstName": "Gaetan",
+            "LastName": "Van Den Wyngaert"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1964-06-28T00:00:00",
+            "FirstName": "Gino",
+            "LastName": "Ceulemans"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1947-09-12T00:00:00",
+            "FirstName": "Henri",
+            "LastName": "Croymans"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1963-04-24T00:00:00",
+            "FirstName": "Jean",
+            "LastName": "Olaerts"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1979-05-08T00:00:00",
+            "FirstName": "Jochem",
+            "LastName": "Goffin"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1977-12-20T00:00:00",
+            "FirstName": "Joey",
+            "LastName": "Mouha"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1963-08-31T00:00:00",
+            "FirstName": "Johan",
+            "LastName": "Vandeweyer"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1969-12-16T00:00:00",
+            "FirstName": "Johnny",
+            "LastName": "Willemsen"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1971-03-24T00:00:00",
+            "FirstName": "Jos",
+            "LastName": "Voets"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1966-12-06T00:00:00",
+            "FirstName": "Marc",
+            "LastName": "Vrancken"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1985-06-11T00:00:00",
+            "FirstName": "Nico",
+            "LastName": "Jans"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1966-07-18T00:00:00",
+            "FirstName": "Pascal",
+            "LastName": "Chaumont"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "2008-04-28T00:00:00",
+            "FirstName": "Rory",
+            "LastName": "Wagemans"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1996-09-03T00:00:00",
+            "FirstName": "Simon",
+            "LastName": "Dupont"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1968-03-21T00:00:00",
+            "FirstName": "Thierry",
+            "LastName": "Gustin"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1964-01-17T00:00:00",
+            "FirstName": "Willy",
+            "LastName": "Verding"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1992-04-10T00:00:00",
+            "FirstName": "Yannick",
+            "LastName": "Vanspauwen"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1964-12-19T00:00:00",
+            "FirstName": "Yvo",
+            "LastName": "Scheunders"
+          }
+        ]
+      }
+    ],
+    "Website": "http://www.kreeftsnooker.com/"
+  },
+  {
+    "Address": {
+      "City": "Pelt",
+      "Number": "9",
+      "PostalCode": "3910",
+      "Street": "Groenstraat"
+    },
+    "Email": "wendyjans170@gmail.com",
+    "Name": "De Maxx",
+    "Number": 5072,
+    "PhoneNumber": "011524246",
+    "Teams": [
+      {
+        "Name": "A",
+        "Players": [
+          {
+            "Class": 1,
+            "DateOfBirth": "1965-07-08T00:00:00",
+            "FirstName": "Eric",
+            "LastName": "Maes"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1977-03-27T00:00:00",
+            "FirstName": "Ufuk",
+            "LastName": "Baygunes"
+          },
+          {
+            "Class": 1,
+            "DateOfBirth": "1983-06-14T00:00:00",
+            "FirstName": "Wendy",
+            "LastName": "Jans"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1978-11-18T00:00:00",
+            "FirstName": "Wesley",
+            "LastName": "Dewingaerden"
+          }
+        ]
+      },
+      {
+        "Name": "B",
+        "Players": [
+          {
+            "Class": 2,
+            "DateOfBirth": "1969-02-09T00:00:00",
+            "FirstName": "Eddy",
+            "LastName": "Vanbaelen"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1980-07-14T00:00:00",
+            "FirstName": "Jimmy",
+            "LastName": "Gijsen"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1986-02-03T00:00:00",
+            "FirstName": "Maarten",
+            "LastName": "Janssen"
+          }
+        ]
+      },
+      {
+        "Name": "C",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1973-06-18T00:00:00",
+            "FirstName": "Erwin",
+            "LastName": "Brepoels"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1996-08-26T00:00:00",
+            "FirstName": "Lennert",
+            "LastName": "Bloemen"
+          },
+          {
+            "Class": 1,
+            "DateOfBirth": "1970-05-07T00:00:00",
+            "FirstName": "Peter",
+            "LastName": "Schrijvers"
+          }
+        ]
+      },
+      {
+        "Name": "D",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1985-09-12T00:00:00",
+            "FirstName": "Bart",
+            "LastName": "Ceulen"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1963-11-01T00:00:00",
+            "FirstName": "Patric",
+            "LastName": "Davids"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1978-08-09T00:00:00",
+            "FirstName": "Stijn",
+            "LastName": "Smeets"
+          }
+        ]
+      },
+      {
+        "Name": "E",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1971-12-14T00:00:00",
+            "FirstName": "Danny",
+            "LastName": "Schoemans"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1970-06-25T00:00:00",
+            "FirstName": "Luc",
+            "LastName": "Lipkens"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1965-03-04T00:00:00",
+            "FirstName": "Yvo",
+            "LastName": "Gysen"
+          }
+        ]
+      },
+      {
+        "Name": "F",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1980-04-20T00:00:00",
+            "FirstName": "Dave",
+            "LastName": "Verfaillie"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1973-06-28T00:00:00",
+            "FirstName": "Ivan",
+            "LastName": "Elsen"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1986-08-19T00:00:00",
+            "FirstName": "Jimmy",
+            "LastName": "Koninckx"
+          }
+        ]
+      },
+      {
+        "Name": "Reserven",
+        "Players": [
+          {
+            "Class": 2,
+            "DateOfBirth": "1957-12-05T00:00:00",
+            "FirstName": "Carlo",
+            "LastName": "Kenens"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1979-11-05T00:00:00",
+            "FirstName": "Geert",
+            "LastName": "Tilmans"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1954-03-27T00:00:00",
+            "FirstName": "Godfried",
+            "LastName": "Vermaerke "
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1970-06-21T00:00:00",
+            "FirstName": "Maarten",
+            "LastName": "van der Zwan"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1949-03-30T00:00:00",
+            "FirstName": "Michel",
+            "LastName": "Uyttenbroeck"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "2000-04-24T00:00:00",
+            "FirstName": "Miguel",
+            "LastName": "Silva Rosso"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1965-08-08T00:00:00",
+            "FirstName": "Nicky",
+            "LastName": "Luining"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1967-08-16T00:00:00",
+            "FirstName": "Noel",
+            "LastName": "Severens"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1970-09-18T00:00:00",
+            "FirstName": "Peter",
+            "LastName": "Moors"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1971-05-02T00:00:00",
+            "FirstName": "Raf",
+            "LastName": "Van Oppen"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1964-04-21T00:00:00",
+            "FirstName": "Rudi",
+            "LastName": "Beckers"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1981-04-25T00:00:00",
+            "FirstName": "Tom",
+            "LastName": "Van den Heuvel"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1967-09-01T00:00:00",
+            "FirstName": "Werner",
+            "LastName": "Vliegen"
+          }
+        ]
+      }
+    ],
+    "Website": "https://www.facebook.com/DE-MAXX-249856043478/"
+  },
+  {
+    "Address": {
+      "City": "Hasselt",
+      "Number": "A",
+      "PostalCode": "3500",
+      "Street": "Oude Luikerbaan 81"
+    },
+    "Email": "jans.danny@live.be",
+    "Name": "Happy Snooker",
+    "Number": 5014,
+    "PhoneNumber": "011275092",
+    "Teams": [
+      {
+        "Name": "A",
+        "Players": [
+          {
+            "Class": 1,
+            "DateOfBirth": "1986-02-11T00:00:00",
+            "FirstName": "Davy",
+            "LastName": "Pauly"
+          },
+          {
+            "Class": 1,
+            "DateOfBirth": "1969-09-29T00:00:00",
+            "FirstName": "Johny",
+            "LastName": "Moermans"
+          },
+          {
+            "Class": 1,
+            "DateOfBirth": "2004-08-30T00:00:00",
+            "FirstName": "Yorrit",
+            "LastName": "Hoes"
+          }
+        ]
+      },
+      {
+        "Name": "B",
+        "Players": [
+          {
+            "Class": 1,
+            "DateOfBirth": "1997-07-09T00:00:00",
+            "FirstName": "Dimitri",
+            "LastName": "Clauw"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1977-08-31T00:00:00",
+            "FirstName": "Jonathan",
+            "LastName": "Russell"
+          },
+          {
+            "Class": 1,
+            "DateOfBirth": "1978-06-29T00:00:00",
+            "FirstName": "Kevin",
+            "LastName": "Debay"
+          },
+          {
+            "Class": 1,
+            "DateOfBirth": "1991-09-25T00:00:00",
+            "FirstName": "Nicky",
+            "LastName": "Godeyne"
+          }
+        ]
+      },
+      {
+        "Name": "C",
+        "Players": [
+          {
+            "Class": 1,
+            "DateOfBirth": "1972-10-07T00:00:00",
+            "FirstName": "Erik",
+            "LastName": "Smeulders"
+          },
+          {
+            "Class": 1,
+            "DateOfBirth": "1979-11-28T00:00:00",
+            "FirstName": "Robby",
+            "LastName": "Convens"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1965-02-19T00:00:00",
+            "FirstName": "Rudi",
+            "LastName": "Mangelschots"
+          }
+        ]
+      },
+      {
+        "Name": "D",
+        "Players": [
+          {
+            "Class": 2,
+            "DateOfBirth": "1980-07-08T00:00:00",
+            "FirstName": "Christoph",
+            "LastName": "Hermans"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1966-09-10T00:00:00",
+            "FirstName": "Jean-Paul",
+            "LastName": "Slechten"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1970-03-06T00:00:00",
+            "FirstName": "Peter",
+            "LastName": "Nelissen"
+          }
+        ]
+      },
+      {
+        "Name": "E",
+        "Players": [
+          {
+            "Class": 2,
+            "DateOfBirth": "1972-10-21T00:00:00",
+            "FirstName": "Danny",
+            "LastName": "Jans"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1969-04-22T00:00:00",
+            "FirstName": "Eddy",
+            "LastName": "Vanspauwen"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1972-11-08T00:00:00",
+            "FirstName": "Kris",
+            "LastName": "Reniers"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1967-04-11T00:00:00",
+            "FirstName": "Peter",
+            "LastName": "Simons"
+          }
+        ]
+      },
+      {
+        "Name": "F",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1971-07-31T00:00:00",
+            "FirstName": "Frank",
+            "LastName": "Ignoul"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1965-05-08T00:00:00",
+            "FirstName": "Jan",
+            "LastName": "De Bruyn"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1958-05-08T00:00:00",
+            "FirstName": "Jean-Paul",
+            "LastName": "Smeers"
+          }
+        ]
+      },
+      {
+        "Name": "G",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1965-10-15T00:00:00",
+            "FirstName": "Filip",
+            "LastName": "Nelissen"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1983-02-25T00:00:00",
+            "FirstName": "Steve",
+            "LastName": "Corthouts"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1976-10-28T00:00:00",
+            "FirstName": "Timothy",
+            "LastName": "Claes"
+          }
+        ]
+      },
+      {
+        "Name": "H",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1972-12-14T00:00:00",
+            "FirstName": "Frank",
+            "LastName": "Nelissen"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1973-05-13T00:00:00",
+            "FirstName": "Gert",
+            "LastName": "Lafosse"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1980-12-18T00:00:00",
+            "FirstName": "Kristof",
+            "LastName": "Maes"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1972-11-21T00:00:00",
+            "FirstName": "Tom",
+            "LastName": "Hannes"
+          }
+        ]
+      },
+      {
+        "Name": "I",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1966-01-24T00:00:00",
+            "FirstName": "Johny",
+            "LastName": "Adriaens"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1968-02-11T00:00:00",
+            "FirstName": "Luc",
+            "LastName": "Aerts"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1968-02-12T00:00:00",
+            "FirstName": "Stany",
+            "LastName": "Vanwalleghem"
+          }
+        ]
+      },
+      {
+        "Name": "J",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1978-01-19T00:00:00",
+            "FirstName": "Bart",
+            "LastName": "Schepers"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1990-09-06T00:00:00",
+            "FirstName": "Didier",
+            "LastName": "Bammens"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1980-10-31T00:00:00",
+            "FirstName": "Jan",
+            "LastName": "Roost"
+          }
+        ]
+      },
+      {
+        "Name": "K",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1988-11-06T00:00:00",
+            "FirstName": "Maarten",
+            "LastName": "Vermeulen"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1989-05-18T00:00:00",
+            "FirstName": "Sam",
+            "LastName": "Van Der Veken"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1992-07-30T00:00:00",
+            "FirstName": "Youri",
+            "LastName": "Kleynen"
+          }
+        ]
+      },
+      {
+        "Name": "L",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1960-05-03T00:00:00",
+            "FirstName": "Marc",
+            "LastName": "Thewis"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1965-12-06T00:00:00",
+            "FirstName": "Nico",
+            "LastName": "Mrak"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1970-05-30T00:00:00",
+            "FirstName": "Patrick",
+            "LastName": "Vrancken"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1957-05-13T00:00:00",
+            "FirstName": "Rudi",
+            "LastName": "Vanhaeren"
+          }
+        ]
+      },
+      {
+        "Name": "M",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1975-02-28T00:00:00",
+            "FirstName": "Johan",
+            "LastName": "Broux"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1969-10-09T00:00:00",
+            "FirstName": "Olivier",
+            "LastName": "Collart"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1996-11-20T00:00:00",
+            "FirstName": "Sander",
+            "LastName": "Collart"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1976-12-29T00:00:00",
+            "FirstName": "Yves",
+            "LastName": "Timmermans"
+          }
+        ]
+      },
+      {
+        "Name": "N",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1972-11-13T00:00:00",
+            "FirstName": "Bart",
+            "LastName": "Pieters"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1972-09-12T00:00:00",
+            "FirstName": "Kurt",
+            "LastName": "Triekels"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1976-08-20T00:00:00",
+            "FirstName": "Mark",
+            "LastName": "Van Helvert"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1960-12-22T00:00:00",
+            "FirstName": "Michel",
+            "LastName": "Ferket"
+          }
+        ]
+      },
+      {
+        "Name": "O",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1956-12-03T00:00:00",
+            "FirstName": "Damiaan",
+            "LastName": "Clemens"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1955-02-03T00:00:00",
+            "FirstName": "Jean-Pierre",
+            "LastName": "Reck"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1955-07-27T00:00:00",
+            "FirstName": "Robert",
+            "LastName": "Aerts"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1957-01-04T00:00:00",
+            "FirstName": "Tony",
+            "LastName": "Swerts"
+          }
+        ]
+      },
+      {
+        "Name": "P",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1981-12-26T00:00:00",
+            "FirstName": "Kristof",
+            "LastName": "Smullenberghs"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1960-03-10T00:00:00",
+            "FirstName": "Ronny",
+            "LastName": "Ramaekers"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1975-10-27T00:00:00",
+            "FirstName": "Wilfried",
+            "LastName": "Lismont"
+          }
+        ]
+      },
+      {
+        "Name": "Q",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1968-06-07T00:00:00",
+            "FirstName": "Danny",
+            "LastName": "Schepers"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1963-10-30T00:00:00",
+            "FirstName": "Petrus",
+            "LastName": "Van Herpen"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1957-01-18T00:00:00",
+            "FirstName": "Richard",
+            "LastName": "Geladi"
+          }
+        ]
+      },
+      {
+        "Name": "R",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1981-12-26T00:00:00",
+            "FirstName": "Kristof",
+            "LastName": "Smullenberghs"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1960-03-10T00:00:00",
+            "FirstName": "Ronny",
+            "LastName": "Ramaekers"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1975-10-27T00:00:00",
+            "FirstName": "Wilfried",
+            "LastName": "Lismont"
+          }
+        ]
+      },
+      {
+        "Name": "Reserven",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1969-09-30T00:00:00",
+            "FirstName": "Alex",
+            "LastName": "Pirard"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1977-04-29T00:00:00",
+            "FirstName": "Bart",
+            "LastName": "Vanderbemden"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1980-02-11T00:00:00",
+            "FirstName": "Christophe",
+            "LastName": "Pape"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1983-08-09T00:00:00",
+            "FirstName": "David",
+            "LastName": "Keyen"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1996-01-10T00:00:00",
+            "FirstName": "Dean",
+            "LastName": "De Bruyn"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1950-12-19T00:00:00",
+            "FirstName": "Eddy",
+            "LastName": "Jamro"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1966-10-24T00:00:00",
+            "FirstName": "Filip",
+            "LastName": "Manshoven"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1986-07-29T00:00:00",
+            "FirstName": "Florin",
+            "LastName": "Swinnen"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "2002-12-20T00:00:00",
+            "FirstName": "Jarne",
+            "LastName": "Cornelis"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1984-07-16T00:00:00",
+            "FirstName": "Joris",
+            "LastName": "Caubergs"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1961-09-22T00:00:00",
+            "FirstName": "Julien",
+            "LastName": "Hanno"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1983-04-16T00:00:00",
+            "FirstName": "Kevin",
+            "LastName": "Rogiers"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1981-03-26T00:00:00",
+            "FirstName": "Kim",
+            "LastName": "Munsters"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1989-07-21T00:00:00",
+            "FirstName": "Koen",
+            "LastName": "Vyncke"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1954-07-03T00:00:00",
+            "FirstName": "Marc",
+            "LastName": "Lambrechts"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1989-10-19T00:00:00",
+            "FirstName": "Mark",
+            "LastName": "Vlaeyen"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1965-12-25T00:00:00",
+            "FirstName": "Noël",
+            "LastName": "Vandebeek"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1973-03-22T00:00:00",
+            "FirstName": "Olivier",
+            "LastName": "Byloos"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1969-02-06T00:00:00",
+            "FirstName": "Patrick",
+            "LastName": "Grosemans"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "2001-08-09T00:00:00",
+            "FirstName": "Risto",
+            "LastName": "Smeets"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "2001-10-24T00:00:00",
+            "FirstName": "Seppe",
+            "LastName": "Vandeweyer"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1980-04-20T00:00:00",
+            "FirstName": "Silvie",
+            "LastName": "Appeltans"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1988-06-24T00:00:00",
+            "FirstName": "Tim",
+            "LastName": "Broeders"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "2001-02-13T00:00:00",
+            "FirstName": "Tim",
+            "LastName": "Crabbe"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1991-11-24T00:00:00",
+            "FirstName": "Tristan",
+            "LastName": "Ramaekers"
+          }
+        ]
+      }
+    ],
+    "Website": "https://www.thehappysnooker.be/"
+  },
+  {
+    "Address": {
+      "City": "Paal",
+      "Number": "71",
+      "PostalCode": "3583",
+      "Street": "Diestersesteenweg"
+    },
+    "Email": "ronnie.dereydt@telenet.be",
+    "Name": "NRG",
+    "Number": 5020,
+    "PhoneNumber": "011428993",
+    "Teams": [
+      {
+        "Name": "A",
+        "Players": [
+          {
+            "Class": 2,
+            "DateOfBirth": "1970-06-08T00:00:00",
+            "FirstName": "Guy",
+            "LastName": "Marien"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1973-12-21T00:00:00",
+            "FirstName": "Marc",
+            "LastName": "De L'arbre"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1973-06-13T00:00:00",
+            "FirstName": "Tom",
+            "LastName": "Wouters"
+          }
+        ]
+      },
+      {
+        "Name": "B",
+        "Players": [
+          {
+            "Class": 1,
+            "DateOfBirth": "1969-06-26T00:00:00",
+            "FirstName": "Derk",
+            "LastName": "Derden"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1963-07-07T00:00:00",
+            "FirstName": "Jean-Pierre",
+            "LastName": "Van Camp"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1968-08-21T00:00:00",
+            "FirstName": "Marnix",
+            "LastName": "Exelmans"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1966-05-22T00:00:00",
+            "FirstName": "Ronny",
+            "LastName": "Wijns"
+          }
+        ]
+      },
+      {
+        "Name": "C",
+        "Players": [
+          {
+            "Class": 2,
+            "DateOfBirth": "1993-03-16T00:00:00",
+            "FirstName": "Marco",
+            "LastName": "Vitali"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1986-05-21T00:00:00",
+            "FirstName": "Yoshi",
+            "LastName": "Lecocq"
+          }
+        ]
+      },
+      {
+        "Name": "D",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1972-02-18T00:00:00",
+            "FirstName": "Danny",
+            "LastName": "Moors"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1960-10-17T00:00:00",
+            "FirstName": "Ronnie",
+            "LastName": "De Reydt"
+          }
+        ]
+      },
+      {
+        "Name": "E",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1953-08-02T00:00:00",
+            "FirstName": "Ronny",
+            "LastName": "Bekkers"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1957-07-23T00:00:00",
+            "FirstName": "Rony",
+            "LastName": "Foets"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1945-11-27T00:00:00",
+            "FirstName": "Salvatore",
+            "LastName": "Verrienti"
+          }
+        ]
+      },
+      {
+        "Name": "F",
+        "Players": [
+          {
+            "Class": 2,
+            "DateOfBirth": "1993-03-16T00:00:00",
+            "FirstName": "Marco",
+            "LastName": "Vitali"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1960-10-17T00:00:00",
+            "FirstName": "Ronnie",
+            "LastName": "De Reydt"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1953-08-02T00:00:00",
+            "FirstName": "Ronny",
+            "LastName": "Bekkers"
+          }
+        ]
+      },
+      {
+        "Name": "Reserven",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1972-03-25T00:00:00",
+            "FirstName": "Andy",
+            "LastName": "Vleugels"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1976-11-03T00:00:00",
+            "FirstName": "Bjorn",
+            "LastName": "Schraeyen"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1962-07-03T00:00:00",
+            "FirstName": "Danny",
+            "LastName": "Brems"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1979-10-02T00:00:00",
+            "FirstName": "Donny",
+            "LastName": "Verhoeven"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1956-05-28T00:00:00",
+            "FirstName": "Eddy",
+            "LastName": "Ritzen"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1970-08-01T00:00:00",
+            "FirstName": "Marnik",
+            "LastName": "Geukens"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1986-12-27T00:00:00",
+            "FirstName": "Melissa",
+            "LastName": "Eens"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1995-02-10T00:00:00",
+            "FirstName": "Steff",
+            "LastName": "Beckers"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1984-06-29T00:00:00",
+            "FirstName": "Thomas",
+            "LastName": "Belmans"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1970-02-15T00:00:00",
+            "FirstName": "Vincent",
+            "LastName": "Moureau"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1965-07-21T00:00:00",
+            "FirstName": "Willy",
+            "LastName": "Daniels"
+          }
+        ]
+      }
+    ],
+    "Website": "https://www.nrgfitness.be/paal/"
+  },
+  {
+    "Address": {
+      "City": "Zonhoven",
+      "Number": "116",
+      "PostalCode": "3520",
+      "Street": "Heuvenstraat"
+    },
+    "Email": "info@respot.be",
+    "Name": "Re-Spot",
+    "Number": 5070,
+    "PhoneNumber": "011918963",
+    "Teams": [
+      {
+        "Name": "A",
+        "Players": [
+          {
+            "Class": 1,
+            "DateOfBirth": "1974-01-29T00:00:00",
+            "FirstName": "Dave",
+            "LastName": "Delanoy"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1960-07-16T00:00:00",
+            "FirstName": "Johny",
+            "LastName": "Vanrijkel"
+          },
+          {
+            "Class": 1,
+            "DateOfBirth": "1999-02-25T00:00:00",
+            "FirstName": "Michael",
+            "LastName": "Hulsbosch"
+          }
+        ]
+      },
+      {
+        "Name": "B",
+        "Players": [
+          {
+            "Class": 2,
+            "DateOfBirth": "1992-10-13T00:00:00",
+            "FirstName": "David",
+            "LastName": "Corens"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1996-07-28T00:00:00",
+            "FirstName": "Jan",
+            "LastName": "Corten"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1983-09-15T00:00:00",
+            "FirstName": "Tim",
+            "LastName": "Bellers"
+          }
+        ]
+      },
+      {
+        "Name": "C",
+        "Players": [
+          {
+            "Class": 1,
+            "DateOfBirth": "1991-06-21T00:00:00",
+            "FirstName": "Andries",
+            "LastName": "Monard"
+          },
+          {
+            "Class": 1,
+            "DateOfBirth": "1979-09-11T00:00:00",
+            "FirstName": "Bjorn",
+            "LastName": "Poilvache"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1977-12-10T00:00:00",
+            "FirstName": "Mike",
+            "LastName": "Wouters"
+          }
+        ]
+      },
+      {
+        "Name": "D",
+        "Players": [
+          {
+            "Class": 1,
+            "DateOfBirth": "1972-06-23T00:00:00",
+            "FirstName": "Frank",
+            "LastName": "Driesen"
+          },
+          {
+            "Class": 1,
+            "DateOfBirth": "1982-01-22T00:00:00",
+            "FirstName": "Patrick",
+            "LastName": "Duchateau"
+          },
+          {
+            "Class": 1,
+            "DateOfBirth": "1969-01-19T00:00:00",
+            "FirstName": "Rik",
+            "LastName": "Cornitensis"
+          }
+        ]
+      },
+      {
+        "Name": "E",
+        "Players": [
+          {
+            "Class": 2,
+            "DateOfBirth": "1974-01-03T00:00:00",
+            "FirstName": "David",
+            "LastName": "Bartholome"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1979-06-12T00:00:00",
+            "FirstName": "Koen",
+            "LastName": "Melotte"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1979-07-08T00:00:00",
+            "FirstName": "Wim",
+            "LastName": "Daniels"
+          }
+        ]
+      },
+      {
+        "Name": "F",
+        "Players": [
+          {
+            "Class": 2,
+            "DateOfBirth": "1970-10-13T00:00:00",
+            "FirstName": "Johan",
+            "LastName": "Stijnen"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1970-11-30T00:00:00",
+            "FirstName": "Peter",
+            "LastName": "Paessens"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1973-08-28T00:00:00",
+            "FirstName": "Steven",
+            "LastName": "Veltens"
+          }
+        ]
+      },
+      {
+        "Name": "G",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1989-11-06T00:00:00",
+            "FirstName": "Bert",
+            "LastName": "Mannaerts"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1974-10-18T00:00:00",
+            "FirstName": "Roby",
+            "LastName": "Cornelissen"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1992-04-09T00:00:00",
+            "FirstName": "Stef",
+            "LastName": "Mertens"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1954-10-23T00:00:00",
+            "FirstName": "Wim",
+            "LastName": "Schalleij"
+          }
+        ]
+      },
+      {
+        "Name": "H",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1991-02-21T00:00:00",
+            "FirstName": "Glenn",
+            "LastName": "Croughs"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1993-06-01T00:00:00",
+            "FirstName": "Salim",
+            "LastName": "Zargar"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1989-07-27T00:00:00",
+            "FirstName": "Wim",
+            "LastName": "Roosen"
+          }
+        ]
+      },
+      {
+        "Name": "I",
+        "Players": [
+          {
+            "Class": 2,
+            "DateOfBirth": "2002-03-01T00:00:00",
+            "FirstName": "Kenneth",
+            "LastName": "Thys"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1965-12-06T00:00:00",
+            "FirstName": "Nico",
+            "LastName": "Lenaers"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1970-06-09T00:00:00",
+            "FirstName": "Peter",
+            "LastName": "Gacoms"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1978-01-28T00:00:00",
+            "FirstName": "Steven",
+            "LastName": "Thys"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1981-11-05T00:00:00",
+            "FirstName": "Wesley",
+            "LastName": "Achten"
+          }
+        ]
+      },
+      {
+        "Name": "J",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1967-11-06T00:00:00",
+            "FirstName": "Bart",
+            "LastName": "Tournel"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1963-09-02T00:00:00",
+            "FirstName": "Dominick",
+            "LastName": "Mols"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1960-06-18T00:00:00",
+            "FirstName": "Johan",
+            "LastName": "Aerts"
+          }
+        ]
+      },
+      {
+        "Name": "K",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1959-12-29T00:00:00",
+            "FirstName": "Johan",
+            "LastName": "Mattens"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1962-08-20T00:00:00",
+            "FirstName": "Wim",
+            "LastName": "Verhaeren"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1985-12-31T00:00:00",
+            "FirstName": "Yves",
+            "LastName": "Brauns"
+          }
+        ]
+      },
+      {
+        "Name": "L",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1977-12-25T00:00:00",
+            "FirstName": "David",
+            "LastName": "De Roover"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1962-06-22T00:00:00",
+            "FirstName": "Eddy",
+            "LastName": "Pieters"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1979-07-21T00:00:00",
+            "FirstName": "Raf",
+            "LastName": "Willems"
+          }
+        ]
+      },
+      {
+        "Name": "M",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1959-09-10T00:00:00",
+            "FirstName": "Marc",
+            "LastName": "Stevens"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1950-03-22T00:00:00",
+            "FirstName": "Maurits",
+            "LastName": "Vanoppen"
+          }
+        ]
+      },
+      {
+        "Name": "N",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1958-04-14T00:00:00",
+            "FirstName": "Gregorio",
+            "LastName": "Prieto-Duran"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1980-09-24T00:00:00",
+            "FirstName": "Gregory",
+            "LastName": "Prieto-Rojas"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1982-04-27T00:00:00",
+            "FirstName": "Jo",
+            "LastName": "Thys"
+          }
+        ]
+      },
+      {
+        "Name": "O",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1972-01-25T00:00:00",
+            "FirstName": "Danny",
+            "LastName": "Clemens"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1956-01-13T00:00:00",
+            "FirstName": "Paul",
+            "LastName": "Van Gucht"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1967-07-06T00:00:00",
+            "FirstName": "Yves",
+            "LastName": "Courtois"
+          }
+        ]
+      },
+      {
+        "Name": "P",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1969-10-22T00:00:00",
+            "FirstName": "Filip",
+            "LastName": "Vanluyten"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1969-10-03T00:00:00",
+            "FirstName": "Jan",
+            "LastName": "Devos"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1967-05-30T00:00:00",
+            "FirstName": "Kris",
+            "LastName": "Buvens"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1990-04-08T00:00:00",
+            "FirstName": "Steyn",
+            "LastName": "Vandendijk"
+          }
+        ]
+      },
+      {
+        "Name": "Q",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1948-09-19T00:00:00",
+            "FirstName": "Ann",
+            "LastName": "Eerdekens"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1959-07-08T00:00:00",
+            "FirstName": "Frank",
+            "LastName": "Segers"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1977-03-01T00:00:00",
+            "FirstName": "Steve",
+            "LastName": "Thans"
+          }
+        ]
+      },
+      {
+        "Name": "R",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1981-01-12T00:00:00",
+            "FirstName": "Geert",
+            "LastName": "Schepers"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1978-01-11T00:00:00",
+            "FirstName": "Kurt",
+            "LastName": "Bonneux"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1976-02-01T00:00:00",
+            "FirstName": "Stefan",
+            "LastName": "Broux"
+          }
+        ]
+      },
+      {
+        "Name": "S",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1977-01-23T00:00:00",
+            "FirstName": "Bart",
+            "LastName": "Mathei"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1958-08-25T00:00:00",
+            "FirstName": "Johan",
+            "LastName": "Swennen"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1968-05-10T00:00:00",
+            "FirstName": "Pasquale",
+            "LastName": "Melis"
+          }
+        ]
+      },
+      {
+        "Name": "T",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1957-07-23T00:00:00",
+            "FirstName": "Jozef",
+            "LastName": "Philippart"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1950-03-08T00:00:00",
+            "FirstName": "Jozef",
+            "LastName": "Strouven"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "2005-04-18T00:00:00",
+            "FirstName": "Kenji",
+            "LastName": "Ickx"
+          }
+        ]
+      },
+      {
+        "Name": "U",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1965-12-06T00:00:00",
+            "FirstName": "Nico",
+            "LastName": "Lenaers"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1970-06-09T00:00:00",
+            "FirstName": "Peter",
+            "LastName": "Gacoms"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1993-06-01T00:00:00",
+            "FirstName": "Salim",
+            "LastName": "Zargar"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1981-11-05T00:00:00",
+            "FirstName": "Wesley",
+            "LastName": "Achten"
+          }
+        ]
+      },
+      {
+        "Name": "V",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1974-10-18T00:00:00",
+            "FirstName": "Roby",
+            "LastName": "Cornelissen"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1992-04-09T00:00:00",
+            "FirstName": "Stef",
+            "LastName": "Mertens"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1954-10-23T00:00:00",
+            "FirstName": "Wim",
+            "LastName": "Schalleij"
+          }
+        ]
+      },
+      {
+        "Name": "W",
+        "Players": [
+          {
+            "Class": 2,
+            "DateOfBirth": "1974-01-03T00:00:00",
+            "FirstName": "David",
+            "LastName": "Bartholome"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "2002-03-01T00:00:00",
+            "FirstName": "Kenneth",
+            "LastName": "Thys"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1978-01-28T00:00:00",
+            "FirstName": "Steven",
+            "LastName": "Thys"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1979-07-08T00:00:00",
+            "FirstName": "Wim",
+            "LastName": "Daniels"
+          }
+        ]
+      },
+      {
+        "Name": "X",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1969-10-23T00:00:00",
+            "FirstName": "Gert",
+            "LastName": "Geladi"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1976-02-01T00:00:00",
+            "FirstName": "Stefan",
+            "LastName": "Broux"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1965-12-31T00:00:00",
+            "FirstName": "Stefan",
+            "LastName": "Louwette"
+          }
+        ]
+      },
+      {
+        "Name": "Reserven",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1976-07-04T00:00:00",
+            "FirstName": "Bjorn",
+            "LastName": "Mangelschots"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1974-04-07T00:00:00",
+            "FirstName": "Edwin",
+            "LastName": "Sokolowski"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1988-05-11T00:00:00",
+            "FirstName": "Eros",
+            "LastName": "Tuand"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1974-03-03T00:00:00",
+            "FirstName": "Erwin",
+            "LastName": "Weygers"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1969-03-09T00:00:00",
+            "FirstName": "Frank",
+            "LastName": "Monette"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1967-08-20T00:00:00",
+            "FirstName": "Freddy",
+            "LastName": "Machiels"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1971-09-07T00:00:00",
+            "FirstName": "Jerry",
+            "LastName": "Swart"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1951-07-20T00:00:00",
+            "FirstName": "Jos",
+            "LastName": "Cardinaels"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1966-03-17T00:00:00",
+            "FirstName": "Marc",
+            "LastName": "Huyben"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1973-10-01T00:00:00",
+            "FirstName": "Marc",
+            "LastName": "Theuwis"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1993-01-28T00:00:00",
+            "FirstName": "Niels",
+            "LastName": "Couwberghs"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1978-06-18T00:00:00",
+            "FirstName": "Paul",
+            "LastName": "Nys Jean"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1963-10-27T00:00:00",
+            "FirstName": "Peter",
+            "LastName": "Adriaens"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1962-09-04T00:00:00",
+            "FirstName": "Robert",
+            "LastName": "Vangansewinkel"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1957-11-01T00:00:00",
+            "FirstName": "Roger",
+            "LastName": "Fransens"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1950-03-02T00:00:00",
+            "FirstName": "Vito",
+            "LastName": "Perrone"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1938-10-05T00:00:00",
+            "FirstName": "William",
+            "LastName": "Bird"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1983-06-21T00:00:00",
+            "FirstName": "Wouter",
+            "LastName": "Strouven"
+          }
+        ]
+      }
+    ],
+    "Website": "https://www.respot.be/"
+  },
+  {
+    "Address": {
+      "City": "Genk",
+      "Number": "93",
+      "PostalCode": "3600",
+      "Street": "Weg naar As"
+    },
+    "Email": "robinlatet@gmail.com",
+    "Name": "Riley Inn",
+    "Number": 5031,
+    "PhoneNumber": "089350476",
+    "Teams": [
+      {
+        "Name": "A",
+        "Players": [
+          {
+            "Class": 1,
+            "DateOfBirth": "1973-05-13T00:00:00",
+            "FirstName": "Christoph",
+            "LastName": "Marien"
+          },
+          {
+            "Class": 1,
+            "DateOfBirth": "1974-12-01T00:00:00",
+            "FirstName": "Ivo",
+            "LastName": "Smeulders"
+          },
+          {
+            "Class": 1,
+            "DateOfBirth": "1983-10-15T00:00:00",
+            "FirstName": "Kevin",
+            "LastName": "Van Hove - Speltincx"
+          },
+          {
+            "Class": 1,
+            "DateOfBirth": "1969-03-21T00:00:00",
+            "FirstName": "Wim",
+            "LastName": "Andries"
+          }
+        ]
+      },
+      {
+        "Name": "B",
+        "Players": [
+          {
+            "Class": 1,
+            "DateOfBirth": "1979-09-13T00:00:00",
+            "FirstName": "Johan",
+            "LastName": "D'hondt"
+          },
+          {
+            "Class": 1,
+            "DateOfBirth": "1995-09-08T00:00:00",
+            "FirstName": "Luca",
+            "LastName": "Brecel"
+          },
+          {
+            "Class": 1,
+            "DateOfBirth": "2000-01-08T00:00:00",
+            "FirstName": "Nick",
+            "LastName": "Jansen"
+          },
+          {
+            "Class": 1,
+            "DateOfBirth": "1965-09-19T00:00:00",
+            "FirstName": "Rudy",
+            "LastName": "Poelmans"
+          },
+          {
+            "Class": 1,
+            "DateOfBirth": "2001-04-22T00:00:00",
+            "FirstName": "Sybren",
+            "LastName": "Sokolowski"
+          }
+        ]
+      },
+      {
+        "Name": "C",
+        "Players": [
+          {
+            "Class": 1,
+            "DateOfBirth": "1968-10-30T00:00:00",
+            "FirstName": "Benny",
+            "LastName": "Hesemans"
+          },
+          {
+            "Class": 1,
+            "DateOfBirth": "1985-09-13T00:00:00",
+            "FirstName": "Claudio",
+            "LastName": "Mercurio"
+          },
+          {
+            "Class": 1,
+            "DateOfBirth": "1988-06-09T00:00:00",
+            "FirstName": "Mathijs",
+            "LastName": "Bokken"
+          }
+        ]
+      },
+      {
+        "Name": "D",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1956-12-23T00:00:00",
+            "FirstName": "Eddy",
+            "LastName": "Devos"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1971-08-13T00:00:00",
+            "FirstName": "Giuseppe",
+            "LastName": "Annaloro"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1995-05-04T00:00:00",
+            "FirstName": "Joachim",
+            "LastName": "Jacobs"
+          }
+        ]
+      },
+      {
+        "Name": "E",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1961-11-22T00:00:00",
+            "FirstName": "Alain",
+            "LastName": "Peters"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1966-10-22T00:00:00",
+            "FirstName": "Laurent",
+            "LastName": "Frans"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1958-03-02T00:00:00",
+            "FirstName": "Rudi",
+            "LastName": "Vuurstaek"
+          }
+        ]
+      },
+      {
+        "Name": "F",
+        "Players": [
+          {
+            "Class": 2,
+            "DateOfBirth": "1986-08-28T00:00:00",
+            "FirstName": "Dimitri",
+            "LastName": "Clijsters"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1965-07-21T00:00:00",
+            "FirstName": "Ghislain",
+            "LastName": "Leenaers"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1975-03-07T00:00:00",
+            "FirstName": "Joeri",
+            "LastName": "Sijbers"
+          }
+        ]
+      },
+      {
+        "Name": "G",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1964-11-11T00:00:00",
+            "FirstName": "Efstatios",
+            "LastName": "Michailidis"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1972-02-15T00:00:00",
+            "FirstName": "Giovanni",
+            "LastName": "Vario"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1975-03-20T00:00:00",
+            "FirstName": "Rudi",
+            "LastName": "Peters"
+          }
+        ]
+      },
+      {
+        "Name": "H",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1982-01-11T00:00:00",
+            "FirstName": "Jochen",
+            "LastName": "Steegmans"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1978-10-26T00:00:00",
+            "FirstName": "Peter",
+            "LastName": "Rutkowski"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1983-07-05T00:00:00",
+            "FirstName": "Tom",
+            "LastName": "Rosius"
+          }
+        ]
+      },
+      {
+        "Name": "I",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1974-11-27T00:00:00",
+            "FirstName": "Jan",
+            "LastName": "Deveux"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1951-08-04T00:00:00",
+            "FirstName": "Marcel",
+            "LastName": "Broux"
+          }
+        ]
+      },
+      {
+        "Name": "J",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1957-01-20T00:00:00",
+            "FirstName": "Freddy",
+            "LastName": "Donkers"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1983-11-15T00:00:00",
+            "FirstName": "Matt",
+            "LastName": "Vliegen"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1951-04-26T00:00:00",
+            "FirstName": "Romain",
+            "LastName": "Schots"
+          }
+        ]
+      },
+      {
+        "Name": "K",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1986-03-20T00:00:00",
+            "FirstName": "Dimitri",
+            "LastName": "Van Dyck"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1986-09-30T00:00:00",
+            "FirstName": "Ken",
+            "LastName": "Barone"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1990-09-18T00:00:00",
+            "FirstName": "Sander",
+            "LastName": "Stinkens"
+          }
+        ]
+      },
+      {
+        "Name": "L",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1970-09-08T00:00:00",
+            "FirstName": "Alfonso",
+            "LastName": "De Cola"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1963-01-06T00:00:00",
+            "FirstName": "Patrick",
+            "LastName": "Palmaers"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1990-10-07T00:00:00",
+            "FirstName": "Robin",
+            "LastName": "Latet"
+          }
+        ]
+      },
+      {
+        "Name": "M",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1950-05-17T00:00:00",
+            "FirstName": "Adamo",
+            "LastName": "Olivieri"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1970-02-10T00:00:00",
+            "FirstName": "Dirk",
+            "LastName": "Huyben"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1956-11-07T00:00:00",
+            "FirstName": "William",
+            "LastName": "Hensen"
+          }
+        ]
+      },
+      {
+        "Name": "N",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1981-12-07T00:00:00",
+            "FirstName": "Dominic",
+            "LastName": "Panis"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1984-09-09T00:00:00",
+            "FirstName": "Steve",
+            "LastName": "Follon"
+          }
+        ]
+      },
+      {
+        "Name": "Reserven",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1958-09-06T00:00:00",
+            "FirstName": "Alfonso",
+            "LastName": "Fuitini"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1959-10-06T00:00:00",
+            "FirstName": "Andre",
+            "LastName": "Mewissen"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1963-06-07T00:00:00",
+            "FirstName": "Bruno",
+            "LastName": "Teodori"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1989-10-20T00:00:00",
+            "FirstName": "Dietrich",
+            "LastName": "Gerits"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1985-08-11T00:00:00",
+            "FirstName": "Janny",
+            "LastName": "Wawrzak"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1978-03-28T00:00:00",
+            "FirstName": "Kevin",
+            "LastName": "Martens"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1972-09-20T00:00:00",
+            "FirstName": "Kris",
+            "LastName": "Aerts"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1949-07-12T00:00:00",
+            "FirstName": "Lucien",
+            "LastName": "Cremers"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1993-03-06T00:00:00",
+            "FirstName": "Niels",
+            "LastName": "Jehaes"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1992-03-16T00:00:00",
+            "FirstName": "Olivier",
+            "LastName": "Van Dael"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1987-07-29T00:00:00",
+            "FirstName": "Robin",
+            "LastName": "Moors"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1997-11-02T00:00:00",
+            "FirstName": "Seppe",
+            "LastName": "Voortmans"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1992-10-25T00:00:00",
+            "FirstName": "Timmy",
+            "LastName": "Gerits"
+          }
+        ]
+      }
+    ],
+    "Website": "http://riley-inn.be/"
+  },
+  {
+    "Address": {
+      "City": "Maasmechelen",
+      "Number": "360",
+      "PostalCode": "3630",
+      "Street": "Rijksweg"
+    },
+    "Email": "snookersports@telenet.be",
+    "Name": "Snooker Sports",
+    "Number": 5036,
+    "PhoneNumber": "089760793",
+    "Teams": [
+      {
+        "Name": "A",
+        "Players": [
+          {
+            "Class": 2,
+            "DateOfBirth": "1978-09-09T00:00:00",
+            "FirstName": "Bart",
+            "LastName": "Haerden"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1976-10-22T00:00:00",
+            "FirstName": "Jeremias",
+            "LastName": "Jurrissen"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1970-03-07T00:00:00",
+            "FirstName": "Raf",
+            "LastName": "Thijs"
+          }
+        ]
+      },
+      {
+        "Name": "B",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1958-09-03T00:00:00",
+            "FirstName": "Rene",
+            "LastName": "Van den Heuvel"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1962-09-23T00:00:00",
+            "FirstName": "Robert",
+            "LastName": "Geron"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1966-01-03T00:00:00",
+            "FirstName": "Stefan",
+            "LastName": "Bringmans"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1993-10-16T00:00:00",
+            "FirstName": "Stephanos",
+            "LastName": "Poulios"
+          }
+        ]
+      },
+      {
+        "Name": "Reserven",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1977-01-20T00:00:00",
+            "FirstName": "Danny",
+            "LastName": "Berix"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1960-10-15T00:00:00",
+            "FirstName": "Georgios",
+            "LastName": "Poulios"
+          }
+        ]
+      }
+    ],
+    "Website": "http://www.snookersports.be/"
+  },
+  {
+    "Address": {
+      "City": "Peer",
+      "Number": "9/3",
+      "PostalCode": "3990",
+      "Street": "Vinkstraat"
+    },
+    "Email": "zuma.snooker@gmail.com",
+    "Name": "Zuma",
+    "Number": 5041,
+    "PhoneNumber": "0472790691",
+    "Teams": [
+      {
+        "Name": "A",
+        "Players": [
+          {
+            "Class": 1,
+            "DateOfBirth": "1991-03-04T00:00:00",
+            "FirstName": "Jurian",
+            "LastName": "Heusdens"
+          },
+          {
+            "Class": 1,
+            "DateOfBirth": "1990-12-21T00:00:00",
+            "FirstName": "Laurens",
+            "LastName": "De Staelen"
+          },
+          {
+            "Class": 1,
+            "DateOfBirth": "1977-09-24T00:00:00",
+            "FirstName": "Mark",
+            "LastName": "Buteneers"
+          },
+          {
+            "Class": 1,
+            "DateOfBirth": "1989-10-04T00:00:00",
+            "FirstName": "Tomasz",
+            "LastName": "Skalski"
+          }
+        ]
+      },
+      {
+        "Name": "B",
+        "Players": [
+          {
+            "Class": 1,
+            "DateOfBirth": "1973-07-13T00:00:00",
+            "FirstName": "Bert",
+            "LastName": "Hoebers"
+          },
+          {
+            "Class": 1,
+            "DateOfBirth": "1981-01-28T00:00:00",
+            "FirstName": "Bjorn",
+            "LastName": "Achten"
+          },
+          {
+            "Class": 1,
+            "DateOfBirth": "1968-10-09T00:00:00",
+            "FirstName": "Rudi",
+            "LastName": "Gielen"
+          }
+        ]
+      },
+      {
+        "Name": "C",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1975-06-14T00:00:00",
+            "FirstName": "Andy",
+            "LastName": "Mok"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1991-08-02T00:00:00",
+            "FirstName": "Mitchell",
+            "LastName": "Maes"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1986-04-21T00:00:00",
+            "FirstName": "Yannick",
+            "LastName": "Saenen"
+          }
+        ]
+      },
+      {
+        "Name": "D",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1968-05-12T00:00:00",
+            "FirstName": "Luc",
+            "LastName": "T Syen"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1966-06-25T00:00:00",
+            "FirstName": "Mario",
+            "LastName": "Veltman"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1957-11-23T00:00:00",
+            "FirstName": "Peter",
+            "LastName": "Bertens"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1972-10-24T00:00:00",
+            "FirstName": "Stijn",
+            "LastName": "Pellens"
+          }
+        ]
+      },
+      {
+        "Name": "E",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1966-11-01T00:00:00",
+            "FirstName": "Guy",
+            "LastName": "Geuns"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1970-05-29T00:00:00",
+            "FirstName": "Marc",
+            "LastName": "Agten"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1979-02-22T00:00:00",
+            "FirstName": "Peter",
+            "LastName": "Coenegrachts"
+          }
+        ]
+      },
+      {
+        "Name": "F",
+        "Players": [
+          {
+            "Class": 2,
+            "DateOfBirth": "1973-02-09T00:00:00",
+            "FirstName": "Dennis",
+            "LastName": "Schrijvers"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1990-03-23T00:00:00",
+            "FirstName": "Jason",
+            "LastName": "Neirinck"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1960-11-12T00:00:00",
+            "FirstName": "Ludo",
+            "LastName": "Schildermans"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1981-12-23T00:00:00",
+            "FirstName": "Tim",
+            "LastName": "Hoolsteens"
+          }
+        ]
+      },
+      {
+        "Name": "G",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1992-08-01T00:00:00",
+            "FirstName": "Andy",
+            "LastName": "Buchla"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1987-09-28T00:00:00",
+            "FirstName": "Dirk",
+            "LastName": "Colemont"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1964-06-06T00:00:00",
+            "FirstName": "Johnny",
+            "LastName": "Kerkhofs"
+          }
+        ]
+      },
+      {
+        "Name": "H",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1986-03-26T00:00:00",
+            "FirstName": "Dirk",
+            "LastName": "Torfs"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1985-08-19T00:00:00",
+            "FirstName": "Joris",
+            "LastName": "Luyten"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1989-02-03T00:00:00",
+            "FirstName": "Martijn",
+            "LastName": "Van Mierloo"
+          }
+        ]
+      },
+      {
+        "Name": "I",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1986-05-17T00:00:00",
+            "FirstName": "Andy",
+            "LastName": "Weyen"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1976-09-20T00:00:00",
+            "FirstName": "Jimmy",
+            "LastName": "Gorissen"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1975-04-25T00:00:00",
+            "FirstName": "Wendy",
+            "LastName": "Hulsmans"
+          }
+        ]
+      },
+      {
+        "Name": "Reserven",
+        "Players": [
+          {
+            "Class": 3,
+            "DateOfBirth": "1949-04-07T00:00:00",
+            "FirstName": "Aurelio",
+            "LastName": "Ginefra"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1976-12-24T00:00:00",
+            "FirstName": "Benny",
+            "LastName": "Houben"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1984-06-04T00:00:00",
+            "FirstName": "Inge",
+            "LastName": "Vermeulen"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1960-01-08T00:00:00",
+            "FirstName": "Johan",
+            "LastName": "Heusdens"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1974-01-03T00:00:00",
+            "FirstName": "Kris",
+            "LastName": "Bombois"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1980-02-29T00:00:00",
+            "FirstName": "Laurens",
+            "LastName": "Boleij"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1993-07-30T00:00:00",
+            "FirstName": "Martijn",
+            "LastName": "Put"
+          },
+          {
+            "Class": 2,
+            "DateOfBirth": "1972-05-14T00:00:00",
+            "FirstName": "Pascal",
+            "LastName": "Meubis"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "2013-04-11T00:00:00",
+            "FirstName": "Rafael",
+            "LastName": "Godoy de Romagnoli"
+          },
+          {
+            "Class": 3,
+            "DateOfBirth": "1977-03-05T00:00:00",
+            "FirstName": "Tim",
+            "LastName": "Vanstraelen"
+          }
+        ]
+      }
+    ],
+    "Website": "http://www.zumasnooker.be/"
+  }
+]

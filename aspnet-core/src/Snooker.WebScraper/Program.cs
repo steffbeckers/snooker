@@ -18,6 +18,7 @@ public static class Program
 
         // Extract club rows
         HtmlNodeCollection clubRows = htmlDocumentClubs.DocumentNode.SelectNodes("//*[@id=\"main-box\"]/div[2]/div/table/tbody/tr[not(contains(@class,'ploeginfo'))]");
+
         foreach (HtmlNode clubRow in clubRows)
         {
             string name = clubRow.ChildNodes[0].InnerText.Trim();
@@ -93,6 +94,6 @@ public static class Program
 
         // Export clubs.json
         string clubsJson = JsonConvert.SerializeObject(clubs, Formatting.Indented);
-        File.WriteAllText("clubs.json", clubsJson);
+        File.WriteAllText("../../../../Snooker.Domain/Data/Seeding/Clubs/snookerlimburg.be.json", clubsJson);
     }
 }
