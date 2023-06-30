@@ -73,10 +73,15 @@ public class ClubsDataSeedContributor : IDataSeedContributor, ITransientDependen
 
                     foreach (WebScraper.Teams.Team limburgTeam in limburgClub.Teams)
                     {
-                        Team team = new Team(_guidGenerator.Create(), limburgTeam.Name)
+                        Team? team = null;
+
+                        if (limburgTeam.Name != "Reserven")
                         {
-                            ClubId = club.Id
-                        };
+                            team = new Team(_guidGenerator.Create(), limburgTeam.Name)
+                            {
+                                ClubId = club.Id
+                            };
+                        }
 
                         foreach (WebScraper.Players.Player limburgPlayer in limburgTeam.Players)
                         {
@@ -100,15 +105,21 @@ public class ClubsDataSeedContributor : IDataSeedContributor, ITransientDependen
                                 club.Players.Add(player);
                             }
 
-                            TeamPlayer teamPlayer = new TeamPlayer(
-                                id: _guidGenerator.Create(),
-                                team.Id,
-                                player.Id);
+                            if (team != null)
+                            {
+                                TeamPlayer teamPlayer = new TeamPlayer(
+                                    id: _guidGenerator.Create(),
+                                    team.Id,
+                                    player.Id);
 
-                            team.Players.Add(teamPlayer);
+                                team.Players.Add(teamPlayer);
+                            }
                         }
 
-                        club.Teams.Add(team);
+                        if (team != null)
+                        {
+                            club.Teams.Add(team);
+                        }
                     }
 
                     await _clubRepository.InsertAsync(club);
