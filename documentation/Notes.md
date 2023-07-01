@@ -25,7 +25,7 @@
 
 ## League planning
 
-- Teams play 1 home and 1 away match against all other teams in the same division
+- Teams play 1 home and 1 away match against all other teams in the same division (double round robin)
 - Clubs have a number of available tables which need to be match ready
 - Club open on holidays?
 - Team's favorite day to play at own club
