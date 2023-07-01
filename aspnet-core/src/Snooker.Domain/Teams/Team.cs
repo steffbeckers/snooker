@@ -1,4 +1,5 @@
 using Snooker.Clubs;
+using Snooker.Divisions;
 using Snooker.TeamPlayers;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,10 @@ public class Team : FullAuditedAggregateRoot<Guid>, IMultiTenant
     public Club? Club { get; set; }
 
     public Guid? ClubId { get; set; }
+
+    public Division? Division { get; set; }
+
+    public Guid? DivisionId { get; set; }
 
     public string Name
     {

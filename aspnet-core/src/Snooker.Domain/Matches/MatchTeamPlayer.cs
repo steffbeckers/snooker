@@ -1,25 +1,26 @@
-using Snooker.Matches;
 using Snooker.Players;
 using Snooker.Teams;
 using System;
 using Volo.Abp.Domain.Entities.Auditing;
 using Volo.Abp.MultiTenancy;
 
-namespace Snooker.TeamPlayers;
+namespace Snooker.Matches;
 
-public class TeamPlayer : FullAuditedAggregateRoot<Guid>, IMultiTenant
+public class MatchTeamPlayer : FullAuditedEntity<Guid>, IMultiTenant
 {
-    public TeamPlayer(
+    public MatchTeamPlayer(
         Guid id,
+        Guid matchId,
         Guid teamId,
         Guid playerId)
     {
         Id = id;
+        MatchId = matchId;
         TeamId = teamId;
         PlayerId = playerId;
     }
 
-    private TeamPlayer()
+    private MatchTeamPlayer()
     {
     }
 
@@ -27,7 +28,7 @@ public class TeamPlayer : FullAuditedAggregateRoot<Guid>, IMultiTenant
 
     public virtual Match Match { get; set; }
 
-    public Guid? MatchId { get; set; }
+    public Guid MatchId { get; set; }
 
     public virtual Player Player { get; set; }
 
@@ -37,5 +38,5 @@ public class TeamPlayer : FullAuditedAggregateRoot<Guid>, IMultiTenant
 
     public Guid TeamId { get; set; }
 
-    public Guid? TenantId { get; set; }
+    public Guid? TenantId { get; private set; }
 }
