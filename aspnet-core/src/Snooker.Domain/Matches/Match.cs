@@ -1,8 +1,8 @@
+using Snooker.Frames;
 using Snooker.Teams;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using Volo.Abp.Domain.Entities.Auditing;
 using Volo.Abp.MultiTenancy;
 
@@ -28,15 +28,13 @@ public class Match : FullAuditedAggregateRoot<Guid>, IMultiTenant
 
     public Guid? AwayTeamId { get; }
 
-    public virtual List<MatchTeamPlayer> AwayTeamPlayers { get => TeamPlayers.Where(x => x.TeamId == AwayTeamId).ToList(); }
-
     public DateTime? Date { get; set; }
+
+    public virtual ICollection<Frame> Frames { get; set; } = new Collection<Frame>();
 
     public virtual Team? HomeTeam { get; }
 
     public Guid? HomeTeamId { get; }
-
-    public virtual List<MatchTeamPlayer> HomeTeamPlayers { get => TeamPlayers.Where(x => x.TeamId == HomeTeamId).ToList(); }
 
     public virtual ICollection<MatchTeamPlayer> TeamPlayers { get; set; } = new Collection<MatchTeamPlayer>();
 

@@ -1,4 +1,3 @@
-using Snooker.Matches;
 using Snooker.Players;
 using Snooker.Teams;
 using System;
@@ -24,10 +23,6 @@ public class TeamPlayer : FullAuditedAggregateRoot<Guid>, IMultiTenant
     }
 
     public bool IsCaptain { get; set; }
-
-    public virtual Match Match { get; set; }
-
-    public Guid? MatchId { get; set; }
 
     public virtual Player Player { get; set; }
 

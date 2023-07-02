@@ -45,7 +45,7 @@ public class Team : FullAuditedAggregateRoot<Guid>, IMultiTenant
         }
     }
 
-    public ICollection<TeamPlayer> Players { get; set; } = new Collection<TeamPlayer>();
+    public virtual ICollection<TeamPlayer> Players { get; set; } = new Collection<TeamPlayer>();
 
     public Guid? TenantId { get; private set; }
 }
