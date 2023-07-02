@@ -1,6 +1,5 @@
 using Snooker.Clubs;
 using Snooker.Divisions;
-using Snooker.TeamPlayers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,9 +15,15 @@ public class Team : FullAuditedAggregateRoot<Guid>, IMultiTenant
 
     public Team(
         Guid id,
+        // TODO
+        //Guid divisionId,
+        Guid clubId,
         string name)
     {
         Id = id;
+        // TODO
+        //DivisionId = divisionId;
+        ClubId = clubId;
         Name = name;
     }
 
@@ -26,11 +31,11 @@ public class Team : FullAuditedAggregateRoot<Guid>, IMultiTenant
     {
     }
 
-    public Club? Club { get; set; }
+    public virtual Club Club { get; }
 
-    public Guid? ClubId { get; set; }
+    public Guid ClubId { get; set; }
 
-    public Division? Division { get; set; }
+    public virtual Division? Division { get; }
 
     public Guid? DivisionId { get; set; }
 
@@ -45,7 +50,7 @@ public class Team : FullAuditedAggregateRoot<Guid>, IMultiTenant
         }
     }
 
-    public virtual ICollection<TeamPlayer> Players { get; set; } = new Collection<TeamPlayer>();
+    public virtual ICollection<TeamPlayer> Players { get; private set; } = new Collection<TeamPlayer>();
 
     public Guid? TenantId { get; private set; }
 }

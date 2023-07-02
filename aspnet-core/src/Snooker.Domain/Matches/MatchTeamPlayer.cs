@@ -26,15 +26,15 @@ public class MatchTeamPlayer : FullAuditedEntity<Guid>, IMultiTenant
 
     public bool IsCaptain { get; set; }
 
-    public virtual Match Match { get; set; }
+    public virtual Match Match { get; }
 
     public Guid MatchId { get; set; }
 
-    public virtual Player Player { get; set; }
+    public virtual Player Player { get; }
 
     public Guid PlayerId { get; set; }
 
-    public virtual Team Team { get; set; }
+    public virtual Team Team { get; }
 
     public Guid TeamId { get; set; }
 

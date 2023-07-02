@@ -2,7 +2,6 @@ using Newtonsoft.Json;
 using Snooker.Addresses;
 using Snooker.Clubs;
 using Snooker.Players;
-using Snooker.TeamPlayers;
 using Snooker.Teams;
 using System.Collections.Generic;
 using System.IO;
@@ -78,7 +77,7 @@ public class ClubsDataSeedContributor : IDataSeedContributor, ITransientDependen
 
                         if (limburgTeam.Name != "Reserven")
                         {
-                            team = new Team(_guidGenerator.Create(), limburgTeam.Name)
+                            team = new Team(_guidGenerator.Create(), club.Id, limburgTeam.Name)
                             {
                                 ClubId = club.Id
                             };
