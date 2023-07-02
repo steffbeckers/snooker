@@ -118,8 +118,8 @@ public class SnookerDbContext :
             b.ToTable(SnookerConsts.DbTablePrefix + "Frames", SnookerConsts.DbSchema);
             b.ConfigureByConvention();
             b.HasOne(x => x.Match).WithMany(x => x.Frames).HasForeignKey(x => x.MatchId);
-            b.HasOne(x => x.HomePlayer).WithMany().HasForeignKey(x => x.HomePlayerId);
-            b.HasOne(x => x.AwayPlayer).WithMany().HasForeignKey(x => x.AwayPlayerId);
+            b.HasOne(x => x.HomePlayer).WithMany().HasForeignKey(x => x.HomePlayerId).OnDelete(DeleteBehavior.Restrict);
+            b.HasOne(x => x.AwayPlayer).WithMany().HasForeignKey(x => x.AwayPlayerId).OnDelete(DeleteBehavior.Restrict);
         });
 
         builder.Entity<League>(b =>

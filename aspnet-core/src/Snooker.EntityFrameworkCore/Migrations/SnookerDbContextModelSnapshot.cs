@@ -2368,13 +2368,13 @@ namespace Snooker.EntityFrameworkCore.Migrations
                     b.HasOne("Snooker.Matches.MatchTeamPlayer", "AwayPlayer")
                         .WithMany()
                         .HasForeignKey("AwayPlayerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Snooker.Matches.MatchTeamPlayer", "HomePlayer")
                         .WithMany()
                         .HasForeignKey("HomePlayerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Snooker.Matches.Match", "Match")

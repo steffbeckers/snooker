@@ -13,7 +13,7 @@ using Volo.Abp.EntityFrameworkCore;
 namespace Snooker.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(SnookerDbContext))]
-    [Migration("20230702113249_UpdatesOnMatchesDivisionsFrames")]
+    [Migration("20230702122116_UpdatesOnMatchesDivisionsFrames")]
     partial class UpdatesOnMatchesDivisionsFrames
     {
         /// <inheritdoc />
@@ -2371,13 +2371,13 @@ namespace Snooker.EntityFrameworkCore.Migrations
                     b.HasOne("Snooker.Matches.MatchTeamPlayer", "AwayPlayer")
                         .WithMany()
                         .HasForeignKey("AwayPlayerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Snooker.Matches.MatchTeamPlayer", "HomePlayer")
                         .WithMany()
                         .HasForeignKey("HomePlayerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Snooker.Matches.Match", "Match")

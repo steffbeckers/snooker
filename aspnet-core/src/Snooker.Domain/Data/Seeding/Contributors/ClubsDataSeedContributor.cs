@@ -60,6 +60,7 @@ public class ClubsDataSeedContributor : IDataSeedContributor, ITransientDependen
                     club = await _clubManager.CreateAsync(
                         id: _guidGenerator.Create(),
                         name: limburgClub.Name);
+                    club.Number = limburgClub.Number.ToString();
                     club.Email = limburgClub.Email;
                     club.PhoneNumber = limburgClub.PhoneNumber;
                     club.Website = limburgClub.Website;

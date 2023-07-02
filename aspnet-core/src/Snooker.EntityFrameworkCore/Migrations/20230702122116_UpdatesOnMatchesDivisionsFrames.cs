@@ -196,13 +196,13 @@ namespace Snooker.EntityFrameworkCore.Migrations
                         column: x => x.AwayPlayerId,
                         principalTable: "MatchTeamPlayer",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_AppFrames_MatchTeamPlayer_HomePlayerId",
                         column: x => x.HomePlayerId,
                         principalTable: "MatchTeamPlayer",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
