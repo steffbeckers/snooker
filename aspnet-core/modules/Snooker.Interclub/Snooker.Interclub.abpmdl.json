@@ -1,0 +1,111 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {},
+      "host": {}
+    }
+  },
+  "packages": {
+    "Snooker.Interclub.Domain.Shared": {
+      "path": "src/Snooker.Interclub.Domain.Shared/Snooker.Interclub.Domain.Shared.abppkg.json",
+      "folder": "src"
+    },
+    "Snooker.Interclub.Domain": {
+      "path": "src/Snooker.Interclub.Domain/Snooker.Interclub.Domain.abppkg.json",
+      "folder": "src"
+    },
+    "Snooker.Interclub.Application.Contracts": {
+      "path": "src/Snooker.Interclub.Application.Contracts/Snooker.Interclub.Application.Contracts.abppkg.json",
+      "folder": "src"
+    },
+    "Snooker.Interclub.Application": {
+      "path": "src/Snooker.Interclub.Application/Snooker.Interclub.Application.abppkg.json",
+      "folder": "src"
+    },
+    "Snooker.Interclub.EntityFrameworkCore": {
+      "path": "src/Snooker.Interclub.EntityFrameworkCore/Snooker.Interclub.EntityFrameworkCore.abppkg.json",
+      "folder": "src"
+    },
+    "Snooker.Interclub.MongoDB": {
+      "path": "src/Snooker.Interclub.MongoDB/Snooker.Interclub.MongoDB.abppkg.json",
+      "folder": "src"
+    },
+    "Snooker.Interclub.HttpApi": {
+      "path": "src/Snooker.Interclub.HttpApi/Snooker.Interclub.HttpApi.abppkg.json",
+      "folder": "src"
+    },
+    "Snooker.Interclub.HttpApi.Client": {
+      "path": "src/Snooker.Interclub.HttpApi.Client/Snooker.Interclub.HttpApi.Client.abppkg.json",
+      "folder": "src"
+    },
+    "Snooker.Interclub.TestBase": {
+      "path": "test/Snooker.Interclub.TestBase/Snooker.Interclub.TestBase.abppkg.json",
+      "folder": "test"
+    },
+    "Snooker.Interclub.EntityFrameworkCore.Tests": {
+      "path": "test/Snooker.Interclub.EntityFrameworkCore.Tests/Snooker.Interclub.EntityFrameworkCore.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Snooker.Interclub.MongoDB.Tests": {
+      "path": "test/Snooker.Interclub.MongoDB.Tests/Snooker.Interclub.MongoDB.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Snooker.Interclub.Domain.Tests": {
+      "path": "test/Snooker.Interclub.Domain.Tests/Snooker.Interclub.Domain.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Snooker.Interclub.Application.Tests": {
+      "path": "test/Snooker.Interclub.Application.Tests/Snooker.Interclub.Application.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Snooker.Interclub.HttpApi.Host": {
+      "path": "host/Snooker.Interclub.HttpApi.Host/Snooker.Interclub.HttpApi.Host.abppkg.json",
+      "folder": "host"
+    },
+    "Snooker.Interclub.Web": {
+      "path": "src/Snooker.Interclub.Web/Snooker.Interclub.Web.abppkg.json",
+      "folder": "src"
+    },
+    "Snooker.Interclub.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/Snooker.Interclub.HttpApi.Client.ConsoleTestApp/Snooker.Interclub.HttpApi.Client.ConsoleTestApp.abppkg.json",
+      "folder": "test"
+    },
+    "Snooker.Interclub.Web.Host": {
+      "path": "host/Snooker.Interclub.Web.Host/Snooker.Interclub.Web.Host.abppkg.json",
+      "folder": "host"
+    },
+    "Snooker.Interclub.AuthServer": {
+      "path": "host/Snooker.Interclub.AuthServer/Snooker.Interclub.AuthServer.abppkg.json",
+      "folder": "host"
+    },
+    "Snooker.Interclub.Host.Shared": {
+      "path": "host/Snooker.Interclub.Host.Shared/Snooker.Interclub.Host.Shared.abppkg.json",
+      "folder": "host"
+    },
+    "Snooker.Interclub.Web.Unified": {
+      "path": "host/Snooker.Interclub.Web.Unified/Snooker.Interclub.Web.Unified.abppkg.json",
+      "folder": "host"
+    },
+    "Snooker.Interclub.Blazor": {
+      "path": "src/Snooker.Interclub.Blazor/Snooker.Interclub.Blazor.abppkg.json",
+      "folder": "src"
+    },
+    "Snooker.Interclub.Blazor.Host": {
+      "path": "host/Snooker.Interclub.Blazor.Host/Snooker.Interclub.Blazor.Host.abppkg.json",
+      "folder": "host"
+    },
+    "Snooker.Interclub.Blazor.Server": {
+      "path": "src/Snooker.Interclub.Blazor.Server/Snooker.Interclub.Blazor.Server.abppkg.json",
+      "folder": "src"
+    },
+    "Snooker.Interclub.Blazor.WebAssembly": {
+      "path": "src/Snooker.Interclub.Blazor.WebAssembly/Snooker.Interclub.Blazor.WebAssembly.abppkg.json",
+      "folder": "src"
+    },
+    "Snooker.Interclub.Blazor.Server.Host": {
+      "path": "host/Snooker.Interclub.Blazor.Server.Host/Snooker.Interclub.Blazor.Server.Host.abppkg.json",
+      "folder": "host"
+    }
+  }
+}

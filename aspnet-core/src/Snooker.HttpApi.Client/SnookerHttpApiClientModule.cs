@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Account;
 using Volo.Abp.FeatureManagement;
 using Volo.Abp.Identity;
@@ -7,6 +7,7 @@ using Volo.Abp.PermissionManagement;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.VirtualFileSystem;
+using Snooker.Interclub;
 
 namespace Snooker;
 
@@ -19,7 +20,8 @@ namespace Snooker;
     typeof(AbpFeatureManagementHttpApiClientModule),
     typeof(AbpSettingManagementHttpApiClientModule)
 )]
-public class SnookerHttpApiClientModule : AbpModule
+[DependsOn(typeof(InterclubHttpApiClientModule))]
+    public class SnookerHttpApiClientModule : AbpModule
 {
     public const string RemoteServiceName = "Default";
 

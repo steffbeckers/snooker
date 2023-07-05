@@ -5,6 +5,36 @@ VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snooker.Domain", "src\Snooker.Domain\Snooker.Domain.csproj", "{554AD327-6DBA-4F8F-96F8-81CE7A0C863F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snooker.Interclub.TestBase", "modules\Snooker.Interclub\test\Snooker.Interclub.TestBase\Snooker.Interclub.TestBase.csproj", "{B4413350-D9BC-4706-A00E-1664F30B5001}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snooker.Interclub.HttpApi.Client.ConsoleTestApp", "modules\Snooker.Interclub\test\Snooker.Interclub.HttpApi.Client.ConsoleTestApp\Snooker.Interclub.HttpApi.Client.ConsoleTestApp.csproj", "{07AAEDC0-9D6E-4E8E-86B1-510CA0B63B81}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snooker.Interclub.EntityFrameworkCore.Tests", "modules\Snooker.Interclub\test\Snooker.Interclub.EntityFrameworkCore.Tests\Snooker.Interclub.EntityFrameworkCore.Tests.csproj", "{A41BCE1E-D07F-445C-A6FE-FF5635856953}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snooker.Interclub.Domain.Tests", "modules\Snooker.Interclub\test\Snooker.Interclub.Domain.Tests\Snooker.Interclub.Domain.Tests.csproj", "{AD720B88-18C1-4A67-842E-045603F35E30}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snooker.Interclub.Application.Tests", "modules\Snooker.Interclub\test\Snooker.Interclub.Application.Tests\Snooker.Interclub.Application.Tests.csproj", "{CE175C10-8C4C-41AC-8C01-A748AE629CB9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snooker.Interclub.HttpApi.Client", "modules\Snooker.Interclub\src\Snooker.Interclub.HttpApi.Client\Snooker.Interclub.HttpApi.Client.csproj", "{12210CAB-6E1C-4D8E-AEAB-5266D02B690E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snooker.Interclub.HttpApi", "modules\Snooker.Interclub\src\Snooker.Interclub.HttpApi\Snooker.Interclub.HttpApi.csproj", "{0D6DD919-E8A5-4703-9AB7-A5A0AEE276DB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snooker.Interclub.EntityFrameworkCore", "modules\Snooker.Interclub\src\Snooker.Interclub.EntityFrameworkCore\Snooker.Interclub.EntityFrameworkCore.csproj", "{4799C62C-E4B5-4398-AB3B-F9A2ACFE5EC4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snooker.Interclub.Domain.Shared", "modules\Snooker.Interclub\src\Snooker.Interclub.Domain.Shared\Snooker.Interclub.Domain.Shared.csproj", "{01469C3A-B5FB-4FC7-8E46-69BD77F2CF6A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snooker.Interclub.Domain", "modules\Snooker.Interclub\src\Snooker.Interclub.Domain\Snooker.Interclub.Domain.csproj", "{0C46748E-85A9-44D3-84DB-25F6619F97F4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snooker.Interclub.Application.Contracts", "modules\Snooker.Interclub\src\Snooker.Interclub.Application.Contracts\Snooker.Interclub.Application.Contracts.csproj", "{200914D3-68BD-498C-BBD7-AAB3F0897580}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snooker.Interclub.Application", "modules\Snooker.Interclub\src\Snooker.Interclub.Application\Snooker.Interclub.Application.csproj", "{A7AA9937-3D8B-4311-BAC2-215F40325C00}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Snooker.Interclub.Tests", "Snooker.Interclub.Tests", "{19BB6930-7EDA-4BD6-B0BD-92B9570F9D5E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Snooker.Interclub", "Snooker.Interclub", "{B6730126-397B-42B0-A891-78C3B115AAE3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "modules", "modules", "{BA8549DC-CB0F-4CAE-BE96-BD8C89369AD6}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snooker.Application", "src\Snooker.Application\Snooker.Application.csproj", "{1A94A50E-06DC-43C1-80B5-B662820EC3EB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snooker.EntityFrameworkCore", "src\Snooker.EntityFrameworkCore\Snooker.EntityFrameworkCore.csproj", "{C956DD76-69C8-4A9C-83EA-D17DF83340FD}"
@@ -44,7 +74,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		NuGet.Config = NuGet.Config
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snooker.WebScraper", "src\Snooker.WebScraper\Snooker.WebScraper.csproj", "{86C8FAE1-AEC9-4D88-AB32-452FBAE6BAD0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snooker.WebScraper", "src\Snooker.WebScraper\Snooker.WebScraper.csproj", "{86C8FAE1-AEC9-4D88-AB32-452FBAE6BAD0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,6 +86,54 @@ Global
 		{554AD327-6DBA-4F8F-96F8-81CE7A0C863F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{554AD327-6DBA-4F8F-96F8-81CE7A0C863F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{554AD327-6DBA-4F8F-96F8-81CE7A0C863F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4413350-D9BC-4706-A00E-1664F30B5001}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4413350-D9BC-4706-A00E-1664F30B5001}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4413350-D9BC-4706-A00E-1664F30B5001}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4413350-D9BC-4706-A00E-1664F30B5001}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07AAEDC0-9D6E-4E8E-86B1-510CA0B63B81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07AAEDC0-9D6E-4E8E-86B1-510CA0B63B81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07AAEDC0-9D6E-4E8E-86B1-510CA0B63B81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07AAEDC0-9D6E-4E8E-86B1-510CA0B63B81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A41BCE1E-D07F-445C-A6FE-FF5635856953}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A41BCE1E-D07F-445C-A6FE-FF5635856953}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A41BCE1E-D07F-445C-A6FE-FF5635856953}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A41BCE1E-D07F-445C-A6FE-FF5635856953}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD720B88-18C1-4A67-842E-045603F35E30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD720B88-18C1-4A67-842E-045603F35E30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD720B88-18C1-4A67-842E-045603F35E30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD720B88-18C1-4A67-842E-045603F35E30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE175C10-8C4C-41AC-8C01-A748AE629CB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE175C10-8C4C-41AC-8C01-A748AE629CB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE175C10-8C4C-41AC-8C01-A748AE629CB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE175C10-8C4C-41AC-8C01-A748AE629CB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12210CAB-6E1C-4D8E-AEAB-5266D02B690E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12210CAB-6E1C-4D8E-AEAB-5266D02B690E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12210CAB-6E1C-4D8E-AEAB-5266D02B690E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12210CAB-6E1C-4D8E-AEAB-5266D02B690E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D6DD919-E8A5-4703-9AB7-A5A0AEE276DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D6DD919-E8A5-4703-9AB7-A5A0AEE276DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D6DD919-E8A5-4703-9AB7-A5A0AEE276DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D6DD919-E8A5-4703-9AB7-A5A0AEE276DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4799C62C-E4B5-4398-AB3B-F9A2ACFE5EC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4799C62C-E4B5-4398-AB3B-F9A2ACFE5EC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4799C62C-E4B5-4398-AB3B-F9A2ACFE5EC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4799C62C-E4B5-4398-AB3B-F9A2ACFE5EC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01469C3A-B5FB-4FC7-8E46-69BD77F2CF6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01469C3A-B5FB-4FC7-8E46-69BD77F2CF6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01469C3A-B5FB-4FC7-8E46-69BD77F2CF6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01469C3A-B5FB-4FC7-8E46-69BD77F2CF6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C46748E-85A9-44D3-84DB-25F6619F97F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C46748E-85A9-44D3-84DB-25F6619F97F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C46748E-85A9-44D3-84DB-25F6619F97F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C46748E-85A9-44D3-84DB-25F6619F97F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{200914D3-68BD-498C-BBD7-AAB3F0897580}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{200914D3-68BD-498C-BBD7-AAB3F0897580}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{200914D3-68BD-498C-BBD7-AAB3F0897580}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{200914D3-68BD-498C-BBD7-AAB3F0897580}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7AA9937-3D8B-4311-BAC2-215F40325C00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7AA9937-3D8B-4311-BAC2-215F40325C00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7AA9937-3D8B-4311-BAC2-215F40325C00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7AA9937-3D8B-4311-BAC2-215F40325C00}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1A94A50E-06DC-43C1-80B5-B662820EC3EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1A94A50E-06DC-43C1-80B5-B662820EC3EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A94A50E-06DC-43C1-80B5-B662820EC3EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -118,6 +196,20 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{554AD327-6DBA-4F8F-96F8-81CE7A0C863F} = {CA9AC87F-097E-4F15-8393-4BC07735A5B0}
+		{B4413350-D9BC-4706-A00E-1664F30B5001} = {19BB6930-7EDA-4BD6-B0BD-92B9570F9D5E}
+		{07AAEDC0-9D6E-4E8E-86B1-510CA0B63B81} = {19BB6930-7EDA-4BD6-B0BD-92B9570F9D5E}
+		{A41BCE1E-D07F-445C-A6FE-FF5635856953} = {19BB6930-7EDA-4BD6-B0BD-92B9570F9D5E}
+		{AD720B88-18C1-4A67-842E-045603F35E30} = {19BB6930-7EDA-4BD6-B0BD-92B9570F9D5E}
+		{CE175C10-8C4C-41AC-8C01-A748AE629CB9} = {19BB6930-7EDA-4BD6-B0BD-92B9570F9D5E}
+		{12210CAB-6E1C-4D8E-AEAB-5266D02B690E} = {B6730126-397B-42B0-A891-78C3B115AAE3}
+		{0D6DD919-E8A5-4703-9AB7-A5A0AEE276DB} = {B6730126-397B-42B0-A891-78C3B115AAE3}
+		{4799C62C-E4B5-4398-AB3B-F9A2ACFE5EC4} = {B6730126-397B-42B0-A891-78C3B115AAE3}
+		{01469C3A-B5FB-4FC7-8E46-69BD77F2CF6A} = {B6730126-397B-42B0-A891-78C3B115AAE3}
+		{0C46748E-85A9-44D3-84DB-25F6619F97F4} = {B6730126-397B-42B0-A891-78C3B115AAE3}
+		{200914D3-68BD-498C-BBD7-AAB3F0897580} = {B6730126-397B-42B0-A891-78C3B115AAE3}
+		{A7AA9937-3D8B-4311-BAC2-215F40325C00} = {B6730126-397B-42B0-A891-78C3B115AAE3}
+		{19BB6930-7EDA-4BD6-B0BD-92B9570F9D5E} = {04DBDB01-70F4-4E06-B468-8F87850B22BE}
+		{B6730126-397B-42B0-A891-78C3B115AAE3} = {BA8549DC-CB0F-4CAE-BE96-BD8C89369AD6}
 		{1A94A50E-06DC-43C1-80B5-B662820EC3EB} = {CA9AC87F-097E-4F15-8393-4BC07735A5B0}
 		{C956DD76-69C8-4A9C-83EA-D17DF83340FD} = {CA9AC87F-097E-4F15-8393-4BC07735A5B0}
 		{50B2631D-129C-47B3-A587-029CCD6099BC} = {04DBDB01-70F4-4E06-B468-8F87850B22BE}

@@ -22,6 +22,7 @@ using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
+using Snooker.Interclub.EntityFrameworkCore;
 
 namespace Snooker.EntityFrameworkCore;
 
@@ -174,5 +175,6 @@ public class SnookerDbContext :
             b.HasOne(x => x.Team).WithMany(x => x.Players).HasForeignKey(x => x.TeamId);
             b.HasOne(x => x.Player).WithMany().HasForeignKey(x => x.PlayerId);
         });
-    }
+        builder.ConfigureInterclub();
+        }
 }

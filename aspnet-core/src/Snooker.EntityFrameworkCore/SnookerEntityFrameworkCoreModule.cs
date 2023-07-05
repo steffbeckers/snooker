@@ -14,6 +14,7 @@ using Volo.Abp.OpenIddict.EntityFrameworkCore;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
+using Snooker.Interclub.EntityFrameworkCore;
 
 namespace Snooker.EntityFrameworkCore;
 
@@ -29,7 +30,8 @@ namespace Snooker.EntityFrameworkCore;
     typeof(AbpTenantManagementEntityFrameworkCoreModule),
     typeof(AbpFeatureManagementEntityFrameworkCoreModule)
     )]
-public class SnookerEntityFrameworkCoreModule : AbpModule
+[DependsOn(typeof(InterclubEntityFrameworkCoreModule))]
+    public class SnookerEntityFrameworkCoreModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {

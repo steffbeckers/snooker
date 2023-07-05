@@ -12,6 +12,7 @@ using Volo.Abp.SettingManagement;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.Validation.Localization;
 using Volo.Abp.VirtualFileSystem;
+using Snooker.Interclub;
 
 namespace Snooker;
 
@@ -25,7 +26,8 @@ namespace Snooker;
     typeof(AbpSettingManagementDomainSharedModule),
     typeof(AbpTenantManagementDomainSharedModule)
     )]
-public class SnookerDomainSharedModule : AbpModule
+[DependsOn(typeof(InterclubDomainSharedModule))]
+    public class SnookerDomainSharedModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {

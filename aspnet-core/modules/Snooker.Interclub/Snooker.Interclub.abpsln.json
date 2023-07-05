@@ -1,0 +1,7 @@
+{
+  "modules": {
+    "Snooker.Interclub": {
+      "path": "Snooker.Interclub.abpmdl.json"
+    }
+  }
+}
