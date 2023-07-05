@@ -70,6 +70,8 @@ public class SnookerDbContext :
 
     public DbSet<Tenant> Tenants { get; set; }
 
+    public DbSet<IdentityUserDelegation> UserDelegations { get; set; }
+
     public DbSet<IdentityUser> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
