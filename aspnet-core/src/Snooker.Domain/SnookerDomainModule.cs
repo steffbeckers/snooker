@@ -15,6 +15,7 @@ using Volo.Abp.PermissionManagement.OpenIddict;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.TenantManagement;
 using Snooker.Interclub;
+using Snooker.Platform;
 
 namespace Snooker;
 
@@ -32,6 +33,7 @@ namespace Snooker;
     typeof(AbpEmailingModule)
 )]
 [DependsOn(typeof(InterclubDomainModule))]
+    [DependsOn(typeof(PlatformDomainModule))]
     public class SnookerDomainModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)

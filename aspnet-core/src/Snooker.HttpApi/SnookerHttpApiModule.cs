@@ -9,6 +9,7 @@ using Volo.Abp.PermissionManagement.HttpApi;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.TenantManagement;
 using Snooker.Interclub;
+using Snooker.Platform;
 
 namespace Snooker;
 
@@ -22,6 +23,7 @@ namespace Snooker;
     typeof(AbpSettingManagementHttpApiModule)
     )]
 [DependsOn(typeof(InterclubHttpApiModule))]
+    [DependsOn(typeof(PlatformHttpApiModule))]
     public class SnookerHttpApiModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)

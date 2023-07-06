@@ -5,6 +5,34 @@ VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snooker.Domain", "src\Snooker.Domain\Snooker.Domain.csproj", "{554AD327-6DBA-4F8F-96F8-81CE7A0C863F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snooker.Platform.TestBase", "modules\Snooker.Platform\test\Snooker.Platform.TestBase\Snooker.Platform.TestBase.csproj", "{3059A07E-EC46-489D-AB75-DF97D73A73C2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snooker.Platform.HttpApi.Client.ConsoleTestApp", "modules\Snooker.Platform\test\Snooker.Platform.HttpApi.Client.ConsoleTestApp\Snooker.Platform.HttpApi.Client.ConsoleTestApp.csproj", "{EBF112E9-460E-442F-B214-64797E2E2664}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snooker.Platform.EntityFrameworkCore.Tests", "modules\Snooker.Platform\test\Snooker.Platform.EntityFrameworkCore.Tests\Snooker.Platform.EntityFrameworkCore.Tests.csproj", "{06997096-EF61-4828-8D36-107986EAE9B0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snooker.Platform.Domain.Tests", "modules\Snooker.Platform\test\Snooker.Platform.Domain.Tests\Snooker.Platform.Domain.Tests.csproj", "{46488A19-2EFF-4E6E-801F-4D46367870C6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snooker.Platform.Application.Tests", "modules\Snooker.Platform\test\Snooker.Platform.Application.Tests\Snooker.Platform.Application.Tests.csproj", "{856A935A-F20B-4FC2-9B9D-986CD1576264}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snooker.Platform.HttpApi.Client", "modules\Snooker.Platform\src\Snooker.Platform.HttpApi.Client\Snooker.Platform.HttpApi.Client.csproj", "{224E3DF5-7481-497B-A02B-FD1F620DB386}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snooker.Platform.HttpApi", "modules\Snooker.Platform\src\Snooker.Platform.HttpApi\Snooker.Platform.HttpApi.csproj", "{62D26AF1-4C97-454A-ABD5-162C44ADCDB1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snooker.Platform.EntityFrameworkCore", "modules\Snooker.Platform\src\Snooker.Platform.EntityFrameworkCore\Snooker.Platform.EntityFrameworkCore.csproj", "{C16C9748-76B3-44B1-9C6B-1517E227BB10}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snooker.Platform.Domain.Shared", "modules\Snooker.Platform\src\Snooker.Platform.Domain.Shared\Snooker.Platform.Domain.Shared.csproj", "{264E6F19-8C45-48BC-B3D8-9486260EA41E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snooker.Platform.Domain", "modules\Snooker.Platform\src\Snooker.Platform.Domain\Snooker.Platform.Domain.csproj", "{F784ACAD-7C2C-4B5C-B0F3-AD841115DD93}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snooker.Platform.Application.Contracts", "modules\Snooker.Platform\src\Snooker.Platform.Application.Contracts\Snooker.Platform.Application.Contracts.csproj", "{5B9BAE5D-607F-4043-A55C-87F7FE40E45D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snooker.Platform.Application", "modules\Snooker.Platform\src\Snooker.Platform.Application\Snooker.Platform.Application.csproj", "{A8B08D67-BD45-4AB9-B21A-FB21DD4CDE47}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Snooker.Platform.Tests", "Snooker.Platform.Tests", "{E685E801-C615-49EE-A72D-59FA24034504}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Snooker.Platform", "Snooker.Platform", "{236952A6-E7A2-4D99-BE88-1527DE608C1E}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snooker.Interclub.TestBase", "modules\Snooker.Interclub\test\Snooker.Interclub.TestBase\Snooker.Interclub.TestBase.csproj", "{B4413350-D9BC-4706-A00E-1664F30B5001}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snooker.Interclub.HttpApi.Client.ConsoleTestApp", "modules\Snooker.Interclub\test\Snooker.Interclub.HttpApi.Client.ConsoleTestApp\Snooker.Interclub.HttpApi.Client.ConsoleTestApp.csproj", "{07AAEDC0-9D6E-4E8E-86B1-510CA0B63B81}"
@@ -86,6 +114,54 @@ Global
 		{554AD327-6DBA-4F8F-96F8-81CE7A0C863F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{554AD327-6DBA-4F8F-96F8-81CE7A0C863F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{554AD327-6DBA-4F8F-96F8-81CE7A0C863F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3059A07E-EC46-489D-AB75-DF97D73A73C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3059A07E-EC46-489D-AB75-DF97D73A73C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3059A07E-EC46-489D-AB75-DF97D73A73C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3059A07E-EC46-489D-AB75-DF97D73A73C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBF112E9-460E-442F-B214-64797E2E2664}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBF112E9-460E-442F-B214-64797E2E2664}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBF112E9-460E-442F-B214-64797E2E2664}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBF112E9-460E-442F-B214-64797E2E2664}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06997096-EF61-4828-8D36-107986EAE9B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06997096-EF61-4828-8D36-107986EAE9B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06997096-EF61-4828-8D36-107986EAE9B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06997096-EF61-4828-8D36-107986EAE9B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46488A19-2EFF-4E6E-801F-4D46367870C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46488A19-2EFF-4E6E-801F-4D46367870C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46488A19-2EFF-4E6E-801F-4D46367870C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46488A19-2EFF-4E6E-801F-4D46367870C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{856A935A-F20B-4FC2-9B9D-986CD1576264}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{856A935A-F20B-4FC2-9B9D-986CD1576264}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{856A935A-F20B-4FC2-9B9D-986CD1576264}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{856A935A-F20B-4FC2-9B9D-986CD1576264}.Release|Any CPU.Build.0 = Release|Any CPU
+		{224E3DF5-7481-497B-A02B-FD1F620DB386}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{224E3DF5-7481-497B-A02B-FD1F620DB386}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{224E3DF5-7481-497B-A02B-FD1F620DB386}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{224E3DF5-7481-497B-A02B-FD1F620DB386}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62D26AF1-4C97-454A-ABD5-162C44ADCDB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62D26AF1-4C97-454A-ABD5-162C44ADCDB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62D26AF1-4C97-454A-ABD5-162C44ADCDB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62D26AF1-4C97-454A-ABD5-162C44ADCDB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C16C9748-76B3-44B1-9C6B-1517E227BB10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C16C9748-76B3-44B1-9C6B-1517E227BB10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C16C9748-76B3-44B1-9C6B-1517E227BB10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C16C9748-76B3-44B1-9C6B-1517E227BB10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{264E6F19-8C45-48BC-B3D8-9486260EA41E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{264E6F19-8C45-48BC-B3D8-9486260EA41E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{264E6F19-8C45-48BC-B3D8-9486260EA41E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{264E6F19-8C45-48BC-B3D8-9486260EA41E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F784ACAD-7C2C-4B5C-B0F3-AD841115DD93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F784ACAD-7C2C-4B5C-B0F3-AD841115DD93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F784ACAD-7C2C-4B5C-B0F3-AD841115DD93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F784ACAD-7C2C-4B5C-B0F3-AD841115DD93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B9BAE5D-607F-4043-A55C-87F7FE40E45D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B9BAE5D-607F-4043-A55C-87F7FE40E45D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B9BAE5D-607F-4043-A55C-87F7FE40E45D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B9BAE5D-607F-4043-A55C-87F7FE40E45D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8B08D67-BD45-4AB9-B21A-FB21DD4CDE47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8B08D67-BD45-4AB9-B21A-FB21DD4CDE47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8B08D67-BD45-4AB9-B21A-FB21DD4CDE47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8B08D67-BD45-4AB9-B21A-FB21DD4CDE47}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B4413350-D9BC-4706-A00E-1664F30B5001}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B4413350-D9BC-4706-A00E-1664F30B5001}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4413350-D9BC-4706-A00E-1664F30B5001}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -196,6 +272,20 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{554AD327-6DBA-4F8F-96F8-81CE7A0C863F} = {CA9AC87F-097E-4F15-8393-4BC07735A5B0}
+		{3059A07E-EC46-489D-AB75-DF97D73A73C2} = {E685E801-C615-49EE-A72D-59FA24034504}
+		{EBF112E9-460E-442F-B214-64797E2E2664} = {E685E801-C615-49EE-A72D-59FA24034504}
+		{06997096-EF61-4828-8D36-107986EAE9B0} = {E685E801-C615-49EE-A72D-59FA24034504}
+		{46488A19-2EFF-4E6E-801F-4D46367870C6} = {E685E801-C615-49EE-A72D-59FA24034504}
+		{856A935A-F20B-4FC2-9B9D-986CD1576264} = {E685E801-C615-49EE-A72D-59FA24034504}
+		{224E3DF5-7481-497B-A02B-FD1F620DB386} = {236952A6-E7A2-4D99-BE88-1527DE608C1E}
+		{62D26AF1-4C97-454A-ABD5-162C44ADCDB1} = {236952A6-E7A2-4D99-BE88-1527DE608C1E}
+		{C16C9748-76B3-44B1-9C6B-1517E227BB10} = {236952A6-E7A2-4D99-BE88-1527DE608C1E}
+		{264E6F19-8C45-48BC-B3D8-9486260EA41E} = {236952A6-E7A2-4D99-BE88-1527DE608C1E}
+		{F784ACAD-7C2C-4B5C-B0F3-AD841115DD93} = {236952A6-E7A2-4D99-BE88-1527DE608C1E}
+		{5B9BAE5D-607F-4043-A55C-87F7FE40E45D} = {236952A6-E7A2-4D99-BE88-1527DE608C1E}
+		{A8B08D67-BD45-4AB9-B21A-FB21DD4CDE47} = {236952A6-E7A2-4D99-BE88-1527DE608C1E}
+		{E685E801-C615-49EE-A72D-59FA24034504} = {04DBDB01-70F4-4E06-B468-8F87850B22BE}
+		{236952A6-E7A2-4D99-BE88-1527DE608C1E} = {BA8549DC-CB0F-4CAE-BE96-BD8C89369AD6}
 		{B4413350-D9BC-4706-A00E-1664F30B5001} = {19BB6930-7EDA-4BD6-B0BD-92B9570F9D5E}
 		{07AAEDC0-9D6E-4E8E-86B1-510CA0B63B81} = {19BB6930-7EDA-4BD6-B0BD-92B9570F9D5E}
 		{A41BCE1E-D07F-445C-A6FE-FF5635856953} = {19BB6930-7EDA-4BD6-B0BD-92B9570F9D5E}

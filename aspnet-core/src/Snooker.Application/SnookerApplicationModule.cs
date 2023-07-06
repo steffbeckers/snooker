@@ -7,6 +7,7 @@ using Volo.Abp.PermissionManagement;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.TenantManagement;
 using Snooker.Interclub;
+using Snooker.Platform;
 
 namespace Snooker;
 
@@ -21,6 +22,7 @@ namespace Snooker;
     typeof(AbpSettingManagementApplicationModule)
     )]
 [DependsOn(typeof(InterclubApplicationModule))]
+    [DependsOn(typeof(PlatformApplicationModule))]
     public class SnookerApplicationModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)

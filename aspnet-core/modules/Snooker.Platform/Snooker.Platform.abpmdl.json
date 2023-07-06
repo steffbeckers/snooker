@@ -1,0 +1,111 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {},
+      "host": {}
+    }
+  },
+  "packages": {
+    "Snooker.Platform.Domain.Shared": {
+      "path": "src/Snooker.Platform.Domain.Shared/Snooker.Platform.Domain.Shared.abppkg.json",
+      "folder": "src"
+    },
+    "Snooker.Platform.Domain": {
+      "path": "src/Snooker.Platform.Domain/Snooker.Platform.Domain.abppkg.json",
+      "folder": "src"
+    },
+    "Snooker.Platform.Application.Contracts": {
+      "path": "src/Snooker.Platform.Application.Contracts/Snooker.Platform.Application.Contracts.abppkg.json",
+      "folder": "src"
+    },
+    "Snooker.Platform.Application": {
+      "path": "src/Snooker.Platform.Application/Snooker.Platform.Application.abppkg.json",
+      "folder": "src"
+    },
+    "Snooker.Platform.EntityFrameworkCore": {
+      "path": "src/Snooker.Platform.EntityFrameworkCore/Snooker.Platform.EntityFrameworkCore.abppkg.json",
+      "folder": "src"
+    },
+    "Snooker.Platform.MongoDB": {
+      "path": "src/Snooker.Platform.MongoDB/Snooker.Platform.MongoDB.abppkg.json",
+      "folder": "src"
+    },
+    "Snooker.Platform.HttpApi": {
+      "path": "src/Snooker.Platform.HttpApi/Snooker.Platform.HttpApi.abppkg.json",
+      "folder": "src"
+    },
+    "Snooker.Platform.HttpApi.Client": {
+      "path": "src/Snooker.Platform.HttpApi.Client/Snooker.Platform.HttpApi.Client.abppkg.json",
+      "folder": "src"
+    },
+    "Snooker.Platform.TestBase": {
+      "path": "test/Snooker.Platform.TestBase/Snooker.Platform.TestBase.abppkg.json",
+      "folder": "test"
+    },
+    "Snooker.Platform.EntityFrameworkCore.Tests": {
+      "path": "test/Snooker.Platform.EntityFrameworkCore.Tests/Snooker.Platform.EntityFrameworkCore.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Snooker.Platform.MongoDB.Tests": {
+      "path": "test/Snooker.Platform.MongoDB.Tests/Snooker.Platform.MongoDB.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Snooker.Platform.Domain.Tests": {
+      "path": "test/Snooker.Platform.Domain.Tests/Snooker.Platform.Domain.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Snooker.Platform.Application.Tests": {
+      "path": "test/Snooker.Platform.Application.Tests/Snooker.Platform.Application.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Snooker.Platform.HttpApi.Host": {
+      "path": "host/Snooker.Platform.HttpApi.Host/Snooker.Platform.HttpApi.Host.abppkg.json",
+      "folder": "host"
+    },
+    "Snooker.Platform.Web": {
+      "path": "src/Snooker.Platform.Web/Snooker.Platform.Web.abppkg.json",
+      "folder": "src"
+    },
+    "Snooker.Platform.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/Snooker.Platform.HttpApi.Client.ConsoleTestApp/Snooker.Platform.HttpApi.Client.ConsoleTestApp.abppkg.json",
+      "folder": "test"
+    },
+    "Snooker.Platform.Web.Host": {
+      "path": "host/Snooker.Platform.Web.Host/Snooker.Platform.Web.Host.abppkg.json",
+      "folder": "host"
+    },
+    "Snooker.Platform.AuthServer": {
+      "path": "host/Snooker.Platform.AuthServer/Snooker.Platform.AuthServer.abppkg.json",
+      "folder": "host"
+    },
+    "Snooker.Platform.Host.Shared": {
+      "path": "host/Snooker.Platform.Host.Shared/Snooker.Platform.Host.Shared.abppkg.json",
+      "folder": "host"
+    },
+    "Snooker.Platform.Web.Unified": {
+      "path": "host/Snooker.Platform.Web.Unified/Snooker.Platform.Web.Unified.abppkg.json",
+      "folder": "host"
+    },
+    "Snooker.Platform.Blazor": {
+      "path": "src/Snooker.Platform.Blazor/Snooker.Platform.Blazor.abppkg.json",
+      "folder": "src"
+    },
+    "Snooker.Platform.Blazor.Host": {
+      "path": "host/Snooker.Platform.Blazor.Host/Snooker.Platform.Blazor.Host.abppkg.json",
+      "folder": "host"
+    },
+    "Snooker.Platform.Blazor.Server": {
+      "path": "src/Snooker.Platform.Blazor.Server/Snooker.Platform.Blazor.Server.abppkg.json",
+      "folder": "src"
+    },
+    "Snooker.Platform.Blazor.WebAssembly": {
+      "path": "src/Snooker.Platform.Blazor.WebAssembly/Snooker.Platform.Blazor.WebAssembly.abppkg.json",
+      "folder": "src"
+    },
+    "Snooker.Platform.Blazor.Server.Host": {
+      "path": "host/Snooker.Platform.Blazor.Server.Host/Snooker.Platform.Blazor.Server.Host.abppkg.json",
+      "folder": "host"
+    }
+  }
+}

@@ -11,7 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Snooker.Domain\Snooker.Domain.csproj" />
     <ProjectReference Include="..\Snooker.Application.Contracts\Snooker.Application.Contracts.csproj" />
-  <ProjectReference Include="..\..\modules\Snooker.Interclub\src\Snooker.Interclub.Application\Snooker.Interclub.Application.csproj" /></ItemGroup>
+  <ProjectReference Include="..\..\modules\Snooker.Interclub\src\Snooker.Interclub.Application\Snooker.Interclub.Application.csproj" /><ProjectReference Include="..\..\modules\Snooker.Platform\src\Snooker.Platform.Application\Snooker.Platform.Application.csproj" /></ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Account.Application" Version="7.2.3" />

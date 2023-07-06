@@ -11,7 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Snooker.Domain.Shared\Snooker.Domain.Shared.csproj" />
     <ProjectReference Include="..\Snooker.WebScraper\Snooker.WebScraper.csproj" />
-  <ProjectReference Include="..\..\modules\Snooker.Interclub\src\Snooker.Interclub.Domain\Snooker.Interclub.Domain.csproj" /></ItemGroup>
+  <ProjectReference Include="..\..\modules\Snooker.Interclub\src\Snooker.Interclub.Domain\Snooker.Interclub.Domain.csproj" /><ProjectReference Include="..\..\modules\Snooker.Platform\src\Snooker.Platform.Domain\Snooker.Platform.Domain.csproj" /></ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Emailing" Version="7.2.3" />

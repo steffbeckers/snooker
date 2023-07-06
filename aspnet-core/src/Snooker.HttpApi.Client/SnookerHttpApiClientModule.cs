@@ -8,6 +8,7 @@ using Volo.Abp.TenantManagement;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.VirtualFileSystem;
 using Snooker.Interclub;
+using Snooker.Platform;
 
 namespace Snooker;
 
@@ -21,6 +22,7 @@ namespace Snooker;
     typeof(AbpSettingManagementHttpApiClientModule)
 )]
 [DependsOn(typeof(InterclubHttpApiClientModule))]
+    [DependsOn(typeof(PlatformHttpApiClientModule))]
     public class SnookerHttpApiClientModule : AbpModule
 {
     public const string RemoteServiceName = "Default";

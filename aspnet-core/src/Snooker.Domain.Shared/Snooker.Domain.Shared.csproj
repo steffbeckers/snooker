@@ -18,7 +18,7 @@
     <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Shared" Version="7.2.3" />
     <PackageReference Include="Volo.Abp.SettingManagement.Domain.Shared" Version="7.2.3" />
     <PackageReference Include="Volo.Abp.OpenIddict.Domain.Shared" Version="7.2.3" />
-  <ProjectReference Include="..\..\modules\Snooker.Interclub\src\Snooker.Interclub.Domain.Shared\Snooker.Interclub.Domain.Shared.csproj" /></ItemGroup>
+  <ProjectReference Include="..\..\modules\Snooker.Interclub\src\Snooker.Interclub.Domain.Shared\Snooker.Interclub.Domain.Shared.csproj" /><ProjectReference Include="..\..\modules\Snooker.Platform\src\Snooker.Platform.Domain.Shared\Snooker.Platform.Domain.Shared.csproj" /></ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Localization\Snooker\*.json" />
