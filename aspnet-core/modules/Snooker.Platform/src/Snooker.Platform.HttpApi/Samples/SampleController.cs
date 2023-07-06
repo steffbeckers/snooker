@@ -1,13 +1,13 @@
-﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using Volo.Abp;
 
 namespace Snooker.Platform.Samples;
 
 [Area(PlatformRemoteServiceConsts.ModuleName)]
 [RemoteService(Name = PlatformRemoteServiceConsts.RemoteServiceName)]
-[Route("api/Platform/sample")]
+[Route("api/platform/sample")]
 public class SampleController : PlatformController, ISampleAppService
 {
     private readonly ISampleAppService _sampleAppService;

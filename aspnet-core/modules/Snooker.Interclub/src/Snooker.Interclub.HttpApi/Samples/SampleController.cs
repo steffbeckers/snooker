@@ -1,13 +1,13 @@
-﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using Volo.Abp;
 
 namespace Snooker.Interclub.Samples;
 
 [Area(InterclubRemoteServiceConsts.ModuleName)]
 [RemoteService(Name = InterclubRemoteServiceConsts.RemoteServiceName)]
-[Route("api/Interclub/sample")]
+[Route("api/interclub/sample")]
 public class SampleController : InterclubController, ISampleAppService
 {
     private readonly ISampleAppService _sampleAppService;
