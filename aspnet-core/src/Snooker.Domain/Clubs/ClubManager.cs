@@ -1,3 +1,4 @@
+using Snooker.Interclub;
 using System;
 using System.Threading.Tasks;
 using Volo.Abp;
@@ -19,7 +20,7 @@ public class ClubManager : DomainService
     {
         if (await _clubRepository.AnyAsync(x => x.Name == name))
         {
-            throw new BusinessException(SnookerDomainErrorCodes.Clubs.AlreadyExists);
+            throw new BusinessException(InterclubErrorCodes.Clubs.AlreadyExists);
         }
 
         return new Club(id, name);

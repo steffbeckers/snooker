@@ -1,3 +1,5 @@
+using System;
+
 namespace Snooker.WebScraper.Players;
 
 public class Player

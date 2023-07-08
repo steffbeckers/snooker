@@ -1,12 +1,12 @@
-﻿using System;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Abstractions;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Identity;
@@ -17,30 +17,30 @@ namespace Snooker.Data;
 
 public class SnookerDbMigrationService : ITransientDependency
 {
-    public ILogger<SnookerDbMigrationService> Logger { get; set; }
-
+    private readonly ICurrentTenant _currentTenant;
     private readonly IDataSeeder _dataSeeder;
     private readonly IEnumerable<ISnookerDbSchemaMigrator> _dbSchemaMigrators;
     private readonly ITenantRepository _tenantRepository;
-    private readonly ICurrentTenant _currentTenant;
 
     public SnookerDbMigrationService(
+        ICurrentTenant currentTenant,
         IDataSeeder dataSeeder,
         IEnumerable<ISnookerDbSchemaMigrator> dbSchemaMigrators,
-        ITenantRepository tenantRepository,
-        ICurrentTenant currentTenant)
+        ITenantRepository tenantRepository)
     {
+        _currentTenant = currentTenant;
         _dataSeeder = dataSeeder;
         _dbSchemaMigrators = dbSchemaMigrators;
         _tenantRepository = tenantRepository;
-        _currentTenant = currentTenant;
 
         Logger = NullLogger<SnookerDbMigrationService>.Instance;
     }
 
+    public ILogger<SnookerDbMigrationService> Logger { get; set; }
+
     public async Task MigrateAsync()
     {
-        var initialMigrationAdded = AddInitialMigrationIfNotExist();
+        bool initialMigrationAdded = AddInitialMigrationIfNotExist();
 
         if (initialMigrationAdded)
         {
@@ -54,16 +54,17 @@ public class SnookerDbMigrationService : ITransientDependency
 
         Logger.LogInformation($"Successfully completed host database migrations.");
 
-        var tenants = await _tenantRepository.GetListAsync(includeDetails: true);
+        List<Tenant> tenants = await _tenantRepository.GetListAsync(includeDetails: true);
 
-        var migratedDatabaseSchemas = new HashSet<string>();
-        foreach (var tenant in tenants)
+        HashSet<string> migratedDatabaseSchemas = new HashSet<string>();
+
+        foreach (Tenant? tenant in tenants)
         {
             using (_currentTenant.Change(tenant.Id))
             {
                 if (tenant.ConnectionStrings.Any())
                 {
-                    var tenantConnectionStrings = tenant.ConnectionStrings
+                    List<string> tenantConnectionStrings = tenant.ConnectionStrings
                         .Select(x => x.Value)
                         .ToList();
 
@@ -85,25 +86,35 @@ public class SnookerDbMigrationService : ITransientDependency
         Logger.LogInformation("You can safely end this process...");
     }
 
-    private async Task MigrateDatabaseSchemaAsync(Tenant? tenant = null)
+    private void AddInitialMigration()
     {
-        Logger.LogInformation(
-            $"Migrating schema for {(tenant == null ? "host" : tenant.Name + " tenant")} database...");
+        Logger.LogInformation("Creating initial migration...");
 
-        foreach (var migrator in _dbSchemaMigrators)
+        string argumentPrefix;
+        string fileName;
+
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX) || RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
         {
-            await migrator.MigrateAsync();
+            argumentPrefix = "-c";
+            fileName = "/bin/bash";
         }
-    }
+        else
+        {
+            argumentPrefix = "/C";
+            fileName = "cmd.exe";
+        }
 
-    private async Task SeedDataAsync(Tenant? tenant = null)
-    {
-        Logger.LogInformation($"Executing {(tenant == null ? "host" : tenant.Name + " tenant")} database seed...");
+        ProcessStartInfo procStartInfo = new ProcessStartInfo(fileName,
+            $"{argumentPrefix} \"abp create-migration-and-run-migrator \"{GetEntityFrameworkCoreProjectFolderPath()}\"\"");
 
-        await _dataSeeder.SeedAsync(new DataSeedContext(tenant?.Id)
-            .WithProperty(IdentityDataSeedContributor.AdminEmailPropertyName, IdentityDataSeedContributor.AdminEmailDefaultValue)
-            .WithProperty(IdentityDataSeedContributor.AdminPasswordPropertyName, IdentityDataSeedContributor.AdminPasswordDefaultValue)
-        );
+        try
+        {
+            Process.Start(procStartInfo);
+        }
+        catch (Exception)
+        {
+            throw new Exception("Couldn't run ABP CLI...");
+        }
     }
 
     private bool AddInitialMigrationIfNotExist()
@@ -141,59 +152,21 @@ public class SnookerDbMigrationService : ITransientDependency
 
     private bool DbMigrationsProjectExists()
     {
-        var dbMigrationsProjectFolder = GetEntityFrameworkCoreProjectFolderPath();
+        string? dbMigrationsProjectFolder = GetEntityFrameworkCoreProjectFolderPath();
 
         return dbMigrationsProjectFolder != null;
     }
 
-    private bool MigrationsFolderExists()
-    {
-        var dbMigrationsProjectFolder = GetEntityFrameworkCoreProjectFolderPath();
-        return dbMigrationsProjectFolder != null && Directory.Exists(Path.Combine(dbMigrationsProjectFolder, "Migrations"));
-    }
-
-    private void AddInitialMigration()
-    {
-        Logger.LogInformation("Creating initial migration...");
-
-        string argumentPrefix;
-        string fileName;
-
-        if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX) || RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-        {
-            argumentPrefix = "-c";
-            fileName = "/bin/bash";
-        }
-        else
-        {
-            argumentPrefix = "/C";
-            fileName = "cmd.exe";
-        }
-
-        var procStartInfo = new ProcessStartInfo(fileName,
-            $"{argumentPrefix} \"abp create-migration-and-run-migrator \"{GetEntityFrameworkCoreProjectFolderPath()}\"\""
-        );
-
-        try
-        {
-            Process.Start(procStartInfo);
-        }
-        catch (Exception)
-        {
-            throw new Exception("Couldn't run ABP CLI...");
-        }
-    }
-
     private string? GetEntityFrameworkCoreProjectFolderPath()
     {
-        var slnDirectoryPath = GetSolutionDirectoryPath();
+        string? slnDirectoryPath = GetSolutionDirectoryPath();
 
         if (slnDirectoryPath == null)
         {
             throw new Exception("Solution folder not found!");
         }
 
-        var srcDirectoryPath = Path.Combine(slnDirectoryPath, "src");
+        string srcDirectoryPath = Path.Combine(slnDirectoryPath, "src");
 
         return Directory.GetDirectories(srcDirectoryPath)
             .FirstOrDefault(d => d.EndsWith(".EntityFrameworkCore"));
@@ -201,7 +174,7 @@ public class SnookerDbMigrationService : ITransientDependency
 
     private string? GetSolutionDirectoryPath()
     {
-        var currentDirectory = new DirectoryInfo(Directory.GetCurrentDirectory());
+        DirectoryInfo? currentDirectory = new DirectoryInfo(Directory.GetCurrentDirectory());
 
         while (currentDirectory != null && Directory.GetParent(currentDirectory.FullName) != null)
         {
@@ -214,5 +187,31 @@ public class SnookerDbMigrationService : ITransientDependency
         }
 
         return null;
+    }
+
+    private async Task MigrateDatabaseSchemaAsync(Tenant? tenant = null)
+    {
+        Logger.LogInformation($"Migrating schema for {(tenant == null ? "host" : tenant.Name + " tenant")} database...");
+
+        foreach (ISnookerDbSchemaMigrator migrator in _dbSchemaMigrators)
+        {
+            await migrator.MigrateAsync();
+        }
+    }
+
+    private bool MigrationsFolderExists()
+    {
+        string? dbMigrationsProjectFolder = GetEntityFrameworkCoreProjectFolderPath();
+
+        return dbMigrationsProjectFolder != null && Directory.Exists(Path.Combine(dbMigrationsProjectFolder, "Migrations"));
+    }
+
+    private async Task SeedDataAsync(Tenant? tenant = null)
+    {
+        Logger.LogInformation($"Executing {(tenant == null ? "host" : tenant.Name + " tenant")} database seed...");
+
+        await _dataSeeder.SeedAsync(new DataSeedContext(tenant?.Id)
+            .WithProperty(IdentityDataSeedContributor.AdminEmailPropertyName, IdentityDataSeedContributor.AdminEmailDefaultValue)
+            .WithProperty(IdentityDataSeedContributor.AdminPasswordPropertyName, IdentityDataSeedContributor.AdminPasswordDefaultValue));
     }
 }

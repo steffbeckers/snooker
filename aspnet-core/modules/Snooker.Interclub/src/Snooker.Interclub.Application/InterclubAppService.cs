@@ -1,4 +1,4 @@
-﻿using Snooker.Interclub.Localization;
+using Snooker.Interclub.Localization;
 using Volo.Abp.Application.Services;
 
 namespace Snooker.Interclub;

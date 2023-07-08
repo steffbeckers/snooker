@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Snooker.Application\Snooker.Application.csproj" />
-    <ProjectReference Include="..\Snooker.Domain.Tests\Snooker.Domain.Tests.csproj" />
   </ItemGroup>
 
   <ItemGroup>

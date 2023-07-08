@@ -1,7 +1,15 @@
-﻿using Volo.Abp.Modularity;
-using Volo.Abp.Localization;
 using Snooker.Platform.Localization;
+using Volo.Abp.AuditLogging;
+using Volo.Abp.BackgroundJobs;
+using Volo.Abp.FeatureManagement;
+using Volo.Abp.Identity;
+using Volo.Abp.Localization;
 using Volo.Abp.Localization.ExceptionHandling;
+using Volo.Abp.Modularity;
+using Volo.Abp.OpenIddict;
+using Volo.Abp.PermissionManagement;
+using Volo.Abp.SettingManagement;
+using Volo.Abp.TenantManagement;
 using Volo.Abp.Validation;
 using Volo.Abp.Validation.Localization;
 using Volo.Abp.VirtualFileSystem;
@@ -9,8 +17,15 @@ using Volo.Abp.VirtualFileSystem;
 namespace Snooker.Platform;
 
 [DependsOn(
-    typeof(AbpValidationModule)
-)]
+    typeof(AbpAuditLoggingDomainSharedModule),
+    typeof(AbpBackgroundJobsDomainSharedModule),
+    typeof(AbpFeatureManagementDomainSharedModule),
+    typeof(AbpIdentityDomainSharedModule),
+    typeof(AbpOpenIddictDomainSharedModule),
+    typeof(AbpPermissionManagementDomainSharedModule),
+    typeof(AbpSettingManagementDomainSharedModule),
+    typeof(AbpTenantManagementDomainSharedModule),
+    typeof(AbpValidationModule))]
 public class PlatformDomainSharedModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
@@ -26,6 +41,8 @@ public class PlatformDomainSharedModule : AbpModule
                 .Add<PlatformResource>("en")
                 .AddBaseTypes(typeof(AbpValidationResource))
                 .AddVirtualJson("/Localization/Platform");
+
+            options.DefaultResourceType = typeof(PlatformResource);
         });
 
         Configure<AbpExceptionLocalizationOptions>(options =>

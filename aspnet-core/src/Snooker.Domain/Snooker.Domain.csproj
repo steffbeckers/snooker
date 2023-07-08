@@ -1,36 +1,27 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\..\common.props" />
+    <Import Project="..\..\common.props" />
 
-  <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <RootNamespace>Snooker</RootNamespace>
-  </PropertyGroup>
+    <PropertyGroup>
+        <Nullable>enable</Nullable>
+        <RootNamespace>Snooker</RootNamespace>
+        <TargetFramework>net7.0</TargetFramework>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Snooker.Domain.Shared\Snooker.Domain.Shared.csproj" />
-    <ProjectReference Include="..\Snooker.WebScraper\Snooker.WebScraper.csproj" />
-  <ProjectReference Include="..\..\modules\Snooker.Interclub\src\Snooker.Interclub.Domain\Snooker.Interclub.Domain.csproj" /><ProjectReference Include="..\..\modules\Snooker.Platform\src\Snooker.Platform.Domain\Snooker.Platform.Domain.csproj" /></ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\..\modules\Snooker.Interclub\src\Snooker.Interclub.Domain\Snooker.Interclub.Domain.csproj" />
+        <ProjectReference Include="..\..\modules\Snooker.Platform\src\Snooker.Platform.Domain\Snooker.Platform.Domain.csproj" />
+        <ProjectReference Include="..\Snooker.Domain.Shared\Snooker.Domain.Shared.csproj" />
+        <!-- TODO: Remove? -->
+        <ProjectReference Include="..\Snooker.WebScraper\Snooker.WebScraper.csproj" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Volo.Abp.Emailing" Version="7.2.3" />
-    <PackageReference Include="Volo.Abp.Identity.Domain" Version="7.2.3" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Identity" Version="7.2.3" />
-    <PackageReference Include="Volo.Abp.BackgroundJobs.Domain" Version="7.2.3" />
-    <PackageReference Include="Volo.Abp.AuditLogging.Domain" Version="7.2.3" />
-    <PackageReference Include="Volo.Abp.TenantManagement.Domain" Version="7.2.3" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.Domain" Version="7.2.3" />
-    <PackageReference Include="Volo.Abp.SettingManagement.Domain" Version="7.2.3" />
-    <PackageReference Include="Volo.Abp.OpenIddict.Domain" Version="7.2.3" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.OpenIddict" Version="7.2.3" />
-  </ItemGroup>
-    
-  <ItemGroup>
-    <Content Include="Data\Seeding\**\*.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <None Remove="Data\Seeding\**\*.json" />
-  </ItemGroup>
+    <!-- TODO: Move to Interclub module -->
+    <ItemGroup>
+        <Content Include="Data\Seeding\**\*.json">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Data\Seeding\**\*.json" />
+    </ItemGroup>
 
 </Project>

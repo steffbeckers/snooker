@@ -1,16 +1,14 @@
-﻿using Volo.Abp.Modularity;
-using Volo.Abp.Localization;
 using Snooker.Interclub.Localization;
+using Snooker.Platform;
+using Volo.Abp.Localization;
 using Volo.Abp.Localization.ExceptionHandling;
-using Volo.Abp.Validation;
+using Volo.Abp.Modularity;
 using Volo.Abp.Validation.Localization;
 using Volo.Abp.VirtualFileSystem;
 
 namespace Snooker.Interclub;
 
-[DependsOn(
-    typeof(AbpValidationModule)
-)]
+[DependsOn(typeof(PlatformDomainSharedModule))]
 public class InterclubDomainSharedModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
@@ -30,6 +28,7 @@ public class InterclubDomainSharedModule : AbpModule
 
         Configure<AbpExceptionLocalizationOptions>(options =>
         {
+            options.MapCodeNamespace("Clubs", typeof(InterclubResource));
             options.MapCodeNamespace("Interclub", typeof(InterclubResource));
         });
     }

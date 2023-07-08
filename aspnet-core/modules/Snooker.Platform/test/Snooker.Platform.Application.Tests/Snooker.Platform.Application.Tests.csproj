@@ -1,17 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\..\common.props" />
+    <Import Project="..\..\..\..\common.props" />
 
-  <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <RootNamespace>Snooker.Platform</RootNamespace>
-  </PropertyGroup>
+    <PropertyGroup>
+        <Nullable>enable</Nullable>
+        <RootNamespace>Snooker.Platform</RootNamespace>
+        <TargetFramework>net7.0</TargetFramework>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\Snooker.Platform.Application\Snooker.Platform.Application.csproj" />
-    <ProjectReference Include="..\Snooker.Platform.Domain.Tests\Snooker.Platform.Domain.Tests.csproj" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\Snooker.Platform.Application\Snooker.Platform.Application.csproj" />
+        <ProjectReference Include="..\Snooker.Platform.Domain.Tests\Snooker.Platform.Domain.Tests.csproj" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
+    </ItemGroup>
 
 </Project>

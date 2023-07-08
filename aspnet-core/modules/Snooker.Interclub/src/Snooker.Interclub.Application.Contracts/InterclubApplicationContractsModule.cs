@@ -1,15 +1,11 @@
-﻿using Volo.Abp.Application;
+using Snooker.Platform;
 using Volo.Abp.Modularity;
-using Volo.Abp.Authorization;
 
 namespace Snooker.Interclub;
 
 [DependsOn(
     typeof(InterclubDomainSharedModule),
-    typeof(AbpDddApplicationContractsModule),
-    typeof(AbpAuthorizationModule)
-    )]
+    typeof(PlatformApplicationContractsModule))]
 public class InterclubApplicationContractsModule : AbpModule
 {
-
 }

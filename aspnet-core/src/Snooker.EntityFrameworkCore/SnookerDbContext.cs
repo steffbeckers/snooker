@@ -3,8 +3,10 @@ using Snooker.Addresses;
 using Snooker.Clubs;
 using Snooker.Divisions;
 using Snooker.Frames;
+using Snooker.Interclub.EntityFrameworkCore;
 using Snooker.Leagues;
 using Snooker.Matches;
+using Snooker.Platform.EntityFrameworkCore;
 using Snooker.Players;
 using Snooker.Seasons;
 using Snooker.Teams;
@@ -22,8 +24,6 @@ using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.TenantManagement;
 using Volo.Abp.TenantManagement.EntityFrameworkCore;
-using Snooker.Interclub.EntityFrameworkCore;
-using Snooker.Platform.EntityFrameworkCore;
 
 namespace Snooker.EntityFrameworkCore;
 
@@ -80,6 +80,7 @@ public class SnookerDbContext :
     {
         base.OnModelCreating(builder);
 
+        // TODO: Move to Platform module
         builder.ConfigurePermissionManagement();
         builder.ConfigureSettingManagement();
         builder.ConfigureBackgroundJobs();
@@ -88,6 +89,9 @@ public class SnookerDbContext :
         builder.ConfigureOpenIddict();
         builder.ConfigureFeatureManagement();
         builder.ConfigureTenantManagement();
+
+        builder.ConfigurePlatform();
+        builder.ConfigureInterclub();
 
         builder.Entity<Club>(b =>
         {
@@ -176,7 +180,5 @@ public class SnookerDbContext :
             b.HasOne(x => x.Team).WithMany(x => x.Players).HasForeignKey(x => x.TeamId);
             b.HasOne(x => x.Player).WithMany().HasForeignKey(x => x.PlayerId);
         });
-        builder.ConfigureInterclub();
-            builder.ConfigurePlatform();
-        }
+    }
 }

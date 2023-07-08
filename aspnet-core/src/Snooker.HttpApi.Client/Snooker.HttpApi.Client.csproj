@@ -1,29 +1,22 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\..\common.props" />
+    <Import Project="..\..\common.props" />
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <RootNamespace>Snooker</RootNamespace>
-  </PropertyGroup>
+    <PropertyGroup>
+        <Nullable>enable</Nullable>
+        <RootNamespace>Snooker</RootNamespace>
+        <TargetFramework>netstandard2.0</TargetFramework>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Snooker.Application.Contracts\Snooker.Application.Contracts.csproj" />
-  <ProjectReference Include="..\..\modules\Snooker.Interclub\src\Snooker.Interclub.HttpApi.Client\Snooker.Interclub.HttpApi.Client.csproj" /><ProjectReference Include="..\..\modules\Snooker.Platform\src\Snooker.Platform.HttpApi.Client\Snooker.Platform.HttpApi.Client.csproj" /></ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\..\modules\Snooker.Interclub\src\Snooker.Interclub.HttpApi.Client\Snooker.Interclub.HttpApi.Client.csproj" />
+        <ProjectReference Include="..\..\modules\Snooker.Platform\src\Snooker.Platform.HttpApi.Client\Snooker.Platform.HttpApi.Client.csproj" />
+        <ProjectReference Include="..\Snooker.Application.Contracts\Snooker.Application.Contracts.csproj" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Volo.Abp.Account.HttpApi.Client" Version="7.2.3" />
-    <PackageReference Include="Volo.Abp.Identity.HttpApi.Client" Version="7.2.3" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.HttpApi.Client" Version="7.2.3" />
-    <PackageReference Include="Volo.Abp.TenantManagement.HttpApi.Client" Version="7.2.3" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.HttpApi.Client" Version="7.2.3" />
-    <PackageReference Include="Volo.Abp.SettingManagement.HttpApi.Client" Version="7.2.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="**\*generate-proxy.json" />
-    <Content Remove="**\*generate-proxy.json" />
-  </ItemGroup>
+    <ItemGroup>
+        <EmbeddedResource Include="**\*generate-proxy.json" />
+        <Content Remove="**\*generate-proxy.json" />
+    </ItemGroup>
 
 </Project>

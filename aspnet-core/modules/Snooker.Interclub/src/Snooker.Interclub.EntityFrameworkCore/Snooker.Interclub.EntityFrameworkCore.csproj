@@ -1,16 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\..\common.props" />
+    <Import Project="..\..\..\..\common.props" />
 
-  <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <RootNamespace>Snooker.Interclub</RootNamespace>
-  </PropertyGroup>
+    <PropertyGroup>
+        <Nullable>enable</Nullable>
+        <RootNamespace>Snooker.Interclub.EntityFrameworkCore</RootNamespace>
+        <TargetFramework>net7.0</TargetFramework>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore" Version="7.2.3" />
-    <ProjectReference Include="..\Snooker.Interclub.Domain\Snooker.Interclub.Domain.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Volo.Abp.EntityFrameworkCore" Version="7.2.3" />
+        <ProjectReference Include="..\..\..\Snooker.Platform\src\Snooker.Platform.EntityFrameworkCore\Snooker.Platform.EntityFrameworkCore.csproj" />
+        <ProjectReference Include="..\Snooker.Interclub.Domain\Snooker.Interclub.Domain.csproj" />
+    </ItemGroup>
 
 </Project>

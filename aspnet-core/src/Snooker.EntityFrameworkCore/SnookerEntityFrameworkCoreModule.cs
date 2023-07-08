@@ -2,41 +2,23 @@ using Microsoft.Extensions.DependencyInjection;
 using Snooker.Clubs;
 using Snooker.EntityFrameworkCore.Clubs;
 using Snooker.EntityFrameworkCore.Teams;
-using Snooker.Teams;
-using Volo.Abp.AuditLogging.EntityFrameworkCore;
-using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
-using Volo.Abp.EntityFrameworkCore;
-using Volo.Abp.EntityFrameworkCore.SqlServer;
-using Volo.Abp.FeatureManagement.EntityFrameworkCore;
-using Volo.Abp.Identity.EntityFrameworkCore;
-using Volo.Abp.Modularity;
-using Volo.Abp.OpenIddict.EntityFrameworkCore;
-using Volo.Abp.PermissionManagement.EntityFrameworkCore;
-using Volo.Abp.SettingManagement.EntityFrameworkCore;
-using Volo.Abp.TenantManagement.EntityFrameworkCore;
 using Snooker.Interclub.EntityFrameworkCore;
 using Snooker.Platform.EntityFrameworkCore;
+using Snooker.Teams;
+using Volo.Abp.EntityFrameworkCore;
+using Volo.Abp.Modularity;
 
 namespace Snooker.EntityFrameworkCore;
 
 [DependsOn(
-    typeof(SnookerDomainModule),
-    typeof(AbpIdentityEntityFrameworkCoreModule),
-    typeof(AbpOpenIddictEntityFrameworkCoreModule),
-    typeof(AbpPermissionManagementEntityFrameworkCoreModule),
-    typeof(AbpSettingManagementEntityFrameworkCoreModule),
-    typeof(AbpEntityFrameworkCoreSqlServerModule),
-    typeof(AbpBackgroundJobsEntityFrameworkCoreModule),
-    typeof(AbpAuditLoggingEntityFrameworkCoreModule),
-    typeof(AbpTenantManagementEntityFrameworkCoreModule),
-    typeof(AbpFeatureManagementEntityFrameworkCoreModule)
-    )]
-[DependsOn(typeof(InterclubEntityFrameworkCoreModule))]
-    [DependsOn(typeof(PlatformEntityFrameworkCoreModule))]
-    public class SnookerEntityFrameworkCoreModule : AbpModule
+    typeof(InterclubEntityFrameworkCoreModule),
+    typeof(PlatformEntityFrameworkCoreModule),
+    typeof(SnookerDomainModule))]
+public class SnookerEntityFrameworkCoreModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
+        // TODO: Move to Interclub module
         context.Services.AddAbpDbContext<SnookerDbContext>(options =>
         {
             options.AddDefaultRepositories();

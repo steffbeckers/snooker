@@ -1,29 +1,16 @@
 using Microsoft.Extensions.DependencyInjection;
-using Volo.Abp.Account;
-using Volo.Abp.FeatureManagement;
-using Volo.Abp.Identity;
-using Volo.Abp.Modularity;
-using Volo.Abp.PermissionManagement;
-using Volo.Abp.TenantManagement;
-using Volo.Abp.SettingManagement;
-using Volo.Abp.VirtualFileSystem;
 using Snooker.Interclub;
 using Snooker.Platform;
+using Volo.Abp.Modularity;
+using Volo.Abp.VirtualFileSystem;
 
 namespace Snooker;
 
 [DependsOn(
-    typeof(SnookerApplicationContractsModule),
-    typeof(AbpAccountHttpApiClientModule),
-    typeof(AbpIdentityHttpApiClientModule),
-    typeof(AbpPermissionManagementHttpApiClientModule),
-    typeof(AbpTenantManagementHttpApiClientModule),
-    typeof(AbpFeatureManagementHttpApiClientModule),
-    typeof(AbpSettingManagementHttpApiClientModule)
-)]
-[DependsOn(typeof(InterclubHttpApiClientModule))]
-    [DependsOn(typeof(PlatformHttpApiClientModule))]
-    public class SnookerHttpApiClientModule : AbpModule
+    typeof(InterclubHttpApiClientModule),
+    typeof(PlatformHttpApiClientModule),
+    typeof(SnookerApplicationContractsModule))]
+public class SnookerHttpApiClientModule : AbpModule
 {
     public const string RemoteServiceName = "Default";
 
@@ -31,8 +18,7 @@ namespace Snooker;
     {
         context.Services.AddHttpClientProxies(
             typeof(SnookerApplicationContractsModule).Assembly,
-            RemoteServiceName
-        );
+            RemoteServiceName);
 
         Configure<AbpVirtualFileSystemOptions>(options =>
         {

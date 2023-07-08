@@ -7,8 +7,8 @@ namespace Snooker;
 [DependsOn(
     typeof(InterclubApplicationModule),
     typeof(PlatformApplicationModule),
-    typeof(SnookerDomainModule),
-    typeof(SnookerApplicationContractsModule))]
+    typeof(SnookerApplicationContractsModule),
+    typeof(SnookerDomainModule))]
 public class SnookerApplicationModule : AbpModule
 {
 }

@@ -5,9 +5,6 @@ using System.IO;
 
 namespace Snooker.EntityFrameworkCore;
 
-/* This class is needed for EF Core console commands
- * (like Add-Migration and Update-Database commands) */
-
 public class SnookerDbContextFactory : IDesignTimeDbContextFactory<SnookerDbContext>
 {
     public SnookerDbContext CreateDbContext(string[] args)

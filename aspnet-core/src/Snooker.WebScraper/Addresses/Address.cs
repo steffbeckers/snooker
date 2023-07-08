@@ -1,3 +1,5 @@
+using System;
+
 namespace Snooker.WebScraper.Addresses;
 
 public class Address

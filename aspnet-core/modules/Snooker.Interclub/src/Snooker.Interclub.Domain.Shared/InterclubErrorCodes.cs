@@ -1,6 +1,9 @@
-﻿namespace Snooker.Interclub;
+namespace Snooker.Interclub;
 
 public static class InterclubErrorCodes
 {
-    //Add your business exception error codes here...
+    public static class Clubs
+    {
+        public const string AlreadyExists = nameof(AlreadyExists);
+    }
 }
