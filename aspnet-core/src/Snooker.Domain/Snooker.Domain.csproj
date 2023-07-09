@@ -13,15 +13,8 @@
         <ProjectReference Include="..\..\modules\Snooker.Platform\src\Snooker.Platform.Domain\Snooker.Platform.Domain.csproj" />
         <ProjectReference Include="..\Snooker.Domain.Shared\Snooker.Domain.Shared.csproj" />
         <!-- TODO: Remove? -->
-        <ProjectReference Include="..\Snooker.WebScraper\Snooker.WebScraper.csproj" />
     </ItemGroup>
 
     <!-- TODO: Move to Interclub module -->
-    <ItemGroup>
-        <Content Include="Data\Seeding\**\*.json">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </Content>
-        <None Remove="Data\Seeding\**\*.json" />
-    </ItemGroup>
 
 </Project>

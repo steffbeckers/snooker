@@ -1,4 +1,8 @@
 using Microsoft.Extensions.DependencyInjection;
+using Snooker.Interclub.Clubs;
+using Snooker.Interclub.EntityFrameworkCore.Clubs;
+using Snooker.Interclub.EntityFrameworkCore.Teams;
+using Snooker.Interclub.Teams;
 using Snooker.Platform.EntityFrameworkCore;
 using Volo.Abp.Modularity;
 
@@ -13,9 +17,9 @@ public class InterclubEntityFrameworkCoreModule : AbpModule
     {
         context.Services.AddAbpDbContext<InterclubDbContext>(options =>
         {
-            /* Add custom repositories here. Example:
-             * options.AddRepository<Question, EfCoreQuestionRepository>();
-             */
+            options.AddDefaultRepositories();
+            options.AddRepository<Club, EfCoreClubRepository>();
+            options.AddRepository<Team, EfCoreTeamRepository>();
         });
     }
 }

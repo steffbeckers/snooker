@@ -9,9 +9,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Volo.Abp.EntityFrameworkCore" Version="7.2.3" />
         <ProjectReference Include="..\..\..\Snooker.Platform\src\Snooker.Platform.EntityFrameworkCore\Snooker.Platform.EntityFrameworkCore.csproj" />
         <ProjectReference Include="..\Snooker.Interclub.Domain\Snooker.Interclub.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Volo.Abp.EntityFrameworkCore" Version="7.2.3" />
     </ItemGroup>
 
 </Project>

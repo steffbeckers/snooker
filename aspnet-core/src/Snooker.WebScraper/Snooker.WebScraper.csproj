@@ -6,16 +6,12 @@
     <TargetFramework>net7.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="HtmlAgilityPack" Version="1.11.48" />
-    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
-  </ItemGroup>
+
+
+
 
   <ItemGroup>
-    <Content Include="Data\**\*.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <None Remove="Data\**\*.html" />
+    <Folder Include="Data\" />
   </ItemGroup>
 
 </Project>

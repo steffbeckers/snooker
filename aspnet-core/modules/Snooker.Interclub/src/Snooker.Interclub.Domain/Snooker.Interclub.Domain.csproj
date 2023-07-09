@@ -9,9 +9,20 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Volo.Abp.Ddd.Domain" Version="7.2.3" />
+        <ProjectReference Include="..\..\..\..\framework\src\Snooker.Data.WebScraping\Snooker.Data.WebScraping.csproj" />
         <ProjectReference Include="..\..\..\Snooker.Platform\src\Snooker.Platform.Domain\Snooker.Platform.Domain.csproj" />
         <ProjectReference Include="..\Snooker.Interclub.Domain.Shared\Snooker.Interclub.Domain.Shared.csproj" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="Volo.Abp.Ddd.Domain" Version="7.2.3" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <Content Include="Data\**\*.html">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Data\**\*.html" />
     </ItemGroup>
 
 </Project>
