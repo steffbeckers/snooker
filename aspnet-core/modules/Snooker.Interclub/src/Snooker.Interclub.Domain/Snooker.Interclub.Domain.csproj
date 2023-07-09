@@ -15,10 +15,6 @@
     </ItemGroup>
     
     <ItemGroup>
-        <PackageReference Include="Volo.Abp.Ddd.Domain" Version="7.2.3" />
-    </ItemGroup>
-    
-    <ItemGroup>
         <Content Include="Data\**\*.html">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
