@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Snooker.Interclub.EntityFrameworkCore;
 using Snooker.Platform.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
@@ -18,6 +19,6 @@ public class SnookerDbContext : AbpDbContext<SnookerDbContext>
         base.OnModelCreating(builder);
 
         builder.ConfigurePlatform();
-        //builder.ConfigureInterclub();
+        builder.ConfigureInterclub();
     }
 }

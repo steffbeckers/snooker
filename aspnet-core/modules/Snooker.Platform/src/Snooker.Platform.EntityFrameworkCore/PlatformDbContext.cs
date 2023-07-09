@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using System.Text.RegularExpressions;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
@@ -23,8 +22,6 @@ public class PlatformDbContext : AbpDbContext<PlatformDbContext>, IPlatformDbCon
     public DbSet<IdentityClaimType> ClaimTypes { get; set; }
 
     public DbSet<IdentityLinkUser> LinkUsers { get; set; }
-
-    public DbSet<Match> Matches { get; set; }
 
     public DbSet<OrganizationUnit> OrganizationUnits { get; set; }
 
