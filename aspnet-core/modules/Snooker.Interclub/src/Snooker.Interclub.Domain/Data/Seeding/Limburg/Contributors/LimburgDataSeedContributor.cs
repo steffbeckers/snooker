@@ -1,4 +1,5 @@
 using HtmlAgilityPack;
+using Snooker.Interclub.Addresses;
 using Snooker.Interclub.Clubs;
 using Snooker.Interclub.Players;
 using Snooker.Interclub.Teams;
@@ -8,13 +9,62 @@ using System.Linq;
 using System.Threading.Tasks;
 using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
+using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Guids;
 using Volo.Abp.TenantManagement;
 
 namespace Snooker.Interclub.Data.Seeding.Limburg.Contributors;
 
+public class AddressDso
+{
+    public AddressDso()
+    {
+    }
+
+    public AddressDso(string addressLine)
+    {
+        ConvertAddress(addressLine);
+    }
+
+    public string? City { get; set; }
+
+    public string? Number { get; set; }
+
+    public string? PostalCode { get; set; }
+
+    public string? Street { get; set; }
+
+    private void ConvertAddress(string addressLine)
+    {
+        string[] parts = addressLine.Split(',');
+
+        if (parts.Length != 2)
+            throw new ArgumentException("Invalid address format.");
+
+        // Extract street and number
+        string streetAndNumber = parts[0].Trim();
+        string[] streetAndNumberParts = streetAndNumber.Split(' ');
+        if (streetAndNumberParts.Length < 2)
+            throw new ArgumentException("Invalid address format.");
+
+        Number = streetAndNumberParts[^1]; // last element
+        Street = string.Join(" ", streetAndNumberParts[0..^1]); // all but the last element
+
+        // Extract postal code and city
+        string postalCodeAndCity = parts[1].Trim();
+        string[] postalCodeAndCityParts = postalCodeAndCity.Split(' ');
+        if (postalCodeAndCityParts.Length < 2)
+            throw new ArgumentException("Invalid address format.");
+
+        PostalCode = postalCodeAndCityParts[0];
+        City = string.Join(" ", postalCodeAndCityParts[1..]);
+    }
+}
+
 public class ClubDso
 {
+    public AddressDso Address { get; set; }
+
     public string Email { get; set; }
 
     public string Name { get; set; }
@@ -79,6 +129,11 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
             return;
         }
 
+        if (await _clubRepository.AnyAsync())
+        {
+            return;
+        }
+
         HtmlDocument htmlDocumentClubs = new HtmlDocument();
         htmlDocumentClubs.Load("Data/Seeding/Limburg/snookerlimburg.be/2023-05-01/Clubs.html");
 
@@ -101,8 +156,7 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
                 Name = name,
                 Website = website,
                 Number = int.Parse(number),
-                // TODO
-                //Address = new Address(addressLine),
+                Address = new AddressDso(addressLine),
                 Email = email,
                 PhoneNumber = phoneNumber,
             });
@@ -176,14 +230,13 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
                 club.Email = clubDso.Email;
                 club.PhoneNumber = clubDso.PhoneNumber;
                 club.Website = clubDso.Website;
-                // TODO
-                //club.Address = new Address()
-                //{
-                //    Street = clubDso.Address?.Street,
-                //    Number = clubDso.Address?.Number,
-                //    PostalCode = clubDso.Address?.PostalCode,
-                //    City = clubDso.Address?.City
-                //};
+                club.Address = new Address()
+                {
+                    Street = clubDso.Address?.Street,
+                    Number = clubDso.Address?.Number,
+                    PostalCode = clubDso.Address?.PostalCode,
+                    City = clubDso.Address?.City
+                };
 
                 foreach (TeamDso teamDso in clubDso.Teams)
                 {
