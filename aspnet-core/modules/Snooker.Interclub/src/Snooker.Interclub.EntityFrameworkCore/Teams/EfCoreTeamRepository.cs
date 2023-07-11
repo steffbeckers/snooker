@@ -7,8 +7,7 @@ namespace Snooker.Interclub.EntityFrameworkCore.Teams;
 
 public class EfCoreTeamRepository : EfCoreRepository<InterclubDbContext, Team, Guid>, ITeamRepository
 {
-    public EfCoreTeamRepository(
-        IDbContextProvider<InterclubDbContext> dbContextProvider)
+    public EfCoreTeamRepository(IDbContextProvider<InterclubDbContext> dbContextProvider)
         : base(dbContextProvider)
     {
     }

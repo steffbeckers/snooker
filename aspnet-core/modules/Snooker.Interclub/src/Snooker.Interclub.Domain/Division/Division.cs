@@ -24,7 +24,7 @@ public class Division : FullAuditedAggregateRoot<Guid>, IMultiTenant
     {
     }
 
-    public int FrameCount { get; set; }
+    public int? FrameCount { get; set; }
 
     public int? MinPlayerClass { get; set; }
 

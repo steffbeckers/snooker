@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Snooker.Interclub.Clubs;
 using Snooker.Interclub.Divisions;
 using Snooker.Interclub.Frames;
+using Snooker.Interclub.Matches;
 using Snooker.Interclub.Players;
 using Snooker.Interclub.Seasons;
 using Snooker.Interclub.Teams;
@@ -30,6 +31,10 @@ public class InterclubDbContext : AbpDbContext<InterclubDbContext>, IInterclubDb
     public DbSet<Frame> Frames { get; set; }
 
     public DbSet<IdentityLinkUser> LinkUsers { get; set; }
+
+    public DbSet<Match> Matches { get; set; }
+
+    public DbSet<MatchTeamPlayer> MatchTeamPlayers { get; set; }
 
     public DbSet<OrganizationUnit> OrganizationUnits { get; set; }
 

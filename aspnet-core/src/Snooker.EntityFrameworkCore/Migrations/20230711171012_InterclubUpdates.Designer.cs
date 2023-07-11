@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Snooker.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
@@ -12,9 +13,11 @@ using Volo.Abp.EntityFrameworkCore;
 namespace Snooker.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(SnookerDbContext))]
-    partial class SnookerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230711171012_InterclubUpdates")]
+    partial class InterclubUpdates
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -321,37 +324,28 @@ namespace Snooker.EntityFrameworkCore.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("CreationTime");
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid?>("CreatorId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("CreatorId");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("DeleterId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("DeleterId");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("DeletionTime")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("DeletionTime");
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("IsCaptain")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false)
-                        .HasColumnName("IsDeleted");
+                        .HasColumnType("bit");
 
                     b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("LastModificationTime");
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid?>("LastModifierId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("LastModifierId");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("MatchId")
                         .HasColumnType("uniqueidentifier");
@@ -363,14 +357,13 @@ namespace Snooker.EntityFrameworkCore.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("TenantId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("TenantId");
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.HasIndex("MatchId");
 
-                    b.ToTable("InterclubMatchTeamPlayers", (string)null);
+                    b.ToTable("MatchTeamPlayer");
                 });
 
             modelBuilder.Entity("Snooker.Interclub.Players.Player", b =>
@@ -2411,13 +2404,11 @@ namespace Snooker.EntityFrameworkCore.Migrations
 
             modelBuilder.Entity("Snooker.Interclub.Matches.MatchTeamPlayer", b =>
                 {
-                    b.HasOne("Snooker.Interclub.Matches.Match", "Match")
+                    b.HasOne("Snooker.Interclub.Matches.Match", null)
                         .WithMany("TeamPlayers")
                         .HasForeignKey("MatchId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Match");
                 });
 
             modelBuilder.Entity("Snooker.Interclub.Players.Player", b =>

@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Snooker.Interclub.Clubs;
 using Snooker.Interclub.Divisions;
 using Snooker.Interclub.Frames;
+using Snooker.Interclub.Matches;
 using Snooker.Interclub.Players;
 using Snooker.Interclub.Seasons;
 using Snooker.Interclub.Teams;
@@ -19,6 +20,10 @@ public interface IInterclubDbContext : IEfCoreDbContext, IPlatformDbContext
     public DbSet<Division> Divisions { get; }
 
     public DbSet<Frame> Frames { get; }
+
+    public DbSet<Match> Matches { get; }
+
+    public DbSet<MatchTeamPlayer> MatchTeamPlayers { get; }
 
     public DbSet<Player> Players { get; }
 

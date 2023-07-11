@@ -63,6 +63,13 @@ public static class InterclubDbContextModelCreatingExtensions
             b.HasOne(x => x.AwayTeam).WithMany().HasForeignKey(x => x.AwayTeamId).OnDelete(DeleteBehavior.Restrict);
         });
 
+        builder.Entity<MatchTeamPlayer>(b =>
+        {
+            b.ToTable(InterclubDbProperties.DbTablePrefix + "MatchTeamPlayers", InterclubDbProperties.DbSchema);
+            b.ConfigureByConvention();
+            b.HasOne(x => x.Match).WithMany(x => x.TeamPlayers).HasForeignKey(x => x.MatchId).OnDelete(DeleteBehavior.Restrict);
+        });
+
         builder.Entity<Player>(b =>
         {
             b.ToTable(InterclubDbProperties.DbTablePrefix + "Players", InterclubDbProperties.DbSchema);
