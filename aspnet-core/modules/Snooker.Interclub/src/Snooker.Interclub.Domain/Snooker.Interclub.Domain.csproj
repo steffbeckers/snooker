@@ -15,10 +15,10 @@
     </ItemGroup>
     
     <ItemGroup>
-        <Content Include="Data\**\*.html">
+        <Content Include="Data\**\WebScrape\**\*.html">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
-        <None Remove="Data\**\*.html" />
+        <None Remove="Data\**\WebScrape\**\*.html" />
     </ItemGroup>
 
 </Project>

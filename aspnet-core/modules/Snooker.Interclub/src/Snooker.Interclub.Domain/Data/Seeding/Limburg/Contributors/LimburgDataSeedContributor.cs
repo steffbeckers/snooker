@@ -49,22 +49,23 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
             return;
         }
 
+        // Extract data from snookerlimburg.be website
+        // TODO: Move to inside season
+        string websiteCopyDate = "2023-05-01";
+        List<DivisionDso> divisionDsos = ExtractFromWebsiteInterclubPage(websiteCopyDate);
+        List<ClubDso> clubDsos = ExtractFromWebsiteClubsPage(websiteCopyDate);
+
         Season? season2223 = await _seasonRepository.FindAsync(x => x.StartDate.Year == 2022 && x.EndDate.Year == 2023);
 
-        if (season2223 == null)
-        {
-            season2223 = new Season(
-                id: _guidGenerator.Create(),
-                startDate: new DateTime(2022, 1, 1),
-                endDate: new DateTime(2023, 1, 1));
+        //if (season2223 == null)
+        //{
+        //    season2223 = new Season(
+        //        id: _guidGenerator.Create(),
+        //        startDate: new DateTime(2022, 1, 1),
+        //        endDate: new DateTime(2023, 1, 1));
 
-            season2223 = await _seasonRepository.InsertAsync(season2223, autoSave: true);
-
-            // Extract data from snookerlimburg.be website
-            string websiteCopyDate = "2023-05-01";
-            List<DivisionDso> divisionDsos = ExtractFromWebsiteInterclubPage(websiteCopyDate);
-            List<ClubDso> clubDsos = ExtractFromWebsiteClubsPage(websiteCopyDate);
-        }
+        //    season2223 = await _seasonRepository.InsertAsync(season2223, autoSave: true);
+        //}
 
         // Add clubs, teams and players data to database
         //foreach (ClubDso clubDso in clubDsos)
@@ -147,21 +148,21 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
     private static List<ClubDso> ExtractFromWebsiteClubsPage(string websiteCopyDate)
     {
         HtmlDocument htmlDocumentClubs = new HtmlDocument();
-        htmlDocumentClubs.Load($"Data/Seeding/Limburg/snookerlimburg.be/{websiteCopyDate}/Clubs.html");
+        htmlDocumentClubs.Load($"Data/Seeding/Limburg/WebScrape/snookerlimburg.be/{websiteCopyDate}/Clubs.html");
 
         List<ClubDso> clubDsos = new List<ClubDso>();
 
         // Extract club data
-        HtmlNodeCollection clubRows = htmlDocumentClubs.DocumentNode.SelectNodes("//*[@id=\"main-box\"]/div[2]/div/table/tbody/tr[not(contains(@class,'ploeginfo'))]");
+        HtmlNodeCollection clubNodes = htmlDocumentClubs.DocumentNode.SelectNodes("//*[@id=\"main-box\"]/div[2]/div/table/tbody/tr[not(contains(@class,'ploeginfo'))]");
 
-        foreach (HtmlNode clubRow in clubRows)
+        foreach (HtmlNode clubNode in clubNodes)
         {
-            string name = clubRow.ChildNodes[0].InnerText.Trim();
-            string website = clubRow.ChildNodes[0].FirstChild.Attributes["href"].Value;
-            string number = clubRow.ChildNodes[1].FirstChild.Attributes["id"].Value.Replace("c", string.Empty);
-            string addressLine = clubRow.ChildNodes[2].InnerText.Trim();
-            string email = clubRow.ChildNodes[4].InnerText.Trim();
-            string phoneNumber = clubRow.ChildNodes[3].InnerText.Trim();
+            string name = clubNode.ChildNodes[0].InnerText.Trim();
+            string website = clubNode.ChildNodes[0].FirstChild.Attributes["href"].Value;
+            string number = clubNode.ChildNodes[1].FirstChild.Attributes["id"].Value.Replace("c", string.Empty);
+            string addressLine = clubNode.ChildNodes[2].InnerText.Trim();
+            string email = clubNode.ChildNodes[4].InnerText.Trim();
+            string phoneNumber = clubNode.ChildNodes[3].InnerText.Trim();
 
             clubDsos.Add(new ClubDso()
             {
@@ -177,18 +178,18 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
         // Extract team and player data
         foreach (ClubDso clubDso in clubDsos)
         {
-            HtmlNodeCollection teamRows = htmlDocumentClubs.DocumentNode.SelectNodes("//*[@id=\"main-box\"]/div[2]/div/table/tbody/tr[contains(@class,'ploeg-c" + clubDso.Number + "')]");
+            HtmlNodeCollection teamNodes = htmlDocumentClubs.DocumentNode.SelectNodes("//*[@id=\"main-box\"]/div[2]/div/table/tbody/tr[contains(@class,'ploeg-c" + clubDso.Number + "')]");
 
-            foreach (HtmlNode teamRow in teamRows)
+            foreach (HtmlNode teamNode in teamNodes)
             {
-                string teamName = teamRow.SelectSingleNode(".//p[starts-with(@style, 'font-size: 1.6em;')]").InnerText;
+                string teamName = teamNode.SelectSingleNode(".//p[starts-with(@style, 'font-size: 1.6em;')]").InnerText;
 
                 TeamDso team = new TeamDso()
                 {
                     Name = teamName
                 };
 
-                HtmlNodeCollection playerDivs = teamRow.SelectNodes(".//div[starts-with(@style, 'float:left; clear: none; min-width: 168px;')]");
+                HtmlNodeCollection playerDivs = teamNode.SelectNodes(".//div[starts-with(@style, 'float:left; clear: none; min-width: 168px;')]");
 
                 foreach (HtmlNode playerDiv in playerDivs)
                 {
@@ -233,9 +234,26 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
     private List<DivisionDso> ExtractFromWebsiteInterclubPage(string websiteCopyDate)
     {
         HtmlDocument htmlDocumentClubs = new HtmlDocument();
-        htmlDocumentClubs.Load($"Data/Seeding/Limburg/snookerlimburg.be/{websiteCopyDate}/Interclub.html");
+        htmlDocumentClubs.Load($"Data/Seeding/Limburg/WebScrape/snookerlimburg.be/{websiteCopyDate}/Interclub.html");
 
         List<DivisionDso> divisionDsos = new List<DivisionDso>();
+
+        HtmlNodeCollection divisionNodes = htmlDocumentClubs.DocumentNode.SelectNodes("//*[@id=\"jwts_tab1\"]/ul/li/a");
+
+        foreach (HtmlNode divisionNode in divisionNodes)
+        {
+            divisionDsos.Add(new DivisionDso()
+            {
+                Name = divisionNode.InnerText.Replace("&nbsp;", string.Empty)
+                    .Replace("liga", string.Empty)
+                    .Replace("afdeling", string.Empty)
+            });
+        }
+
+        foreach (DivisionDso divisionDso in divisionDsos)
+        {
+            // TODO: Extract club team names and add to division dso
+        }
 
         return divisionDsos;
     }
