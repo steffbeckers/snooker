@@ -15,14 +15,12 @@ public class Team : FullAuditedAggregateRoot<Guid>, IMultiTenant
 
     public Team(
         Guid id,
-        // TODO
-        //Guid divisionId,
+        Guid divisionId,
         Guid clubId,
         string name)
     {
         Id = id;
-        // TODO
-        //DivisionId = divisionId;
+        DivisionId = divisionId;
         ClubId = clubId;
         Name = name;
     }
@@ -35,9 +33,9 @@ public class Team : FullAuditedAggregateRoot<Guid>, IMultiTenant
 
     public Guid ClubId { get; set; }
 
-    public virtual Division? Division { get; }
+    public virtual Division Division { get; }
 
-    public Guid? DivisionId { get; set; }
+    public Guid DivisionId { get; set; }
 
     public string Name
     {

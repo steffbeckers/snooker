@@ -1,7 +1,11 @@
 using HtmlAgilityPack;
+using Snooker.Interclub.Addresses;
 using Snooker.Interclub.Clubs;
 using Snooker.Interclub.Data.Seeding.Limburg.WebScrape;
+using Snooker.Interclub.Divisions;
+using Snooker.Interclub.Players;
 using Snooker.Interclub.Seasons;
+using Snooker.Interclub.Teams;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +21,7 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
 {
     private readonly ClubManager _clubManager;
     private readonly IClubRepository _clubRepository;
+    private readonly IDivisionRepository _divisionRepository;
     private readonly IGuidGenerator _guidGenerator;
     private readonly ISeasonRepository _seasonRepository;
     private readonly ITenantRepository _tenantRepository;
@@ -24,12 +29,14 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
     public LimburgDataSeedContributor(
         ClubManager clubManager,
         IClubRepository clubRepository,
+        IDivisionRepository divisionRepository,
         IGuidGenerator guidGenerator,
         ISeasonRepository seasonRepository,
         ITenantRepository tenantRepository)
     {
         _clubManager = clubManager;
         _clubRepository = clubRepository;
+        _divisionRepository = divisionRepository;
         _guidGenerator = guidGenerator;
         _seasonRepository = seasonRepository;
         _tenantRepository = tenantRepository;
@@ -49,100 +56,123 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
             return;
         }
 
-        // Extract data from snookerlimburg.be website
-        // TODO: Move to inside season
-        string websiteCopyDate = "2023-05-01";
-        List<DivisionDso> divisionDsos = ExtractFromWebsiteInterclubPage(websiteCopyDate);
-        List<ClubDso> clubDsos = ExtractFromWebsiteClubsPage(websiteCopyDate);
-
         Season? season2223 = await _seasonRepository.FindAsync(x => x.StartDate.Year == 2022 && x.EndDate.Year == 2023);
 
-        //if (season2223 == null)
-        //{
-        //    season2223 = new Season(
-        //        id: _guidGenerator.Create(),
-        //        startDate: new DateTime(2022, 1, 1),
-        //        endDate: new DateTime(2023, 1, 1));
+        if (season2223 == null)
+        {
+            season2223 = new Season(
+                id: _guidGenerator.Create(),
+                startDate: new DateTime(2022, 1, 1),
+                endDate: new DateTime(2023, 1, 1));
 
-        //    season2223 = await _seasonRepository.InsertAsync(season2223, autoSave: true);
-        //}
+            // Extract data from snookerlimburg.be website
+            string websiteCopyDate = "2023-05-01";
+            List<DivisionDso> divisionDsos = ExtractFromWebsiteInterclubPage(websiteCopyDate);
+            List<ClubDso> clubDsos = ExtractFromWebsiteClubsPage(websiteCopyDate);
 
-        // Add clubs, teams and players data to database
-        //foreach (ClubDso clubDso in clubDsos)
-        //{
-        //    // Add
-        //    Club? club = await _clubRepository.FindAsync(x => x.Name == clubDso.Name);
+            // Add divisions to database
+            foreach (DivisionDso divisionDso in divisionDsos)
+            {
+                Division division = new Division(
+                    _guidGenerator.Create(),
+                    season2223.Id,
+                    divisionDso.Name)
+                {
+                    SortOrder = divisionDsos.IndexOf(divisionDso) + 1
+                };
 
-        //    if (club == null)
-        //    {
-        //        club = await _clubManager.CreateAsync(
-        //            id: _guidGenerator.Create(),
-        //            name: clubDso.Name);
-        //        club.Number = clubDso.Number.ToString();
-        //        club.Email = clubDso.Email;
-        //        club.PhoneNumber = clubDso.PhoneNumber;
-        //        club.Website = clubDso.Website;
-        //        club.Address = new Address()
-        //        {
-        //            Street = clubDso.Address?.Street,
-        //            Number = clubDso.Address?.Number,
-        //            PostalCode = clubDso.Address?.PostalCode,
-        //            City = clubDso.Address?.City
-        //        };
+                divisionDso.Id = division.Id;
 
-        //        foreach (TeamDso teamDso in clubDso.Teams)
-        //        {
-        //            Team? team = null;
-        //            if (teamDso.Name != "Reserven")
-        //            {
-        //                team = new Team(_guidGenerator.Create(), club.Id, teamDso.Name)
-        //                {
-        //                    ClubId = club.Id
-        //                };
-        //            }
+                season2223.Divisions.Add(division);
+            }
 
-        //            foreach (PlayerDso playerDso in teamDso.Players)
-        //            {
-        //                Player? player = club.Players.FirstOrDefault(x =>
-        //                    x.FirstName == playerDso.FirstName &&
-        //                    x.LastName == playerDso.LastName &&
-        //                    x.DateOfBirth == playerDso.DateOfBirth);
+            // Add clubs, teams and players data to database
+            foreach (ClubDso clubDso in clubDsos)
+            {
+                // Add
+                Club? club = await _clubRepository.FindAsync(x => x.Name == clubDso.Name);
 
-        //                if (player == null)
-        //                {
-        //                    player = new Player(
-        //                        id: _guidGenerator.Create(),
-        //                        firstName: playerDso.FirstName,
-        //                        lastName: playerDso.LastName)
-        //                    {
-        //                        ClubId = club.Id,
-        //                        Class = playerDso.Class,
-        //                        DateOfBirth = playerDso.DateOfBirth
-        //                    };
+                if (club == null)
+                {
+                    club = await _clubManager.CreateAsync(
+                        id: _guidGenerator.Create(),
+                        name: clubDso.Name);
 
-        //                    club.Players.Add(player);
-        //                }
+                    clubDso.Id = club.Id;
+                    club.Number = clubDso.Number.ToString();
+                    club.Email = clubDso.Email;
+                    club.PhoneNumber = clubDso.PhoneNumber;
+                    club.Website = clubDso.Website;
+                    club.Address = new Address()
+                    {
+                        Street = clubDso.Address?.Street,
+                        Number = clubDso.Address?.Number,
+                        PostalCode = clubDso.Address?.PostalCode,
+                        City = clubDso.Address?.City
+                    };
 
-        //                if (team != null)
-        //                {
-        //                    TeamPlayer teamPlayer = new TeamPlayer(
-        //                        id: _guidGenerator.Create(),
-        //                        team.Id,
-        //                        player.Id);
+                    club = await _clubRepository.InsertAsync(club);
+                }
 
-        //                    team.Players.Add(teamPlayer);
-        //                }
-        //            }
+                foreach (TeamDso teamDso in clubDso.Teams)
+                {
+                    Team? team = null;
 
-        //            if (team != null)
-        //            {
-        //                club.Teams.Add(team);
-        //            }
-        //        }
+                    if (teamDso.Name != "Reserven")
+                    {
+                        DivisionDso division = divisionDsos.Where(x => x.ClubTeamNames.Contains($"{club.Name} {teamDso.Name}")).FirstOrDefault();
 
-        //        await _clubRepository.InsertAsync(club);
-        //    }
-        //}
+                        if (division != null)
+                        {
+                            team = new Team(_guidGenerator.Create(), division.Id!.Value, club.Id, teamDso.Name)
+                            {
+                                ClubId = club.Id
+                            };
+                        }
+                    }
+
+                    foreach (PlayerDso playerDso in teamDso.Players)
+                    {
+                        Player? player = club.Players.FirstOrDefault(x =>
+                            x.FirstName == playerDso.FirstName &&
+                            x.LastName == playerDso.LastName &&
+                            x.DateOfBirth == playerDso.DateOfBirth);
+
+                        if (player == null)
+                        {
+                            player = new Player(
+                                id: _guidGenerator.Create(),
+                                firstName: playerDso.FirstName,
+                                lastName: playerDso.LastName)
+                            {
+                                ClubId = club.Id,
+                                Class = playerDso.Class,
+                                DateOfBirth = playerDso.DateOfBirth
+                            };
+
+                            club.Players.Add(player);
+                        }
+
+                        if (team != null)
+                        {
+                            TeamPlayer teamPlayer = new TeamPlayer(
+                                id: _guidGenerator.Create(),
+                                team.Id,
+                                player.Id);
+
+                            team.Players.Add(teamPlayer);
+                        }
+                    }
+
+                    if (team != null)
+                    {
+                        club.Teams.Add(team);
+                    }
+                }
+            }
+
+            await _seasonRepository.InsertAsync(season2223);
+        }
     }
 
     private static List<ClubDso> ExtractFromWebsiteClubsPage(string websiteCopyDate)
@@ -242,17 +272,29 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
 
         foreach (HtmlNode divisionNode in divisionNodes)
         {
-            divisionDsos.Add(new DivisionDso()
+            string name = divisionNode.InnerText.Replace("&nbsp;", string.Empty)
+                .Replace("liga", string.Empty)
+                .Replace("afdeling", string.Empty);
+
+            DivisionDso divisionDso = new DivisionDso()
             {
-                Name = divisionNode.InnerText.Replace("&nbsp;", string.Empty)
-                    .Replace("liga", string.Empty)
-                    .Replace("afdeling", string.Empty)
-            });
+                Name = name
+            };
+
+            divisionDsos.Add(divisionDso);
         }
+
+        HtmlNodeCollection rankingTableNodes = htmlDocumentClubs.DocumentNode.SelectNodes("//table[@class=\"ic-rank\"]");
 
         foreach (DivisionDso divisionDso in divisionDsos)
         {
-            // TODO: Extract club team names and add to division dso
+            int divisionDsoIndex = divisionDsos.IndexOf(divisionDso);
+            HtmlNode rankingTableNode = rankingTableNodes.ElementAt(divisionDsoIndex);
+
+            divisionDso.ClubTeamNames = rankingTableNode.SelectNodes(".//td[@class=\"ranknaam\"]")
+                .Select(x => x.InnerText)
+                .OrderBy(x => x)
+                .ToList();
         }
 
         return divisionDsos;

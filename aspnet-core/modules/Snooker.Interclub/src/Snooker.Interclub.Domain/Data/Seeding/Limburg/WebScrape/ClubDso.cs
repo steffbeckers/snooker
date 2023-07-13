@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Snooker.Interclub.Data.Seeding.Limburg.WebScrape;
@@ -7,6 +8,8 @@ public class ClubDso
     public AddressDso Address { get; set; }
 
     public string Email { get; set; }
+
+    public Guid? Id { get; set; }
 
     public string Name { get; set; }
 

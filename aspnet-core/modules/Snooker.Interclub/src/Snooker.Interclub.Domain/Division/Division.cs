@@ -34,6 +34,8 @@ public class Division : FullAuditedAggregateRoot<Guid>, IMultiTenant
 
     public Guid SeasonId { get; set; }
 
+    public int? SortOrder { get; set; }
+
     public virtual ICollection<Team> Teams { get; private set; } = new Collection<Team>();
 
     public Guid? TenantId { get; private set; }
