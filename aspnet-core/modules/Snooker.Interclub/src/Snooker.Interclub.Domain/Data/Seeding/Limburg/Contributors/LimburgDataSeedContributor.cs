@@ -8,6 +8,7 @@ using Snooker.Interclub.Seasons;
 using Snooker.Interclub.Teams;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Volo.Abp.Data;
@@ -21,7 +22,6 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
 {
     private readonly ClubManager _clubManager;
     private readonly IClubRepository _clubRepository;
-    private readonly IDivisionRepository _divisionRepository;
     private readonly IGuidGenerator _guidGenerator;
     private readonly ISeasonRepository _seasonRepository;
     private readonly ITenantRepository _tenantRepository;
@@ -29,14 +29,12 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
     public LimburgDataSeedContributor(
         ClubManager clubManager,
         IClubRepository clubRepository,
-        IDivisionRepository divisionRepository,
         IGuidGenerator guidGenerator,
         ISeasonRepository seasonRepository,
         ITenantRepository tenantRepository)
     {
         _clubManager = clubManager;
         _clubRepository = clubRepository;
-        _divisionRepository = divisionRepository;
         _guidGenerator = guidGenerator;
         _seasonRepository = seasonRepository;
         _tenantRepository = tenantRepository;
@@ -55,6 +53,8 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
         {
             return;
         }
+
+        List<DivisionDso> test = ExtractFromWebsiteInterclubPage("2023-05-01");
 
         Season? season2223 = await _seasonRepository.FindAsync(x => x.StartDate.Year == 2022 && x.EndDate.Year == 2023);
 
@@ -183,7 +183,7 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
         List<ClubDso> clubDsos = new List<ClubDso>();
 
         // Extract club data
-        HtmlNodeCollection clubNodes = htmlDocumentClubs.DocumentNode.SelectNodes("//*[@id=\"main-box\"]/div[2]/div/table/tbody/tr[not(contains(@class,'ploeginfo'))]");
+        HtmlNodeCollection clubNodes = htmlDocumentClubs.DocumentNode.SelectNodes("//*[@id='main-box']/div[2]/div/table/tbody/tr[not(contains(@class,'ploeginfo'))]");
 
         foreach (HtmlNode clubNode in clubNodes)
         {
@@ -208,7 +208,7 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
         // Extract team and player data
         foreach (ClubDso clubDso in clubDsos)
         {
-            HtmlNodeCollection teamNodes = htmlDocumentClubs.DocumentNode.SelectNodes("//*[@id=\"main-box\"]/div[2]/div/table/tbody/tr[contains(@class,'ploeg-c" + clubDso.Number + "')]");
+            HtmlNodeCollection teamNodes = htmlDocumentClubs.DocumentNode.SelectNodes("//*[@id='main-box']/div[2]/div/table/tbody/tr[contains(@class,'ploeg-c" + clubDso.Number + "')]");
 
             foreach (HtmlNode teamNode in teamNodes)
             {
@@ -263,12 +263,12 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
 
     private List<DivisionDso> ExtractFromWebsiteInterclubPage(string websiteCopyDate)
     {
-        HtmlDocument htmlDocumentClubs = new HtmlDocument();
-        htmlDocumentClubs.Load($"Data/Seeding/Limburg/WebScrape/snookerlimburg.be/{websiteCopyDate}/Interclub.html");
+        HtmlDocument htmlDocumentInterclub = new HtmlDocument();
+        htmlDocumentInterclub.Load($"Data/Seeding/Limburg/WebScrape/snookerlimburg.be/{websiteCopyDate}/Interclub.html");
 
         List<DivisionDso> divisionDsos = new List<DivisionDso>();
 
-        HtmlNodeCollection divisionNodes = htmlDocumentClubs.DocumentNode.SelectNodes("//*[@id=\"jwts_tab1\"]/ul/li/a");
+        HtmlNodeCollection divisionNodes = htmlDocumentInterclub.DocumentNode.SelectNodes("//*[@id='jwts_tab1']/ul/li/a");
 
         foreach (HtmlNode divisionNode in divisionNodes)
         {
@@ -284,17 +284,72 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
             divisionDsos.Add(divisionDso);
         }
 
-        HtmlNodeCollection rankingTableNodes = htmlDocumentClubs.DocumentNode.SelectNodes("//table[@class=\"ic-rank\"]");
+        HtmlNodeCollection rankingTableNodes = htmlDocumentInterclub.DocumentNode.SelectNodes("//table[@class='ic-rank']");
 
         foreach (DivisionDso divisionDso in divisionDsos)
         {
             int divisionDsoIndex = divisionDsos.IndexOf(divisionDso);
             HtmlNode rankingTableNode = rankingTableNodes.ElementAt(divisionDsoIndex);
 
-            divisionDso.ClubTeamNames = rankingTableNode.SelectNodes(".//td[@class=\"ranknaam\"]")
+            divisionDso.ClubTeamNames = rankingTableNode.SelectNodes(".//td[@class='ranknaam']")
                 .Select(x => x.InnerText)
                 .OrderBy(x => x)
                 .ToList();
+        }
+
+        HtmlNodeCollection matchResultTableNodes = htmlDocumentInterclub.DocumentNode.SelectNodes("//table[contains(@class,'ic-result')]");
+
+        List<MatchDso> matches = new List<MatchDso>();
+
+        foreach (HtmlNode tableNode in matchResultTableNodes)
+        {
+            // Get all the rows in the current table
+            HtmlNodeCollection rows = tableNode.SelectNodes(".//tr");
+
+            // Skip the first row (header row)
+            for (int i = 1; i < rows.Count; i++)
+            {
+                HtmlNodeCollection cells = rows[i].SelectNodes(".//td");
+
+                // Extract the relevant data from the cells
+                string dateString = cells[0].InnerText.Split(' ')[1];
+                string homeTeamName = cells[1].InnerText;
+                string scoreString = cells[2].InnerText;
+                string awayTeamName = cells[3].InnerText;
+
+                // Extract home team score and away team score from scoreString
+                int homeTeamScore, awayTeamScore;
+                string[] scoreParts = scoreString.Split(new char[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
+                if (scoreParts.Length == 2 && int.TryParse(scoreParts[0].Trim(), out homeTeamScore) && int.TryParse(scoreParts[1].Trim(), out awayTeamScore))
+                {
+                    // Parse the date using a custom format
+                    DateTime date;
+                    if (!DateTime.TryParseExact(dateString, "dd-MM-yy", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
+                    {
+                        // Handle date parsing error (e.g., log, skip, etc.)
+                        Console.WriteLine($"Failed to parse date: {dateString}");
+                        continue;
+                    }
+
+                    // Create a new MatchDso object and add it to the list
+                    MatchDso match = new MatchDso
+                    {
+                        Date = date,
+                        HomeTeamName = homeTeamName,
+                        HomeTeamScore = homeTeamScore,
+                        AwayTeamName = awayTeamName,
+                        AwayTeamScore = awayTeamScore
+                    };
+
+                    matches.Add(match);
+                }
+                else
+                {
+                    // Handle score parsing error (e.g., log, skip, etc.)
+                    Console.WriteLine($"Failed to parse score: {scoreString}");
+                    continue;
+                }
+            }
         }
 
         return divisionDsos;

@@ -30,7 +30,7 @@ public class Division : FullAuditedAggregateRoot<Guid>, IMultiTenant
 
     public string Name { get; set; }
 
-    public Season Season { get; }
+    public virtual Season Season { get; }
 
     public Guid SeasonId { get; set; }
 
