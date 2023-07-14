@@ -179,10 +179,10 @@ namespace Snooker.EntityFrameworkCore.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("AwayPlayerId")
+                    b.Property<Guid?>("AwayPlayerId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("AwayScore")
+                    b.Property<int?>("AwayPlayerScore")
                         .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -211,10 +211,10 @@ namespace Snooker.EntityFrameworkCore.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("ExtraProperties");
 
-                    b.Property<Guid>("HomePlayerId")
+                    b.Property<Guid?>("HomePlayerId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("HomeScore")
+                    b.Property<int?>("HomeScore")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
@@ -258,6 +258,9 @@ namespace Snooker.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("AwayTeamId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int?>("AwayTeamScore")
+                        .HasColumnType("int");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasMaxLength(40)
@@ -283,12 +286,18 @@ namespace Snooker.EntityFrameworkCore.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("DeletionTime");
 
+                    b.Property<Guid?>("DivisionId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("ExtraProperties")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("ExtraProperties");
 
                     b.Property<Guid?>("HomeTeamId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("HomeTeamScore")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
@@ -311,6 +320,8 @@ namespace Snooker.EntityFrameworkCore.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AwayTeamId");
+
+                    b.HasIndex("DivisionId");
 
                     b.HasIndex("HomeTeamId");
 
@@ -2372,15 +2383,11 @@ namespace Snooker.EntityFrameworkCore.Migrations
                 {
                     b.HasOne("Snooker.Interclub.Matches.MatchTeamPlayer", "AwayPlayer")
                         .WithMany()
-                        .HasForeignKey("AwayPlayerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("AwayPlayerId");
 
                     b.HasOne("Snooker.Interclub.Matches.MatchTeamPlayer", "HomePlayer")
                         .WithMany()
-                        .HasForeignKey("HomePlayerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("HomePlayerId");
 
                     b.HasOne("Snooker.Interclub.Matches.Match", "Match")
                         .WithMany("Frames")
@@ -2399,15 +2406,19 @@ namespace Snooker.EntityFrameworkCore.Migrations
                 {
                     b.HasOne("Snooker.Interclub.Teams.Team", "AwayTeam")
                         .WithMany()
-                        .HasForeignKey("AwayTeamId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("AwayTeamId");
+
+                    b.HasOne("Snooker.Interclub.Divisions.Division", "Division")
+                        .WithMany()
+                        .HasForeignKey("DivisionId");
 
                     b.HasOne("Snooker.Interclub.Teams.Team", "HomeTeam")
                         .WithMany()
-                        .HasForeignKey("HomeTeamId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("HomeTeamId");
 
                     b.Navigation("AwayTeam");
+
+                    b.Navigation("Division");
 
                     b.Navigation("HomeTeam");
                 });
@@ -2417,7 +2428,7 @@ namespace Snooker.EntityFrameworkCore.Migrations
                     b.HasOne("Snooker.Interclub.Matches.Match", "Match")
                         .WithMany("TeamPlayers")
                         .HasForeignKey("MatchId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Match");

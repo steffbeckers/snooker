@@ -19,17 +19,17 @@ public class Frame : FullAuditedAggregateRoot<Guid>, IMultiTenant
     {
     }
 
-    public virtual MatchTeamPlayer AwayPlayer { get; }
+    public virtual MatchTeamPlayer? AwayPlayer { get; }
 
-    public Guid AwayPlayerId { get; set; }
+    public Guid? AwayPlayerId { get; set; }
 
-    public int AwayScore { get; set; }
+    public int? AwayPlayerScore { get; set; }
 
-    public virtual MatchTeamPlayer HomePlayer { get; }
+    public virtual MatchTeamPlayer? HomePlayer { get; }
 
-    public Guid HomePlayerId { get; set; }
+    public Guid? HomePlayerId { get; set; }
 
-    public int HomeScore { get; set; }
+    public int? HomeScore { get; set; }
 
     public virtual Match Match { get; }
 

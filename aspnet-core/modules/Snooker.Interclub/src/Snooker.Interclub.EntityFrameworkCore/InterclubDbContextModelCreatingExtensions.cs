@@ -51,23 +51,24 @@ public static class InterclubDbContextModelCreatingExtensions
             b.ToTable(InterclubDbProperties.DbTablePrefix + "Frames", InterclubDbProperties.DbSchema);
             b.ConfigureByConvention();
             b.HasOne(x => x.Match).WithMany(x => x.Frames).HasForeignKey(x => x.MatchId);
-            b.HasOne(x => x.HomePlayer).WithMany().HasForeignKey(x => x.HomePlayerId).OnDelete(DeleteBehavior.Restrict);
-            b.HasOne(x => x.AwayPlayer).WithMany().HasForeignKey(x => x.AwayPlayerId).OnDelete(DeleteBehavior.Restrict);
+            b.HasOne(x => x.HomePlayer).WithMany().HasForeignKey(x => x.HomePlayerId);
+            b.HasOne(x => x.AwayPlayer).WithMany().HasForeignKey(x => x.AwayPlayerId);
         });
 
         builder.Entity<Match>(b =>
         {
             b.ToTable(InterclubDbProperties.DbTablePrefix + "Matches", InterclubDbProperties.DbSchema);
             b.ConfigureByConvention();
-            b.HasOne(x => x.HomeTeam).WithMany().HasForeignKey(x => x.HomeTeamId).OnDelete(DeleteBehavior.Restrict);
-            b.HasOne(x => x.AwayTeam).WithMany().HasForeignKey(x => x.AwayTeamId).OnDelete(DeleteBehavior.Restrict);
+            b.HasOne(x => x.Division).WithMany().HasForeignKey(x => x.DivisionId);
+            b.HasOne(x => x.HomeTeam).WithMany().HasForeignKey(x => x.HomeTeamId);
+            b.HasOne(x => x.AwayTeam).WithMany().HasForeignKey(x => x.AwayTeamId);
         });
 
         builder.Entity<MatchTeamPlayer>(b =>
         {
             b.ToTable(InterclubDbProperties.DbTablePrefix + "MatchTeamPlayers", InterclubDbProperties.DbSchema);
             b.ConfigureByConvention();
-            b.HasOne(x => x.Match).WithMany(x => x.TeamPlayers).HasForeignKey(x => x.MatchId).OnDelete(DeleteBehavior.Restrict);
+            b.HasOne(x => x.Match).WithMany(x => x.TeamPlayers).HasForeignKey(x => x.MatchId);
         });
 
         builder.Entity<Player>(b =>

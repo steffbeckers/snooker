@@ -124,10 +124,11 @@ namespace Snooker.EntityFrameworkCore.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FrameCount = table.Column<int>(type: "int", nullable: false),
+                    FrameCount = table.Column<int>(type: "int", nullable: true),
                     MinPlayerClass = table.Column<int>(type: "int", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     SeasonId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SortOrder = table.Column<int>(type: "int", nullable: true),
                     TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
@@ -156,7 +157,7 @@ namespace Snooker.EntityFrameworkCore.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ClubId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    DivisionId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    DivisionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -182,7 +183,8 @@ namespace Snooker.EntityFrameworkCore.Migrations
                         name: "FK_InterclubTeams_InterclubDivisions_DivisionId",
                         column: x => x.DivisionId,
                         principalTable: "InterclubDivisions",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -191,8 +193,11 @@ namespace Snooker.EntityFrameworkCore.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     AwayTeamId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    AwayTeamScore = table.Column<int>(type: "int", nullable: true),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DivisionId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     HomeTeamId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    HomeTeamScore = table.Column<int>(type: "int", nullable: true),
                     TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
@@ -208,17 +213,20 @@ namespace Snooker.EntityFrameworkCore.Migrations
                 {
                     table.PrimaryKey("PK_InterclubMatches", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_InterclubMatches_InterclubDivisions_DivisionId",
+                        column: x => x.DivisionId,
+                        principalTable: "InterclubDivisions",
+                        principalColumn: "Id");
+                    table.ForeignKey(
                         name: "FK_InterclubMatches_InterclubTeams_AwayTeamId",
                         column: x => x.AwayTeamId,
                         principalTable: "InterclubTeams",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_InterclubMatches_InterclubTeams_HomeTeamId",
                         column: x => x.HomeTeamId,
                         principalTable: "InterclubTeams",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -258,7 +266,7 @@ namespace Snooker.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MatchTeamPlayer",
+                name: "InterclubMatchTeamPlayers",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -271,15 +279,15 @@ namespace Snooker.EntityFrameworkCore.Migrations
                     CreatorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     LastModifierId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
                     DeleterId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     DeletionTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MatchTeamPlayer", x => x.Id);
+                    table.PrimaryKey("PK_InterclubMatchTeamPlayers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_MatchTeamPlayer_InterclubMatches_MatchId",
+                        name: "FK_InterclubMatchTeamPlayers_InterclubMatches_MatchId",
                         column: x => x.MatchId,
                         principalTable: "InterclubMatches",
                         principalColumn: "Id",
@@ -291,10 +299,10 @@ namespace Snooker.EntityFrameworkCore.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    AwayPlayerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    AwayScore = table.Column<int>(type: "int", nullable: false),
-                    HomePlayerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    HomeScore = table.Column<int>(type: "int", nullable: false),
+                    AwayPlayerId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    AwayPlayerScore = table.Column<int>(type: "int", nullable: true),
+                    HomePlayerId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    HomeScore = table.Column<int>(type: "int", nullable: true),
                     MatchId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -311,23 +319,21 @@ namespace Snooker.EntityFrameworkCore.Migrations
                 {
                     table.PrimaryKey("PK_InterclubFrames", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_InterclubFrames_InterclubMatchTeamPlayers_AwayPlayerId",
+                        column: x => x.AwayPlayerId,
+                        principalTable: "InterclubMatchTeamPlayers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_InterclubFrames_InterclubMatchTeamPlayers_HomePlayerId",
+                        column: x => x.HomePlayerId,
+                        principalTable: "InterclubMatchTeamPlayers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
                         name: "FK_InterclubFrames_InterclubMatches_MatchId",
                         column: x => x.MatchId,
                         principalTable: "InterclubMatches",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_InterclubFrames_MatchTeamPlayer_AwayPlayerId",
-                        column: x => x.AwayPlayerId,
-                        principalTable: "MatchTeamPlayer",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_InterclubFrames_MatchTeamPlayer_HomePlayerId",
-                        column: x => x.HomePlayerId,
-                        principalTable: "MatchTeamPlayer",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -356,9 +362,19 @@ namespace Snooker.EntityFrameworkCore.Migrations
                 column: "AwayTeamId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_InterclubMatches_DivisionId",
+                table: "InterclubMatches",
+                column: "DivisionId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_InterclubMatches_HomeTeamId",
                 table: "InterclubMatches",
                 column: "HomeTeamId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_InterclubMatchTeamPlayers_MatchId",
+                table: "InterclubMatchTeamPlayers",
+                column: "MatchId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_InterclubPlayers_ClubId",
@@ -389,11 +405,6 @@ namespace Snooker.EntityFrameworkCore.Migrations
                 name: "IX_InterclubTeams_DivisionId",
                 table: "InterclubTeams",
                 column: "DivisionId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_MatchTeamPlayer_MatchId",
-                table: "MatchTeamPlayer",
-                column: "MatchId");
         }
 
         /// <inheritdoc />
@@ -409,7 +420,7 @@ namespace Snooker.EntityFrameworkCore.Migrations
                 name: "InterclubTeamPlayers");
 
             migrationBuilder.DropTable(
-                name: "MatchTeamPlayer");
+                name: "InterclubMatchTeamPlayers");
 
             migrationBuilder.DropTable(
                 name: "InterclubPlayers");
