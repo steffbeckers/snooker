@@ -54,6 +54,7 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
             return;
         }
 
+        // TODO: Remove
         List<DivisionDso> test = ExtractFromWebsiteInterclubPage("2023-05-01");
 
         Season? season2223 = await _seasonRepository.FindAsync(x => x.StartDate.Year == 2022 && x.EndDate.Year == 2023);
