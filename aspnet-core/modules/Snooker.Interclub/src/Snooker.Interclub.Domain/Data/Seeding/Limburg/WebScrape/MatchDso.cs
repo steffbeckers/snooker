@@ -13,4 +13,6 @@ public class MatchDso
     public string HomeTeamName { get; set; }
 
     public int HomeTeamScore { get; set; }
+
+    public Guid? Id { get; set; }
 }

@@ -13,12 +13,14 @@ public class Match : FullAuditedAggregateRoot<Guid>, IMultiTenant
 {
     public Match(
         Guid id,
-        Guid homeTeamId,
-        Guid awayTeamId)
+        Team homeTeam,
+        Team awayTeam)
     {
         Id = id;
-        HomeTeamId = homeTeamId;
-        AwayTeamId = awayTeamId;
+        HomeTeam = homeTeam;
+        HomeTeamId = homeTeam.Id;
+        AwayTeam = awayTeam;
+        AwayTeamId = awayTeam.Id;
     }
 
     private Match()

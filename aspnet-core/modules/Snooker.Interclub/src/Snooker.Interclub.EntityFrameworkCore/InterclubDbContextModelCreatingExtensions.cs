@@ -59,7 +59,7 @@ public static class InterclubDbContextModelCreatingExtensions
         {
             b.ToTable(InterclubDbProperties.DbTablePrefix + "Matches", InterclubDbProperties.DbSchema);
             b.ConfigureByConvention();
-            b.HasOne(x => x.Division).WithMany().HasForeignKey(x => x.DivisionId);
+            b.HasOne(x => x.Division).WithMany(x => x.Matches).HasForeignKey(x => x.DivisionId);
             b.HasOne(x => x.HomeTeam).WithMany().HasForeignKey(x => x.HomeTeamId);
             b.HasOne(x => x.AwayTeam).WithMany().HasForeignKey(x => x.AwayTeamId);
         });

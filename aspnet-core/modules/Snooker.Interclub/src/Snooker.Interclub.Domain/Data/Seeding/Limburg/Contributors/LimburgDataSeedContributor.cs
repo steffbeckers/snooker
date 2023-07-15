@@ -3,6 +3,7 @@ using Snooker.Interclub.Addresses;
 using Snooker.Interclub.Clubs;
 using Snooker.Interclub.Data.Seeding.Limburg.WebScrape;
 using Snooker.Interclub.Divisions;
+using Snooker.Interclub.Matches;
 using Snooker.Interclub.Players;
 using Snooker.Interclub.Seasons;
 using Snooker.Interclub.Teams;
@@ -54,9 +55,6 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
             return;
         }
 
-        // TODO: Remove
-        //List<DivisionDso> test = ExtractFromWebsiteInterclubPage("2023-05-01");
-
         Season? season2223 = await _seasonRepository.FindAsync(x => x.StartDate.Year == 2022 && x.EndDate.Year == 2023);
 
         if (season2223 == null)
@@ -76,7 +74,7 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
             {
                 Division division = new Division(
                     _guidGenerator.Create(),
-                    season2223.Id,
+                    season2223,
                     divisionDso.Name)
                 {
                     SortOrder = divisionDsos.IndexOf(divisionDso) + 1
@@ -121,14 +119,24 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
 
                     if (teamDso.Name != "Reserven")
                     {
-                        DivisionDso division = divisionDsos.Where(x => x.ClubTeamNames.Contains($"{club.Name} {teamDso.Name}")).FirstOrDefault();
+                        DivisionDso divisionDso = divisionDsos.Where(x => x.ClubTeamNames.Contains($"{club.Name} {teamDso.Name}")).FirstOrDefault();
 
-                        if (division != null)
+                        if (divisionDso != null)
                         {
-                            team = new Team(_guidGenerator.Create(), division.Id!.Value, club.Id, teamDso.Name)
+                            Division division = season2223.Divisions.First(x => x.Id == divisionDso.Id);
+
+                            team = new Team(
+                                _guidGenerator.Create(),
+                                division,
+                                club,
+                                teamDso.Name)
                             {
                                 ClubId = club.Id
                             };
+
+                            teamDso.Id = team.Id;
+
+                            division.Teams.Add(team);
                         }
                     }
 
@@ -158,8 +166,8 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
                         {
                             TeamPlayer teamPlayer = new TeamPlayer(
                                 id: _guidGenerator.Create(),
-                                team.Id,
-                                player.Id);
+                                team,
+                                player);
 
                             team.Players.Add(teamPlayer);
                         }
@@ -169,6 +177,42 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
                     {
                         club.Teams.Add(team);
                     }
+                }
+            }
+
+            // Add matches to division
+            foreach (DivisionDso divisionDso in divisionDsos)
+            {
+                Division division = season2223.Divisions.First(x => x.Id == divisionDso.Id);
+
+                foreach (MatchDso matchDso in divisionDso.Matches)
+                {
+                    Team homeTeam = division.Teams.FirstOrDefault(x => x.ClubTeamName == matchDso.HomeTeamName);
+
+                    if (homeTeam == null)
+                    {
+                        Console.WriteLine($"Failed to find home team {matchDso.HomeTeamName}");
+                        continue;
+                    }
+
+                    Team awayTeam = division.Teams.FirstOrDefault(x => x.ClubTeamName == matchDso.AwayTeamName);
+
+                    if (awayTeam == null)
+                    {
+                        Console.WriteLine($"Failed to find away team {matchDso.AwayTeamName}");
+                        continue;
+                    }
+
+                    Match match = new Match(
+                        _guidGenerator.Create(),
+                        homeTeam,
+                        awayTeam)
+                    {
+                        HomeTeamScore = matchDso.HomeTeamScore,
+                        AwayTeamScore = matchDso.AwayTeamScore
+                    };
+
+                    division.Matches.Add(match);
                 }
             }
 
@@ -303,9 +347,14 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
                     HtmlNodeCollection cells = rows[i].SelectNodes(".//td");
 
                     // Extract the relevant data from the cells
+                    string scoreString = cells[2].InnerText;
+                    if (scoreString.Contains("&nbps;"))
+                    {
+                        continue;
+                    }
+
                     string dateString = cells[0].InnerText.Split(' ')[1];
                     string homeTeamName = cells[1].InnerText;
-                    string scoreString = cells[2].InnerText;
                     string awayTeamName = cells[3].InnerText;
 
                     // Extract home team score and away team score from scoreString

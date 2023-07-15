@@ -1,3 +1,4 @@
+using Snooker.Interclub.Matches;
 using Snooker.Interclub.Seasons;
 using Snooker.Interclub.Teams;
 using System;
@@ -12,11 +13,12 @@ public class Division : FullAuditedAggregateRoot<Guid>, IMultiTenant
 {
     public Division(
         Guid id,
-        Guid seasonId,
+        Season season,
         string name)
     {
         Id = id;
-        SeasonId = seasonId;
+        Season = season;
+        SeasonId = season.Id;
         Name = name;
     }
 
@@ -25,6 +27,8 @@ public class Division : FullAuditedAggregateRoot<Guid>, IMultiTenant
     }
 
     public int? FrameCount { get; set; }
+
+    public virtual ICollection<Match> Matches { get; private set; } = new Collection<Match>();
 
     public int? MinPlayerClass { get; set; }
 

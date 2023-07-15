@@ -9,12 +9,14 @@ public class TeamPlayer : FullAuditedAggregateRoot<Guid>, IMultiTenant
 {
     public TeamPlayer(
         Guid id,
-        Guid teamId,
-        Guid playerId)
+        Team team,
+        Player player)
     {
         Id = id;
-        TeamId = teamId;
-        PlayerId = playerId;
+        Team = team;
+        TeamId = team.Id;
+        Player = player;
+        PlayerId = player.Id;
     }
 
     private TeamPlayer()
