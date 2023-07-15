@@ -264,96 +264,87 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
 
     private List<DivisionDso> ExtractFromWebsiteInterclubPage(string websiteCopyDate)
     {
+        List<DivisionDso> divisionDsos = new List<DivisionDso>();
+
         HtmlDocument htmlDocumentInterclub = new HtmlDocument();
         htmlDocumentInterclub.Load($"Data/Seeding/Limburg/WebScrape/snookerlimburg.be/{websiteCopyDate}/Interclub.html");
 
-        List<DivisionDso> divisionDsos = new List<DivisionDso>();
+        // Extract divisions
+        HtmlNodeCollection divisionTabNodes = htmlDocumentInterclub.DocumentNode.SelectNodes("//div[@id='jwts_tab1']/div[contains(@class,'jwts_tabbertab')]");
 
-        HtmlNodeCollection divisionNodes = htmlDocumentInterclub.DocumentNode.SelectNodes("//*[@id='jwts_tab1']/ul/li/a");
-
-        foreach (HtmlNode divisionNode in divisionNodes)
+        foreach (HtmlNode divisionTabNode in divisionTabNodes)
         {
-            string name = divisionNode.InnerText.Replace("&nbsp;", string.Empty)
+            DivisionDso divisionDso = new DivisionDso();
+
+            // Name
+            HtmlNode nameNode = divisionTabNode.SelectSingleNode(".//h2[@class='jwts_heading']/a");
+            divisionDso.Name = nameNode.InnerText.Replace("&nbsp;", string.Empty)
                 .Replace("liga", string.Empty)
                 .Replace("afdeling", string.Empty);
 
-            DivisionDso divisionDso = new DivisionDso()
-            {
-                Name = name
-            };
-
-            divisionDsos.Add(divisionDso);
-        }
-
-        HtmlNodeCollection rankingTableNodes = htmlDocumentInterclub.DocumentNode.SelectNodes("//table[@class='ic-rank']");
-
-        foreach (DivisionDso divisionDso in divisionDsos)
-        {
-            int divisionDsoIndex = divisionDsos.IndexOf(divisionDso);
-            HtmlNode rankingTableNode = rankingTableNodes.ElementAt(divisionDsoIndex);
-
+            // Club team names
+            HtmlNode rankingTableNode = divisionTabNode.SelectSingleNode(".//table[@class='ic-rank']");
             divisionDso.ClubTeamNames = rankingTableNode.SelectNodes(".//td[@class='ranknaam']")
                 .Select(x => x.InnerText)
                 .OrderBy(x => x)
                 .ToList();
-        }
 
-        HtmlNodeCollection matchResultTableNodes = htmlDocumentInterclub.DocumentNode.SelectNodes("//table[contains(@class,'ic-result')]");
+            // Matches
+            HtmlNodeCollection matchResultTableNodes = divisionTabNode.SelectNodes(".//table[contains(@class,'ic-result')]");
 
-        List<MatchDso> matches = new List<MatchDso>();
-
-        foreach (HtmlNode tableNode in matchResultTableNodes)
-        {
-            // Get all the rows in the current table
-            HtmlNodeCollection rows = tableNode.SelectNodes(".//tr");
-
-            // Skip the first row (header row)
-            for (int i = 1; i < rows.Count; i++)
+            foreach (HtmlNode tableNode in matchResultTableNodes)
             {
-                HtmlNodeCollection cells = rows[i].SelectNodes(".//td");
+                // Get all the rows in the current table
+                HtmlNodeCollection rows = tableNode.SelectNodes(".//tr");
 
-                // Extract the relevant data from the cells
-                string dateString = cells[0].InnerText.Split(' ')[1];
-                string homeTeamName = cells[1].InnerText;
-                string scoreString = cells[2].InnerText;
-                string awayTeamName = cells[3].InnerText;
-
-                // Extract home team score and away team score from scoreString
-                int homeTeamScore, awayTeamScore;
-                string[] scoreParts = scoreString.Split(new char[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
-                if (scoreParts.Length == 2 && int.TryParse(scoreParts[0].Trim(), out homeTeamScore) && int.TryParse(scoreParts[1].Trim(), out awayTeamScore))
+                // Skip the first row (header row)
+                for (int i = 1; i < rows.Count; i++)
                 {
-                    // Parse the date using a custom format
-                    DateTime date;
-                    if (!DateTime.TryParseExact(dateString, "dd-MM-yy", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
+                    HtmlNodeCollection cells = rows[i].SelectNodes(".//td");
+
+                    // Extract the relevant data from the cells
+                    string dateString = cells[0].InnerText.Split(' ')[1];
+                    string homeTeamName = cells[1].InnerText;
+                    string scoreString = cells[2].InnerText;
+                    string awayTeamName = cells[3].InnerText;
+
+                    // Extract home team score and away team score from scoreString
+                    int homeTeamScore, awayTeamScore;
+                    string[] scoreParts = scoreString.Split(new char[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
+                    if (scoreParts.Length == 2 && int.TryParse(scoreParts[0].Trim(), out homeTeamScore) && int.TryParse(scoreParts[1].Trim(), out awayTeamScore))
                     {
-                        // Handle date parsing error (e.g., log, skip, etc.)
-                        Console.WriteLine($"Failed to parse date: {dateString}");
+                        // Parse the date using a custom format
+                        DateTime date;
+                        if (!DateTime.TryParseExact(dateString, "dd-MM-yy", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
+                        {
+                            // Handle date parsing error (e.g., log, skip, etc.)
+                            Console.WriteLine($"Failed to parse date: {dateString}");
+                            continue;
+                        }
+
+                        // Create a new MatchDso object and add it to the list
+                        MatchDso match = new MatchDso
+                        {
+                            Date = date,
+                            HomeTeamName = homeTeamName,
+                            HomeTeamScore = homeTeamScore,
+                            AwayTeamName = awayTeamName,
+                            AwayTeamScore = awayTeamScore
+                        };
+
+                        divisionDso.Matches.Add(match);
+                    }
+                    else
+                    {
+                        // Handle score parsing error (e.g., log, skip, etc.)
+                        Console.WriteLine($"Failed to parse score: {scoreString}");
                         continue;
                     }
-
-                    // Create a new MatchDso object and add it to the list
-                    MatchDso match = new MatchDso
-                    {
-                        Date = date,
-                        HomeTeamName = homeTeamName,
-                        HomeTeamScore = homeTeamScore,
-                        AwayTeamName = awayTeamName,
-                        AwayTeamScore = awayTeamScore
-                    };
-
-                    matches.Add(match);
-                }
-                else
-                {
-                    // Handle score parsing error (e.g., log, skip, etc.)
-                    Console.WriteLine($"Failed to parse score: {scoreString}");
-                    continue;
                 }
             }
-        }
 
-        // TODO: map matches to divisions
+            divisionDsos.Add(divisionDso);
+        }
 
         return divisionDsos;
     }
