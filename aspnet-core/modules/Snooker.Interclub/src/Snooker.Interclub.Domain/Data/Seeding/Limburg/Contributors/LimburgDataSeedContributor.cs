@@ -208,6 +208,7 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
                         homeTeam,
                         awayTeam)
                     {
+                        Date = matchDso.Date,
                         HomeTeamScore = matchDso.HomeTeamScore,
                         AwayTeamScore = matchDso.AwayTeamScore
                     };
