@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Snooker.Interclub.Data.Seeding.Limburg.Contributors;
 
@@ -9,6 +10,10 @@ public class MatchDso
     public int AwayTeamScore { get; set; }
 
     public DateTime Date { get; set; }
+
+    public string? DetailId { get; set; }
+
+    public IList<FrameDso> Frames { get; set; } = new List<FrameDso>();
 
     public string HomeTeamName { get; set; }
 

@@ -55,6 +55,9 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
             return;
         }
 
+        // TODO: Remove
+        //List<DivisionDso> test = ExtractFromWebsiteInterclubPage("2023-05-01");
+
         Season? season2223 = await _seasonRepository.FindAsync(x => x.StartDate.Year == 2022 && x.EndDate.Year == 2023);
 
         if (season2223 == null)
@@ -337,15 +340,20 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
             // Matches
             HtmlNodeCollection matchResultTableNodes = divisionTabNode.SelectNodes(".//table[contains(@class,'ic-result')]");
 
-            foreach (HtmlNode tableNode in matchResultTableNodes)
+            foreach (HtmlNode matchResultTableNode in matchResultTableNodes)
             {
                 // Get all the rows in the current table
-                HtmlNodeCollection rows = tableNode.SelectNodes(".//tr");
+                HtmlNodeCollection rows = matchResultTableNode.SelectNodes(".//tr");
 
                 // Skip the first row (header row)
                 for (int i = 1; i < rows.Count; i++)
                 {
-                    HtmlNodeCollection cells = rows[i].SelectNodes(".//td");
+                    HtmlNode row = rows[i];
+
+                    HtmlNode? detailBtnNode = row.SelectSingleNode(".//span[@class='detailbtn']");
+                    string? detailId = detailBtnNode?.Id;
+
+                    HtmlNodeCollection cells = row.SelectNodes(".//td");
 
                     // Extract the relevant data from the cells
                     string scoreString = cells[2].InnerText;
@@ -373,16 +381,37 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
                         }
 
                         // Create a new MatchDso object and add it to the list
-                        MatchDso match = new MatchDso
+                        MatchDso matchDso = new MatchDso()
                         {
                             Date = date,
                             HomeTeamName = homeTeamName,
                             HomeTeamScore = homeTeamScore,
                             AwayTeamName = awayTeamName,
-                            AwayTeamScore = awayTeamScore
+                            AwayTeamScore = awayTeamScore,
+                            DetailId = !string.IsNullOrEmpty(detailId) ? $"dtl{detailId}" : null
                         };
 
-                        divisionDso.Matches.Add(match);
+                        // Frames
+                        if (!string.IsNullOrEmpty(matchDso.DetailId))
+                        {
+                            HtmlNode matchDetailNode = htmlDocumentInterclub.DocumentNode.SelectSingleNode($"//div[@id='{matchDso.DetailId}']/table/tbody");
+
+                            if (matchDetailNode != null)
+                            {
+                                string homeClubTeamName = matchDetailNode.SelectSingleNode(".//td[@class='tpl']").InnerHtml.Split("<br>")[1];
+                                string awayClubTeamName = matchDetailNode.SelectSingleNode(".//td[@class='upl']").InnerText.Replace("Uit: ", string.Empty);
+
+                                FrameDso frameDso = new FrameDso()
+                                {
+                                    HomeClubTeamName = homeClubTeamName,
+                                    AwayClubTeamName = awayClubTeamName
+                                };
+
+                                matchDso.Frames.Add(frameDso);
+                            }
+                        }
+
+                        divisionDso.Matches.Add(matchDso);
                     }
                     else
                     {
