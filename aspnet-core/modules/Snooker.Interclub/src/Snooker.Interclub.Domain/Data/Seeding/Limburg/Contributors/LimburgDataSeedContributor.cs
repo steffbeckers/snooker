@@ -352,6 +352,10 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
 
                     HtmlNode? detailBtnNode = row.SelectSingleNode(".//span[@class='detailbtn']");
                     string? detailId = detailBtnNode?.Id;
+                    if (detailId == null)
+                    {
+                        continue;
+                    }
 
                     HtmlNodeCollection cells = row.SelectNodes(".//td");
 
@@ -391,23 +395,21 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
                             DetailId = !string.IsNullOrEmpty(detailId) ? $"dtl{detailId}" : null
                         };
 
-                        // Frames
                         if (!string.IsNullOrEmpty(matchDso.DetailId))
                         {
                             HtmlNode matchDetailNode = htmlDocumentInterclub.DocumentNode.SelectSingleNode($"//div[@id='{matchDso.DetailId}']/table/tbody");
 
                             if (matchDetailNode != null)
                             {
-                                string homeClubTeamName = matchDetailNode.SelectSingleNode(".//td[@class='tpl']").InnerHtml.Split("<br>")[1];
-                                string awayClubTeamName = matchDetailNode.SelectSingleNode(".//td[@class='upl']").InnerText.Replace("Uit: ", string.Empty);
+                                matchDso.HomeTeamPlayerNames = matchDetailNode.SelectNodes(".//td[@class='tsp']/span").Select(x => x.InnerText).ToList();
+                                matchDso.AwayTeamPlayerNames = matchDetailNode.SelectNodes(".//td[@class='usp']/span").Select(x => x.InnerText).ToList();
 
-                                FrameDso frameDso = new FrameDso()
-                                {
-                                    HomeClubTeamName = homeClubTeamName,
-                                    AwayClubTeamName = awayClubTeamName
-                                };
+                                // Frames
+                                //FrameDso frameDso = new FrameDso()
+                                //{
+                                //};
 
-                                matchDso.Frames.Add(frameDso);
+                                //matchDso.Frames.Add(frameDso);
                             }
                         }
 
