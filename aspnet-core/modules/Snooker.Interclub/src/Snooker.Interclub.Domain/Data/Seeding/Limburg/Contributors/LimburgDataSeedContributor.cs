@@ -56,7 +56,7 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
         }
 
         // TODO: Remove
-        //List<DivisionDso> test = ExtractFromWebsiteInterclubPage("2023-05-01");
+        List<DivisionDso> test = ExtractFromWebsiteInterclubPage("2023-05-01");
 
         Season? season2223 = await _seasonRepository.FindAsync(x => x.StartDate.Year == 2022 && x.EndDate.Year == 2023);
 
@@ -373,6 +373,7 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
                     // Extract home team score and away team score from scoreString
                     int homeTeamScore, awayTeamScore;
                     string[] scoreParts = scoreString.Split(new char[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
+
                     if (scoreParts.Length == 2 && int.TryParse(scoreParts[0].Trim(), out homeTeamScore) && int.TryParse(scoreParts[1].Trim(), out awayTeamScore))
                     {
                         // Parse the date using a custom format
@@ -405,11 +406,45 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
                                 matchDso.AwayTeamPlayerNames = matchDetailNode.SelectNodes(".//td[@class='usp']/span").Select(x => x.InnerText).ToList();
 
                                 // Frames
-                                //FrameDso frameDso = new FrameDso()
-                                //{
-                                //};
+                                HtmlNodeCollection matrixNodes = matchDetailNode.SelectNodes(".//div[@class='mtrx']");
 
-                                //matchDso.Frames.Add(frameDso);
+                                for (int j = 0; j < matchDso.HomeTeamPlayerNames.Count; j++)
+                                {
+                                    for (int k = 0; k < matchDso.AwayTeamPlayerNames.Count; k++)
+                                    {
+                                        int matrixIndex = j * matchDso.AwayTeamPlayerNames.Count + k;
+                                        HtmlNode matrixNode = matrixNodes[matrixIndex];
+
+                                        HtmlNodeCollection frameResultNodes = matrixNode.SelectNodes(".//span[contains(@class,'fscore')]");
+                                        foreach (HtmlNode frameResultNode in frameResultNodes)
+                                        {
+                                            int[] scores = frameResultNode.InnerText.Split(" - ").Select(x => int.Parse(x)).ToArray();
+
+                                            FrameDso frameDso = new FrameDso()
+                                            {
+                                                HomeTeamPlayerName = matchDso.HomeTeamPlayerNames[j],
+                                                HomeTeamPlayerScore = scores[0],
+                                                AwayTeamPlayerName = matchDso.AwayTeamPlayerNames[k],
+                                                AwayTeamPlayerScore = scores[1]
+                                            };
+
+                                            // Breaks
+                                            HtmlNode homePlayerBreakNode = frameResultNode.SelectSingleNode("preceding-sibling::span[@class='brl'][1]");
+                                            if (homePlayerBreakNode != null)
+                                            {
+                                                // TODO
+                                            }
+
+                                            HtmlNode awayPlayerBreakNode = frameResultNode.SelectSingleNode("following-sibling::span[@class='brr'][1]");
+                                            if (awayPlayerBreakNode != null)
+                                            {
+                                                // TODO
+                                            }
+
+                                            matchDso.Frames.Add(frameDso);
+                                        }
+                                    }
+                                }
                             }
                         }
 
