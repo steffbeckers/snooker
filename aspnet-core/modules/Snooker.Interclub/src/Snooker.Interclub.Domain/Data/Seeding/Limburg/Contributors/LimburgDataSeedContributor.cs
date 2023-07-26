@@ -216,6 +216,8 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
                         AwayTeamScore = matchDso.AwayTeamScore
                     };
 
+                    // TODO: Add frames
+
                     division.Matches.Add(match);
                 }
             }
@@ -418,7 +420,7 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
                                         HtmlNodeCollection frameResultNodes = matrixNode.SelectNodes(".//span[contains(@class,'fscore')]");
                                         foreach (HtmlNode frameResultNode in frameResultNodes)
                                         {
-                                            int[] scores = frameResultNode.InnerText.Split(" - ").Select(x => int.Parse(x)).ToArray();
+                                            int[] scores = frameResultNode.InnerText.Split(" - ").Select(int.Parse).ToArray();
 
                                             FrameDso frameDso = new FrameDso()
                                             {
@@ -429,16 +431,26 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
                                             };
 
                                             // Breaks
-                                            HtmlNode homePlayerBreakNode = frameResultNode.SelectSingleNode("preceding-sibling::span[@class='brl'][1]");
+                                            HtmlNode homePlayerBreakNode = frameResultNode.SelectSingleNode("preceding-sibling::*[1][self::span[@class='brl']]");
                                             if (homePlayerBreakNode != null)
                                             {
-                                                // TODO
+                                                frameDso.HomeTeamPlayerBreaks = homePlayerBreakNode.InnerText
+                                                    .Replace("(br ", string.Empty)
+                                                    .Replace(")", string.Empty)
+                                                    .Split("+")
+                                                    .Select(int.Parse)
+                                                    .ToList();
                                             }
 
-                                            HtmlNode awayPlayerBreakNode = frameResultNode.SelectSingleNode("following-sibling::span[@class='brr'][1]");
+                                            HtmlNode awayPlayerBreakNode = frameResultNode.SelectSingleNode("following-sibling::*[1][self::span[@class='brr']]");
                                             if (awayPlayerBreakNode != null)
                                             {
-                                                // TODO
+                                                frameDso.AwayTeamPlayerBreaks = awayPlayerBreakNode.InnerText
+                                                    .Replace("(br ", string.Empty)
+                                                    .Replace(")", string.Empty)
+                                                    .Split("+")
+                                                    .Select(int.Parse)
+                                                    .ToList();
                                             }
 
                                             matchDso.Frames.Add(frameDso);
