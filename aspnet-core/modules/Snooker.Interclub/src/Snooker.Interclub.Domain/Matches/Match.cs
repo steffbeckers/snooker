@@ -4,6 +4,8 @@ using Snooker.Interclub.Teams;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using Volo.Abp.Domain.Entities.Auditing;
 using Volo.Abp.MultiTenancy;
 
@@ -31,6 +33,9 @@ public class Match : FullAuditedAggregateRoot<Guid>, IMultiTenant
 
     public Guid? AwayTeamId { get; }
 
+    [NotMapped]
+    public virtual IList<MatchTeamPlayer> AwayTeamPlayers { get => TeamPlayers.Where(x => x.TeamId == AwayTeamId).ToList(); }
+
     public int? AwayTeamScore { get; set; }
 
     public DateTime? Date { get; set; }
@@ -44,6 +49,9 @@ public class Match : FullAuditedAggregateRoot<Guid>, IMultiTenant
     public virtual Team? HomeTeam { get; }
 
     public Guid? HomeTeamId { get; }
+
+    [NotMapped]
+    public virtual IList<MatchTeamPlayer> HomeTeamPlayers { get => TeamPlayers.Where(x => x.TeamId == HomeTeamId).ToList(); }
 
     public int? HomeTeamScore { get; set; }
 

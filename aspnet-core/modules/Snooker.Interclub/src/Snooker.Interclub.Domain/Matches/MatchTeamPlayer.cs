@@ -10,14 +10,17 @@ public class MatchTeamPlayer : FullAuditedEntity<Guid>, IMultiTenant
 {
     public MatchTeamPlayer(
         Guid id,
-        Guid matchId,
-        Guid teamId,
-        Guid playerId)
+        Match match,
+        Team team,
+        Player player)
     {
         Id = id;
-        MatchId = matchId;
-        TeamId = teamId;
-        PlayerId = playerId;
+        Match = match;
+        MatchId = match.Id;
+        Team = team;
+        TeamId = team.Id;
+        Player = player;
+        PlayerId = player.Id;
     }
 
     private MatchTeamPlayer()

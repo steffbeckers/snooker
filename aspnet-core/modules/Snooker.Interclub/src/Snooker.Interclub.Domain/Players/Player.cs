@@ -32,7 +32,11 @@ public class Player : FullAuditedAggregateRoot<Guid>, IMultiTenant
 
     public string FirstName { get; set; }
 
+    public string FullName { get => $"{FirstName} {LastName}"; }
+
     public string LastName { get; set; }
+
+    public string LastNameFirstName { get => $"{LastName} {FirstName}"; }
 
     public Guid? ProfilePictureFileId { get; set; }
 

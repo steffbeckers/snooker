@@ -3,6 +3,7 @@ using Snooker.Interclub.Addresses;
 using Snooker.Interclub.Clubs;
 using Snooker.Interclub.Data.Seeding.Limburg.WebScrape;
 using Snooker.Interclub.Divisions;
+using Snooker.Interclub.Frames;
 using Snooker.Interclub.Matches;
 using Snooker.Interclub.Players;
 using Snooker.Interclub.Seasons;
@@ -54,9 +55,6 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
         {
             return;
         }
-
-        // TODO: Remove
-        List<DivisionDso> test = ExtractFromWebsiteInterclubPage("2023-05-01");
 
         Season? season2223 = await _seasonRepository.FindAsync(x => x.StartDate.Year == 2022 && x.EndDate.Year == 2023);
 
@@ -216,7 +214,99 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
                         AwayTeamScore = matchDso.AwayTeamScore
                     };
 
-                    // TODO: Add frames
+                    matchDso.Id = match.Id;
+
+                    foreach (string homeTeamPlayerName in matchDso.HomeTeamPlayerNames)
+                    {
+                        MatchTeamPlayer? matchTeamPlayer = null;
+
+                        TeamPlayer? teamPlayer = homeTeam.Players.FirstOrDefault(x => x.Player.LastNameFirstName == homeTeamPlayerName);
+
+                        if (teamPlayer != null)
+                        {
+                            matchTeamPlayer = new MatchTeamPlayer(
+                                _guidGenerator.Create(),
+                                match,
+                                homeTeam,
+                                teamPlayer.Player)
+                            {
+                                IsCaptain = teamPlayer.IsCaptain
+                            };
+                        }
+                        else
+                        {
+                            Player? player = homeTeam.Club.Players.FirstOrDefault(x => x.LastNameFirstName == homeTeamPlayerName);
+
+                            if (player != null)
+                            {
+                                matchTeamPlayer = new MatchTeamPlayer(
+                                    _guidGenerator.Create(),
+                                    match,
+                                    homeTeam,
+                                    player);
+                            }
+                        }
+
+                        if (matchTeamPlayer != null)
+                        {
+                            match.TeamPlayers.Add(matchTeamPlayer);
+                        }
+                    }
+
+                    foreach (string awayTeamPlayerName in matchDso.AwayTeamPlayerNames)
+                    {
+                        MatchTeamPlayer? matchTeamPlayer = null;
+
+                        TeamPlayer? teamPlayer = awayTeam.Players.FirstOrDefault(x => x.Player.LastNameFirstName == awayTeamPlayerName);
+
+                        if (teamPlayer != null)
+                        {
+                            matchTeamPlayer = new MatchTeamPlayer(
+                                _guidGenerator.Create(),
+                                match,
+                                awayTeam,
+                                teamPlayer.Player)
+                            {
+                                IsCaptain = teamPlayer.IsCaptain
+                            };
+                        }
+                        else
+                        {
+                            Player? player = awayTeam.Club.Players.FirstOrDefault(x => x.LastNameFirstName == awayTeamPlayerName);
+
+                            if (player != null)
+                            {
+                                matchTeamPlayer = new MatchTeamPlayer(
+                                    _guidGenerator.Create(),
+                                    match,
+                                    awayTeam,
+                                    player);
+                            }
+                        }
+
+                        if (matchTeamPlayer != null)
+                        {
+                            match.TeamPlayers.Add(matchTeamPlayer);
+                        }
+                    }
+
+                    foreach (FrameDso frameDso in matchDso.Frames)
+                    {
+                        MatchTeamPlayer? homeTeamPlayer = match.HomeTeamPlayers.FirstOrDefault(x => x.Player.LastNameFirstName == frameDso.HomeTeamPlayerName);
+                        MatchTeamPlayer? awayTeamPlayer = match.AwayTeamPlayers.FirstOrDefault(x => x.Player.LastNameFirstName == frameDso.AwayTeamPlayerName);
+
+                        Frame frame = new Frame(
+                            _guidGenerator.Create(),
+                            match,
+                            homeTeamPlayer,
+                            awayTeamPlayer)
+                        {
+                            HomePlayerScore = frameDso.HomeTeamPlayerScore,
+                            AwayPlayerScore = frameDso.AwayTeamPlayerScore
+                        };
+
+                        match.Frames.Add(frame);
+                    }
 
                     division.Matches.Add(match);
                 }
