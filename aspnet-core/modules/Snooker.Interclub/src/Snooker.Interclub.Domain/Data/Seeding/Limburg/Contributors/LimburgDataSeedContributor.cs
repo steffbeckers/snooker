@@ -298,12 +298,32 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
                         Frame frame = new Frame(
                             _guidGenerator.Create(),
                             match,
-                            homeTeamPlayer,
-                            awayTeamPlayer)
+                            homeTeamPlayer.Player,
+                            awayTeamPlayer.Player)
                         {
                             HomePlayerScore = frameDso.HomeTeamPlayerScore,
                             AwayPlayerScore = frameDso.AwayTeamPlayerScore
                         };
+
+                        foreach (int homeTeamPlayerBreak in frameDso.HomeTeamPlayerBreaks)
+                        {
+                            frame.Breaks.Add(
+                                new Break(
+                                    _guidGenerator.Create(),
+                                    frame,
+                                    homeTeamPlayer.Player,
+                                    homeTeamPlayerBreak));
+                        }
+
+                        foreach (int awayTeamPlayerBreak in frameDso.AwayTeamPlayerBreaks)
+                        {
+                            frame.Breaks.Add(
+                                new Break(
+                                    _guidGenerator.Create(),
+                                    frame,
+                                    awayTeamPlayer.Player,
+                                    awayTeamPlayerBreak));
+                        }
 
                         match.Frames.Add(frame);
                     }

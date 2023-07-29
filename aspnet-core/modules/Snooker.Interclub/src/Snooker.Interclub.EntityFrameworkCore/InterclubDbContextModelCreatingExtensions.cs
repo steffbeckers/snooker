@@ -38,6 +38,15 @@ public static class InterclubDbContextModelCreatingExtensions
                 });
         });
 
+        builder.Entity<Break>(b =>
+        {
+            b.ToTable(InterclubDbProperties.DbTablePrefix + "Breaks", InterclubDbProperties.DbSchema);
+            b.ConfigureByConvention();
+            b.HasOne(x => x.Frame).WithMany(x => x.Breaks).HasForeignKey(x => x.FrameId);
+            b.HasOne(x => x.Player).WithMany().HasForeignKey(x => x.PlayerId);
+            b.Property(x => x.Value).IsRequired();
+        });
+
         builder.Entity<Division>(b =>
         {
             b.ToTable(InterclubDbProperties.DbTablePrefix + "Divisions", InterclubDbProperties.DbSchema);

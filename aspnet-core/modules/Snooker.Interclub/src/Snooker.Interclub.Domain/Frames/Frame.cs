@@ -1,5 +1,10 @@
 using Snooker.Interclub.Matches;
+using Snooker.Interclub.Players;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using Volo.Abp.Domain.Entities.Auditing;
 using Volo.Abp.MultiTenancy;
 
@@ -10,8 +15,8 @@ public class Frame : FullAuditedAggregateRoot<Guid>, IMultiTenant
     public Frame(
         Guid id,
         Match match,
-        MatchTeamPlayer homePlayer,
-        MatchTeamPlayer awayPlayer)
+        Player homePlayer,
+        Player awayPlayer)
     {
         Id = id;
         Match = match;
@@ -26,13 +31,21 @@ public class Frame : FullAuditedAggregateRoot<Guid>, IMultiTenant
     {
     }
 
-    public virtual MatchTeamPlayer? AwayPlayer { get; set; }
+    public virtual Player? AwayPlayer { get; set; }
+
+    [NotMapped]
+    public virtual IList<Break> AwayPlayerBreaks { get => Breaks.Where(x => x.PlayerId == AwayPlayerId).ToList(); }
 
     public Guid? AwayPlayerId { get; set; }
 
     public int? AwayPlayerScore { get; set; }
 
-    public virtual MatchTeamPlayer? HomePlayer { get; set; }
+    public virtual ICollection<Break> Breaks { get; set; } = new Collection<Break>();
+
+    public virtual Player? HomePlayer { get; set; }
+
+    [NotMapped]
+    public virtual IList<Break> HomePlayerBreaks { get => Breaks.Where(x => x.PlayerId == HomePlayerId).ToList(); }
 
     public Guid? HomePlayerId { get; set; }
 

@@ -173,6 +173,64 @@ namespace Snooker.EntityFrameworkCore.Migrations
                     b.ToTable("InterclubDivisions", (string)null);
                 });
 
+            modelBuilder.Entity("Snooker.Interclub.Frames.Break", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreationTime");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("CreatorId");
+
+                    b.Property<Guid?>("DeleterId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("DeleterId");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletionTime");
+
+                    b.Property<Guid>("FrameId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false)
+                        .HasColumnName("IsDeleted");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LastModificationTime");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LastModifierId");
+
+                    b.Property<Guid>("PlayerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("TenantId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("TenantId");
+
+                    b.Property<int>("Value")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FrameId");
+
+                    b.HasIndex("PlayerId");
+
+                    b.ToTable("InterclubBreaks", (string)null);
+                });
+
             modelBuilder.Entity("Snooker.Interclub.Frames.Frame", b =>
                 {
                     b.Property<Guid>("Id")
@@ -2379,13 +2437,32 @@ namespace Snooker.EntityFrameworkCore.Migrations
                     b.Navigation("Season");
                 });
 
+            modelBuilder.Entity("Snooker.Interclub.Frames.Break", b =>
+                {
+                    b.HasOne("Snooker.Interclub.Frames.Frame", "Frame")
+                        .WithMany("Breaks")
+                        .HasForeignKey("FrameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Snooker.Interclub.Players.Player", "Player")
+                        .WithMany()
+                        .HasForeignKey("PlayerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Frame");
+
+                    b.Navigation("Player");
+                });
+
             modelBuilder.Entity("Snooker.Interclub.Frames.Frame", b =>
                 {
-                    b.HasOne("Snooker.Interclub.Matches.MatchTeamPlayer", "AwayPlayer")
+                    b.HasOne("Snooker.Interclub.Players.Player", "AwayPlayer")
                         .WithMany()
                         .HasForeignKey("AwayPlayerId");
 
-                    b.HasOne("Snooker.Interclub.Matches.MatchTeamPlayer", "HomePlayer")
+                    b.HasOne("Snooker.Interclub.Players.Player", "HomePlayer")
                         .WithMany()
                         .HasForeignKey("HomePlayerId");
 
@@ -2641,6 +2718,11 @@ namespace Snooker.EntityFrameworkCore.Migrations
                     b.Navigation("Matches");
 
                     b.Navigation("Teams");
+                });
+
+            modelBuilder.Entity("Snooker.Interclub.Frames.Frame", b =>
+                {
+                    b.Navigation("Breaks");
                 });
 
             modelBuilder.Entity("Snooker.Interclub.Matches.Match", b =>
