@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
@@ -35,6 +36,15 @@ public class SeasonsAppService : ApplicationService, ISeasonsAppService
         await CurrentUnitOfWork.SaveChangesAsync();
 
         return await GetAsync(season.Id);
+    }
+
+    public async Task<List<SeasonListDto>> GetAllAsync()
+    {
+        IQueryable<Season> seasonQueryable = await _seasonRepository.GetQueryableAsync();
+
+        return await AsyncExecuter.ToListAsync(
+            ObjectMapper.GetMapper()
+                .ProjectTo<SeasonListDto>(seasonQueryable));
     }
 
     public async Task<SeasonDto> GetAsync(Guid id)

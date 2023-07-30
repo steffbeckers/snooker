@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Volo.Abp;
 
@@ -23,6 +24,12 @@ public class SeasonsController : InterclubController, ISeasonsAppService
     public Task<SeasonDto> CopyAsync(Guid id, SeasonInputDto input)
     {
         return _seasonsAppService.CopyAsync(id, input);
+    }
+
+    [HttpGet]
+    public Task<List<SeasonListDto>> GetAllAsync()
+    {
+        return _seasonsAppService.GetAllAsync();
     }
 
     [HttpGet]
