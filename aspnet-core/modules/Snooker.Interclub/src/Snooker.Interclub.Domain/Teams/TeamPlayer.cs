@@ -19,7 +19,7 @@ public class TeamPlayer : FullAuditedAggregateRoot<Guid>, IMultiTenant
         PlayerId = player.Id;
     }
 
-    private TeamPlayer()
+    protected TeamPlayer()
     {
     }
 

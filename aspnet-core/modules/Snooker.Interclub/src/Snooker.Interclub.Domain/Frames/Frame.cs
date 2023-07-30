@@ -27,7 +27,7 @@ public class Frame : FullAuditedAggregateRoot<Guid>, IMultiTenant
         AwayPlayerId = awayPlayer.Id;
     }
 
-    private Frame()
+    protected Frame()
     {
     }
 

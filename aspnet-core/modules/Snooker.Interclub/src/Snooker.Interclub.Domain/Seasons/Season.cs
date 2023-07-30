@@ -19,7 +19,7 @@ public class Season : FullAuditedAggregateRoot<Guid>, IMultiTenant
         EndDate = endDate;
     }
 
-    private Season()
+    protected Season()
     {
     }
 

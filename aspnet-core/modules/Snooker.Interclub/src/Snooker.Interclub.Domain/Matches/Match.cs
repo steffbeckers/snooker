@@ -25,7 +25,7 @@ public class Match : FullAuditedAggregateRoot<Guid>, IMultiTenant
         AwayTeamId = awayTeam.Id;
     }
 
-    private Match()
+    protected Match()
     {
     }
 

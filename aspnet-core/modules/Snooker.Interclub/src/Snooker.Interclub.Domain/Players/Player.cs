@@ -18,13 +18,13 @@ public class Player : FullAuditedAggregateRoot<Guid>, IMultiTenant
         LastName = lastName;
     }
 
-    private Player()
+    protected Player()
     {
     }
 
     public int? Class { get; set; }
 
-    public Club? Club { get; set; }
+    public virtual Club? Club { get; set; }
 
     public Guid? ClubId { get; set; }
 
@@ -42,7 +42,7 @@ public class Player : FullAuditedAggregateRoot<Guid>, IMultiTenant
 
     public Guid? TenantId { get; private set; }
 
-    public IdentityUser? User { get; set; }
+    public virtual IdentityUser? User { get; set; }
 
     public Guid? UserId { get; set; }
 }

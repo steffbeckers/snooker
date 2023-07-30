@@ -27,7 +27,7 @@ public class Team : FullAuditedAggregateRoot<Guid>, IMultiTenant
         Name = name;
     }
 
-    private Team()
+    protected Team()
     {
     }
 

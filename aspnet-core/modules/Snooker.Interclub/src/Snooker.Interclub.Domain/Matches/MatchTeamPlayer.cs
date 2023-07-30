@@ -23,7 +23,7 @@ public class MatchTeamPlayer : FullAuditedEntity<Guid>, IMultiTenant
         PlayerId = player.Id;
     }
 
-    private MatchTeamPlayer()
+    protected MatchTeamPlayer()
     {
     }
 

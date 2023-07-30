@@ -21,7 +21,7 @@ public class Break : FullAuditedEntity<Guid>, IMultiTenant
         Value = value;
     }
 
-    private Break()
+    protected Break()
     {
     }
 
@@ -29,7 +29,7 @@ public class Break : FullAuditedEntity<Guid>, IMultiTenant
 
     public Guid FrameId { get; set; }
 
-    public Player Player { get; }
+    public virtual Player Player { get; }
 
     public Guid PlayerId { get; set; }
 

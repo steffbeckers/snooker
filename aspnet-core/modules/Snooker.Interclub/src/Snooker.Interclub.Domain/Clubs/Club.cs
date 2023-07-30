@@ -26,7 +26,7 @@ public class Club : FullAuditedAggregateRoot<Guid>, IMultiTenant
         Name = name;
     }
 
-    private Club()
+    protected Club()
     {
     }
 

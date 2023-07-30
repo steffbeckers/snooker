@@ -22,7 +22,7 @@ public class Division : FullAuditedAggregateRoot<Guid>, IMultiTenant
         Name = name;
     }
 
-    private Division()
+    protected Division()
     {
     }
 
