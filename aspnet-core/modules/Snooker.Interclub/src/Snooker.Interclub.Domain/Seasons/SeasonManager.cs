@@ -48,4 +48,10 @@ public class SeasonManager : DomainService
 
         return season;
     }
+
+    public Task<Season> ScheduleAsync(Season season)
+    {
+        // TODO
+        return Task.FromResult(season);
+    }
 }

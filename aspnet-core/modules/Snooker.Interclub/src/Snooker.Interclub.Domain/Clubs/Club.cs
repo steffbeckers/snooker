@@ -64,6 +64,8 @@ public class Club : FullAuditedAggregateRoot<Guid>, IMultiTenant
         }
     }
 
+    public int NumberOfTables { get; set; }
+
     public string? PhoneNumber
     {
         get => _phoneNumber;
