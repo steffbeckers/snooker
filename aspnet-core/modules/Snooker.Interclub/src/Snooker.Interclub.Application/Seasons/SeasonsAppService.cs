@@ -1,7 +1,10 @@
 using System;
+using System.Linq;
+using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
 using Volo.Abp;
 using Volo.Abp.Application.Services;
+using Volo.Abp.ObjectMapping;
 
 namespace Snooker.Interclub.Seasons;
 
@@ -36,8 +39,11 @@ public class SeasonsAppService : ApplicationService, ISeasonsAppService
 
     public async Task<SeasonDto> GetAsync(Guid id)
     {
-        Season season = await _seasonRepository.GetAsync(id);
+        IQueryable<Season> seasonQueryable = await _seasonRepository.GetQueryableAsync();
 
-        return ObjectMapper.Map<Season, SeasonDto>(season);
+        return await AsyncExecuter.FirstOrDefaultAsync(
+            ObjectMapper.GetMapper()
+                .ProjectTo<SeasonDto>(seasonQueryable)
+                .Where(x => x.Id == id));
     }
 }
