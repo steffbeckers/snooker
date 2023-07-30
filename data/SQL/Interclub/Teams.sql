@@ -1,0 +1,10 @@
+SELECT t.[Id]
+      ,CONCAT(YEAR(s.[StartDate]), '-', YEAR(s.[EndDate])) AS [Season]
+      ,c.[Name] AS [Club]
+      ,t.[Name] AS [Team]
+      ,d.[Name] AS [Division]
+  FROM [dbo].[InterclubTeams] t
+  LEFT JOIN [dbo].[InterclubDivisions] d ON t.[DivisionId] = d.[Id]
+  LEFT JOIN [dbo].[InterclubSeasons] s ON d.[SeasonId] = s.[Id]
+  LEFT JOIN [dbo].[InterclubClubs] c ON t.[ClubId] = c.[Id]
+  ORDER BY s.[StartDate], c.[Name], t.[Name]

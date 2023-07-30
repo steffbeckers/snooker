@@ -1,4 +1,5 @@
-SELECT CONCAT(YEAR(s.[StartDate]), '-', YEAR(s.[EndDate])) AS [Season]
+SELECT d.[Id]
+       ,CONCAT(YEAR(s.[StartDate]), '-', YEAR(s.[EndDate])) AS [Season]
       --,d.[Id]
       --,d.[SortOrder]
       ,d.[Name] AS [Division]
@@ -6,4 +7,4 @@ SELECT CONCAT(YEAR(s.[StartDate]), '-', YEAR(s.[EndDate])) AS [Season]
       --,d.[MinPlayerClass]
   FROM [dbo].[InterclubDivisions] d
   LEFT JOIN [dbo].[InterclubSeasons] s ON d.[SeasonId] = s.[Id]
-  ORDER BY d.[SortOrder]
+  ORDER BY s.[StartDate], d.[SortOrder]
