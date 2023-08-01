@@ -53,6 +53,7 @@ public static class InterclubDbContextModelCreatingExtensions
             b.ConfigureByConvention();
             b.Property(x => x.Name).IsRequired().HasMaxLength(DivisionConsts.NameMaxLength);
             b.HasOne(x => x.Season).WithMany(x => x.Divisions).HasForeignKey(x => x.SeasonId);
+            b.Property(x => x.RoundsPerSeasonCount).HasDefaultValue(2);
         });
 
         builder.Entity<Frame>(b =>
