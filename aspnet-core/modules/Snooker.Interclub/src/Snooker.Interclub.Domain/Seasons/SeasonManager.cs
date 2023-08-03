@@ -1,9 +1,6 @@
-using Snooker.Interclub.Clubs;
 using Snooker.Interclub.Divisions;
 using Snooker.Interclub.Teams;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Services;
 
@@ -52,11 +49,8 @@ public class SeasonManager : DomainService
         return season;
     }
 
-    public async Task<Season> ScheduleAsync(Season season)
+    public Task<Season> ScheduleAsync(Season season)
     {
-        List<Division> divisions = await AsyncExecuter.ToListAsync(season.Divisions.AsQueryable());
-        List<Club> clubs = await AsyncExecuter.ToListAsync(season.Divisions.SelectMany(x => x.Teams).Select(x => x.Club).Distinct().AsQueryable());
-
-        return season;
+        return Task.FromResult(season);
     }
 }
