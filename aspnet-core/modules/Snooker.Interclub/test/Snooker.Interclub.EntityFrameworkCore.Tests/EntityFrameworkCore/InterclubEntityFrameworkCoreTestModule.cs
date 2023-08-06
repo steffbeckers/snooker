@@ -1,4 +1,4 @@
-﻿using Microsoft.Data.Sqlite;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -20,20 +20,21 @@ public class InterclubEntityFrameworkCoreTestModule : AbpModule
     {
         context.Services.AddAlwaysDisableUnitOfWorkTransaction();
 
-        var sqliteConnection = CreateDatabaseAndGetConnection();
+        SqliteConnection sqliteConnection = CreateDatabaseAndGetConnection();
 
         Configure<AbpDbContextOptions>(options =>
         {
             options.Configure(abpDbContextConfigurationContext =>
             {
                 abpDbContextConfigurationContext.DbContextOptions.UseSqlite(sqliteConnection);
+                abpDbContextConfigurationContext.DbContextOptions.EnableSensitiveDataLogging();
             });
         });
     }
 
     private static SqliteConnection CreateDatabaseAndGetConnection()
     {
-        var connection = new SqliteConnection("Data Source=:memory:");
+        SqliteConnection connection = new SqliteConnection("Data Source=:memory:");
         connection.Open();
 
         new InterclubDbContext(
