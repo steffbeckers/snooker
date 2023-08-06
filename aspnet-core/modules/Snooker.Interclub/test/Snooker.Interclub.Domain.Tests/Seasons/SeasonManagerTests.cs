@@ -158,6 +158,70 @@ public class SeasonManagerTests : InterclubDomainTestBase
             divisionEre.Teams.Add(teamHappySnookerC);
             clubHappySnooker.Teams.Add(teamHappySnookerC);
 
+            Team teamReSpotA = new Team(
+                id: Guid.Parse("d1894dbe-ad35-4919-af1b-ce52af2a5a89"),
+                divisionEre,
+                clubReSpot,
+                name: "A");
+            divisionEre.Teams.Add(teamReSpotA);
+            clubReSpot.Teams.Add(teamReSpotA);
+
+            Team teamReSpotB = new Team(
+                id: Guid.Parse("e97a78db-b929-45c5-b263-1184b5e47f8a"),
+                divisionEre,
+                clubReSpot,
+                name: "B");
+            divisionEre.Teams.Add(teamReSpotB);
+            clubReSpot.Teams.Add(teamReSpotB);
+
+            Team teamReSpotC = new Team(
+                id: Guid.Parse("a7476bd5-f28d-4b6b-88f4-8c60de8c9c77"),
+                divisionEre,
+                clubReSpot,
+                name: "C");
+            divisionEre.Teams.Add(teamReSpotC);
+            clubReSpot.Teams.Add(teamReSpotC);
+
+            Team teamRileyInnA = new Team(
+                id: Guid.Parse("b173ff74-86d9-48c0-9a7a-8e3e783509c9"),
+                divisionEre,
+                clubRileyInn,
+                name: "A");
+            divisionEre.Teams.Add(teamRileyInnA);
+            clubRileyInn.Teams.Add(teamRileyInnA);
+
+            Team teamRileyInnB = new Team(
+                id: Guid.Parse("784989e3-a000-4b60-a8ca-5fccde978fb5"),
+                divisionEre,
+                clubRileyInn,
+                name: "B");
+            divisionEre.Teams.Add(teamRileyInnB);
+            clubRileyInn.Teams.Add(teamRileyInnB);
+
+            Team teamRileyInnC = new Team(
+                id: Guid.Parse("807ca2e4-cbfd-4a76-8b93-e1a2889b8568"),
+                divisionEre,
+                clubRileyInn,
+                name: "C");
+            divisionEre.Teams.Add(teamRileyInnC);
+            clubRileyInn.Teams.Add(teamRileyInnC);
+
+            Team teamZumaA = new Team(
+                id: Guid.Parse("62c25faa-88d1-453a-863b-c11e22c852ab"),
+                divisionEre,
+                clubZuma,
+                name: "A");
+            divisionEre.Teams.Add(teamZumaA);
+            clubZuma.Teams.Add(teamZumaA);
+
+            Team teamZumaB = new Team(
+                id: Guid.Parse("34f1146c-ac89-41ac-800a-86bee0e44957"),
+                divisionEre,
+                clubZuma,
+                name: "B");
+            divisionEre.Teams.Add(teamZumaB);
+            clubZuma.Teams.Add(teamZumaB);
+
             season.Divisions.Add(divisionEre);
 
             Division division1 = new Division(
@@ -259,6 +323,54 @@ public class SeasonManagerTests : InterclubDomainTestBase
             division1.Teams.Add(teamHappySnookerD);
             clubHappySnooker.Teams.Add(teamHappySnookerD);
 
+            Team teamNRGA = new Team(
+                id: Guid.Parse("234f1401-6b84-4e7b-8067-4885502ee4e3"),
+                division1,
+                clubNRG,
+                name: "A");
+            division1.Teams.Add(teamNRGA);
+            clubNRG.Teams.Add(teamNRGA);
+
+            Team teamNRGB = new Team(
+                id: Guid.Parse("23b5c5e0-5d90-4826-aa75-5b0d7234fe4c"),
+                division1,
+                clubNRG,
+                name: "B");
+            division1.Teams.Add(teamNRGB);
+            clubNRG.Teams.Add(teamNRGB);
+
+            Team teamReSpotD = new Team(
+                id: Guid.Parse("d3123654-e197-4d71-b5d5-e03ae605a4a7"),
+                division1,
+                clubReSpot,
+                name: "D");
+            division1.Teams.Add(teamReSpotD);
+            clubReSpot.Teams.Add(teamReSpotD);
+
+            Team teamReSpotE = new Team(
+                id: Guid.Parse("71d11e3c-8dee-4789-9aa5-e1e5bae13afd"),
+                division1,
+                clubReSpot,
+                name: "E");
+            division1.Teams.Add(teamReSpotE);
+            clubReSpot.Teams.Add(teamReSpotE);
+
+            Team teamRileyInnD = new Team(
+                id: Guid.Parse("c4bc8b44-eb52-43a4-a11f-21bd0c5c9cb6"),
+                division1,
+                clubRileyInn,
+                name: "D");
+            division1.Teams.Add(teamRileyInnD);
+            clubRileyInn.Teams.Add(teamRileyInnD);
+
+            Team teamSnookerSportsA = new Team(
+                id: Guid.Parse("a482feeb-deba-48c4-8610-fd7f309414a8"),
+                division1,
+                clubSnookerSports,
+                name: "A");
+            division1.Teams.Add(teamSnookerSportsA);
+            clubSnookerSports.Teams.Add(teamSnookerSportsA);
+
             season.Divisions.Add(division1);
 
             Division division2 = new Division(
@@ -327,6 +439,78 @@ public class SeasonManagerTests : InterclubDomainTestBase
                 name: "G");
             division2.Teams.Add(teamHappySnookerG);
             clubHappySnooker.Teams.Add(teamHappySnookerG);
+
+            Team teamNRGC = new Team(
+                id: Guid.Parse("3b84dceb-2c48-4380-b603-ee00172dfd63"),
+                division2,
+                clubNRG,
+                name: "C");
+            division2.Teams.Add(teamNRGC);
+            clubNRG.Teams.Add(teamNRGC);
+
+            Team teamReSpotF = new Team(
+                id: Guid.Parse("ca922235-b92d-478f-a360-e9e98932f0cf"),
+                division2,
+                clubReSpot,
+                name: "F");
+            division2.Teams.Add(teamReSpotF);
+            clubReSpot.Teams.Add(teamReSpotF);
+
+            Team teamReSpotG = new Team(
+                id: Guid.Parse("11185623-6a3f-486d-983b-ca931922723d"),
+                division2,
+                clubReSpot,
+                name: "G");
+            division2.Teams.Add(teamReSpotG);
+            clubReSpot.Teams.Add(teamReSpotG);
+
+            Team teamRileyInnE = new Team(
+                id: Guid.Parse("1d8bf0b3-2870-47fa-a7c8-66faaf03d974"),
+                division2,
+                clubRileyInn,
+                name: "E");
+            division2.Teams.Add(teamRileyInnE);
+            clubRileyInn.Teams.Add(teamRileyInnE);
+
+            Team teamRileyInnF = new Team(
+                id: Guid.Parse("43674326-c64a-450c-a717-84580e68eb55"),
+                division2,
+                clubRileyInn,
+                name: "F");
+            division2.Teams.Add(teamRileyInnF);
+            clubRileyInn.Teams.Add(teamRileyInnF);
+
+            Team teamRileyInnG = new Team(
+                id: Guid.Parse("1127b903-780c-43ce-bfc5-433d29e15385"),
+                division2,
+                clubRileyInn,
+                name: "G");
+            division2.Teams.Add(teamRileyInnG);
+            clubRileyInn.Teams.Add(teamRileyInnG);
+
+            Team teamSnookerSportsB = new Team(
+                id: Guid.Parse("885c556a-5164-45c9-8a03-8dc8a78f3ab7"),
+                division2,
+                clubSnookerSports,
+                name: "B");
+            division2.Teams.Add(teamSnookerSportsB);
+            clubSnookerSports.Teams.Add(teamSnookerSportsB);
+
+            Team teamZumaC = new Team(
+                id: Guid.Parse("c572dc0a-f48c-461a-974e-71797a1056d0"),
+                division2,
+                clubZuma,
+                name: "C");
+            division2.Teams.Add(teamZumaC);
+            clubZuma.Teams.Add(teamZumaC);
+
+            Team teamZumaD = new Team(
+                id: Guid.Parse("b8d2b913-5d69-46cd-9c55-71620fd9f04f"),
+                division2,
+                clubZuma,
+                name: "D");
+            division2.Teams.Add(teamZumaD);
+            clubZuma.Teams.Add(teamZumaD);
 
             season.Divisions.Add(division2);
 
@@ -412,6 +596,70 @@ public class SeasonManagerTests : InterclubDomainTestBase
                 name: "K");
             division3.Teams.Add(teamHappySnookerK);
             clubHappySnooker.Teams.Add(teamHappySnookerK);
+
+            Team teamNRGD = new Team(
+                id: Guid.Parse("46173b28-8de1-4bb7-b3f1-1e914873e69b"),
+                division3,
+                clubNRG,
+                name: "D");
+            division3.Teams.Add(teamNRGD);
+            clubNRG.Teams.Add(teamNRGD);
+
+            Team teamReSpotH = new Team(
+                id: Guid.Parse("f906e77c-fb4c-4c62-bf40-9fa018a99484"),
+                division3,
+                clubReSpot,
+                name: "H");
+            division3.Teams.Add(teamReSpotH);
+            clubReSpot.Teams.Add(teamReSpotH);
+
+            Team teamReSpotI = new Team(
+                id: Guid.Parse("745cc76e-cb2b-4786-b100-fc542b9d3a90"),
+                division3,
+                clubReSpot,
+                name: "I");
+            division3.Teams.Add(teamReSpotI);
+            clubReSpot.Teams.Add(teamReSpotI);
+
+            Team teamRileyInnH = new Team(
+                id: Guid.Parse("0bf54219-21e6-4d48-8bcc-a7a6259b819d"),
+                division3,
+                clubRileyInn,
+                name: "H");
+            division3.Teams.Add(teamRileyInnH);
+            clubRileyInn.Teams.Add(teamRileyInnH);
+
+            Team teamRileyInnI = new Team(
+                id: Guid.Parse("58d5d14e-ab8f-4100-9dfb-e96a6bb9c777"),
+                division3,
+                clubRileyInn,
+                name: "I");
+            division3.Teams.Add(teamRileyInnI);
+            clubRileyInn.Teams.Add(teamRileyInnI);
+
+            Team teamRileyInnJ = new Team(
+                id: Guid.Parse("7085fe91-e9a9-43ad-b9f8-d94e75140b17"),
+                division3,
+                clubRileyInn,
+                name: "J");
+            division3.Teams.Add(teamRileyInnJ);
+            clubRileyInn.Teams.Add(teamRileyInnJ);
+
+            Team teamZumaE = new Team(
+                id: Guid.Parse("12b1c133-072c-4ad4-9772-a3881ecf75ba"),
+                division3,
+                clubZuma,
+                name: "E");
+            division3.Teams.Add(teamZumaE);
+            clubZuma.Teams.Add(teamZumaE);
+
+            Team teamZumaF = new Team(
+                id: Guid.Parse("e54060ee-393e-4d04-847f-cbfc1c2a77fb"),
+                division3,
+                clubZuma,
+                name: "F");
+            division3.Teams.Add(teamZumaF);
+            clubZuma.Teams.Add(teamZumaF);
 
             season.Divisions.Add(division3);
 
@@ -506,6 +754,62 @@ public class SeasonManagerTests : InterclubDomainTestBase
             division4.Teams.Add(teamHappySnookerN);
             clubHappySnooker.Teams.Add(teamHappySnookerN);
 
+            Team teamNRGE = new Team(
+                id: Guid.Parse("4dc189af-9e95-4ea9-97f5-0fd256a8d4dd"),
+                division4,
+                clubNRG,
+                name: "E");
+            division4.Teams.Add(teamNRGE);
+            clubNRG.Teams.Add(teamNRGE);
+
+            Team teamReSpotJ = new Team(
+                id: Guid.Parse("6f3cfc7c-45d1-4f91-b1f1-35855962c2e3"),
+                division4,
+                clubReSpot,
+                name: "J");
+            division4.Teams.Add(teamReSpotJ);
+            clubReSpot.Teams.Add(teamReSpotJ);
+
+            Team teamReSpotK = new Team(
+                id: Guid.Parse("109e16f2-d7a4-4c74-ab29-8ade03dd309f"),
+                division4,
+                clubReSpot,
+                name: "K");
+            division4.Teams.Add(teamReSpotK);
+            clubReSpot.Teams.Add(teamReSpotK);
+
+            Team teamReSpotL = new Team(
+                id: Guid.Parse("1547f011-c538-4d6d-a7d1-34bf7c9a2ec7"),
+                division4,
+                clubReSpot,
+                name: "L");
+            division4.Teams.Add(teamReSpotL);
+            clubReSpot.Teams.Add(teamReSpotL);
+
+            Team teamReSpotM = new Team(
+                id: Guid.Parse("74a169e7-4ace-46fd-8315-7ab4a6d4b03a"),
+                division4,
+                clubReSpot,
+                name: "M");
+            division4.Teams.Add(teamReSpotM);
+            clubReSpot.Teams.Add(teamReSpotM);
+
+            Team teamRileyInnK = new Team(
+                id: Guid.Parse("d45c8164-7b5a-4d4c-b563-da96d486e701"),
+                division4,
+                clubRileyInn,
+                name: "K");
+            division4.Teams.Add(teamRileyInnK);
+            clubRileyInn.Teams.Add(teamRileyInnK);
+
+            Team teamZumaG = new Team(
+                id: Guid.Parse("e4023a8f-4076-4e65-a1c4-49d2cd40762e"),
+                division4,
+                clubZuma,
+                name: "G");
+            division4.Teams.Add(teamZumaG);
+            clubZuma.Teams.Add(teamZumaG);
+
             season.Divisions.Add(division4);
 
             Division division5 = new Division(
@@ -551,6 +855,102 @@ public class SeasonManagerTests : InterclubDomainTestBase
             division5.Teams.Add(teamHappySnookerQ);
             clubHappySnooker.Teams.Add(teamHappySnookerQ);
 
+            Team teamReSpotN = new Team(
+                id: Guid.Parse("fdbaaa0f-b4ed-4a14-ab74-911c60c4a956"),
+                division5,
+                clubReSpot,
+                name: "N");
+            division5.Teams.Add(teamReSpotN);
+            clubReSpot.Teams.Add(teamReSpotN);
+
+            Team teamReSpotO = new Team(
+                id: Guid.Parse("3681ed12-14f1-490b-a2f9-336cc99bb824"),
+                division5,
+                clubReSpot,
+                name: "O");
+            division5.Teams.Add(teamReSpotO);
+            clubReSpot.Teams.Add(teamReSpotO);
+
+            Team teamReSpotP = new Team(
+                id: Guid.Parse("2f07d12d-844a-4409-b3f7-f9a4ce09e511"),
+                division5,
+                clubReSpot,
+                name: "P");
+            division5.Teams.Add(teamReSpotP);
+            clubReSpot.Teams.Add(teamReSpotP);
+
+            Team teamReSpotQ = new Team(
+                id: Guid.Parse("e87a4ce1-cd10-498e-b7e4-114afb1ac811"),
+                division5,
+                clubReSpot,
+                name: "Q");
+            division5.Teams.Add(teamReSpotQ);
+            clubReSpot.Teams.Add(teamReSpotQ);
+
+            Team teamReSpotR = new Team(
+                id: Guid.Parse("4497b8cb-b3cd-41a7-8a3f-ea8f30f82ce5"),
+                division5,
+                clubReSpot,
+                name: "R");
+            division5.Teams.Add(teamReSpotR);
+            clubReSpot.Teams.Add(teamReSpotR);
+
+            Team teamReSpotS = new Team(
+                id: Guid.Parse("8f6330f5-0dcf-4a3f-9fbf-a362a1a2710c"),
+                division5,
+                clubReSpot,
+                name: "S");
+            division5.Teams.Add(teamReSpotS);
+            clubReSpot.Teams.Add(teamReSpotS);
+
+            Team teamReSpotT = new Team(
+                id: Guid.Parse("adaef4b2-6c3f-4370-b735-cb88b6c06b4e"),
+                division5,
+                clubReSpot,
+                name: "T");
+            division5.Teams.Add(teamReSpotT);
+            clubReSpot.Teams.Add(teamReSpotT);
+
+            Team teamRileyInnL = new Team(
+                id: Guid.Parse("38100d49-c486-4df8-a6c2-fb7bd253c40f"),
+                division5,
+                clubRileyInn,
+                name: "L");
+            division5.Teams.Add(teamRileyInnL);
+            clubRileyInn.Teams.Add(teamRileyInnL);
+
+            Team teamRileyInnM = new Team(
+                id: Guid.Parse("49716688-88bb-494d-9c3b-b23fe077279a"),
+                division5,
+                clubRileyInn,
+                name: "M");
+            division5.Teams.Add(teamRileyInnM);
+            clubRileyInn.Teams.Add(teamRileyInnM);
+
+            Team teamRileyInnN = new Team(
+                id: Guid.Parse("7b92d520-f44f-41dd-aa44-f474ed664019"),
+                division5,
+                clubRileyInn,
+                name: "N");
+            division5.Teams.Add(teamRileyInnN);
+            clubRileyInn.Teams.Add(teamRileyInnN);
+
+            Team teamZumaH = new Team(
+                id: Guid.Parse("22ffc8b1-138e-40c8-b6eb-6e65610c2e6c"),
+                division5,
+                clubZuma,
+                name: "H");
+            division5.Teams.Add(teamZumaH);
+            clubZuma.Teams.Add(teamZumaH);
+
+            Team teamZumaI = new Team(
+                id: Guid.Parse("0101caec-72d8-4c60-a3b5-1f36f94a3776"),
+                division5,
+                clubZuma,
+                name: "I");
+            division5.Teams.Add(teamZumaI);
+            clubZuma.Teams.Add(teamZumaI);
+
             season.Divisions.Add(division5);
 
             Division divisionSaturday = new Division(
@@ -583,6 +983,46 @@ public class SeasonManagerTests : InterclubDomainTestBase
                 name: "R");
             divisionSaturday.Teams.Add(teamHappySnookerR);
             clubHappySnooker.Teams.Add(teamHappySnookerR);
+
+            Team teamNRGF = new Team(
+                id: Guid.Parse("275ae8d7-57ea-4a63-b12c-db38fabd71f9"),
+                divisionSaturday,
+                clubNRG,
+                name: "F");
+            divisionSaturday.Teams.Add(teamNRGF);
+            clubNRG.Teams.Add(teamNRGF);
+
+            Team teamReSpotU = new Team(
+                id: Guid.Parse("a54c1ec4-0f58-49f0-b7d8-6c925e15a6ae"),
+                divisionSaturday,
+                clubReSpot,
+                name: "U");
+            divisionSaturday.Teams.Add(teamReSpotU);
+            clubReSpot.Teams.Add(teamReSpotU);
+
+            Team teamReSpotV = new Team(
+                id: Guid.Parse("01e3a70d-b3fa-4fff-9f2f-8a4fbe6fb79b"),
+                divisionSaturday,
+                clubReSpot,
+                name: "V");
+            divisionSaturday.Teams.Add(teamReSpotV);
+            clubReSpot.Teams.Add(teamReSpotV);
+
+            Team teamReSpotW = new Team(
+                id: Guid.Parse("fa3606a0-682b-47b7-8113-0933c7d3b07e"),
+                divisionSaturday,
+                clubReSpot,
+                name: "W");
+            divisionSaturday.Teams.Add(teamReSpotW);
+            clubReSpot.Teams.Add(teamReSpotW);
+
+            Team teamReSpotX = new Team(
+                id: Guid.Parse("b22e4276-3c72-4c62-9458-8f2a1a1ca47e"),
+                divisionSaturday,
+                clubReSpot,
+                name: "X");
+            divisionSaturday.Teams.Add(teamReSpotX);
+            clubReSpot.Teams.Add(teamReSpotX);
 
             season.Divisions.Add(divisionSaturday);
 
