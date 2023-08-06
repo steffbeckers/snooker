@@ -55,6 +55,8 @@ public class Match : FullAuditedAggregateRoot<Guid>, IMultiTenant
 
     public int? HomeTeamScore { get; set; }
 
+    public int? Round { get; set; }
+
     public virtual ICollection<MatchTeamPlayer> TeamPlayers { get; private set; } = new Collection<MatchTeamPlayer>();
 
     public Guid? TenantId { get; private set; }

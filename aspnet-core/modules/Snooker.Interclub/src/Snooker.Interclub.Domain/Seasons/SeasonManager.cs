@@ -1,4 +1,5 @@
 using Snooker.Interclub.Divisions;
+using Snooker.Interclub.Matches;
 using Snooker.Interclub.Teams;
 using System;
 using System.Threading.Tasks;
@@ -51,6 +52,34 @@ public class SeasonManager : DomainService
 
     public Task<Season> ScheduleAsync(Season season)
     {
+        foreach (Division division in season.Divisions)
+        {
+            for (int round = 1; round <= division.RoundsPerSeasonCount; round++)
+            {
+                foreach (Team homeTeam in division.Teams)
+                {
+                    foreach (Team awayTeam in division.Teams)
+                    {
+                        if (homeTeam.Id == awayTeam.Id)
+                        {
+                            continue;
+                        }
+
+                        Match match = new Match(
+                            GuidGenerator.Create(),
+                            homeTeam,
+                            awayTeam)
+                        {
+                            Division = division,
+                            Round = round
+                        };
+
+                        division.Matches.Add(match);
+                    }
+                }
+            }
+        }
+
         return Task.FromResult(season);
     }
 }
