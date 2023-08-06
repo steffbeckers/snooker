@@ -12,8 +12,7 @@ namespace Snooker.Interclub.EntityFrameworkCore;
 [DependsOn(
     typeof(InterclubTestBaseModule),
     typeof(InterclubEntityFrameworkCoreModule),
-    typeof(AbpEntityFrameworkCoreSqliteModule)
-    )]
+    typeof(AbpEntityFrameworkCoreSqliteModule))]
 public class InterclubEntityFrameworkCoreTestModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
