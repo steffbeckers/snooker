@@ -969,12 +969,12 @@ public class SeasonsDataSeedContributor : IDataSeedContributor, ITransientDepend
         {
             FrameCount = 12,
             MinPlayerClass = 3,
-            RoundsPerSeasonCount = 3,
+            RoundsPerSeasonCount = 6,
             SortOrder = 7,
             DaysOfWeek = new List<DayOfWeek>()
-                {
-                    DayOfWeek.Saturday
-                }
+            {
+                DayOfWeek.Saturday
+            }
         };
 
         Team teamDeKreeftM = new Team(
