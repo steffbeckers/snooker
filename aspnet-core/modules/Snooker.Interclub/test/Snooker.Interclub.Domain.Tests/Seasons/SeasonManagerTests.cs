@@ -16,15 +16,15 @@ public class SeasonManagerTests : InterclubDomainTestBase
     }
 
     [Fact]
-    public async Task Should_Schedule()
+    public async Task Should_Schedule_Season()
     {
         await WithUnitOfWorkAsync(async () =>
         {
             // Arrange
-            Season season = await _seasonRepository.GetAsync(Guid.Parse("1877aa91-3906-48f0-a4eb-eb7dc9358835")); // Season 22-23
+            Guid seasonId = Guid.Parse("1877aa91-3906-48f0-a4eb-eb7dc9358835"); // Season 22-23
 
             // Act
-            season = await _seasonManager.ScheduleAsync(season);
+            Season season = await _seasonManager.ScheduleAsync(seasonId);
 
             // Assert
         });
