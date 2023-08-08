@@ -1,0 +1,95 @@
+(function($){
+
+$(document).ready(function() {
+
+    $.fn.showCoverbg = function()
+    {
+        $('#coverbg').height($(document).height());
+        $('#coverbg').fadeIn(100);
+    };
+
+    $.fn.showLoginForm = function(lgnerr)
+    {
+        // chkbox toon pasw uit zetten
+        $('#showpas').prop( 'checked', false );
+        // toon loginkader
+        $.fn.showCoverbg();
+        $('#login-form').fadeIn(200);
+        if (lgnerr > 0) $('#web-login-err').text('Geen geldige login of paswoord...');
+        $('#login-form').focus();
+
+        $('#showpas').change(function()
+        {
+            if ( $('#showpas').is(':checked') )
+            {
+                $('#web_paswoord').clone().attr('type','text').insertAfter('#web_paswoord').prev().remove();
+            } else {
+                $('#web_paswoord').clone().attr('type','password').insertAfter('#web_paswoord').prev().remove();
+            }
+        });
+    };
+
+    $('#login-pwforgot').on('click', function()
+    {
+        $('#login-form').fadeOut(200);
+        $('#pwforgot-form').fadeIn(200);
+        //$('#coverbg').hide();
+    });
+
+    $('#close-x').on('click', function()
+    {
+        $(this).parent().fadeOut(200);
+        $('#coverbg').hide();
+    });
+
+    $('.btn-torin').on('click', function()  // tornooi login
+    {
+	    $.fn.showCoverbg();
+        //id = in-xxxxx
+        var torid = $(this).attr('id');
+        // inloggen
+        //if (showlgn != 0) $.fn.showLoginForm(0);
+        $.fn.showLoginForm(0);
+        //alert ('test');
+        // inschrijven
+        if (showlgn == 0) $('#treg-'+torid.substring(3)).fadeIn(200);
+    });
+
+    $('.btn-webin').on('click', function()  // algemene login
+    {
+        $.fn.showCoverbg();
+
+        //id = in-xxxxx
+        var torid = 'none';
+        // inloggen
+        //if (showlgn != 0) $.fn.showLoginForm(0);
+        $.fn.showLoginForm(0);
+    });
+
+    $('.closemsg').on('click', function()
+    {
+        $(this).parent().hide();
+        //$(this).closest('.msgbox').hide();
+        $('#coverbg').fadeOut(100);
+    });
+
+    $('.closeandreload').on('click', function()
+    {
+        $(this).parent().hide();
+        $('#coverbg').fadeOut(100);
+        // reload page without form submit (again)
+        window.location.href = window.location.href;
+    });
+
+	// toon login bij "enkel-leden" items
+	if (showlgn > 0) { $.fn.showLoginForm(); }
+
+    var urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('lgnerr')) {
+        //var lerr = urlParams.get('lgnerr');
+        //alert (lerr);
+        if (urlParams.get('lgnerr') == 1 || urlParams.get('lgnerr') == 2) $.fn.showLoginForm(urlParams.get('lgnerr'));
+    }
+    if ( typeof showmsg !== 'undefined' && showmsg == true )  { $.fn.showCoverbg(); }
+});
+})(jQuery);
