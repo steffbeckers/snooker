@@ -5,13 +5,17 @@
     <PropertyGroup>
         <Nullable>enable</Nullable>
         <RootNamespace>Snooker.Interclub</RootNamespace>
-        <TargetFramework>netstandard2.1</TargetFramework>
+        <TargetFramework>net7.0</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>
         <ProjectReference Include="..\..\..\..\framework\src\Snooker.Data.WebScraping\Snooker.Data.WebScraping.csproj" />
         <ProjectReference Include="..\..\..\Snooker.Platform\src\Snooker.Platform.Domain\Snooker.Platform.Domain.csproj" />
         <ProjectReference Include="..\Snooker.Interclub.Domain.Shared\Snooker.Interclub.Domain.Shared.csproj" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <PackageReference Include="Google.OrTools" Version="9.6.2534" />
     </ItemGroup>
     
     <ItemGroup>

@@ -1,3 +1,4 @@
+using Google.OrTools.ConstraintSolver;
 using Snooker.Interclub.Divisions;
 using Snooker.Interclub.Matches;
 using Snooker.Interclub.Teams;
@@ -12,6 +13,7 @@ public class SeasonScheduler : DomainService
     public async Task<Season> ScheduleAsync(Season season)
     {
         await GenerateAllMatchesAsync(season);
+        await GenerateScheduleAsync(season);
 
         return season;
     }
@@ -74,6 +76,18 @@ public class SeasonScheduler : DomainService
                 }
             }
         }
+
+        return Task.CompletedTask;
+    }
+
+    private Task GenerateScheduleAsync(Season season)
+    {
+        Solver solver = new Solver("SeasonScheduler");
+
+        int totalSeasonDays = 240; // Total days in the season
+        IntVar[,,] matches = new IntVar[season.Matches.Count, totalSeasonDays, 1];
+
+        solver.EndSearch();
 
         return Task.CompletedTask;
     }
