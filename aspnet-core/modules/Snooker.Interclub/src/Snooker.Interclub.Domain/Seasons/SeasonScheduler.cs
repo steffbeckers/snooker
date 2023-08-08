@@ -32,7 +32,7 @@ public class SeasonScheduler : DomainService
                     }
 
                     // Per round, 1 team only plays 1 match against each other team
-                    Match match = division.Matches.FirstOrDefault(x => x.HomeTeamId == awayTeam.Id && x.AwayTeamId == homeTeam.Id);
+                    Match? match = division.Matches.FirstOrDefault(x => x.HomeTeamId == awayTeam.Id && x.AwayTeamId == homeTeam.Id);
 
                     if (match != null)
                     {

@@ -7,12 +7,10 @@ namespace Snooker.Interclub.Seasons;
 public class SeasonManagerTests : InterclubDomainTestBase
 {
     private readonly SeasonManager _seasonManager;
-    private readonly ISeasonRepository _seasonRepository;
 
     public SeasonManagerTests()
     {
         _seasonManager = GetRequiredService<SeasonManager>();
-        _seasonRepository = GetRequiredService<ISeasonRepository>();
     }
 
     [Fact]
