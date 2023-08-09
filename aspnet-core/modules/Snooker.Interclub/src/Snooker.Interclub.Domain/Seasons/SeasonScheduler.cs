@@ -84,11 +84,6 @@ public class SeasonScheduler : DomainService
     {
         Solver solver = new Solver("SeasonScheduler");
 
-        int totalSeasonDays = 240; // Total days in the season
-        IntVar[,,] matches = new IntVar[season.Matches.Count, totalSeasonDays, 1];
-
-        solver.EndSearch();
-
         return Task.CompletedTask;
     }
 }

@@ -1,5 +1,6 @@
 using Snooker.Interclub.Divisions;
 using Snooker.Interclub.Matches;
+using Snooker.Interclub.Teams;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -34,6 +35,9 @@ public class Season : FullAuditedAggregateRoot<Guid>, IMultiTenant
     public virtual ICollection<Match> Matches { get => Divisions.SelectMany(x => x.Matches).OrderBy(x => x.Date).ToList(); }
 
     public DateTime StartDate { get; set; }
+
+    [NotMapped]
+    public virtual ICollection<Team> Teams { get => Divisions.SelectMany(x => x.Teams).OrderBy(x => x.ClubTeamName).ToList(); }
 
     public Guid? TenantId { get; private set; }
 }

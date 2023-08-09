@@ -47,6 +47,8 @@ Entities with fields:
   - int NumberOfTables
 - Team
   - Guid Id
+  - Guid ClubId
+  - Guid DivisionId
   - string Name
 - Season
   - Guid Id
@@ -60,14 +62,21 @@ Entities with fields:
   - int RoundsDuringSeason
 - Match
   - Guid Id
+  - Guid DivisionId
+  - int Round
+  - Guid HomeTeamId
+  - Guid AwayTeamId
+  - DateTime Date
 
 Relations:
 
-- Team belongs to a Club
 - Club has many Teams
+- Team belongs to a Club
 - Team belongs to a Division
 - Season has many Divisions
+- Division belongs to a Season
 - Division has many Teams
 - Division has many Matches
+- Match belongs to a Division
 - Match has one "Home" Team
 - Match has one "Away" Team

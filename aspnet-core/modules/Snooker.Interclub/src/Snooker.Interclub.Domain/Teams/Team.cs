@@ -1,8 +1,11 @@
 using Snooker.Interclub.Clubs;
 using Snooker.Interclub.Divisions;
+using Snooker.Interclub.Matches;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using Volo.Abp;
 using Volo.Abp.Domain.Entities.Auditing;
 using Volo.Abp.MultiTenancy;
@@ -40,6 +43,16 @@ public class Team : FullAuditedAggregateRoot<Guid>, IMultiTenant
     public virtual Division Division { get; }
 
     public Guid DivisionId { get; set; }
+
+    [NotMapped]
+    public virtual ICollection<Match> Matches
+    {
+        get => Division.Matches.Where(x => x.HomeTeamId == Id || x.AwayTeamId == Id)
+            .OrderBy(x => x.Date)
+            .ThenBy(x => x.Round)
+            .ThenBy(x => x.HomeTeam?.ClubTeamName)
+            .ToList();
+    }
 
     public string Name
     {
