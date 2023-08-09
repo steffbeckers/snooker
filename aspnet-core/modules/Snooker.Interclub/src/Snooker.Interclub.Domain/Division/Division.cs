@@ -45,7 +45,7 @@ public class Division : FullAuditedAggregateRoot<Guid>, IMultiTenant
 
     public string Name { get; set; }
 
-    public int? RoundsPerSeasonCount { get; set; }
+    public int? RoundsDuringSeason { get; set; }
 
     public virtual Season Season { get; }
 

@@ -99,7 +99,7 @@ public class SeasonsDataSeedContributor : IDataSeedContributor, ITransientDepend
         {
             FrameCount = 18,
             MinPlayerClass = 1,
-            RoundsPerSeasonCount = 2,
+            RoundsDuringSeason = 2,
             SortOrder = 1
         };
 
@@ -240,7 +240,7 @@ public class SeasonsDataSeedContributor : IDataSeedContributor, ITransientDepend
         {
             FrameCount = 18,
             MinPlayerClass = 1,
-            RoundsPerSeasonCount = 2,
+            RoundsDuringSeason = 2,
             SortOrder = 2
         };
 
@@ -389,7 +389,7 @@ public class SeasonsDataSeedContributor : IDataSeedContributor, ITransientDepend
         {
             FrameCount = 18,
             MinPlayerClass = 1,
-            RoundsPerSeasonCount = 2,
+            RoundsDuringSeason = 2,
             SortOrder = 3
         };
 
@@ -530,7 +530,7 @@ public class SeasonsDataSeedContributor : IDataSeedContributor, ITransientDepend
         {
             FrameCount = 12,
             MinPlayerClass = 2,
-            RoundsPerSeasonCount = 2,
+            RoundsDuringSeason = 2,
             SortOrder = 4
         };
 
@@ -679,7 +679,7 @@ public class SeasonsDataSeedContributor : IDataSeedContributor, ITransientDepend
         {
             FrameCount = 12,
             MinPlayerClass = 2,
-            RoundsPerSeasonCount = 2,
+            RoundsDuringSeason = 2,
             SortOrder = 5
         };
 
@@ -828,7 +828,7 @@ public class SeasonsDataSeedContributor : IDataSeedContributor, ITransientDepend
         {
             FrameCount = 9,
             MinPlayerClass = 3,
-            RoundsPerSeasonCount = 2,
+            RoundsDuringSeason = 2,
             SortOrder = 6
         };
 
@@ -969,7 +969,7 @@ public class SeasonsDataSeedContributor : IDataSeedContributor, ITransientDepend
         {
             FrameCount = 12,
             MinPlayerClass = 3,
-            RoundsPerSeasonCount = 6,
+            RoundsDuringSeason = 4,
             SortOrder = 7,
             DaysOfWeek = new List<DayOfWeek>()
             {

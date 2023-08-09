@@ -54,12 +54,12 @@ public class SeasonScheduler : DomainService
                 }
             }
 
-            if (division.RoundsPerSeasonCount < 2)
+            if (division.RoundsDuringSeason < 2)
             {
                 continue;
             }
 
-            for (int round = 2; round <= division.RoundsPerSeasonCount; round++)
+            for (int round = 2; round <= division.RoundsDuringSeason; round++)
             {
                 foreach (Match previousMatch in division.Matches.Where(x => x.Round == round - 1).ToList())
                 {
