@@ -1,7 +1,10 @@
 using Google.OrTools.ConstraintSolver;
+using Snooker.Interclub.Clubs;
 using Snooker.Interclub.Divisions;
 using Snooker.Interclub.Matches;
 using Snooker.Interclub.Teams;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Services;
@@ -10,18 +13,67 @@ namespace Snooker.Interclub.Seasons;
 
 public class SeasonScheduler : DomainService
 {
+    private Dictionary<Guid, IList<DateTime>> _availableMatchDatesPerDivision = new Dictionary<Guid, IList<DateTime>>();
+    private Dictionary<Guid, Dictionary<DateTime, int>> _availableTablesPerMatchDatePerClub = new Dictionary<Guid, Dictionary<DateTime, int>>();
+    private Season _season;
+
     public async Task<Season> ScheduleAsync(Season season)
     {
-        await GenerateAllMatchesAsync(season);
-        await GenerateScheduleAsync(season);
+        _season = season;
 
-        return season;
+        await GenerateMatchesAsync();
+        await GenerateAvailableMatchDatesPerDivisionAsync();
+        await GenerateAvailableTablesPerMatchDatePerClubAsync();
+        await SolveMatchDatesAsync();
+
+        return _season;
     }
 
-    private Task GenerateAllMatchesAsync(Season season)
+    private Task GenerateAvailableMatchDatesPerDivisionAsync()
+    {
+        _availableMatchDatesPerDivision = new Dictionary<Guid, IList<DateTime>>();
+
+        foreach (Division division in _season.Divisions)
+        {
+            _availableMatchDatesPerDivision.Add(division.Id, new List<DateTime>());
+
+            DateTime currentDate = _season.StartDate;
+
+            while (currentDate <= _season.EndDate)
+            {
+                if (division.DaysOfWeek.Contains(currentDate.DayOfWeek))
+                {
+                    _availableMatchDatesPerDivision[division.Id].Add(currentDate);
+                }
+
+                currentDate = currentDate.AddDays(1);
+            }
+        }
+
+        return Task.CompletedTask;
+    }
+
+    private Task GenerateAvailableTablesPerMatchDatePerClubAsync()
+    {
+        _availableTablesPerMatchDatePerClub = new Dictionary<Guid, Dictionary<DateTime, int>>();
+
+        foreach (Club club in _season.Clubs)
+        {
+            _availableTablesPerMatchDatePerClub.Add(club.Id, new Dictionary<DateTime, int>());
+
+            foreach (DateTime matchDate in _availableMatchDatesPerDivision.SelectMany(x => x.Value).Distinct())
+            {
+                _availableTablesPerMatchDatePerClub[club.Id].Add(matchDate, club.NumberOfTables);
+            }
+        }
+
+        return Task.CompletedTask;
+    }
+
+    private Task GenerateMatchesAsync()
     {
         // Generate all matches of season
-        foreach (Division division in season.Divisions)
+        foreach (Division division in _season.Divisions)
         {
             foreach (Team homeTeam in division.Teams)
             {
@@ -80,7 +132,7 @@ public class SeasonScheduler : DomainService
         return Task.CompletedTask;
     }
 
-    private Task GenerateScheduleAsync(Season season)
+    private Task SolveMatchDatesAsync()
     {
         Solver solver = new Solver("SeasonScheduler");
 

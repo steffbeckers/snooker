@@ -1,3 +1,4 @@
+using Snooker.Interclub.Clubs;
 using Snooker.Interclub.Divisions;
 using Snooker.Interclub.Matches;
 using Snooker.Interclub.Teams;
@@ -26,6 +27,9 @@ public class Season : FullAuditedAggregateRoot<Guid>, IMultiTenant
     protected Season()
     {
     }
+
+    [NotMapped]
+    public virtual ICollection<Club> Clubs { get => Teams.Select(x => x.Club).Distinct().OrderBy(x => x.Name).ToList(); }
 
     public virtual ICollection<Division> Divisions { get; private set; } = new Collection<Division>();
 

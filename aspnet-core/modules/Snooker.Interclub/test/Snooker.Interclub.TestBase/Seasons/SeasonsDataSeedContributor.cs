@@ -29,8 +29,8 @@ public class SeasonsDataSeedContributor : IDataSeedContributor, ITransientDepend
     {
         Season season20222023 = new Season(
             id: Guid.Parse("1877aa91-3906-48f0-a4eb-eb7dc9358835"),
-            startDate: new DateTime(2022, 1, 1),
-            endDate: new DateTime(2023, 1, 1));
+            startDate: new DateTime(2022, 8, 29),
+            endDate: new DateTime(2023, 4, 27));
 
         Club clubBiljartLounge = await _clubManager.CreateAsync(
             id: Guid.Parse("d1610828-8df5-4ced-8bf3-d876f6207691"),

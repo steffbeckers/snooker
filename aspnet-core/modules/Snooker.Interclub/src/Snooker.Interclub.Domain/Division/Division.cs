@@ -4,7 +4,6 @@ using Snooker.Interclub.Teams;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations.Schema;
 using Volo.Abp.Domain.Entities.Auditing;
 using Volo.Abp.MultiTenancy;
 
@@ -27,8 +26,6 @@ public class Division : FullAuditedAggregateRoot<Guid>, IMultiTenant
     {
     }
 
-    // TODO
-    [NotMapped]
     public IList<DayOfWeek> DaysOfWeek { get; set; } = new List<DayOfWeek>()
     {
         DayOfWeek.Monday,

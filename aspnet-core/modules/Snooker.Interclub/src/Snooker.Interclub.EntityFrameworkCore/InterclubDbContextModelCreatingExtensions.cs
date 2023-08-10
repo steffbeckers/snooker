@@ -7,6 +7,8 @@ using Snooker.Interclub.Matches;
 using Snooker.Interclub.Players;
 using Snooker.Interclub.Seasons;
 using Snooker.Interclub.Teams;
+using System;
+using System.Linq;
 using Volo.Abp;
 using Volo.Abp.EntityFrameworkCore.Modeling;
 
@@ -53,6 +55,11 @@ public static class InterclubDbContextModelCreatingExtensions
             b.ConfigureByConvention();
             b.Property(x => x.Name).IsRequired().HasMaxLength(DivisionConsts.NameMaxLength);
             b.HasOne(x => x.Season).WithMany(x => x.Divisions).HasForeignKey(x => x.SeasonId);
+            b.Property(x => x.DaysOfWeek).HasConversion(
+                x => string.Join(',', x),
+                x => x.Split(',', StringSplitOptions.RemoveEmptyEntries)
+                    .Select(x => Enum.Parse<DayOfWeek>(x))
+                    .ToList());
             b.Property(x => x.RoundsDuringSeason).HasDefaultValue(2);
         });
 
