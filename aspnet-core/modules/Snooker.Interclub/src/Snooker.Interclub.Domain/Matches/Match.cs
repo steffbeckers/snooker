@@ -60,4 +60,6 @@ public class Match : FullAuditedAggregateRoot<Guid>, IMultiTenant
     public virtual ICollection<MatchTeamPlayer> TeamPlayers { get; private set; } = new Collection<MatchTeamPlayer>();
 
     public Guid? TenantId { get; private set; }
+
+    public int? Week { get; set; }
 }
