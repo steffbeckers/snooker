@@ -67,5 +67,7 @@ public class Team : FullAuditedAggregateRoot<Guid>, IMultiTenant
 
     public virtual ICollection<TeamPlayer> Players { get; private set; } = new Collection<TeamPlayer>();
 
+    public DayOfWeek? PreferredMatchDay { get; set; }
+
     public Guid? TenantId { get; private set; }
 }
