@@ -136,6 +136,12 @@ public class SeasonScheduler : DomainService
     {
         Solver solver = new Solver("SeasonScheduler");
 
+        // Find the best match date for each match following the constraints:
+        // 1. 1 team only plays 1 match per week
+        // 2. Matches are played in the club of the home team
+        // 3. Matches are played on a date that is available for the division
+        // 4. Matches are played on a date that is available for the home club and has enough tables available
+
         return Task.CompletedTask;
     }
 }
