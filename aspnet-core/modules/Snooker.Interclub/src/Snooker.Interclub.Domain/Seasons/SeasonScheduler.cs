@@ -1,4 +1,4 @@
-using Google.OrTools.ConstraintSolver;
+using Google.OrTools.Sat;
 using Snooker.Interclub.Clubs;
 using Snooker.Interclub.Divisions;
 using Snooker.Interclub.Matches;
@@ -134,13 +134,57 @@ public class SeasonScheduler : DomainService
 
     private Task SolveMatchDatesAsync()
     {
-        Solver solver = new Solver("SeasonScheduler");
+        CpSolver solver = new CpSolver();
 
-        // Find the best match date for each match following the constraints:
-        // 1. 1 team only plays 1 match per week
-        // 2. Matches are played in the club of the home team
-        // 3. Matches are played on a date that is available for the division
-        // 4. Matches are played on a date that is available for the home club and has enough tables available
+        CpModel model = new CpModel();
+
+        // Create variables
+
+        // Match date per match
+        Dictionary<Guid, IntVar> matchDateVars = new Dictionary<Guid, IntVar>();
+
+        foreach (Match match in _season.Matches)
+        {
+            matchDateVars.Add(match.Id, model.NewIntVar(0, _availableMatchDatesPerDivision[match.Division!.Id].Count - 1, $"MatchDate_{match.Id}"));
+        }
+
+        // Table per match date per club
+        Dictionary<Guid, Dictionary<DateTime, IntVar>> tableVars = new Dictionary<Guid, Dictionary<DateTime, IntVar>>();
+
+        foreach (Club club in _season.Clubs)
+        {
+            tableVars.Add(club.Id, new Dictionary<DateTime, IntVar>());
+
+            foreach (DateTime matchDate in _availableMatchDatesPerDivision.SelectMany(x => x.Value).Distinct())
+            {
+                tableVars[club.Id].Add(matchDate, model.NewIntVar(0, _availableTablesPerMatchDatePerClub[club.Id][matchDate], $"Table_{club.Id}_{matchDate:yyyyMMdd}"));
+            }
+        }
+
+        // Create constraints
+
+        // Solve
+        CpSolverStatus solverStatus = solver.Solve(model);
+
+        // Check solution
+        if (solverStatus == CpSolverStatus.Feasible || solverStatus == CpSolverStatus.Optimal)
+        {
+            // Set match dates
+            foreach (Match match in _season.Matches)
+            {
+                match.Date = _availableMatchDatesPerDivision[match.Division!.Id][(int)solver.Value(matchDateVars[match.Id])];
+            }
+        }
+        else
+        {
+            throw new Exception("No solution found.");
+        }
+
+        // Print matches
+        foreach (Match match in _season.Matches.OrderBy(x => x.Date))
+        {
+            Console.WriteLine($"{match.Date:yyyy-MM-dd} {match.HomeTeam!.ClubTeamName} - {match.AwayTeam!.ClubTeamName}");
+        }
 
         return Task.CompletedTask;
     }
