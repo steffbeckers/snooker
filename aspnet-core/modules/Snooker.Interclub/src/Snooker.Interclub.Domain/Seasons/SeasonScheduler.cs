@@ -16,6 +16,7 @@ public class SeasonScheduler : DomainService
     private Dictionary<Guid, IList<DateTime>> _availableMatchDatesPerDivision = new Dictionary<Guid, IList<DateTime>>();
     private Dictionary<Guid, Dictionary<DateTime, int>> _availableTablesPerMatchDatePerClub = new Dictionary<Guid, Dictionary<DateTime, int>>();
     private Season _season;
+    private Dictionary<Guid, Dictionary<DateTime, int>> _weekOfAvailableMatchDatesPerDivision = new Dictionary<Guid, Dictionary<DateTime, int>>();
 
     public async Task<Season> ScheduleAsync(Season season)
     {
@@ -23,6 +24,7 @@ public class SeasonScheduler : DomainService
 
         await GenerateMatchesAsync();
         await GenerateAvailableMatchDatesPerDivisionAsync();
+        await GenerateWeekOfAvailableMatchDatesPerDivisionAsync();
         await GenerateAvailableTablesPerMatchDatePerClubAsync();
         await SolveMatchDatesAsync();
 
@@ -125,6 +127,31 @@ public class SeasonScheduler : DomainService
                     };
 
                     division.Matches.Add(match);
+                }
+            }
+        }
+
+        return Task.CompletedTask;
+    }
+
+    private Task GenerateWeekOfAvailableMatchDatesPerDivisionAsync()
+    {
+        _weekOfAvailableMatchDatesPerDivision = new Dictionary<Guid, Dictionary<DateTime, int>>();
+
+        foreach (Division division in _season.Divisions)
+        {
+            _weekOfAvailableMatchDatesPerDivision.Add(division.Id, new Dictionary<DateTime, int>());
+
+            List<DateTime> dateTimes = _availableMatchDatesPerDivision[division.Id].ToList();
+            int week = 1;
+
+            foreach (DateTime matchDate in dateTimes)
+            {
+                _weekOfAvailableMatchDatesPerDivision[division.Id].Add(matchDate, week);
+
+                if (division.DaysOfWeek.Last() == matchDate.DayOfWeek)
+                {
+                    week++;
                 }
             }
         }
