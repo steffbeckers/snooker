@@ -175,38 +175,18 @@ public class SeasonScheduler : DomainService
             matchDateVars.Add(match.Id, model.NewIntVar(0, _availableMatchDatesPerDivision[match.Division!.Id].Count - 1, $"MatchDate_{match.Id}"));
         }
 
-        // Table per match date per club
-        Dictionary<Guid, Dictionary<DateTime, IntVar>> tableVars = new Dictionary<Guid, Dictionary<DateTime, IntVar>>();
-
-        foreach (Club club in _season.Clubs)
-        {
-            tableVars.Add(club.Id, new Dictionary<DateTime, IntVar>());
-
-            foreach (DateTime matchDate in _availableMatchDatesPerDivision.SelectMany(x => x.Value).Distinct())
-            {
-                tableVars[club.Id].Add(matchDate, model.NewIntVar(0, _availableTablesPerMatchDatePerClub[club.Id][matchDate], $"Table_{club.Id}_{matchDate:yyyyMMdd}"));
-            }
-        }
-
-        // Every team plays only one match per week
-        Dictionary<Guid, Dictionary<int, IntVar>> teamMatchPerWeekVars = new Dictionary<Guid, Dictionary<int, IntVar>>();
-
-        foreach (Division division in _season.Divisions)
-        {
-            foreach (Team team in division.Teams)
-            {
-                teamMatchPerWeekVars.Add(team.Id, new Dictionary<int, IntVar>());
-
-                foreach (int week in _weekOfAvailableMatchDatesPerDivision[division.Id].Select(x => x.Value).Distinct())
-                {
-                    List<Match> matches = division.Matches.Where(x => x.HomeTeamId == team.Id || x.AwayTeamId == team.Id).ToList();
-
-                    teamMatchPerWeekVars[team.Id].Add(week, model.NewIntVar(0, matches.Count - 1, $"TeamMatchPerWeek_{team.Id}_{week}"));
-                }
-            }
-        }
-
         // Create constraints
+
+        // Each match should be played in a specific order
+        foreach (Match match in _season.Matches)
+        {
+            Match? nextMatch = _season.Matches.Where(x => x.Round > match.Round).FirstOrDefault(x => x.HomeTeamId == match.AwayTeamId && x.AwayTeamId == match.HomeTeamId);
+
+            if (nextMatch != null)
+            {
+                model.Add(matchDateVars[match.Id] < matchDateVars[nextMatch.Id]);
+            }
+        }
 
         // Solve
         CpSolverStatus solverStatus = solver.Solve(model);
