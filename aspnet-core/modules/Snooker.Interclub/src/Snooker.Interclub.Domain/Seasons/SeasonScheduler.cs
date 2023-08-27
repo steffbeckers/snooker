@@ -188,6 +188,24 @@ public class SeasonScheduler : DomainService
             }
         }
 
+        // Every team plays only one match per week
+        Dictionary<Guid, Dictionary<int, IntVar>> teamMatchPerWeekVars = new Dictionary<Guid, Dictionary<int, IntVar>>();
+
+        foreach (Division division in _season.Divisions)
+        {
+            foreach (Team team in division.Teams)
+            {
+                teamMatchPerWeekVars.Add(team.Id, new Dictionary<int, IntVar>());
+
+                foreach (int week in _weekOfAvailableMatchDatesPerDivision[division.Id].Select(x => x.Value).Distinct())
+                {
+                    List<Match> matches = division.Matches.Where(x => x.HomeTeamId == team.Id || x.AwayTeamId == team.Id).ToList();
+
+                    teamMatchPerWeekVars[team.Id].Add(week, model.NewIntVar(0, matches.Count - 1, $"TeamMatchPerWeek_{team.Id}_{week}"));
+                }
+            }
+        }
+
         // Create constraints
 
         // Solve
