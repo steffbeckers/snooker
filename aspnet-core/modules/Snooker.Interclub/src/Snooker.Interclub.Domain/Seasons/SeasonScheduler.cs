@@ -161,8 +161,6 @@ public class SeasonScheduler : DomainService
 
     private Task SolveMatchDatesAsync()
     {
-        CpSolver solver = new CpSolver();
-
         CpModel model = new CpModel();
 
         // Create variables
@@ -189,6 +187,7 @@ public class SeasonScheduler : DomainService
         }
 
         // Solve
+        CpSolver solver = new CpSolver();
         CpSolverStatus solverStatus = solver.Solve(model);
 
         // Check solution
