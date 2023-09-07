@@ -167,25 +167,10 @@ public class SeasonScheduler : DomainService
 
         // Match date per match
         Dictionary<Guid, IntVar> matchDateVars = new Dictionary<Guid, IntVar>();
-        Dictionary<IntVar, IntVar> weekOfMatchDateVars = new Dictionary<IntVar, IntVar>();
 
         foreach (Match match in _season.Matches)
         {
             matchDateVars.Add(match.Id, model.NewIntVar(0, _availableMatchDatesPerDivision[match.Division!.Id].Count - 1, $"MatchDate_{match.Id}"));
-            weekOfMatchDateVars.Add(matchDateVars[match.Id], model.NewIntVar(0, _weekOfAvailableMatchDatesPerDivision[match.Division!.Id].Values.Max(), $"WeekOfMatchDate_{match.Id}"));
-        }
-
-        // Create constraints
-
-        // Each match should be played in a specific order
-        foreach (Match match in _season.Matches)
-        {
-            Match? nextMatch = _season.Matches.Where(x => x.Round > match.Round).FirstOrDefault(x => x.HomeTeamId == match.AwayTeamId && x.AwayTeamId == match.HomeTeamId);
-
-            if (nextMatch != null)
-            {
-                model.Add(matchDateVars[match.Id] < matchDateVars[nextMatch.Id]);
-            }
         }
 
         // Solve
