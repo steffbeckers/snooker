@@ -1,5 +1,4 @@
 using Google.OrTools.Sat;
-using Snooker.Interclub.Clubs;
 using Snooker.Interclub.Divisions;
 using Snooker.Interclub.Matches;
 using Snooker.Interclub.Teams;
@@ -13,60 +12,29 @@ namespace Snooker.Interclub.Seasons;
 
 public class SeasonScheduler : DomainService
 {
-    private Dictionary<Guid, IList<DateTime>> _availableMatchDatesPerDivision = new Dictionary<Guid, IList<DateTime>>();
-    private Dictionary<Guid, Dictionary<DateTime, int>> _availableTablesPerMatchDatePerClub = new Dictionary<Guid, Dictionary<DateTime, int>>();
+    private IList<(DateTime, DayOfWeek)> _dates = new List<(DateTime, DayOfWeek)>();
     private Season _season;
-    private Dictionary<Guid, Dictionary<DateTime, int>> _weekOfAvailableMatchDatesPerDivision = new Dictionary<Guid, Dictionary<DateTime, int>>();
 
     public async Task<Season> ScheduleAsync(Season season)
     {
         _season = season;
 
         await GenerateMatchesAsync();
-        await GenerateAvailableMatchDatesPerDivisionAsync();
-        await GenerateWeekOfAvailableMatchDatesPerDivisionAsync();
-        await GenerateAvailableTablesPerMatchDatePerClubAsync();
+        await GenerateDatesAsync();
         await SolveMatchDatesAsync();
 
         return _season;
     }
 
-    private Task GenerateAvailableMatchDatesPerDivisionAsync()
+    private Task GenerateDatesAsync()
     {
-        _availableMatchDatesPerDivision = new Dictionary<Guid, IList<DateTime>>();
+        DateTime date = _season.StartDate;
 
-        foreach (Division division in _season.Divisions)
+        while (date <= _season.EndDate)
         {
-            _availableMatchDatesPerDivision.Add(division.Id, new List<DateTime>());
+            _dates.Add((date, date.DayOfWeek));
 
-            DateTime currentDate = _season.StartDate;
-
-            while (currentDate <= _season.EndDate)
-            {
-                if (division.DaysOfWeek.Contains(currentDate.DayOfWeek))
-                {
-                    _availableMatchDatesPerDivision[division.Id].Add(currentDate);
-                }
-
-                currentDate = currentDate.AddDays(1);
-            }
-        }
-
-        return Task.CompletedTask;
-    }
-
-    private Task GenerateAvailableTablesPerMatchDatePerClubAsync()
-    {
-        _availableTablesPerMatchDatePerClub = new Dictionary<Guid, Dictionary<DateTime, int>>();
-
-        foreach (Club club in _season.Clubs)
-        {
-            _availableTablesPerMatchDatePerClub.Add(club.Id, new Dictionary<DateTime, int>());
-
-            foreach (DateTime matchDate in _availableMatchDatesPerDivision.SelectMany(x => x.Value).Distinct())
-            {
-                _availableTablesPerMatchDatePerClub[club.Id].Add(matchDate, club.NumberOfTables);
-            }
+            date = date.AddDays(1);
         }
 
         return Task.CompletedTask;
@@ -134,56 +102,50 @@ public class SeasonScheduler : DomainService
         return Task.CompletedTask;
     }
 
-    private Task GenerateWeekOfAvailableMatchDatesPerDivisionAsync()
-    {
-        _weekOfAvailableMatchDatesPerDivision = new Dictionary<Guid, Dictionary<DateTime, int>>();
-
-        foreach (Division division in _season.Divisions)
-        {
-            _weekOfAvailableMatchDatesPerDivision.Add(division.Id, new Dictionary<DateTime, int>());
-
-            List<DateTime> dateTimes = _availableMatchDatesPerDivision[division.Id].ToList();
-            int week = 1;
-
-            foreach (DateTime matchDate in dateTimes)
-            {
-                _weekOfAvailableMatchDatesPerDivision[division.Id].Add(matchDate, week);
-
-                if (division.DaysOfWeek.Last() == matchDate.DayOfWeek)
-                {
-                    week++;
-                }
-            }
-        }
-
-        return Task.CompletedTask;
-    }
-
     private Task SolveMatchDatesAsync()
     {
         CpModel model = new CpModel();
 
-        // Create variables
+        BoolVar[,] matchDateVars = new BoolVar[_season.Matches.Count, _dates.Count];
 
-        // Match date per match
-        Dictionary<Guid, IntVar> matchDateVars = new Dictionary<Guid, IntVar>();
-
-        foreach (Match match in _season.Matches)
+        for (int matchIndex = 0; matchIndex < _season.Matches.Count; matchIndex++)
         {
-            matchDateVars.Add(match.Id, model.NewIntVar(0, _availableMatchDatesPerDivision[match.Division!.Id].Count - 1, $"MatchDate_{match.Id}"));
+            for (int dateIndex = 0; dateIndex < _dates.Count; dateIndex++)
+            {
+                matchDateVars[matchIndex, dateIndex] = model.NewBoolVar($"Match {matchIndex} on date {dateIndex}");
+            }
         }
 
-        // Solve
+        // Each match must be played on one of the days of the week defined on division level
+        for (int matchIndex = 0; matchIndex < _season.Matches.Count; matchIndex++)
+        {
+            Match match = _season.Matches.ElementAt(matchIndex);
+
+            foreach (DayOfWeek dayOfWeek in match.Division!.DaysOfWeek)
+            {
+                model.AddBoolOr(new[] { matchDateVars[matchIndex, _dates.IndexOf(_dates.First(x => x.Item2 == dayOfWeek))] });
+            }
+        }
+
         CpSolver solver = new CpSolver();
         CpSolverStatus solverStatus = solver.Solve(model);
 
-        // Check solution
         if (solverStatus == CpSolverStatus.Feasible || solverStatus == CpSolverStatus.Optimal)
         {
-            // Set match dates
-            foreach (Match match in _season.Matches)
+            for (int matchIndex = 0; matchIndex < _season.Matches.Count; matchIndex++)
             {
-                match.Date = _availableMatchDatesPerDivision[match.Division!.Id][(int)solver.Value(matchDateVars[match.Id])];
+                Match match = _season.Matches.ElementAt(matchIndex);
+
+                for (int dateIndex = 0; dateIndex < _dates.Count; dateIndex++)
+                {
+                    if (solver.Value(matchDateVars[matchIndex, dateIndex]) == 1)
+                    {
+                        // TODO: Does this work?
+                        match.Date = _dates.ElementAt(dateIndex).Item1;
+
+                        break;
+                    }
+                }
             }
         }
         else
@@ -191,7 +153,6 @@ public class SeasonScheduler : DomainService
             throw new Exception("No solution found.");
         }
 
-        // Print matches
         foreach (Match match in _season.Matches.OrderBy(x => x.Date))
         {
             Console.WriteLine($"{match.Date:yyyy-MM-dd} {match.HomeTeam!.ClubTeamName} - {match.AwayTeam!.ClubTeamName}");
