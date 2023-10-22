@@ -1,4 +1,5 @@
 using Google.OrTools.Sat;
+using Microsoft.Extensions.Logging;
 using Snooker.Interclub.Divisions;
 using Snooker.Interclub.Matches;
 using Snooker.Interclub.Teams;
@@ -106,24 +107,33 @@ public class SeasonScheduler : DomainService
     {
         CpModel model = new CpModel();
 
+        // Create variables
         BoolVar[,] matchDateVars = new BoolVar[_season.Matches.Count, _dates.Count];
 
         for (int matchIndex = 0; matchIndex < _season.Matches.Count; matchIndex++)
         {
             for (int dateIndex = 0; dateIndex < _dates.Count; dateIndex++)
             {
-                matchDateVars[matchIndex, dateIndex] = model.NewBoolVar($"Match {matchIndex} on date {dateIndex}");
+                matchDateVars[matchIndex, dateIndex] = model.NewBoolVar($"Match_{matchIndex}_Date_{dateIndex}");
             }
         }
 
-        // Each match must be played on one of the days of the week defined on division level
+        // Create constraints
+
+        // Each match should be played on date of the week defined on division level
+        bool[,] matchCanBePlayedOnDate = new bool[_season.Matches.Count, _dates.Count];
+
         for (int matchIndex = 0; matchIndex < _season.Matches.Count; matchIndex++)
         {
             Match match = _season.Matches.ElementAt(matchIndex);
 
-            foreach (DayOfWeek dayOfWeek in match.Division!.DaysOfWeek)
+            for (int dateIndex = 0; dateIndex < _dates.Count; dateIndex++)
             {
-                model.AddBoolOr(new[] { matchDateVars[matchIndex, _dates.IndexOf(_dates.First(x => x.Item2 == dayOfWeek))] });
+                (DateTime, DayOfWeek) date = _dates.ElementAt(dateIndex);
+                matchCanBePlayedOnDate[matchIndex, dateIndex] = match.Division!.DaysOfWeek.Contains(date.Item2);
+
+                // TODO
+                //model.Add(matchDateVars[matchIndex, dateIndex] == matchCanBePlayedOnDate[matchIndex, dateIndex]);
             }
         }
 
@@ -132,6 +142,8 @@ public class SeasonScheduler : DomainService
 
         if (solverStatus == CpSolverStatus.Feasible || solverStatus == CpSolverStatus.Optimal)
         {
+            Logger.LogDebug($"{solverStatus} solution found");
+
             for (int matchIndex = 0; matchIndex < _season.Matches.Count; matchIndex++)
             {
                 Match match = _season.Matches.ElementAt(matchIndex);
@@ -150,12 +162,12 @@ public class SeasonScheduler : DomainService
         }
         else
         {
-            throw new Exception("No solution found.");
+            throw new Exception("No solution found");
         }
 
         foreach (Match match in _season.Matches.OrderBy(x => x.Date))
         {
-            Console.WriteLine($"{match.Date:yyyy-MM-dd} {match.HomeTeam!.ClubTeamName} - {match.AwayTeam!.ClubTeamName}");
+            Logger.LogDebug($"{match.Date:yyyy-MM-dd} {match.HomeTeam!.ClubTeamName} - {match.AwayTeam!.ClubTeamName}");
         }
 
         return Task.CompletedTask;
