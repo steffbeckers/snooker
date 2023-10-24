@@ -121,8 +121,6 @@ public class SeasonScheduler : DomainService
         // Create constraints
 
         // Each match should be played on date of the week defined on division level
-        bool[,] matchCanBePlayedOnDate = new bool[_season.Matches.Count, _dates.Count];
-
         for (int matchIndex = 0; matchIndex < _season.Matches.Count; matchIndex++)
         {
             Match match = _season.Matches.ElementAt(matchIndex);
@@ -130,10 +128,8 @@ public class SeasonScheduler : DomainService
             for (int dateIndex = 0; dateIndex < _dates.Count; dateIndex++)
             {
                 (DateTime, DayOfWeek) date = _dates.ElementAt(dateIndex);
-                matchCanBePlayedOnDate[matchIndex, dateIndex] = match.Division!.DaysOfWeek.Contains(date.Item2);
 
-                // TODO
-                //model.Add(matchDateVars[matchIndex, dateIndex] == matchCanBePlayedOnDate[matchIndex, dateIndex]);
+                model.Add(matchDateVars[matchIndex, dateIndex] == (match.Division!.DaysOfWeek.Contains(date.Item2) ? 1 : 0));
             }
         }
 
@@ -154,6 +150,7 @@ public class SeasonScheduler : DomainService
                     {
                         // TODO: Does this work?
                         match.Date = _dates.ElementAt(dateIndex).Item1;
+                        match.Week = 1;
 
                         break;
                     }
