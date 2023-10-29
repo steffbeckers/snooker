@@ -13,7 +13,8 @@ namespace Snooker.Interclub.Seasons;
 
 public class SeasonScheduler : DomainService
 {
-    private IList<(DateTime, DayOfWeek)> _dates = new List<(DateTime, DayOfWeek)>();
+    private IList<DateTime> _dates;
+    private int[] _weeks;
     private Season _season;
 
     public async Task<Season> ScheduleAsync(Season season)
@@ -21,21 +22,35 @@ public class SeasonScheduler : DomainService
         _season = season;
 
         await GenerateMatchesAsync();
-        await GenerateDatesAsync();
+        await GenerateDatesAndWeeksAsync();
         await SolveMatchDatesAsync();
 
         return _season;
     }
 
-    private Task GenerateDatesAsync()
+    private Task GenerateDatesAndWeeksAsync()
     {
-        DateTime date = _season.StartDate;
+        _dates = new List<DateTime>();
 
+        DateTime date = _season.StartDate;
         while (date <= _season.EndDate)
         {
-            _dates.Add((date, date.DayOfWeek));
+            _dates.Add(date);
 
             date = date.AddDays(1);
+        }
+
+        _weeks = new int[_dates.Count];
+
+        int week = _dates[0].DayOfWeek == DayOfWeek.Monday ? 0 : 1;
+        for (int i = 0; i < _dates.Count; i++)
+        {
+            if (_dates[i].DayOfWeek == DayOfWeek.Monday)
+            {
+                week++;
+            }
+
+            _weeks[i] = week;
         }
 
         return Task.CompletedTask;
@@ -103,33 +118,37 @@ public class SeasonScheduler : DomainService
         return Task.CompletedTask;
     }
 
+    // This method solves the match dates of all the matches of the season using Google OR-Tools.
+    // It uses the following constraints:
+    // - Each match should be played on a day of the week that is specified on division level (match.Division.DaysOfWeek)
     private Task SolveMatchDatesAsync()
     {
         CpModel model = new CpModel();
 
         // Create variables
-        BoolVar[,] matchDateVars = new BoolVar[_season.Matches.Count, _dates.Count];
+        Dictionary<Guid, IntVar> matchDateVars = new Dictionary<Guid, IntVar>();
 
-        for (int matchIndex = 0; matchIndex < _season.Matches.Count; matchIndex++)
+        foreach (Match match in _season.Matches)
         {
-            for (int dateIndex = 0; dateIndex < _dates.Count; dateIndex++)
-            {
-                matchDateVars[matchIndex, dateIndex] = model.NewBoolVar($"Match_{matchIndex}_Date_{dateIndex}");
-            }
+            matchDateVars.Add(match.Id, model.NewIntVar(0, _dates.Count - 1, $"Match_{match.Id}_Date"));
         }
 
         // Create constraints
 
-        // Each match should be played on date of the week defined on division level
-        for (int matchIndex = 0; matchIndex < _season.Matches.Count; matchIndex++)
+        // Each match should be played on a day of the week that is specified on division level (match.Division.DaysOfWeek)
+        foreach (Match match in _season.Matches)
         {
-            Match match = _season.Matches.ElementAt(matchIndex);
-
-            for (int dateIndex = 0; dateIndex < _dates.Count; dateIndex++)
+            foreach (DayOfWeek dayOfWeek in match.Division!.DaysOfWeek)
             {
-                (DateTime, DayOfWeek) date = _dates.ElementAt(dateIndex);
+                foreach (DateTime dateTime in _dates)
+                {
+                    if (dateTime.DayOfWeek == dayOfWeek)
+                    {
+                        continue;
+                    }
 
-                model.Add(matchDateVars[matchIndex, dateIndex] == (match.Division!.DaysOfWeek.Contains(date.Item2) ? 1 : 0));
+                    model.Add(matchDateVars[match.Id] != _dates.IndexOf(dateTime));
+                }
             }
         }
 
@@ -140,21 +159,9 @@ public class SeasonScheduler : DomainService
         {
             Logger.LogDebug($"{solverStatus} solution found");
 
-            for (int matchIndex = 0; matchIndex < _season.Matches.Count; matchIndex++)
+            foreach (Match match in _season.Matches)
             {
-                Match match = _season.Matches.ElementAt(matchIndex);
-
-                for (int dateIndex = 0; dateIndex < _dates.Count; dateIndex++)
-                {
-                    if (solver.Value(matchDateVars[matchIndex, dateIndex]) == 1)
-                    {
-                        // TODO: Does this work?
-                        match.Date = _dates.ElementAt(dateIndex).Item1;
-                        match.Week = 1;
-
-                        break;
-                    }
-                }
+                match.Date = _dates[(int)solver.Value(matchDateVars[match.Id])];
             }
         }
         else
