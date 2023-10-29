@@ -138,17 +138,14 @@ public class SeasonScheduler : DomainService
         // Each match should be played on a day of the week that is specified on division level (match.Division.DaysOfWeek)
         foreach (Match match in _season.Matches)
         {
-            foreach (DayOfWeek dayOfWeek in match.Division!.DaysOfWeek)
+            foreach (DateTime date in _dates)
             {
-                foreach (DateTime dateTime in _dates)
+                if (match.Division!.DaysOfWeek.Contains(date.DayOfWeek))
                 {
-                    if (dateTime.DayOfWeek == dayOfWeek)
-                    {
-                        continue;
-                    }
-
-                    model.Add(matchDateVars[match.Id] != _dates.IndexOf(dateTime));
+                    continue;
                 }
+
+                model.Add(matchDateVars[match.Id] != _dates.IndexOf(date));
             }
         }
 
@@ -169,7 +166,7 @@ public class SeasonScheduler : DomainService
             throw new Exception("No solution found");
         }
 
-        foreach (Match match in _season.Matches.OrderBy(x => x.Date))
+        foreach (Match match in _season.Matches.OrderByDescending(x => x.Date))
         {
             Logger.LogDebug($"{match.Date:yyyy-MM-dd} {match.HomeTeam!.ClubTeamName} - {match.AwayTeam!.ClubTeamName}");
         }
