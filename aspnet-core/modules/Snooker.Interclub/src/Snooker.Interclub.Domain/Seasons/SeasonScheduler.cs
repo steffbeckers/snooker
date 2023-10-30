@@ -121,6 +121,7 @@ public class SeasonScheduler : DomainService
     // This method solves the match dates of all the matches of the season using Google OR-Tools.
     // It uses the following constraints:
     // - Each match should be played on a day of the week that is specified on division level (match.Division.DaysOfWeek)
+    // - If a home team has a preference for a specific day of the week (match.HomeTeam.PreferredMatchDay), the match should be played on that day
     private Task SolveMatchDatesAsync()
     {
         CpModel model = new CpModel();
@@ -134,18 +135,21 @@ public class SeasonScheduler : DomainService
         }
 
         // Create constraints
-
-        // Each match should be played on a day of the week that is specified on division level (match.Division.DaysOfWeek)
         foreach (Match match in _season.Matches)
         {
             foreach (DateTime date in _dates)
             {
-                if (match.Division!.DaysOfWeek.Contains(date.DayOfWeek))
+                // Each match should be played on a day of the week that is specified on division level (match.Division.DaysOfWeek)
+                if (!match.Division!.DaysOfWeek.Contains(date.DayOfWeek))
                 {
-                    continue;
+                    model.Add(matchDateVars[match.Id] != _dates.IndexOf(date));
                 }
 
-                model.Add(matchDateVars[match.Id] != _dates.IndexOf(date));
+                // If a home team has a preference for a specific day of the week (match.HomeTeam.PreferredMatchDay), the match should be played on that day
+                if (match.HomeTeam!.PreferredMatchDay.HasValue && match.HomeTeam.PreferredMatchDay.Value != date.DayOfWeek)
+                {
+                    model.Add(matchDateVars[match.Id] != _dates.IndexOf(date));
+                }
             }
         }
 
