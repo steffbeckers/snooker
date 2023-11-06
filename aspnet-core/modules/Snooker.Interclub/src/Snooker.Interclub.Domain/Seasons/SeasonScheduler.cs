@@ -122,7 +122,7 @@ public class SeasonScheduler : DomainService
     // It uses the following constraints:
     // - Each match should be played on a day of the week that is specified on division level (match.Division.DaysOfWeek)
     // - If a home team has a preference for a specific day of the week (match.HomeTeam.PreferredMatchDay), the match should be played on that day
-    // - Each team should only play 1 match per week (sum of day of match of team per week _weekOfDate[_dates.IndexOf(date)] should be 1)
+    // - Each team should only play 1 match per week
     private Task SolveMatchDatesAsync()
     {
         CpModel model = new CpModel();
@@ -153,33 +153,6 @@ public class SeasonScheduler : DomainService
                 }
             }
         }
-
-        // TODO: This constraint is not working yet
-        // Each team should only play 1 match per week
-        //foreach (Team team in _season.Divisions.SelectMany(x => x.Teams))
-        //{
-        //    for (int week = 1; week <= _season.Divisions.First().RoundsDuringSeason; week++)
-        //    {
-        //        List<IntVar> weekVars = new List<IntVar>();
-
-        //        foreach (Match match in _season.Matches.Where(x => x.HomeTeamId == team.Id || x.AwayTeamId == team.Id))
-        //        {
-        //            weekVars.Add(model.NewBoolVar($"Match_{match.Id}_Week_{week}"));
-        //        }
-
-        //        for (int i = 0; i < _dates.Count; i++)
-        //        {
-        //            if (_weekOfDate[i] == week)
-        //            {
-        //                model.Add(weekVars.Sum() == 1);
-        //            }
-        //            else
-        //            {
-        //                model.Add(weekVars.Sum() == 0);
-        //            }
-        //        }
-        //    }
-        //}
 
         CpSolver solver = new CpSolver();
         CpSolverStatus solverStatus = solver.Solve(model);
