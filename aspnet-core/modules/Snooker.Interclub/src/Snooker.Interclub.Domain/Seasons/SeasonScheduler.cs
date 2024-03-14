@@ -1,5 +1,3 @@
-using Google.OrTools.Sat;
-using Microsoft.Extensions.Logging;
 using Snooker.Interclub.Divisions;
 using Snooker.Interclub.Matches;
 using Snooker.Interclub.Teams;
@@ -118,65 +116,8 @@ public class SeasonScheduler : DomainService
         return Task.CompletedTask;
     }
 
-    // This method solves the match dates of all the matches of the season using Google OR-Tools.
-    // It uses the following constraints:
-    // - Each match should be played on a day of the week that is specified on division level (match.Division.DaysOfWeek)
-    // - If a home team has a preference for a specific day of the week (match.HomeTeam.PreferredMatchDay), the match should be played on that day
-    // - Each team should only play 1 match per week
     private Task SolveMatchDatesAsync()
     {
-        CpModel model = new CpModel();
-
-        // Create variables
-        Dictionary<Guid, IntVar> matchDateVars = new Dictionary<Guid, IntVar>();
-
-        foreach (Match match in _season.Matches)
-        {
-            matchDateVars.Add(match.Id, model.NewIntVar(0, _dates.Count - 1, $"Match_{match.Id}_Date"));
-        }
-
-        // Create constraints
-        foreach (Match match in _season.Matches)
-        {
-            foreach (DateTime date in _dates)
-            {
-                // Each match should be played on a day of the week that is specified on division level (match.Division.DaysOfWeek)
-                if (!match.Division!.DaysOfWeek.Contains(date.DayOfWeek))
-                {
-                    model.Add(matchDateVars[match.Id] != _dates.IndexOf(date));
-                }
-
-                // If a home team has a preference for a specific day of the week (match.HomeTeam.PreferredMatchDay), the match should be played on that day
-                if (match.HomeTeam!.PreferredMatchDay.HasValue && match.HomeTeam.PreferredMatchDay.Value != date.DayOfWeek)
-                {
-                    model.Add(matchDateVars[match.Id] != _dates.IndexOf(date));
-                }
-            }
-        }
-
-        CpSolver solver = new CpSolver();
-        CpSolverStatus solverStatus = solver.Solve(model);
-
-        if (solverStatus == CpSolverStatus.Feasible || solverStatus == CpSolverStatus.Optimal)
-        {
-            Logger.LogDebug($"{solverStatus} solution found");
-
-            foreach (Match match in _season.Matches)
-            {
-                match.Date = _dates[(int)solver.Value(matchDateVars[match.Id])];
-            }
-        }
-        else
-        {
-            throw new Exception("No solution found");
-        }
-
-        List<Match> matches = _season.Matches.OrderBy(x => x.Date).ToList();
-        foreach (Match match in matches)
-        {
-            Logger.LogDebug($"{match.Date:yyyy-MM-dd} {match.HomeTeam!.ClubTeamName} - {match.AwayTeam!.ClubTeamName}");
-        }
-
         return Task.CompletedTask;
     }
 }
