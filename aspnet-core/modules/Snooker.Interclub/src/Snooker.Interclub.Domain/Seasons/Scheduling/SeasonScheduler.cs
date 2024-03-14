@@ -14,6 +14,7 @@ public class SeasonScheduler : DomainService
     private IList<DateTime> _dates;
     private Season _season;
     private int[] _weekOfDate;
+    private int[] _weeks;
 
     public async Task<Season> ScheduleAsync(Season season)
     {
@@ -22,6 +23,7 @@ public class SeasonScheduler : DomainService
         await GenerateMatchesAsync();
         await GenerateDatesAndWeeksAsync();
         await SolveMatchDatesAsync();
+        await ValidateAsync();
 
         return _season;
     }
@@ -50,6 +52,8 @@ public class SeasonScheduler : DomainService
 
             _weekOfDate[i] = week;
         }
+
+        _weeks = _weekOfDate.Distinct().ToArray();
 
         return Task.CompletedTask;
     }
@@ -118,6 +122,55 @@ public class SeasonScheduler : DomainService
 
     private Task SolveMatchDatesAsync()
     {
+        // TODO: This is just a test
+
+        foreach (Match match in _season.Matches)
+        {
+            foreach (DateTime date in _dates)
+            {
+                if (match.Date.HasValue)
+                {
+                    continue;
+                }
+
+                if (!match.Division!.DaysOfWeek.Contains(date.DayOfWeek))
+                {
+                    continue;
+                }
+
+                match.Date = date;
+            }
+        }
+
+        return Task.CompletedTask;
+    }
+
+    private Task ValidateAsync()
+    {
+        // Each match should have a date
+        Match? matchWithoutDate = _season.Matches.FirstOrDefault(x => !x.Date.HasValue);
+        if (matchWithoutDate != null)
+        {
+            throw new Exception($"Match between {matchWithoutDate.HomeTeam!.ClubTeamName} and {matchWithoutDate.AwayTeam!.ClubTeamName} is not scheduled.");
+        }
+
+        foreach (Team team in _season.Teams)
+        {
+            // Each team should only play max 1 time a week
+            List<int> teamPlaysInWeeks = new List<int>();
+            foreach (Match match in team.Matches)
+            {
+                int week = _weekOfDate[_dates.IndexOf(match.Date!.Value)];
+
+                if (teamPlaysInWeeks.Contains(week))
+                {
+                    throw new Exception($"Team {team.ClubTeamName} already plays a match in week {week}.");
+                }
+
+                teamPlaysInWeeks.Add(week);
+            }
+        }
+
         return Task.CompletedTask;
     }
 }
