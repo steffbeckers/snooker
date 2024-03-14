@@ -7,7 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Services;
 
-namespace Snooker.Interclub.Seasons;
+namespace Snooker.Interclub.Seasons.Scheduling;
 
 public class SeasonScheduler : DomainService
 {
