@@ -20,15 +20,16 @@ using Volo.Abp.TenantManagement;
 
 namespace Snooker.Interclub.Data.Seeding.Limburg.Contributors;
 
-public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDependency
+public class Limburg2223DataSeedContributor : IDataSeedContributor, ITransientDependency
 {
+    private const string _websiteCopyDate = "2023-05-01";
     private readonly ClubManager _clubManager;
     private readonly IClubRepository _clubRepository;
     private readonly IGuidGenerator _guidGenerator;
     private readonly ISeasonRepository _seasonRepository;
     private readonly ITenantRepository _tenantRepository;
 
-    public LimburgDataSeedContributor(
+    public Limburg2223DataSeedContributor(
         ClubManager clubManager,
         IClubRepository clubRepository,
         IGuidGenerator guidGenerator,
@@ -56,26 +57,25 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
             return;
         }
 
-        Season? season2223 = await _seasonRepository.FindAsync(x => x.StartDate.Year == 2022 && x.EndDate.Year == 2023);
+        Season? season = await _seasonRepository.FindAsync(x => x.StartDate.Year == 2022 && x.EndDate.Year == 2023);
 
-        if (season2223 == null)
+        if (season == null)
         {
-            season2223 = new Season(
+            season = new Season(
                 id: _guidGenerator.Create(),
                 startDate: new DateTime(2022, 1, 1),
                 endDate: new DateTime(2023, 1, 1));
 
             // Extract data from snookerlimburg.be website
-            string websiteCopyDate = "2023-05-01";
-            List<DivisionDso> divisionDsos = ExtractFromWebsiteInterclubPage(websiteCopyDate);
-            List<ClubDso> clubDsos = ExtractFromWebsiteClubsPage(websiteCopyDate);
+            List<DivisionDso> divisionDsos = ExtractFromWebsiteInterclubPage();
+            List<ClubDso> clubDsos = ExtractFromWebsiteClubsPage();
 
             // Add divisions to database
             foreach (DivisionDso divisionDso in divisionDsos)
             {
                 Division division = new Division(
                     _guidGenerator.Create(),
-                    season2223,
+                    season,
                     divisionDso.Name)
                 {
                     SortOrder = divisionDsos.IndexOf(divisionDso) + 1
@@ -83,7 +83,7 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
 
                 divisionDso.Id = division.Id;
 
-                season2223.Divisions.Add(division);
+                season.Divisions.Add(division);
             }
 
             // Add clubs, teams and players data to database
@@ -124,7 +124,7 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
 
                         if (divisionDso != null)
                         {
-                            Division division = season2223.Divisions.First(x => x.Id == divisionDso.Id);
+                            Division division = season.Divisions.First(x => x.Id == divisionDso.Id);
 
                             team = new Team(
                                 _guidGenerator.Create(),
@@ -184,7 +184,7 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
             // Add matches to division
             foreach (DivisionDso divisionDso in divisionDsos)
             {
-                Division division = season2223.Divisions.First(x => x.Id == divisionDso.Id);
+                Division division = season.Divisions.First(x => x.Id == divisionDso.Id);
 
                 foreach (MatchDso matchDso in divisionDso.Matches)
                 {
@@ -332,14 +332,14 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
                 }
             }
 
-            await _seasonRepository.InsertAsync(season2223);
+            await _seasonRepository.InsertAsync(season);
         }
     }
 
-    private static List<ClubDso> ExtractFromWebsiteClubsPage(string websiteCopyDate)
+    private static List<ClubDso> ExtractFromWebsiteClubsPage()
     {
         HtmlDocument htmlDocumentClubs = new HtmlDocument();
-        htmlDocumentClubs.Load($"Data/Seeding/Limburg/WebScrape/snookerlimburg.be/{websiteCopyDate}/Clubs.html");
+        htmlDocumentClubs.Load($"Data/Seeding/Limburg/WebScrape/snookerlimburg.be/{_websiteCopyDate}/Clubs.html");
 
         List<ClubDso> clubDsos = new List<ClubDso>();
 
@@ -422,12 +422,12 @@ public class LimburgDataSeedContributor : IDataSeedContributor, ITransientDepend
         return clubDsos;
     }
 
-    private List<DivisionDso> ExtractFromWebsiteInterclubPage(string websiteCopyDate)
+    private List<DivisionDso> ExtractFromWebsiteInterclubPage()
     {
         List<DivisionDso> divisionDsos = new List<DivisionDso>();
 
         HtmlDocument htmlDocumentInterclub = new HtmlDocument();
-        htmlDocumentInterclub.Load($"Data/Seeding/Limburg/WebScrape/snookerlimburg.be/{websiteCopyDate}/Interclub.html");
+        htmlDocumentInterclub.Load($"Data/Seeding/Limburg/WebScrape/snookerlimburg.be/{_websiteCopyDate}/Interclub.html");
 
         // Extract divisions
         HtmlNodeCollection divisionTabNodes = htmlDocumentInterclub.DocumentNode.SelectNodes("//div[@id='jwts_tab1']/div[contains(@class,'jwts_tabbertab')]");
