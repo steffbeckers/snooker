@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Snooker.Interclub.Addresses;
 using Snooker.Interclub.Clubs;
 using Snooker.Interclub.Divisions;
@@ -8,6 +10,7 @@ using Snooker.Interclub.Players;
 using Snooker.Interclub.Seasons;
 using Snooker.Interclub.Teams;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Volo.Abp;
 using Volo.Abp.EntityFrameworkCore.Modeling;
@@ -55,11 +58,22 @@ public static class InterclubDbContextModelCreatingExtensions
             b.ConfigureByConvention();
             b.Property(x => x.Name).IsRequired().HasMaxLength(DivisionConsts.NameMaxLength);
             b.HasOne(x => x.Season).WithMany(x => x.Divisions).HasForeignKey(x => x.SeasonId);
-            b.Property(x => x.DaysOfWeek).HasConversion(
+
+            ValueConverter<IList<DayOfWeek>, string> daysOfWeekConverter = new ValueConverter<IList<DayOfWeek>, string>(
                 x => string.Join(',', x),
                 x => x.Split(',', StringSplitOptions.RemoveEmptyEntries)
                     .Select(x => Enum.Parse<DayOfWeek>(x))
                     .ToList());
+
+            ValueComparer<IList<DayOfWeek>> daysOfWeekComparer = new ValueComparer<IList<DayOfWeek>>(
+                (c1, c2) => c1.SequenceEqual(c2),
+                c => c.Aggregate(0, (a, v) => HashCode.Combine(a, v.GetHashCode())),
+                c => c.ToList());
+
+            b.Property(x => x.DaysOfWeek)
+                .HasConversion(daysOfWeekConverter)
+                .Metadata.SetValueComparer(daysOfWeekComparer);
+
             b.Property(x => x.RoundsDuringSeason).HasDefaultValue(2);
         });
 
