@@ -118,9 +118,9 @@ public class Limburg2324DataSeedContributor : IDataSeedContributor, ITransientDe
                 {
                     Team? team = null;
 
-                    if (teamDso.Name != "Reserven")
+                    if (teamDso.Name != "Reserve")
                     {
-                        DivisionDso divisionDso = divisionDsos.Where(x => x.ClubTeamNames.Contains($"{club.Name} {teamDso.Name}")).FirstOrDefault();
+                        DivisionDso? divisionDso = divisionDsos.Where(x => x.ClubTeamNames.Contains($"{club.Name} {teamDso.Name}")).FirstOrDefault();
 
                         if (divisionDso != null)
                         {
@@ -188,7 +188,7 @@ public class Limburg2324DataSeedContributor : IDataSeedContributor, ITransientDe
 
                 foreach (MatchDso matchDso in divisionDso.Matches)
                 {
-                    Team homeTeam = division.Teams.FirstOrDefault(x => x.ClubTeamName == matchDso.HomeTeamName);
+                    Team? homeTeam = division.Teams.FirstOrDefault(x => x.ClubTeamName == matchDso.HomeTeamName);
 
                     if (homeTeam == null)
                     {
@@ -196,7 +196,7 @@ public class Limburg2324DataSeedContributor : IDataSeedContributor, ITransientDe
                         continue;
                     }
 
-                    Team awayTeam = division.Teams.FirstOrDefault(x => x.ClubTeamName == matchDso.AwayTeamName);
+                    Team? awayTeam = division.Teams.FirstOrDefault(x => x.ClubTeamName == matchDso.AwayTeamName);
 
                     if (awayTeam == null)
                     {
@@ -293,7 +293,20 @@ public class Limburg2324DataSeedContributor : IDataSeedContributor, ITransientDe
                     foreach (FrameDso frameDso in matchDso.Frames)
                     {
                         MatchTeamPlayer? homeTeamPlayer = match.HomeTeamPlayers.FirstOrDefault(x => x.Player.LastNameFirstName == frameDso.HomeTeamPlayerName);
+
+                        if (homeTeamPlayer == null)
+                        {
+                            Console.WriteLine($"Failed to find home team player {frameDso.HomeTeamPlayerName}");
+                            continue;
+                        }
+
                         MatchTeamPlayer? awayTeamPlayer = match.AwayTeamPlayers.FirstOrDefault(x => x.Player.LastNameFirstName == frameDso.AwayTeamPlayerName);
+
+                        if (awayTeamPlayer == null)
+                        {
+                            Console.WriteLine($"Failed to find away team player {frameDso.AwayTeamPlayerName}");
+                            continue;
+                        }
 
                         Frame frame = new Frame(
                             _guidGenerator.Create(),
@@ -373,12 +386,23 @@ public class Limburg2324DataSeedContributor : IDataSeedContributor, ITransientDe
 
             foreach (HtmlNode teamNode in teamNodes)
             {
-                string teamName = teamNode.SelectSingleNode(".//h5").InnerText
+                string? teamName = teamNode.SelectSingleNode(".//h5")?.InnerText
                     .Replace("&nbsp;", string.Empty)
                     .Split(" (")
-                    .First();
+                    .FirstOrDefault();
 
-                // TODO: Reserve
+                if (teamName == null)
+                {
+                    // Reserven
+                    teamName = teamNode.SelectSingleNode(".//h4")?.InnerText
+                        .Replace("&nbsp;", string.Empty)
+                        .Replace(":", string.Empty);
+                }
+
+                if (teamName == null)
+                {
+                    continue;
+                }
 
                 TeamDso team = new TeamDso()
                 {
@@ -389,16 +413,19 @@ public class Limburg2324DataSeedContributor : IDataSeedContributor, ITransientDe
 
                 foreach (HtmlNode playerDiv in playerDivs)
                 {
-                    // Split the player's name into first name and last name
-                    string[] nameParts = playerDiv.SelectSingleNode(".//span[contains(@class,'fw-bold')]").InnerText.Trim().Split(' ');
-                    string lastName = string.Join(" ", nameParts[0..^1]);
-                    string firstName = nameParts[^1];
-
                     // Extract the player's details
-                    string playerDetails = playerDiv.SelectSingleNode(".//p").InnerHtml;
+                    HtmlNode playerDetailsNode = playerDiv.SelectSingleNode(".//p");
+                    string playerDetails = playerDetailsNode.InnerHtml
+                        .Replace("<span class=\"fw-bold\">", string.Empty)
+                        .Replace("</span>", string.Empty);
 
                     // Split the player details into separate parts
                     string[] detailsParts = playerDetails.Split(new[] { "<br>" }, StringSplitOptions.RemoveEmptyEntries);
+
+                    // Split the player's name into first name and last name
+                    string[] nameParts = detailsParts[0].Trim().Split(' ');
+                    string lastName = string.Join(" ", nameParts[0..^1]);
+                    string firstName = nameParts[^1];
 
                     // Extract the player's class, date of birth, etc.
                     int? playerClass = int.Parse(detailsParts[1].Trim().Replace("ic-klasse: ", string.Empty));

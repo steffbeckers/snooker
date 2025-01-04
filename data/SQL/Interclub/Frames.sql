@@ -6,3 +6,4 @@ SELECT hp.[FirstName] + ' ' + hp.[LastName] AS [HomePlayerName]
   LEFT JOIN [dbo].[InterclubPlayers] hp ON f.[HomePlayerId] = hp.[Id]
   LEFT JOIN [dbo].[InterclubPlayers] ap ON f.[AwayPlayerId] = ap.[Id]
   ORDER BY f.[HomePlayerScore] DESC
+  --ORDER BY f.[AwayPlayerScore] DESC

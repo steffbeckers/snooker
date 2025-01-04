@@ -120,7 +120,7 @@ public class Limburg2223DataSeedContributor : IDataSeedContributor, ITransientDe
 
                     if (teamDso.Name != "Reserven")
                     {
-                        DivisionDso divisionDso = divisionDsos.Where(x => x.ClubTeamNames.Contains($"{club.Name} {teamDso.Name}")).FirstOrDefault();
+                        DivisionDso? divisionDso = divisionDsos.Where(x => x.ClubTeamNames.Contains($"{club.Name} {teamDso.Name}")).FirstOrDefault();
 
                         if (divisionDso != null)
                         {
@@ -188,7 +188,7 @@ public class Limburg2223DataSeedContributor : IDataSeedContributor, ITransientDe
 
                 foreach (MatchDso matchDso in divisionDso.Matches)
                 {
-                    Team homeTeam = division.Teams.FirstOrDefault(x => x.ClubTeamName == matchDso.HomeTeamName);
+                    Team? homeTeam = division.Teams.FirstOrDefault(x => x.ClubTeamName == matchDso.HomeTeamName);
 
                     if (homeTeam == null)
                     {
@@ -196,7 +196,7 @@ public class Limburg2223DataSeedContributor : IDataSeedContributor, ITransientDe
                         continue;
                     }
 
-                    Team awayTeam = division.Teams.FirstOrDefault(x => x.ClubTeamName == matchDso.AwayTeamName);
+                    Team? awayTeam = division.Teams.FirstOrDefault(x => x.ClubTeamName == matchDso.AwayTeamName);
 
                     if (awayTeam == null)
                     {
@@ -293,7 +293,20 @@ public class Limburg2223DataSeedContributor : IDataSeedContributor, ITransientDe
                     foreach (FrameDso frameDso in matchDso.Frames)
                     {
                         MatchTeamPlayer? homeTeamPlayer = match.HomeTeamPlayers.FirstOrDefault(x => x.Player.LastNameFirstName == frameDso.HomeTeamPlayerName);
+
+                        if (homeTeamPlayer == null)
+                        {
+                            Console.WriteLine($"Failed to find home team player {frameDso.HomeTeamPlayerName}");
+                            continue;
+                        }
+
                         MatchTeamPlayer? awayTeamPlayer = match.AwayTeamPlayers.FirstOrDefault(x => x.Player.LastNameFirstName == frameDso.AwayTeamPlayerName);
+
+                        if (awayTeamPlayer == null)
+                        {
+                            Console.WriteLine($"Failed to find away team player {frameDso.AwayTeamPlayerName}");
+                            continue;
+                        }
 
                         Frame frame = new Frame(
                             _guidGenerator.Create(),
