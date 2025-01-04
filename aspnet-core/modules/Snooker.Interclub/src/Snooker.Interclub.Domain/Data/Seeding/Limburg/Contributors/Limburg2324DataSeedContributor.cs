@@ -378,41 +378,38 @@ public class Limburg2324DataSeedContributor : IDataSeedContributor, ITransientDe
                     .Split(" (")
                     .First();
 
+                // TODO: Reserve
+
                 TeamDso team = new TeamDso()
                 {
                     Name = teamName
                 };
 
-                HtmlNodeCollection playerDivs = teamNode.SelectNodes(".//div[starts-with(@style, 'float:left; clear: none; min-width: 168px;')]");
+                HtmlNodeCollection playerDivs = teamNode.SelectNodes(".//div[contains(@class,'spinfo')]");
 
                 foreach (HtmlNode playerDiv in playerDivs)
                 {
-                    // Extract the player's image source
-                    //string imageSrc = playerDiv.SelectSingleNode(".//img").GetAttributeValue("src", "");
+                    // Split the player's name into first name and last name
+                    string[] nameParts = playerDiv.SelectSingleNode(".//span[contains(@class,'fw-bold')]").InnerText.Trim().Split(' ');
+                    string lastName = string.Join(" ", nameParts[0..^1]);
+                    string firstName = nameParts[^1];
 
                     // Extract the player's details
-                    HtmlNode playerDetailsNode = playerDiv.SelectSingleNode(".//p[contains(@style, 'color: #032800;')]");
-                    string playerDetails = playerDetailsNode.InnerHtml;
+                    string playerDetails = playerDiv.SelectSingleNode(".//p").InnerHtml;
 
                     // Split the player details into separate parts
                     string[] detailsParts = playerDetails.Split(new[] { "<br>" }, StringSplitOptions.RemoveEmptyEntries);
 
-                    // Split the player's name into first name and last name
-                    string[] nameParts = detailsParts[0].Trim().Split(' ');
-                    string lastName = string.Join(" ", nameParts[0..^1]);
-                    string firstName = nameParts[^1];
-
                     // Extract the player's class, date of birth, etc.
-                    int? playerClass = int.Parse(detailsParts[1].Trim().Replace("klasse: ", string.Empty));
-                    DateTime playerDateOfBirth = DateTime.ParseExact(detailsParts[2].Trim(), "dd-MM-yyyy", null);
+                    int? playerClass = int.Parse(detailsParts[1].Trim().Replace("ic-klasse: ", string.Empty));
+                    DateTime playerDateOfBirth = DateTime.ParseExact(detailsParts[3].Trim(), "dd-MM-yyyy", null);
 
                     team.Players.Add(new PlayerDso()
                     {
                         FirstName = firstName,
                         LastName = lastName,
                         Class = playerClass,
-                        DateOfBirth = playerDateOfBirth,
-                        //Image = imageSrc
+                        DateOfBirth = playerDateOfBirth
                     });
 
                     team.Players = team.Players.OrderBy(x => x.FirstName).ToList();
