@@ -14,4 +14,10 @@ SELECT CONCAT(YEAR(s.[StartDate]), '-', YEAR(s.[EndDate])) AS [Season]
   LEFT JOIN [dbo].[InterclubClubs] c ON t.[ClubId] = c.[Id]
   LEFT JOIN [dbo].[InterclubTeamPlayers] tp ON t.[Id] = tp.[TeamId]
   LEFT JOIN [dbo].[InterclubPlayers] p ON tp.[PlayerId] = p.[Id]
+  --WHERE p.[FirstName] = 'Steff' AND p.[LastName] = 'Beckers'
+  --WHERE c.[Name] = 'NRG' AND t.[Name] = 'C'
+  --WHERE p.[FirstName] = 'Dimitri' AND p.[LastName] = 'Clauw'
+  --WHERE p.[FirstName] = 'Ufuk' AND p.[LastName] = 'Baygunes'
+  --WHERE p.[FirstName] = 'Vincent' AND p.[LastName] = 'Moureau'
+  WHERE p.[FirstName] = 'Sybren' AND p.[LastName] = 'Sokolowski'
   ORDER BY d.[SortOrder], c.[Name], t.[Name], p.[FirstName]

@@ -17,6 +17,7 @@ using Volo.Abp.Data;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Guids;
 using Volo.Abp.TenantManagement;
+using Volo.Abp.Uow;
 
 namespace Snooker.Interclub.Data.Seeding.Limburg.Contributors;
 
@@ -28,19 +29,22 @@ public class Limburg2324DataSeedContributor : IDataSeedContributor, ITransientDe
     private readonly IGuidGenerator _guidGenerator;
     private readonly ISeasonRepository _seasonRepository;
     private readonly ITenantRepository _tenantRepository;
+    private readonly IUnitOfWorkManager _unitOfWorkManager;
 
     public Limburg2324DataSeedContributor(
         ClubManager clubManager,
         IClubRepository clubRepository,
         IGuidGenerator guidGenerator,
         ISeasonRepository seasonRepository,
-        ITenantRepository tenantRepository)
+        ITenantRepository tenantRepository,
+        IUnitOfWorkManager unitOfWorkManager)
     {
         _clubManager = clubManager;
         _clubRepository = clubRepository;
         _guidGenerator = guidGenerator;
         _seasonRepository = seasonRepository;
         _tenantRepository = tenantRepository;
+        _unitOfWorkManager = unitOfWorkManager;
     }
 
     public async Task SeedAsync(DataSeedContext context)
@@ -98,7 +102,6 @@ public class Limburg2324DataSeedContributor : IDataSeedContributor, ITransientDe
                         id: _guidGenerator.Create(),
                         name: clubDso.Name);
 
-                    clubDso.Id = club.Id;
                     club.Number = clubDso.Number.ToString();
                     club.Email = clubDso.Email;
                     club.PhoneNumber = clubDso.PhoneNumber;
@@ -113,6 +116,22 @@ public class Limburg2324DataSeedContributor : IDataSeedContributor, ITransientDe
 
                     club = await _clubRepository.InsertAsync(club);
                 }
+                else
+                {
+                    club.Number = clubDso.Number.ToString();
+                    club.Email = clubDso.Email;
+                    club.PhoneNumber = clubDso.PhoneNumber;
+                    club.Website = clubDso.Website;
+                    club.Address ??= new Address();
+                    club.Address.Street = clubDso.Address?.Street;
+                    club.Address.Number = clubDso.Address?.Number;
+                    club.Address.PostalCode = clubDso.Address?.PostalCode;
+                    club.Address.City = clubDso.Address?.City;
+
+                    club = await _clubRepository.UpdateAsync(club);
+                }
+
+                clubDso.Id = club.Id;
 
                 foreach (TeamDso teamDso in clubDso.Teams)
                 {
@@ -347,6 +366,8 @@ public class Limburg2324DataSeedContributor : IDataSeedContributor, ITransientDe
 
             await _seasonRepository.InsertAsync(season);
         }
+
+        await _unitOfWorkManager.Current!.SaveChangesAsync();
     }
 
     private static List<ClubDso> ExtractFromWebsiteClubsPage()
